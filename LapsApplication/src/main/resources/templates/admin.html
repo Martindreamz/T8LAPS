@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:utext=#{admin.title}></title>
+</head>
+<body>
+	<h1 th:utext=#{admin.heading}></h1>
+
+	<a href="/employee/home">
+		<button> Sign out</button>
+	</a>
+	
+	<a href="/employee/admin-blockleave">
+		<button> Set block leave</button>
+	</a>
+
+<a href="/employee/admin-manage">
+		<button> Manage Employees</button>
+	</a>
+</body>
+</html>
