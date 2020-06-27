@@ -1,48 +1,29 @@
 package sg.edu.iss.sa50.t8.model;
 
- 
+import javax.persistence.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
- 
-
-@MappedSuperclass
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String email;
-    
+	private String password; 
     
     public Employee() {
         super();
         // TODO Auto-generated constructor stub 
     }
 
- 
-
-    public Employee(int id, String name, String email) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        
-    }
-
- 
-
     public Employee(String name, String email) {
         super();
         this.name = name;
         this.email = email;
+    	password = "000000"; 
         
     }
-
- 
 
     public int getId() {
         return id;
@@ -80,13 +61,19 @@ public abstract class Employee {
 
  
 
-    
+    public String getPassword() {
+		return password;
+	}
 
- 
 
-    @Override
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	@Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
+        return "Employee [id=" + id + ", name=" + name + ", email=" + email + "]";
     }
     
     
