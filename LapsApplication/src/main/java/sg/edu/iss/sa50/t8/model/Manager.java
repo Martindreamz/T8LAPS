@@ -1,10 +1,30 @@
 package sg.edu.iss.sa50.t8.model;
 
-public class Manager extends Employee{
+import java.util.List;
 
+public class Manager extends Employee{
+	private String dept;
+	private List<Staff> staffList;
+	
 	public Manager() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
+	public List<Staff> getStaffList() {
+		return staffList;
+	}
+
+	public void setStaffList(List<Staff> staffList) {
+		this.staffList = staffList;
 	}
 
 }
