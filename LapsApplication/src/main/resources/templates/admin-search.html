@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Search</title>
+</head>
+<body>
+<table th:if="${}not #lists.isEmpty(elist)}">
+	<tr th:each="employee : ${elist}">
+		<td th:text="${employee.id}">Id</td>
+		<td th:text="${employee.name}">Name</td>
+		<td th:text="${employee.email}">email</td>
+	</tr>
+</table>
+
+</body>
+</html>
