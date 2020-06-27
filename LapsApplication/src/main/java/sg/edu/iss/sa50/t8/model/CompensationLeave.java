@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class CompensationLeave extends Leaves{
 	
 	private LocalDate leaveDate;
-	@OneToOne(mappedBy="leaveMatch")
+	@OneToOne(cascade = CascadeType.REFRESH)
 	private Compensation compensation;
 	
 	public CompensationLeave() {

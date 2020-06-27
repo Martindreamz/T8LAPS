@@ -17,8 +17,8 @@ public class Compensation {
 	private Staff staff; 
 	private CompensationStatus compStatus; //Declared/approved/rejected/...
 	//private LeaveStatus leaveStatus; // Relationship?
-	@OneToOne @JoinColumn(name="leave_id")
-	private Leaves leaveMatch;
+	@OneToOne(mappedBy="compensation")
+	private CompensationLeave leaveMatch;
 
 	public Compensation() {
 		super();
@@ -67,7 +67,7 @@ public class Compensation {
 		return leaveMatch;
 	}
 
-	public void setLeaveMatch(Leaves leaveMatch) {
+	public void setLeaveMatch(CompensationLeave leaveMatch) {
 		this.leaveMatch = leaveMatch;
 	} 
 

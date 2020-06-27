@@ -45,7 +45,7 @@ public class LapsApplication {
 		return args -> {
 			System.out.println("Let's start to see our models! ");
 			
-			Admin adm1 = new Admin("Martin","e0XXXXXXadm@u.nus.edu");
+			Admin adm1 = new Admin("Martin","e0533409@u.nus.edu");
 			Manager man1 = new Manager("Joe","e0XXXXXman@u.nus.edu");
 			Manager man2 = new Manager("Joe","e0XXXXXman2@u.nus.edu");
 			Staff s1 = new Staff("Bianca","e0533381@u.nus.edu",man1,10,10);

@@ -30,6 +30,7 @@ public class AdminController {
 	//admin
 	@RequestMapping("/admin")
 	public String admin() {
+
 		return "admin";
 	}
 	
