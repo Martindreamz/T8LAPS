@@ -1,6 +1,8 @@
 package sg.edu.iss.sa50.t8.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -80,11 +82,6 @@ public abstract class Employee {
     }
 
 
-
-
-	public void setEmployeetype(employeeType employeetype) {
-		this.employeetype = employeetype;
-	}
     
     
     
