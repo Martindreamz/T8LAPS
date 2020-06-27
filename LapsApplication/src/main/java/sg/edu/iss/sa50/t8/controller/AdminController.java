@@ -1,12 +1,19 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveType;
 import sg.edu.iss.sa50.t8.model.Leaves;
+import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 
 // a) Manage Leave Type (CRUD) - Joe 
 // b) Manage Staff (CRUD)- Joe 
@@ -26,30 +33,84 @@ public class AdminController {
 		return "admin";
 	}
 	
-	// JOE SECTION A 
+	// JOE SECTION A ***
 	
-	@RequestMapping("/admin-createleavetype")
-    public String createleavetype(LeaveType leavetype) {
-		return "createleavetype";
-    }
 	
-	@RequestMapping("/admin-updateleavetype")
-    public String updateleavetype(LeaveType leavetype) {
-		return "updateleavetype";
-    }
+	@GetMapping("/admin-createleavetype")
+	public String createleavetype(@RequestParam(name="leavetype", required=true, defaultValue="") String leavetype) {
+		LeaveType.addAttribute("leavetype", leavetype);
+		return "admin-manageleavetype.html";}
 	
-	@RequestMapping("/admin-deleteleavetype")
-    public String deleteleavetype(LeaveType leavetype) {
-		return "deleteleavetype";
-    }
+	@GetMapping("/admin-updateleavetype")
+	public String updateleavetype(@RequestParam(name="leavetype", required=true, defaultValue="") String leavetype, LeaveType newleavetype) {
+			LeaveType.updateAttribute("leavetype", leavetype);
+			return "admin-manageleavetype.html";}
 	
-	@RequestMapping("/admin-viewleavetype")
-    public String viewleavetype(LeaveType leavetype) {
-		return "viewleavetype"; 
-    }
+	@GetMapping("/admin-deleteleavetype")
+	public String deleteleavetype(@RequestParam(name="leavetype", required=true, defaultValue="") LeaveType leavetype) {
+			LeaveType.deleteAttribute("leavetype");
+			return "admin-manageleavetype.html";}
+					
+	@GetMapping("/admin-viewleavelist")
+	public String viewleavelist() {
+			LeaveType.view();
+			return "admin-manageleavetype.html";}
+			
 	
-	// JOE SECTION B
+	
+	// JOE SECTION B *** 
+	
+	// TESTING VERSION 1 
 
+	@GetMapping("/signup")
+    public String showSignUpForm(User user) {
+        return "add-user";
+    }
+     
+    @PostMapping("/adduser")
+    public String addUser(@Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-user";
+        }
+         
+        EmployeeRepository.save(user);
+        model.addAttribute("users", EmployeeRepository.findAll());
+        return "redirect:/index";
+    }
+    
+    @GetMapping("/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+          .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+         
+        model.addAttribute("user", user);
+        return "update-user";
+    }
+    
+    @PostMapping("/update/{id}")
+    public String updateUser(@PathVariable("id") long id, @Valid User user, 
+      BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            user.setId(id);
+            return "update-user";
+        }
+             
+        userRepository.save(user);
+        model.addAttribute("users", userRepository.findAll());
+        return "redirect:/index";
+    }
+         
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+          .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        userRepository.delete(user);
+        model.addAttribute("users", userRepository.findAll());
+        return "index";
+    }
+    
+    
+   //TESTING VERSION 2 
 	
 	@RequestMapping("/admin-manageemployee")
 	public String ManageEmployee() {
