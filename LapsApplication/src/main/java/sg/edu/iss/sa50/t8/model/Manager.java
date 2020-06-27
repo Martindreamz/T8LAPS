@@ -5,7 +5,7 @@ import java.util.List;
 public class Manager extends Employee{
 	private String dept;
 	private List<Staff> staffList;
-	
+	private boolean IsManager;
 	public Manager() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,6 +25,14 @@ public class Manager extends Employee{
 
 	public void setStaffList(List<Staff> staffList) {
 		this.staffList = staffList;
+	}
+
+	public boolean isIsManager() {
+		return IsManager;
+	}
+
+	public void setIsManager(boolean isManager) {
+		IsManager = isManager;
 	}
 
 }

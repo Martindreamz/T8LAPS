@@ -3,7 +3,7 @@ package sg.edu.iss.sa50.t8.model;
 import java.util.List;
 
 public class Staff extends Employee{
-	private int managerid;
+	private int ManagerId;
 	//the above managerid is the FK 
 	private List<Leaves> leaves;
 	private List<CompensationLeave> compensationleaves;
@@ -16,12 +16,12 @@ public class Staff extends Employee{
 
 
 	public int getManagerid() {
-		return managerid;
+		return ManagerId;
 	}
 
 
 	public void setManagerid(int managerid) {
-		this.managerid = managerid;
+		this.ManagerId = managerid;
 	}
 
 
@@ -52,6 +52,16 @@ public class Staff extends Employee{
 
 	public void setMedicalLeaveDays(int medicalLeaveDays) {
 		this.medicalLeaveDays = medicalLeaveDays;
+	}
+
+
+	public int getManagerId() {
+		return ManagerId;
+	}
+
+
+	public void setManagerId(int managerId) {
+		ManagerId = managerId;
 	}
 
 }

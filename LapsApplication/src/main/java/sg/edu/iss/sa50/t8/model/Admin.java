@@ -1,7 +1,7 @@
 package sg.edu.iss.sa50.t8.model;
 
 public class Admin extends Employee{
-	private boolean adminuser;
+	private boolean IsAdmin;
 	
 
 	public Admin() {
@@ -10,13 +10,16 @@ public class Admin extends Employee{
 	}
 
 
-	public boolean isAdminuser() {
-		return adminuser;
+
+
+
+	public boolean isIsAdmin() {
+		return IsAdmin;
 	}
 
 
-	public void setAdminuser(boolean adminuser) {
-		this.adminuser = adminuser;
+	public void setIsAdmin(boolean isAdmin) {
+		IsAdmin = isAdmin;
 	}
 
 }
