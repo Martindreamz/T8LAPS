@@ -89,6 +89,18 @@ public abstract class Employee {
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
     }
+
+
+
+	public employeeType getEmployeetype() {
+		return employeetype;
+	}
+
+
+
+	public void setEmployeetype(employeeType employeetype) {
+		this.employeetype = employeetype;
+	}
     
     
     
