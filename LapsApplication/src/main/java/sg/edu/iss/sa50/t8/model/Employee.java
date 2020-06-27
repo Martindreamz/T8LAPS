@@ -8,9 +8,12 @@ public abstract class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotBlank(message = "Name is mandatory")
     private String name;
+    @NotBlank(message = "Email is mandatory")
     private String email;
-	private String password; 
+	  private String password; 
+
     
     public Employee() {
         super();
@@ -21,7 +24,7 @@ public abstract class Employee {
         super();
         this.name = name;
         this.email = email;
-    	password = "000000"; 
+    	  password = "000000"; 
         
     }
 
@@ -75,6 +78,13 @@ public abstract class Employee {
     public String toString() {
         return "Employee [id=" + id + ", name=" + name + ", email=" + email + "]";
     }
+
+
+
+
+	public void setEmployeetype(employeeType employeetype) {
+		this.employeetype = employeetype;
+	}
     
     
     

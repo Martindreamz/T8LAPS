@@ -15,8 +15,8 @@ public abstract class Leaves{
 	//this is the Foreign Key 
 	private LeaveType leavetype;
 	private LeaveStatus leaveStatus;
+	private LeaveReason leaveReason;
 
-	// a full Constructor
 	public Leaves() {
 		super();
 		this.leaveStatus = LeaveStatus.Applied;
