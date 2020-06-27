@@ -16,6 +16,7 @@ public abstract class Employee {
     private int id;
     private String name;
     private String email;
+    private employeeType employeetype; 
     
     
     public Employee() {

@@ -21,7 +21,8 @@ public abstract class Leaves{
 	private LocalDate startdate;
 	private LocalDate enddate;
 	private LeaveStatus leaveStatus;
-
+	private LeaveReason leaveReason;
+	
 
 	public Leaves() {
 		// TODO Auto-generated constructor stub
