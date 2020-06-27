@@ -20,7 +20,7 @@ import sg.edu.iss.sa50.t8.model.Leaves;
 @RequestMapping("/employee")
 public class AdminController {
 	
-	// admin
+	//admin
 	@RequestMapping("/admin")
 	public String admin() {
 		return "admin";

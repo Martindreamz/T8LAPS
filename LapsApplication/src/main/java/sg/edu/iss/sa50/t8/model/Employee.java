@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
 
  
 
@@ -14,8 +15,14 @@ public abstract class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
+    @NotBlank(message = "Name is mandatory")
     private String name;
+    
+    @NotBlank(message = "Email is mandatory")
     private String email;
+    
+    @NotBlank(message = "EmployeeType is mandatory")
     private employeeType employeetype; 
     
     
