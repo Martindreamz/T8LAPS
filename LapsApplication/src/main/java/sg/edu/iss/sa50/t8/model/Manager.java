@@ -1,28 +1,28 @@
 package sg.edu.iss.sa50.t8.model;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
 public class Manager extends Employee{
-	private String dept;
+	//private String dept;
+	@OneToMany(mappedBy="manager") 
 	private List<Staff> staffList;
 	private boolean IsManager;
 	public Manager() {
 		super();
-		// TODO Auto-generated constructor stub
+		IsManager = true;
 	}
-
-	public String getDept() {
-		return dept;
-	}
-
-	public void setDept(String dept) {
-		this.dept = dept;
-	}
-
+	//Bianca New constructors
+	public Manager(String name, String email) {
+			super(name,email);
+		}
+	
+	@OneToMany
 	public List<Staff> getStaffList() {
 		return staffList;
 	}
-
+	@OneToMany
 	public void setStaffList(List<Staff> staffList) {
 		this.staffList = staffList;
 	}

@@ -1,40 +1,47 @@
 package sg.edu.iss.sa50.t8.model;
 
+import javax.persistence.*;
 import java.util.List;
+import javax.validation.constraints.*;
 
+@Entity
 public class Staff extends Employee{
-	private int ManagerId;
-	//the above managerid is the FK 
+	
+	//Check & Edit by Bianca: add validation and mapping setting
+	
+	//managerid is the FK need to build mapping 
+	@ManyToOne  @JoinColumn(name="manager_id")
+	private Manager manager;
+	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
-	private List<CompensationLeave> compensationleaves;
+	@OneToMany(mappedBy="staff") 
+	private List<Compensation> compensations;
+	@Max(20)
 	private int annualLeaveDays;
+	@Max(30)
 	private int medicalLeaveDays; 
+
 	
 	public Staff() {
-		// TODO Auto-generated constructor stub
+	}
+
+	//Bianca New constructors
+	public Staff(String name, String email,Manager manager, @Max(20) int annualLeaveDays, @Max(30) int medicalLeaveDays) {
+		super(name,email);
+		this.manager = manager;
+		this.annualLeaveDays = annualLeaveDays;
+		this.medicalLeaveDays = medicalLeaveDays;
 	}
 
 
-	public int getManagerid() {
-		return ManagerId;
-	}
-
-
-	public void setManagerid(int managerid) {
-		this.ManagerId = managerid;
-	}
-
-
-	public List<CompensationLeave> getCompensationleaves() {
-		return compensationleaves;
-	}
-
-
-	public void setCompensationleaves(List<CompensationLeave> compensationleaves) {
-		this.compensationleaves = compensationleaves;
-	}
-
-
+	/*
+	 * public List<Compensation> getCompensations() { return compensations; }
+	 * 
+	 * 
+	 * public void setCompensations(List<Compensation> compensations) {
+	 * this.compensations = compensations; }
+	 * 
+	 */
 	public int getAnnualLeaveDays() {
 		return annualLeaveDays;
 	}
@@ -54,14 +61,5 @@ public class Staff extends Employee{
 		this.medicalLeaveDays = medicalLeaveDays;
 	}
 
-
-	public int getManagerId() {
-		return ManagerId;
-	}
-
-
-	public void setManagerId(int managerId) {
-		ManagerId = managerId;
-	}
 
 }
