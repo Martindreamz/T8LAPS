@@ -1,14 +1,16 @@
 package sg.edu.iss.sa50.t8.model;
 
- 
+// we will use Employee.java as the Superclass instead. Please ignore this file. 
+
+ /*
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
- 
-
+ */
+/*
 @MappedSuperclass
 public abstract class User {
     @Id
@@ -95,3 +97,4 @@ public abstract class User {
  
 
 }
+*/
