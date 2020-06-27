@@ -2,7 +2,9 @@ package sg.edu.iss.sa50.t8.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,8 @@ import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveType;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.service.AdminService;
+import sg.edu.iss.sa50.t8.service.IEmployeeService;
 
 // a) Manage Leave Type (CRUD) - Joe 
 // b) Manage Staff (CRUD)- Joe 
@@ -26,6 +30,14 @@ import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 @Controller
 @RequestMapping("/employee")
 public class AdminController {
+	
+	@Autowired
+	protected IEmployeeService aservice;
+	
+	@Autowired
+	public void setILeaveService(AdminService aservice) {
+		this.aservice = aservice;
+	}
 	
 	//admin
 	@RequestMapping("/admin")
@@ -154,6 +166,13 @@ public class AdminController {
 	}
 	*/
 
+	//Daryl part
+	
+	@RequestMapping("/search-employee")
+	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
+		model.addAttribute("elist", ((AdminService) aservice).searchEmployee(searchTerm));
+		return "";
+	}
 	
 	
 }
