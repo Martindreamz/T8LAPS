@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -182,8 +183,9 @@ public class AdminController {
 		return "dashboard";
 	}
 	
-	@RequestMapping("/admin-edit")
-	public String edit() {
+	@RequestMapping("/admin-edit/{id}")
+	public String edit(@PathVariable("id") int id, Model model) {
+		model.addAttribute("employee", ((AdminService) aservice).findById(id));
 		return "admin-edit";
 	}
 	

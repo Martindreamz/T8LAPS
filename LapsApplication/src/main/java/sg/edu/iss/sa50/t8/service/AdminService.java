@@ -1,6 +1,7 @@
 package sg.edu.iss.sa50.t8.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class AdminService implements IEmployeeService {
 	
 	public List<Employee> findAll(){
 		return arepo.findAll();
+	}
+	
+	public Optional<Employee> findById(int id) {
+		return arepo.findById(id);
 	}
 	
 }

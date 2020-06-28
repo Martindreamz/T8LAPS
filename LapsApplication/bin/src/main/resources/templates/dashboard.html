@@ -31,9 +31,6 @@
       <th scope="row" th:text="${employee.id}">Id</th>
       <td th:text="${employee.name}">Name</td>
       <td th:text="${employee.email}">Email</td>
-      <td>
-      	<a class="btn btn-primary" th:href="@{/employee/admin-edit/}+${employee.id}" role="button">Edit</a>
-      </td>
     </tr>
   </tbody>
 </table>
