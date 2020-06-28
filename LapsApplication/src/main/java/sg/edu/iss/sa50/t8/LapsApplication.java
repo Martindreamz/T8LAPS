@@ -8,9 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import sg.edu.iss.sa50.t8.model.*;
 import sg.edu.iss.sa50.t8.repository.*;
+import sg.edu.iss.sa50.t8.service.EmailService;
+import sg.edu.iss.sa50.t8.service.iEmailService;
 
 
 @SpringBootApplication
@@ -35,6 +38,10 @@ public class LapsApplication {
 	@Autowired
 	CLRepository clRepo;
 	
+	@Autowired
+	EmailService ems;
+	
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(LapsApplication.class, args);
@@ -45,12 +52,12 @@ public class LapsApplication {
 		return args -> {
 			System.out.println("Let's start to see our models! ");
 			
-			Admin adm1 = new Admin("Martin","e0533409@u.nus.edu");
+			Admin adm1 = new Admin("Martin","martin.dreamz@hotmail.com");
 			Admin adm2 = new Admin("Martin2","e0533410@u.nus.edu");
-			Manager man1 = new Manager("Joe","e0XXXXXman@u.nus.edu",null,16,20);
-			Manager man2 = new Manager("Joe2","e0XXXXXman2@u.nus.edu",man1,16,15);
-			Manager man3 = new Manager("Joe3","e0XXXXXman2@u.nus.edu",man2,15,15);
-			Staff s1 = new Staff("Bianca","e0533381@u.nus.edu",man2,10,10);
+			Manager man1 = new Manager("Joe","martin.dreamz@hotmail.com",null,16,20);
+			Manager man2 = new Manager("Joe2","martin.dreamz@hotmail.com",man1,16,15);
+			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
+			Staff s1 = new Staff("Martin","martin.dreamz@hotmail.com",man2,10,10);
 			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
 			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
 			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
@@ -124,13 +131,21 @@ public class LapsApplication {
 			mlRepo.save(ml7);
 			mlRepo.save(ml8);
 			mlRepo.save(ml9);
-			mlRepo.save(ml10);
-			
+			mlRepo.save(ml10);	
 			compRepo.save(com1);
 			clRepo.save(cl1);
-			
-			
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
+			
+			
+			ems.notifyManager(al1);
+			ems.notifyManager(ml1);
+			ems.notifyStaff(al1);
+			ems.notifyStaff(ml1);
+			ems.confirmStaffCancellation(al1);
+			ems.confirmStaffCancellation(ml1);
+			System.out.println("emails sent");
+
+			
 			
 		}; 
 	}
