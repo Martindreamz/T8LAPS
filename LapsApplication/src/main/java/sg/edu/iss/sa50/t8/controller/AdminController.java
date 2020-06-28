@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,15 +33,16 @@ import sg.edu.iss.sa50.t8.service.IEmployeeService;
 @Controller
 @RequestMapping("/employee")
 public class AdminController {
-	/*
+	
 	@Autowired
+	@Qualifier("adminService")
 	protected IEmployeeService aservice;
 	
 	@Autowired
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;
 	}
-	*/
+	
 	//admin
 	@RequestMapping("/admin")
 	public String admin() {
@@ -168,12 +171,17 @@ public class AdminController {
 	*/
 
 	//Daryl part
-	/*
+	
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
-		model.addAttribute("elist", ((AdminService) aservice).searchEmployee(searchTerm));
-		return "";
+		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
+		return "dashboard";
 	}
-	*/
+	@RequestMapping("/dashboard")
+	public String dashboard(Model model) {
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "dashboard";
+	}
+	
 	
 }
