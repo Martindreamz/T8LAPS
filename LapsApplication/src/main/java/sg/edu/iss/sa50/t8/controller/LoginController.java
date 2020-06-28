@@ -18,7 +18,7 @@ public class LoginController {
 		return "adminlogin";
 	}
 
-	// employee-login
+	// employee-login 
 	@RequestMapping("/employeelogin")
 	public String employeeLogin() {
 		return "employeelogin";

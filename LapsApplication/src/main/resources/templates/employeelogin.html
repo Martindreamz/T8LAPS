@@ -8,7 +8,18 @@
 	<h1 th:utext=#{employeelogin.heading}></h1>
 
 	<a href="/employee/leaves">
-		<button> login</button>
+		<!-- <button> login</button> -->
+		<form name='f' action="login" method='POST'>
+			<table>
+			<tr>
+				<td>User:</td>
+				<td><input type = 'text' name = 'username' value ''></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input name = "submit" type = "submit" value = "submit"></td>
+				</tr>
+				</table>
 	</a>
 	
 	<a href="/employee/home">
