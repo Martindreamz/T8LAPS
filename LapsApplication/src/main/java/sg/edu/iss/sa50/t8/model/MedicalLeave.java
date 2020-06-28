@@ -12,11 +12,11 @@ public class MedicalLeave extends Leaves {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MedicalLeave(Staff staff,LocalDate startDate, LocalDate endDate) {
-		super(staff);
-		super.setLeavetype(LeaveType.MedicalLeave);
+	public MedicalLeave(Staff staff,LocalDate startDate, LocalDate endDate,String reason) {
+		super(staff,reason);
 		this.startDate= startDate;
 		this.endDate= endDate;
+
 	}
 
 	public LocalDate getStartdate() {

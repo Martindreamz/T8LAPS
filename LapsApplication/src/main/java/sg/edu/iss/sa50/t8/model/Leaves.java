@@ -13,18 +13,37 @@ public abstract class Leaves{
 	@ManyToOne @JoinColumn(name="staff_id") 
 	private Staff staff;
 	//this is the Foreign Key 
-	private LeaveType leavetype;
 	private LeaveStatus leaveStatus;
-	private LeaveReason leaveReason;
+	private String leaveReason;
+	private String managerComment;
 
+	public String getLeaveReason() {
+		return leaveReason;
+	}
+	public void setLeaveReason(String leaveReason) {
+		this.leaveReason = leaveReason;
+	}
+	public String getManagerComment() {
+		return managerComment;
+	}
+	public void setManagerComment(String managerComment) {
+		this.managerComment = managerComment;
+	}
 	public Leaves() {
 		super();
+	}
+	public Leaves(Staff  staff,String leaveReason) {
+		super();
 		this.leaveStatus = LeaveStatus.Applied;
+		this.staff = staff;
+		this.leaveReason=leaveReason;
+		
 	}
 	public Leaves(Staff  staff) {
 		super();
 		this.leaveStatus = LeaveStatus.Applied;
 		this.staff = staff;
+		
 	}
 
 
@@ -38,21 +57,5 @@ public abstract class Leaves{
 	}
 
 
-	/*
-	 * public int getStaffId() { return StaffId; }
-	 * 
-	 * 
-	 * public void setStaffId(int staffId) { StaffId = staffId; }
-	 */
-
-
-	public LeaveType getLeavetype() {
-		return leavetype;
-	}
-
-
-	public void setLeavetype(LeaveType leavetype) {
-		this.leavetype = leavetype;
-	}
 
 }

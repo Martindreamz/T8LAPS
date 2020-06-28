@@ -17,7 +17,6 @@ public class CompensationLeave extends Leaves{
 		super(staff);
 		this.leaveDate=leaveDate;
 		this.compensation=compensation;
-		super.setLeavetype(LeaveType.CompensationLeave);
 	}
 	
 	public LocalDate getLeaveDate() {

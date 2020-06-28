@@ -46,31 +46,37 @@ public class LapsApplication {
 			System.out.println("Let's start to see our models! ");
 			
 			Admin adm1 = new Admin("Martin","e0533409@u.nus.edu");
-			Manager man1 = new Manager("Joe","e0XXXXXman@u.nus.edu");
-			Manager man2 = new Manager("Joe","e0XXXXXman2@u.nus.edu");
-			Staff s1 = new Staff("Bianca","e0533381@u.nus.edu",man1,10,10);
+			Manager man1 = new Manager("Joe","e0XXXXXman@u.nus.edu",null,16,20);
+			Manager man2 = new Manager("Joe2","e0XXXXXman2@u.nus.edu",man1,16,15);
+			Manager man3 = new Manager("Joe2","e0XXXXXman2@u.nus.edu",man2,15,15);
+			Staff s1 = new Staff("Bianca","e0533381@u.nus.edu",man2,10,10);
 			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
-			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man1,14,10);
+			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
 			//Constructor : Staff(name,email,int managerId, annualLeaveDays, @Max(30) int medicalLeaveDays)
 			 
 			LocalDate d1 = LocalDate.of(2020,5,1); 
 			LocalDate d2 = LocalDate.of(2020,5,3);
-			AnnualLeave al1 = new AnnualLeave(s1,d1,d2);
+			AnnualLeave al1 = new AnnualLeave(s1,d1,d2,"oversea travel");
+			AnnualLeave al2 = new AnnualLeave(man2,d1,d2,"manager oversea travel");
 			LocalDate d3 = LocalDate.of(2020,6,1); 
 			LocalDate d4 = LocalDate.of(2020,6,7);
-			MedicalLeave ml2 = new MedicalLeave(s1,d3,d4);
+			MedicalLeave ml1 = new MedicalLeave(s1,d3,d4,"covid-19");
+			MedicalLeave ml2 = new MedicalLeave(man3,d3,d4,"manager covid-19");
 			//Constructor : MedicalLeave(staff,startDate,endDate)
-			Compensation com1 = new Compensation(d1,s2);
-			CompensationLeave cl1 = new CompensationLeave(s2,d3,com1);
+			Compensation com1 = new Compensation(d1,s3);
+			CompensationLeave cl1 = new CompensationLeave(s3,d3,com1);
 			
 			
 			admRepo.save(adm1);
 			manRepo.save(man1);
 			manRepo.save(man2);
+			manRepo.save(man3);
 			stfRepo.save(s1);
 			stfRepo.save(s2);
 			stfRepo.save(s3);
 			alRepo.save(al1);
+			alRepo.save(al2);
+			mlRepo.save(ml1);
 			mlRepo.save(ml2);
 			compRepo.save(com1);
 			clRepo.save(cl1);

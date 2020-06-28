@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Staff extends Employee{
 	
 	//Check & Edit by Bianca: add validation and mapping setting
@@ -34,14 +35,14 @@ public class Staff extends Employee{
 	}
 
 
-	/*
-	 * public List<Compensation> getCompensations() { return compensations; }
-	 * 
-	 * 
-	 * public void setCompensations(List<Compensation> compensations) {
-	 * this.compensations = compensations; }
-	 * 
-	 */
+	public List<Compensation> getCompensations() {
+		return compensations;
+	}
+
+	public void setCompensations(List<Compensation> compensations) {
+		this.compensations = compensations;
+	}
+	 
 	public int getAnnualLeaveDays() {
 		return annualLeaveDays;
 	}

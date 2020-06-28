@@ -26,7 +26,7 @@ public abstract class Employee {
         super();
         this.name = name;
         this.email = email;
-    	  password = "000000"; 
+    	password = "000000"; 
         
     }
 

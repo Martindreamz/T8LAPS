@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.model.LeaveType;
-import sg.edu.iss.sa50.t8.model.Leaves;
+import sg.edu.iss.sa50.t8.model.*;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
@@ -53,25 +51,26 @@ public class AdminController {
 	// JOE SECTION A ***
 	
 	
-	@GetMapping("/admin-createleavetype")
-	public String createleavetype(@RequestParam(name="leavetype", required=true, defaultValue="") String leavetype) {
-		LeaveType.addAttribute("leavetype", leavetype);
-		return "admin-manageleavetype.html";}
-	
-	@GetMapping("/admin-updateleavetype")
-	public String updateleavetype(@RequestParam(name="leavetype", required=true, defaultValue="") String leavetype, LeaveType newleavetype) {
-			LeaveType.updateAttribute("leavetype", leavetype);
-			return "admin-manageleavetype.html";}
-	
-	@GetMapping("/admin-deleteleavetype")
-	public String deleteleavetype(@RequestParam(name="leavetype", required=true, defaultValue="") LeaveType leavetype) {
-			LeaveType.deleteAttribute("leavetype");
-			return "admin-manageleavetype.html";}
-					
-	@GetMapping("/admin-viewleavelist")
-	public String viewleavelist() {
-			LeaveType.view();
-			return "admin-manageleavetype.html";}
+	/*
+	 * @GetMapping("/admin-createleavetype") public String
+	 * createleavetype(@RequestParam(name="leavetype", required=true,
+	 * defaultValue="") String leavetype) { LeaveType.addAttribute("leavetype",
+	 * leavetype); return "admin-manageleavetype.html";}
+	 * 
+	 * @GetMapping("/admin-updateleavetype") public String
+	 * updateleavetype(@RequestParam(name="leavetype", required=true,
+	 * defaultValue="") String leavetype, LeaveType newleavetype) {
+	 * LeaveType.updateAttribute("leavetype", leavetype); return
+	 * "admin-manageleavetype.html";}
+	 * 
+	 * @GetMapping("/admin-deleteleavetype") public String
+	 * deleteleavetype(@RequestParam(name="leavetype", required=true,
+	 * defaultValue="") LeaveType leavetype) {
+	 * LeaveType.deleteAttribute("leavetype"); return "admin-manageleavetype.html";}
+	 * 
+	 * @GetMapping("/admin-viewleavelist") public String viewleavelist() {
+	 * LeaveType.view(); return "admin-manageleavetype.html";}
+	 */
 			
 	
 	
