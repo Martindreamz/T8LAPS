@@ -182,5 +182,10 @@ public class AdminController {
 		return "dashboard";
 	}
 	
+	@RequestMapping("/admin-edit")
+	public String edit() {
+		return "admin-edit";
+	}
+	
 	
 }
