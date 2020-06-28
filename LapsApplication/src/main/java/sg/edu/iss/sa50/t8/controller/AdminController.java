@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.controller;
 
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,7 @@ import sg.edu.iss.sa50.t8.service.IEmployeeService;
 @Controller
 @RequestMapping("/employee")
 public class AdminController {
-	
+	/*
 	@Autowired
 	protected IEmployeeService aservice;
 	
@@ -38,7 +39,7 @@ public class AdminController {
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;
 	}
-	
+	*/
 	//admin
 	@RequestMapping("/admin")
 	public String admin() {
@@ -167,12 +168,12 @@ public class AdminController {
 	*/
 
 	//Daryl part
-	
+	/*
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
 		model.addAttribute("elist", ((AdminService) aservice).searchEmployee(searchTerm));
 		return "";
 	}
-	
+	*/
 	
 }

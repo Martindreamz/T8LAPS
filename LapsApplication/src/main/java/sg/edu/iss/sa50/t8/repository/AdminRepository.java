@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import sg.edu.iss.sa50.t8.model.Employee;
 
 public interface AdminRepository extends EmployeeRepository {
-	@Query("SELECT e FROM Staff s, Manager m"
+	/*@Query("SELECT e FROM Staff s, Manager m"
 			+ "WHERE s.name LIKE %?1"
 			+ "OR s.name LIKE ?1%"
 			+ "OR s.email LIKE %?1"
@@ -16,5 +16,5 @@ public interface AdminRepository extends EmployeeRepository {
 			+ "OR m.name LIKE ?1%"
 			+ "OR m.email LIKE %?1"
 			+ "OR m.email LIKE ?1%")
-	List<Employee> searchEmployee(String searchTerm);
+	List<Employee> searchEmployee(String searchTerm);*/
 }
