@@ -19,11 +19,13 @@ public class MedicalLeave extends Leaves {
 
 	public MedicalLeave() {
 		super();
+		super.setStatus(LeaveStatus.Applied);
 		// TODO Auto-generated constructor stub
 	}
 
 	public MedicalLeave(Date endDate) {
 		super();
+		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
 	}
 

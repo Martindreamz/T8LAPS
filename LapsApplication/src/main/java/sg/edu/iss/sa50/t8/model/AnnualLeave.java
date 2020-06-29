@@ -12,18 +12,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @DiscriminatorValue("Annual_Leave")
 public class AnnualLeave extends Leaves{
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date endDate;
+	
 	private String contactDetails;
 
 	//private LeaveType super.leaveType;
 	public AnnualLeave() {
 		super();
+		super.setStatus(LeaveStatus.Applied);
 	}
 
 	public AnnualLeave(Date endDate, String contactDetails) {
 		super();
+		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
 		this.contactDetails = contactDetails;
 	}
@@ -43,7 +47,4 @@ public class AnnualLeave extends Leaves{
 	public void setContactDetails(String contactDetails) {
 		this.contactDetails = contactDetails;
 	}
-	
-	
-	
 }

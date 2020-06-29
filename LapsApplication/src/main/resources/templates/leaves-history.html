@@ -23,13 +23,35 @@
 		 </thead>
 		 <tbody>
 		    <tr th:each="al:${alLeaves}">
-		    <td th:text="${al.id}">id</td>
+		    <td th:if="${not #lists.isEmpty(alLeaves)}"  th:text="${al.id}">id</td>
 		      <td th:text="${al.leaveReason}">leaveReason</td>
 		      <td th:text="Annual">LeaveType</td>
 		      <td th:text="${al.startDate}" >Start Date</td>
 			  <td th:text="${al.endDate}" >Duration</td>
 		      <td th:text="${al.mangerComment}">Manager Comment</td>
 		      <td th:text="${al.status}">Otto</td>
+		      <td><a th:href="@{/leaves/apply}" th:text="#{leaves-history.detail.link }"></a></td>
+		    </tr>
+		    
+		    <tr th:if="${not #lists.isEmpty(mlLeaves)}"  th:each="ml:${mlLeaves}">
+		      <td th:text="${ml.id}">id</td>
+		      <td th:text="${ml.leaveReason}">leaveReason</td>
+		      <td th:text="Medical">LeaveType</td>
+		      <td th:text="${ml.startDate}" >Start Date</td>
+			  <td th:text="${ml.endDate}" >endDate</td>
+		      <td th:text="${ml.mangerComment}">Manager Comment</td>
+		      <td th:text="${ml.status}">Otto</td>
+		      <td><a th:href="@{/leaves/apply}" th:text="#{leaves-history.detail.link }"></a></td>
+		    </tr>
+		    
+		    <tr th:if="${not #lists.isEmpty(clLeaves)}" th:each="cl:${clLeaves}">
+		      <td th:text="${cl.id}">id</td>
+		      <td th:text="${cl.leaveReason}">leaveReason</td>
+		      <td th:text="Compensation">LeaveType</td>
+		      <td th:text="${cl.startDate}" >Start Date</td>
+			  <td th:text="${cl.endDate}" >endDate</td>
+		      <td th:text="${cl.mangerComment}">Manager Comment</td>
+		      <td th:text="${cl.status}">Otto</td>
 		      <td><a th:href="@{/leaves/apply}" th:text="#{leaves-history.detail.link }"></a></td>
 		    </tr>
 		  </tbody>

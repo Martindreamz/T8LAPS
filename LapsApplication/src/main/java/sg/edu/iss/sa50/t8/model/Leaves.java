@@ -22,6 +22,7 @@ public abstract class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date startDate;
