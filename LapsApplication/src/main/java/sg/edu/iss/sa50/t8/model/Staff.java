@@ -23,6 +23,14 @@ public class Staff extends Employee{
 	private int medicalLeaveDays; 
 
 	
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+
 	public Staff() {
 	}
 
