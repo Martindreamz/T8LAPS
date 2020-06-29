@@ -50,18 +50,20 @@ public class AdminController {
 	}
 	
 
-
-	@RequestMapping("/admin-createEmployee")
+/*
+	@RequestMapping("/admin-create")
 	public String addEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
 				model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
-				return "admin-createemployee";	
+				return "admin-create";	
+	}
+	*/
+	
+	@RequestMapping("/admin-delete/{id}")
+	public String deleteEmployee(@PathVariable("id") int id, Model model) {
+		model.addAttribute("employee", ((AdminService) aservice).findById(id));
+		return "admin-delete";
 	}
 	
-	@RequestMapping("/admin-deleteEmployee")
-	public String deleteEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
-						model.delete("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
-						return "admin-edit";	
-	}
 	
 
 	
