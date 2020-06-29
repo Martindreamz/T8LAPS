@@ -37,6 +37,8 @@ public class LapsApplication {
 	MLRepository mlRepo;
 	@Autowired
 	CLRepository clRepo;
+	@Autowired
+	OvertimeRepository oRepo;
 	
 	@Autowired
 	EmailService ems;
@@ -69,6 +71,10 @@ public class LapsApplication {
 
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
 		
+			
+			Overtime ot1 = new Overtime(d1,s1,3);
+			Overtime ot2 = new Overtime(d2,s1,3);
+			
 			al1.setStartDate(d1);
 			al1.setStatus(LeaveStatus.Applied);
 			al1.setStaff(s1);
@@ -88,6 +94,9 @@ public class LapsApplication {
 			stfRepo.save(s5);
 			
 			alRepo.save(al1);
+			
+			oRepo.save(ot1);
+			oRepo.save(ot2);
 			
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
 			
