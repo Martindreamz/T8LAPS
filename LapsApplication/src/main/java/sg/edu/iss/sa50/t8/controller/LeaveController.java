@@ -51,7 +51,8 @@ public class LeaveController {
 	}
 
 	@RequestMapping("/medicalAdd")
-	public String medicaladdForm() {
+	public String medicaladdForm(Model model) {
+		model.addAttribute("medicalLeave", new MedicalLeave());
 		return "leaves-apply-medical";
 	}
 
@@ -64,12 +65,18 @@ public class LeaveController {
 	@RequestMapping("/annual/save")
 	public String saveAnnualForm(@ModelAttribute("annualLeave") AnnualLeave annualLeave, Model model) {
 		leaveService.saveAnnualLeave(annualLeave);
+		model.addAttribute("alLeaves", alRepo.findAllAnnualLeaves());
+		model.addAttribute("mlLeaves", mlRepo.findAllMedicalLeaves());
+		model.addAttribute("clLeaves", clRepo.findAllCompensationLeaves());
 		return "leaves-history";
 	}
 	
 	@RequestMapping("/medical/save")
 	public String saveMedicalForm(@ModelAttribute("medicalLeave") MedicalLeave medicalLeave, Model model) {
 		mRepo.save(medicalLeave);
+		model.addAttribute("alLeaves", alRepo.findAllAnnualLeaves());
+		model.addAttribute("mlLeaves", mlRepo.findAllMedicalLeaves());
+		model.addAttribute("clLeaves", clRepo.findAllCompensationLeaves());
 		return "leaves-history";
 	}
 

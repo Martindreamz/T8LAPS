@@ -75,8 +75,8 @@ public class LapsApplication {
 			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
 			//Constructor : Staff(name,email,int managerId, annualLeaveDays, @Max(30) int medicalLeaveDays)
 			 
-			Date d1 = new SimpleDateFormat("dd-mm-yyyy").parse("1-5-2020");
-			Date d2 = new SimpleDateFormat("dd-mm-yyyy").parse("3-5-2020");
+			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
+			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
 
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
 			al1.setStartDate(d1);

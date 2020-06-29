@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance
@@ -17,6 +21,9 @@ public abstract class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="MM/dd/yyyy")
 	private Date startDate;
 
 	private String leaveReason;

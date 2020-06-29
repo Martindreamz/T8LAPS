@@ -18,21 +18,45 @@
   <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
 <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.css" />
 
+<script>
+	$(document).ready(function(){
+		var minDate = new Date();
+		$("#sdate").datepicker({
+			showAnim: 'drop',
+			numberOfMonth: 1,
+			minDate: minDate,
+			dateFormat: 'dd/mm/yy',
+			/* onClose: function(selectedDate){
+				$('#edate').datepicker("option","minDate",selectedDate);
+			} */
+		});
 
+		
+		$("#edate").datepicker({
+			showAnim: 'drop',
+			numberOfMonth: 1,
+			minDate: minDate,
+			dateFormat: 'dd/mm/yy',
+			/* onClose: function(selectedDate){
+				$('#sdate').datepicker("option","minDate",selectedDate);
+			} */
+		});
+	})
+</script>
 </head>
 <body>
 	<h1 th:utext=#{leaves-apply.heading}></h1>
 
-	<form class="form-horizontal" action="#" th:action="@{/annual/save}"
+	<form class="form-horizontal" action="#" th:action="@{/leaves/annual/save}"
 		th:object="${annualLeave}" method="get">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="startdate">Start
 				Date</label> 
-			<input type="date" th:field="*{startDate}" id="sdate" placeholder="dd/MM/yyyy" />
+			<input type="text" th:field="*{startDate}" id="sdate" placeholder="dd/MM/yyyy" />
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="enddate">End Date</label>
-			<input type="date" th:field="*{endDate}" id="edate" placeholder="dd/MM/yyyy" />
+			<input type="text" th:field="*{endDate}" id="edate" placeholder="dd/MM/yyyy" />
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="contactdetails">Contact Details</label>
