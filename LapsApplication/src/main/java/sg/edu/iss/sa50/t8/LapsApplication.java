@@ -90,7 +90,8 @@ public class LapsApplication {
 			alRepo.save(al1);
 			
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
-			
+			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
+			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
 			
 			/*
 			 * ems.notifyManager(al1); ems.notifyManager(ml1); ems.notifyStaff(al1);
