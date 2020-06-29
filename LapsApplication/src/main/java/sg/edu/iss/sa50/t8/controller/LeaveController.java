@@ -3,9 +3,15 @@ package sg.edu.iss.sa50.t8.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.repository.ALRepository;
+import sg.edu.iss.sa50.t8.repository.MLRepository;
+import sg.edu.iss.sa50.t8.service.ALService;
+import sg.edu.iss.sa50.t8.service.ILeaveService;
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
 @Controller
@@ -14,6 +20,51 @@ public class LeaveController {
 	
 	@Autowired
 	ALRepository alRepo;
+	
+	@Autowired
+	protected MLRepository mRepo;
+
+	@Autowired
+	protected ILeaveService leaveService;
+
+	@Autowired
+	public void setILeaveService(ALService alService) {
+		this.leaveService = alService;
+	}
+	
+	@RequestMapping("/apply")
+	public String apply() {
+		return "leaves-apply";
+	}
+	
+	@RequestMapping("/annualAdd")
+	public String annualaddForm(Model model) {
+		model.addAttribute("annualLeave", new AnnualLeave());
+		return "leaves-apply-annual";
+	}
+
+	@RequestMapping("/medicalAdd")
+	public String medicaladdForm() {
+		return "leaves-apply-medical";
+	}
+
+	@RequestMapping("/compensationAdd")
+	public String compensationaddForm() {
+		return "leaves-apply-compensation";
+	}
+
+	
+	@RequestMapping("/annual/save")
+	public String saveAnnualForm(@ModelAttribute("annualLeave") AnnualLeave annualLeave, Model model) {
+		leaveService.saveAnnualLeave(annualLeave);
+		return "leaves-history";
+	}
+	
+	@RequestMapping("/medical/save")
+	public String saveMedicalForm(@ModelAttribute("medicalLeave") MedicalLeave medicalLeave, Model model) {
+		mRepo.save(medicalLeave);
+		return "leaves-history";
+	}
 
 	@RequestMapping("/history")
 	public String History(Model model) {
@@ -39,11 +90,6 @@ public class LeaveController {
 	@RequestMapping("/manage")
 	public String Manage() {
 		return "leaves-manage";
-	}
-	
-	@RequestMapping("/apply")
-	public String Apply() {
-		return "leaves-apply";
 	}
 	
 	@RequestMapping("/movement-register")

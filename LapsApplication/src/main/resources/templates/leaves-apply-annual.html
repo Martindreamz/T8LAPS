@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:utext=#{leaves-apply.title}></title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.css" />
+
+
+</head>
+<body>
+	<h1 th:utext=#{leaves-apply.heading}></h1>
+
+	<form class="form-horizontal" action="#" th:action="@{/annual/save}"
+		th:object="${annualLeave}" method="get">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="startdate">Start
+				Date</label> 
+			<input type="date" th:field="*{startDate}" id="sdate" placeholder="dd/MM/yyyy" />
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="enddate">End Date</label>
+			<input type="date" th:field="*{endDate}" id="edate" placeholder="dd/MM/yyyy" />
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="contactdetails">Contact Details</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="ctdetails"
+					th:field="*{contactDetails}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="comment">Leave
+				Reason</label>
+			<div class="col-sm-6">
+				<textarea class="form-control" rows="5" id="comment"
+					th:field="*{leaveReason}"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-6" style="float: right;">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-primary">Reset</button>
+			</div>
+		</div>
+	</form>
+</body>
+</html>
+
+<!-- 			<div class="col-sm-6"> -->
+<!-- 				<input type="date" class="form-control" id="sdate" -->
+<!-- 					th:field="*{startDate}"> -->
+<!-- 			</div> -->
+
+<!-- 			<div class="col-sm-6"> -->
+<!-- 				<input type="date" class="form-control" id="edate" -->
+<!-- 					th:field="*{endDate}"> -->
+<!-- 			</div> -->
+
+<!-- 		<div class="form-group"> -->
+		<!-- 			<label class="control-label col-sm-2" for="name">Name</label> -->
+		<!-- 			<div class="col-sm-6"> -->
+		<!-- 				<input type="text" class="form-control" id="name" -->
+		<!-- 					placeholder="Enter name" th:field="*{name}"> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		<!-- 		<div class="form-group"> -->
+		<!-- 			<label class="control-label col-sm-2" for="leavetype">Leave -->
+		<!-- 				Type</label> -->
+		<!-- 			<div class="col-sm-10 dropdown"> -->
+		<!-- 				<button class="btn btn-primary dropdown-toggle" type="button" -->
+		<!-- 					data-toggle="dropdown"> -->
+		<!-- 					Select here<span class="caret"></span> -->
+		<!-- 				</button> -->
+		<!-- 				<ul class="dropdown-menu"> -->
+		<!-- 					<li><a href="#">Annual Leave</a></li> -->
+		<!-- 					<li><a href="#">Medical Leave</a></li> -->
+		<!-- 					<li><a href="#">Compensation Leave</a></li> -->
+		<!-- 				</ul> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		
+		
+<!-- 		th:text="${#dates.format(annualLeave.startDate, 'dd-MM-yyyy')}" -->
