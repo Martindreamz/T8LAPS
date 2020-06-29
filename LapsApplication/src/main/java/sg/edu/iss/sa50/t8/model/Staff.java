@@ -19,15 +19,23 @@ public class Staff extends Employee{
 	private List<Compensation> compensations;
 	@Max(20)
 	private int annualLeaveDays;
-	@Max(30)
+	@Max(60)
 	private int medicalLeaveDays; 
 
 	
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+
 	public Staff() {
 	}
 
 	//Bianca New constructors
-	public Staff(String name, String email,Manager manager, @Max(20) int annualLeaveDays, @Max(30) int medicalLeaveDays) {
+	public Staff(String name, String email,Manager manager, @Max(20) int annualLeaveDays, @Max(60) int medicalLeaveDays) {
 		super(name,email);
 		this.manager = manager;
 		this.annualLeaveDays = annualLeaveDays;

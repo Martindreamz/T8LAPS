@@ -32,6 +32,12 @@ public abstract class Leaves{
 	public Leaves() {
 		super();
 	}
+	public Staff getStaff() {
+		return staff;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 	public Leaves(Staff  staff,String leaveReason) {
 		super();
 		this.leaveStatus = LeaveStatus.Applied;
