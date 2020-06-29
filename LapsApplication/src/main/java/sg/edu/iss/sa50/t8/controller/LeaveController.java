@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.repository.ALRepository;
+import sg.edu.iss.sa50.t8.repository.CLRepository;
 import sg.edu.iss.sa50.t8.repository.MLRepository;
 import sg.edu.iss.sa50.t8.service.ALService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
@@ -20,6 +21,12 @@ public class LeaveController {
 	
 	@Autowired
 	ALRepository alRepo;
+	
+	@Autowired
+	MLRepository mlRepo;
+	
+	@Autowired
+	CLRepository clRepo;
 	
 	@Autowired
 	protected MLRepository mRepo;
@@ -68,7 +75,9 @@ public class LeaveController {
 
 	@RequestMapping("/history")
 	public String History(Model model) {
-		model.addAttribute("alLeaves", alRepo.findAll());
+		model.addAttribute("alLeaves", alRepo.findAllAnnualLeaves());
+		model.addAttribute("mlLeaves", mlRepo.findAllMedicalLeaves());
+		model.addAttribute("clLeaves", clRepo.findAllCompensationLeaves());
 		return "leaves-history";
 	}
 	

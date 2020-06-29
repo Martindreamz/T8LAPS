@@ -1,7 +1,6 @@
 package sg.edu.iss.sa50.t8;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,24 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.javamail.JavaMailSender;
 
-import sg.edu.iss.sa50.t8.model.*;
-import sg.edu.iss.sa50.t8.repository.*;
+import sg.edu.iss.sa50.t8.model.Admin;
+import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.LeaveStatus;
+import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.Overtime;
+import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.repository.ALRepository;
+import sg.edu.iss.sa50.t8.repository.AdminRepository;
+import sg.edu.iss.sa50.t8.repository.CLRepository;
+import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.repository.LeaveRepository;
+import sg.edu.iss.sa50.t8.repository.MLRepository;
+import sg.edu.iss.sa50.t8.repository.ManagerRepository;
+import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
+import sg.edu.iss.sa50.t8.repository.StaffRepository;
 import sg.edu.iss.sa50.t8.service.EmailService;
-import sg.edu.iss.sa50.t8.service.iEmailService;
 
 
 @SpringBootApplication
@@ -43,8 +54,6 @@ public class LapsApplication {
 	@Autowired
 	EmailService ems;
 	
-	
-
 	public static void main(String[] args) {
 		SpringApplication.run(LapsApplication.class, args);
 	}
@@ -70,16 +79,19 @@ public class LapsApplication {
 			Date d2 = new SimpleDateFormat("dd-mm-yyyy").parse("3-5-2020");
 
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
-		
-			
-			Overtime ot1 = new Overtime(d1,s1,3);
-			Overtime ot2 = new Overtime(d2,s1,3);
-			
 			al1.setStartDate(d1);
-			al1.setStatus(LeaveStatus.Applied);
 			al1.setStaff(s1);
 			al1.setLeaveReason("Moving House");
-			al1.setMangerComment("hello");
+			
+			MedicalLeave ml1 = new MedicalLeave(d2);
+			al1.setStartDate(d1);
+			al1.setStaff(s3);
+			al1.setLeaveReason("Stomatch ache");
+			al1.setMangerComment("Not Set");
+			
+			Overtime ot1 = new Overtime(d1,s1,3);
+			Overtime ot2 = new Overtime(d2,s2,3);
+			
 			
 			admRepo.save(adm1);
 			admRepo.save(adm2);
@@ -94,12 +106,11 @@ public class LapsApplication {
 			stfRepo.save(s5);
 			
 			alRepo.save(al1);
+			mlRepo.save(ml1);
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);
 			
-			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
-			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
 			
 			/*

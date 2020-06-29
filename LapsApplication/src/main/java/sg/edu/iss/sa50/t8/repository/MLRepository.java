@@ -1,5 +1,13 @@
 package sg.edu.iss.sa50.t8.repository;
 
-public interface MLRepository extends LeaveRepository {
+import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+
+import sg.edu.iss.sa50.t8.model.MedicalLeave;
+
+public interface MLRepository extends LeaveRepository {
+	//@Query("select l from Leaves l where l.Leave_Type='Medical_Leave'")
+	@Query(value="SELECT * FROM Leaves where Leave_Type='Medical_Leave'",nativeQuery = true)
+	List<MedicalLeave> findAllMedicalLeaves();
 }
