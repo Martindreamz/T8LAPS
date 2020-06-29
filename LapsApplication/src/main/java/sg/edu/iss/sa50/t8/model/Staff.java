@@ -15,8 +15,7 @@ public class Staff extends Employee{
 	private Manager manager;
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
-	@OneToMany(mappedBy="staff") 
-	private List<Compensation> compensations;
+	
 	@Max(20)
 	private int annualLeaveDays;
 	@Max(60)
@@ -42,15 +41,6 @@ public class Staff extends Employee{
 		this.medicalLeaveDays = medicalLeaveDays;
 	}
 
-
-	public List<Compensation> getCompensations() {
-		return compensations;
-	}
-
-	public void setCompensations(List<Compensation> compensations) {
-		this.compensations = compensations;
-	}
-	 
 	public int getAnnualLeaveDays() {
 		return annualLeaveDays;
 	}

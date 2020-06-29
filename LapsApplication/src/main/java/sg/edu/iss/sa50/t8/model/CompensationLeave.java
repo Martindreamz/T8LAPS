@@ -1,29 +1,31 @@
 package sg.edu.iss.sa50.t8.model;
-import java.time.LocalDate;
 
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("Compensation_Leave")
 public class CompensationLeave extends Leaves{
-	
-	private LocalDate leaveDate;
-	@OneToOne(cascade = CascadeType.REFRESH)
-	private Compensation compensation;
-	
+
+	private int comLeaveHours;
+
 	public CompensationLeave() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public CompensationLeave(Staff  staff,LocalDate leaveDate,Compensation compensation) {
-		super(staff);
-		this.leaveDate=leaveDate;
-		this.compensation=compensation;
+
+	public CompensationLeave(int comLeaveHours) {
+		super();
+		this.comLeaveHours = comLeaveHours;
 	}
+
+	public int getComLeaveHours() {
+		return comLeaveHours;
+	}
+
+	public void setComLeaveHours(int comLeaveHours) {
+		this.comLeaveHours = comLeaveHours;
+	}
+
 	
-	public LocalDate getLeaveDate() {
-		return leaveDate;
-	}
-	public void setLeaveDate(LocalDate leaveDate) {
-		this.leaveDate = leaveDate;
-	}
 
 }

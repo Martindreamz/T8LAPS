@@ -1,14 +1,41 @@
 package sg.edu.iss.sa50.t8.model;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@DiscriminatorValue("Annual_Leave")
 public class AnnualLeave extends Leaves{
-	
-	private LocalDate startDate;
-	private LocalDate endDate;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="dd/mm/yyyy")
+	private Date endDate;
 	private String contactDetails;
+
+	//private LeaveType super.leaveType;
+	public AnnualLeave() {
+		super();
+	}
+
+	public AnnualLeave(Date endDate, String contactDetails) {
+		super();
+		this.endDate = endDate;
+		this.contactDetails = contactDetails;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	public String getContactDetails() {
 		return contactDetails;
 	}
@@ -16,31 +43,7 @@ public class AnnualLeave extends Leaves{
 	public void setContactDetails(String contactDetails) {
 		this.contactDetails = contactDetails;
 	}
-
-	//private LeaveType super.leaveType;
-	public AnnualLeave() {
-		super();
-	}
 	
-	public AnnualLeave(Staff staff,LocalDate startDate, LocalDate endDate,String reason) {
-		super(staff,reason);
-		this.startDate= startDate;
-		this.endDate= endDate;
-	}
-
-	public LocalDate getStartdate() {
-		return startDate;
-	}
-
-	public void setStartdate(LocalDate startdate) {
-		this.startDate = startdate;
-	}
-
-	public LocalDate getEnddate() {
-		return endDate;
-	}
-
-	public void setEnddate(LocalDate enddate) {
-		this.endDate = enddate;
-	}
+	
+	
 }

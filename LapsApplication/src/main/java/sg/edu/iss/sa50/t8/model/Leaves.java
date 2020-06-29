@@ -1,67 +1,105 @@
 package sg.edu.iss.sa50.t8.model;
+import java.util.Date;
 
-import javax.persistence.*;
-//import java.time.LocalDate;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public abstract class Leaves{
+@Inheritance
+@DiscriminatorColumn ( name="Leave_Type")
+public abstract class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@ManyToOne @JoinColumn(name="staff_id") 
-	private Staff staff;
-	//this is the Foreign Key 
-	private LeaveStatus leaveStatus;
+	private Date startDate;
+
 	private String leaveReason;
-	private String managerComment;
+	private LeaveStatus status;
+
+	private String mangerComment;
+	
+	@ManyToOne @JoinColumn(name="staff_id")
+	private Staff staff;
+
+	public Leaves() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Leaves(Date startDate,int comLeaveHours, String leaveReason,
+			LeaveStatus status,String mangerComment) {
+		super();
+		this.startDate = startDate;
+		this.leaveReason = leaveReason;
+		this.status = status;
+		this.mangerComment = mangerComment;
+	}
+
+	public Leaves(Date startDate,int comLeaveHours, String leaveReason,
+			LeaveStatus status, String mangerComment, Staff staff) {
+		super();
+		this.startDate = startDate;
+		this.leaveReason = leaveReason;
+		this.status = status;
+		this.mangerComment = mangerComment;
+		this.staff = staff;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
 
 	public String getLeaveReason() {
 		return leaveReason;
 	}
+
 	public void setLeaveReason(String leaveReason) {
 		this.leaveReason = leaveReason;
 	}
-	public String getManagerComment() {
-		return managerComment;
+
+	public LeaveStatus getStatus() {
+		return status;
 	}
-	public void setManagerComment(String managerComment) {
-		this.managerComment = managerComment;
+
+	public void setStatus(LeaveStatus status) {
+		this.status = status;
 	}
-	public Leaves() {
-		super();
+
+	
+	public String getMangerComment() {
+		return mangerComment;
 	}
+
+	public void setMangerComment(String mangerComment) {
+		this.mangerComment = mangerComment;
+	}
+
 	public Staff getStaff() {
 		return staff;
 	}
+
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-	public Leaves(Staff  staff,String leaveReason) {
-		super();
-		this.leaveStatus = LeaveStatus.Applied;
-		this.staff = staff;
-		this.leaveReason=leaveReason;
-		
-	}
-	public Leaves(Staff  staff) {
-		super();
-		this.leaveStatus = LeaveStatus.Applied;
-		this.staff = staff;
-		
-	}
-
-
-	public LeaveStatus getLeaveStatus() {
-		return leaveStatus;
-	}
-
-
-	public void setLeaveStatus(LeaveStatus leaveStatus) {
-		this.leaveStatus = leaveStatus;
-	}
-
-
-
+	
+	
 }

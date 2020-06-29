@@ -4,34 +4,27 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("Medical_Leave")
 public class MedicalLeave extends Leaves {
-	private LocalDate startDate;
+
 	private LocalDate endDate;
 
 	public MedicalLeave() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MedicalLeave(Staff staff,LocalDate startDate, LocalDate endDate,String reason) {
-		super(staff,reason);
-		this.startDate= startDate;
-		this.endDate= endDate;
 
+	public MedicalLeave(LocalDate endDate) {
+		super();
+		this.endDate = endDate;
 	}
 
-	public LocalDate getStartdate() {
-		return startDate;
-	}
-
-	public void setStartdate(LocalDate startdate) {
-		this.startDate = startdate;
-	}
-
-	public LocalDate getEnddate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEnddate(LocalDate enddate) {
-		this.endDate = enddate;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
+	
 }
