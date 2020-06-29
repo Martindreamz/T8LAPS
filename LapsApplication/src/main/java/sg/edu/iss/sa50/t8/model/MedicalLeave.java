@@ -1,30 +1,40 @@
 package sg.edu.iss.sa50.t8.model;
 
-import java.time.LocalDate;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @DiscriminatorValue("Medical_Leave")
 public class MedicalLeave extends Leaves {
 
-	private LocalDate endDate;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="yyyy-MM-dd")
+	private Date endDate;
 
 	public MedicalLeave() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public MedicalLeave(LocalDate endDate) {
+	public MedicalLeave(Date endDate) {
 		super();
 		this.endDate = endDate;
 	}
 
-	public LocalDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
+	
 	
 }

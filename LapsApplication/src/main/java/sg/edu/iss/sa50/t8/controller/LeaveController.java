@@ -17,7 +17,7 @@ import sg.edu.iss.sa50.t8.service.ILeaveService;
 @Controller
 @RequestMapping("/leaves")
 public class LeaveController {
-	
+
 	@Autowired
 	ALRepository alRepo;
 	
@@ -31,12 +31,12 @@ public class LeaveController {
 	public void setILeaveService(ALService alService) {
 		this.leaveService = alService;
 	}
-	
+
 	@RequestMapping("/apply")
 	public String apply() {
 		return "leaves-apply";
 	}
-	
+
 	@RequestMapping("/annualAdd")
 	public String annualaddForm(Model model) {
 		model.addAttribute("annualLeave", new AnnualLeave());
@@ -44,7 +44,8 @@ public class LeaveController {
 	}
 
 	@RequestMapping("/medicalAdd")
-	public String medicaladdForm() {
+	public String medicaladdForm(Model model) {
+		model.addAttribute("medicalLeave", new MedicalLeave());
 		return "leaves-apply-medical";
 	}
 
@@ -63,15 +64,14 @@ public class LeaveController {
 	@RequestMapping("/medical/save")
 	public String saveMedicalForm(@ModelAttribute("medicalLeave") MedicalLeave medicalLeave, Model model) {
 		mRepo.save(medicalLeave);
-		return "leaves-history";
+		return "leaves-applicationdetails";
 	}
-
+	
 	@RequestMapping("/history")
 	public String History(Model model) {
 		model.addAttribute("alLeaves", alRepo.findAll());
 		return "leaves-history";
 	}
-	
 	@RequestMapping("/pending")
 	public String Pending() {
 		return "leaves-applications";
@@ -81,7 +81,7 @@ public class LeaveController {
 	public String Details() {
 		return "leaves-aplicationdetails";
 	}
-	
+
 	@RequestMapping("/cancel")
 	public String Cancel() {
 		return "leaves-cancel";
@@ -91,7 +91,7 @@ public class LeaveController {
 	public String Manage() {
 		return "leaves-manage";
 	}
-	
+
 	@RequestMapping("/movement-register")
 	public String MovementRegister() {
 		return "leaves-movement-register";

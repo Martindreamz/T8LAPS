@@ -1,4 +1,5 @@
 package sg.edu.iss.sa50.t8.model;
+
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
@@ -9,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance
@@ -17,6 +22,8 @@ public abstract class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date startDate;
 
 	private String leaveReason;

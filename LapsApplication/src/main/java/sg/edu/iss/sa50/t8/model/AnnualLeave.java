@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @DiscriminatorValue("Annual_Leave")
 public class AnnualLeave extends Leaves{
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat (pattern="dd/mm/yyyy")
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date endDate;
 	private String contactDetails;
 
