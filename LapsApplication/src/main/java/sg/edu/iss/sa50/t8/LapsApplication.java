@@ -1,7 +1,9 @@
 package sg.edu.iss.sa50.t8;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -75,6 +77,13 @@ public class LapsApplication {
 			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
 			//Constructor : Staff(name,email,int managerId, annualLeaveDays, @Max(30) int medicalLeaveDays)
 			 
+			/*List<Staff> list = new ArrayList<>();
+			list.add(s1);
+			list.add(s2);
+			list.add(s3);
+			list.add(s4);
+			man2.setStaffList(list);*/
+			
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +87,17 @@ public class AdminController {
 	public String edit(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
 		return "admin-edit";
+	}
+	
+	@RequestMapping("/save")
+	public String save(@ModelAttribute("employee") Employee entry, Model model) {
+		if(((AdminService) aservice).save(entry)) {
+			return "forward:/employee/dashboard";
+		}
+		else {
+			model.addAttribute("employee", entry);
+			return "admin-edit";
+		}
 	}
 	
 	

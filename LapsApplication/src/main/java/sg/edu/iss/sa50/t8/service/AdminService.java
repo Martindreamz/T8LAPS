@@ -28,4 +28,8 @@ public class AdminService implements IEmployeeService {
 		return arepo.findById(id);
 	}
 	
+	public boolean save(Employee entry) {
+		return arepo.save(entry)!=null? true : false;
+	}
+	
 }

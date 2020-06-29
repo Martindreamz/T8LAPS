@@ -1,11 +1,16 @@
 package sg.edu.iss.sa50.t8.model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance
+@DiscriminatorColumn(name="EMP_TYPE")
 public abstract class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,10 +19,21 @@ public abstract class Employee {
     private String name;
     @NotBlank(message = "Email is mandatory")
     private String email;
-	  private String password; 
+	private String password;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="yyyy-MM-dd")
+	private Date startDate;
 
     
-    public Employee() {
+    public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Employee() {
         super();
         // TODO Auto-generated constructor stub 
     }

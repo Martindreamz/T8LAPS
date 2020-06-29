@@ -5,7 +5,7 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue("staff")
 public class Staff extends Employee{
 	
 	//Check & Edit by Bianca: add validation and mapping setting
@@ -16,11 +16,13 @@ public class Staff extends Employee{
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
 	
-	@Max(20)
-	private int annualLeaveDays;
-	@Max(60)
-	private int medicalLeaveDays; 
-
+	private int CurrentAnnualLeaves;
+	private int CurrentMedicalLeaves; 
+	private int TotalAnnualLeaves;
+	private int TotalMedicalLeaves;
+	
+	@ManyToOne
+	private Team team;
 	
 	public Manager getManager() {
 		return manager;
@@ -34,30 +36,30 @@ public class Staff extends Employee{
 	}
 
 	//Bianca New constructors
-	public Staff(String name, String email,Manager manager, @Max(20) int annualLeaveDays, @Max(60) int medicalLeaveDays) {
+	public Staff(String name, String email,Manager manager, int annualLeaveDays, int medicalLeaveDays) {
 		super(name,email);
 		this.manager = manager;
-		this.annualLeaveDays = annualLeaveDays;
-		this.medicalLeaveDays = medicalLeaveDays;
+		this.CurrentAnnualLeaves = annualLeaveDays;
+		this.CurrentMedicalLeaves = medicalLeaveDays;
 	}
 
 	public int getAnnualLeaveDays() {
-		return annualLeaveDays;
+		return CurrentAnnualLeaves;
 	}
 
 
 	public void setAnnualLeaveDays(int annualLeaveDays) {
-		this.annualLeaveDays = annualLeaveDays;
+		this.CurrentAnnualLeaves = annualLeaveDays;
 	}
 
 
 	public int getMedicalLeaveDays() {
-		return medicalLeaveDays;
+		return CurrentMedicalLeaves;
 	}
 
 
 	public void setMedicalLeaveDays(int medicalLeaveDays) {
-		this.medicalLeaveDays = medicalLeaveDays;
+		this.CurrentMedicalLeaves = medicalLeaveDays;
 	}
 
 
