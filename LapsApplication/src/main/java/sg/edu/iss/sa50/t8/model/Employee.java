@@ -11,7 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Inheritance
 @DiscriminatorColumn(name="EMP_TYPE")
-public abstract class Employee {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -103,7 +103,10 @@ public abstract class Employee {
 
 
     
-    
+	@Transient
+    public String getDiscriminatorValue() {
+    	return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+    }
     
 
  
