@@ -1,12 +1,7 @@
 package sg.edu.iss.sa50.t8.model;
 
-import java.util.Date;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 
 @Entity
 @Inheritance
@@ -19,25 +14,9 @@ public class Employee {
     private String name;
     @NotBlank(message = "Email is mandatory")
     private String email;
-	private String password;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat (pattern="yyyy-MM-dd")
-	private Date startDate;
+	private String password; 
 
-    
-	
-	
- 
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Employee() {
+    public Employee() {
         super();
         // TODO Auto-generated constructor stub 
     }
@@ -46,7 +25,7 @@ public class Employee {
         super();
         this.name = name;
         this.email = email;
-    	password = "000000"; 
+    	  password = "000000"; 
         
     }
 
@@ -101,14 +80,10 @@ public class Employee {
         return "Employee [id=" + id + ", name=" + name + ", email=" + email + "]";
     }
 
-
-    
 	@Transient
-    public String getDiscriminatorValue() {
-    	return this.getClass().getAnnotation(DiscriminatorValue.class).value();
-    }
-    
+	public String getDiscriminatorValue(){
+		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+	}
 
- 
 
 }
