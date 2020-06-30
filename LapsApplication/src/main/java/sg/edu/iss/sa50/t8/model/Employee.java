@@ -1,16 +1,13 @@
 package sg.edu.iss.sa50.t8.model;
 
-import java.util.Date;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="EMP_TYPE")
+@DiscriminatorColumn(name="employee_Type")
+//changed all emp into one single table
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,21 +16,10 @@ public abstract class Employee {
     private String name;
     @NotBlank(message = "Email is mandatory")
     private String email;
-	private String password;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat (pattern="yyyy-MM-dd")
-	private Date startDate;
+	private String password; 
 
     
-    public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Employee() {
+    public Employee() {
         super();
         // TODO Auto-generated constructor stub 
     }
@@ -42,7 +28,7 @@ public abstract class Employee {
         super();
         this.name = name;
         this.email = email;
-    	password = "000000"; 
+    	  password = "000000"; 
         
     }
 
@@ -98,8 +84,16 @@ public abstract class Employee {
     }
 
 
-    
-    
+	@Transient
+	public String getDiscriminatorValue(){
+		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+	}
+
+	/*
+	 * public void setEmployeetype(employeeType employeetype) { this.employeetype =
+	 * employeetype; }
+	 * 
+	 */
     
 
  

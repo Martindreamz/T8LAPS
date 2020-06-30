@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +29,7 @@ public class Leaves {
 	private Date startDate;
 
 	private String leaveReason;
-	private String leaveType;
+	//private String leaveType;
 	private LeaveStatus status;
 
 	private String managerComment;
@@ -108,14 +110,14 @@ public class Leaves {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-
-	public String getLeaveType() {
-		return leaveType;
-	}
-
-	public void setLeaveType(String leaveType) {
-		this.leaveType = leaveType;
-	}
 	
-	
+	@Transient
+	public String getDiscriminatorValue(){
+		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+	}
+	/*This is what I found online
+	 * @Transient public String getDiscriminatorValue(){ DiscriminatorValue val =
+	 * this.getClass().getAnnotation(DiscriminatorValue.class); return val == null ?
+	 * null : val.value(); }
+	 */
 }

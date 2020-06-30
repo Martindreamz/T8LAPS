@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,13 +23,15 @@ public class LapsApplication {
 
 	@Autowired
 	EmployeeRepository empRepo;
+	/*
+	 * @Autowired StaffRepository stfRepo;
+	 * 
+	 * @Autowired AdminRepository admRepo;
+	 * 
+	 * @Autowired ManagerRepository manRepo;
+	 */
 	@Autowired
-	StaffRepository stfRepo;
-	@Autowired
-	AdminRepository admRepo;
-	@Autowired
-	ManagerRepository manRepo;
-	@Autowired
+	@Qualifier()
 	LeaveRepository lRepo;
 	@Autowired
 	OvertimeRepository oRepo;
@@ -74,17 +77,17 @@ public class LapsApplication {
 			Overtime ot2 = new Overtime(d2,s2,3);
 			
 			
-			admRepo.save(adm1);
-			admRepo.save(adm2);
-			manRepo.save(man1);
-			manRepo.save(man2);
-			manRepo.save(man3);
+			empRepo.save(adm1);
+			empRepo.save(adm2);
+			empRepo.save(man1);
+			empRepo.save(man2);
+			empRepo.save(man3);
 			
-			stfRepo.save(s1);
-			stfRepo.save(s2);
-			stfRepo.save(s3);
-			stfRepo.save(s4);
-			stfRepo.save(s5);
+			empRepo.save(s1);
+			empRepo.save(s2);
+			empRepo.save(s3);
+			empRepo.save(s4);
+			empRepo.save(s5);
 			
 			lRepo.save(al1);
 			lRepo.save(ml1);
@@ -93,6 +96,9 @@ public class LapsApplication {
 			oRepo.save(ot2);
 			
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
+			System.out.println("I want to test the discriminator:");
+			System.out.println(al1.getDiscriminatorValue());
+			System.out.println(adm1.getDiscriminatorValue());
 			
 			/*
 			 * ems.notifyManager(al1); ems.notifyManager(ml1); ems.notifyStaff(al1);
