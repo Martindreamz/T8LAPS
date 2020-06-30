@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 
 import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.model2.Admin;
 
 public interface AdminRepository extends EmployeeRepository {
 	/*@Query("SELECT e FROM Employee e"
@@ -14,6 +13,4 @@ public interface AdminRepository extends EmployeeRepository {
 	List<Employee> searchEmployee(String searchTerm);*/
 	
 	List<Employee> findByNameContaining(String searchTerm);
-
-	void save(Admin employee1);
 }
