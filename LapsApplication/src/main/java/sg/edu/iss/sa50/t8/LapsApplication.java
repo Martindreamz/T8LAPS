@@ -31,7 +31,6 @@ public class LapsApplication {
 	 * @Autowired ManagerRepository manRepo;
 	 */
 	@Autowired
-	@Qualifier()
 	LeaveRepository lRepo;
 	@Autowired
 	OvertimeRepository oRepo;
