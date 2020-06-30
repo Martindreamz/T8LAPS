@@ -94,13 +94,27 @@ public class AdminController {
 	
 	@RequestMapping("/save")
 	public String save(@ModelAttribute("employee") Employee entry, Model model) {
+		Employee toSave = ((AdminService) aservice).findById(entry.getId());
+		toSave.setName(entry.getName());
+		toSave.setPassword(entry.getPassword());
+		toSave.setEmail(entry.getEmail());
+		
+		
+		if(((AdminService) aservice).save(toSave)) {
+			return "forward:/employee/dashboard";
+		}
+		else {
+			model.addAttribute("employee", toSave);
+			return "admin-edit";
+		}
+		/*
 		if(((AdminService) aservice).save(entry)) {
 			return "forward:/employee/dashboard";
 		}
 		else {
 			model.addAttribute("employee", entry);
 			return "admin-edit";
-		}
+		}*/
 	}
 	
 	

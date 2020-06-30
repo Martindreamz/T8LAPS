@@ -25,7 +25,7 @@ public class AdminService implements IEmployeeService {
 		return arepo.findAll();
 	}
 	
-	public Optional<Employee> findById(int id) {
+	public Employee findById(int id) {
 		return arepo.findById(id);
 	}
 	
