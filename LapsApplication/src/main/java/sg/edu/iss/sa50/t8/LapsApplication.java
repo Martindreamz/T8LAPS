@@ -12,13 +12,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import sg.edu.iss.sa50.t8.model.Admin;
+import sg.edu.iss.sa50.t8.model2.Admin;
+/*import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Overtime;
-import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.model.Staff;*/
+import sg.edu.iss.sa50.t8.model2.Employee;
+import sg.edu.iss.sa50.t8.model2.Manager;
+import sg.edu.iss.sa50.t8.model2.Staff;
+import sg.edu.iss.sa50.t8.model2.Team;
 import sg.edu.iss.sa50.t8.repository.ALRepository;
 import sg.edu.iss.sa50.t8.repository.AdminRepository;
 import sg.edu.iss.sa50.t8.repository.CLRepository;
@@ -64,7 +69,7 @@ public class LapsApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 			System.out.println("Let's start to see our models! ");
-			
+			/*
 			Admin adm1 = new Admin("Martin","martin.dreamz@hotmail.com");
 			Admin adm2 = new Admin("Martin2","e0533410@u.nus.edu");
 			Manager man1 = new Manager("Joe","martin.dreamz@hotmail.com",null,16,20);
@@ -83,7 +88,7 @@ public class LapsApplication {
 			list.add(s3);
 			list.add(s4);
 			man2.setStaffList(list);*/
-			
+			/*
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
 
@@ -118,7 +123,64 @@ public class LapsApplication {
 			mlRepo.save(ml1);
 			
 			oRepo.save(ot1);
-			oRepo.save(ot2);
+			oRepo.save(ot2);*/
+			
+			Admin employee1 = new Admin();
+			employee1.setName("daryl");
+			employee1.setPassword("password");
+			
+			Staff staff1 = new Staff();
+			staff1.setName("martin");
+			staff1.setPassword("password1");
+			
+			Staff staff2 = new Staff();
+			staff2.setName("bianca");
+			staff2.setPassword("password2");
+			
+			Staff staff3 = new Staff();
+			staff3.setName("wutt yee");
+			staff3.setPassword("password3");
+			
+			Staff staff4 = new Staff();
+			staff4.setName("theingi");
+			staff4.setPassword("password4");
+			
+			Manager manager1 = new Manager();
+			manager1.setName("yirui");
+			manager1.setPassword("password5");
+			
+			Manager manager2 = new Manager();
+			manager1.setName("joe");
+			manager1.setPassword("password6");
+			
+			List<Staff> team1List = new ArrayList<>();
+			team1List.add(staff1);
+			team1List.add(staff2);
+			
+			Team team1 = new Team();
+			team1.setManager(manager1);
+			team1.setStaffs(team1List);
+			
+			List<Staff> team2List = new ArrayList<>();
+			team1List.add(staff3);
+			team1List.add(staff4);
+			
+			Team team2 = new Team();
+			team2.setManager(manager2);
+			team2.setStaffs(team2List);
+			
+			admRepo.save(employee1);
+			
+			stfRepo.save(staff1);
+			stfRepo.save(staff2);
+			stfRepo.save(staff3);
+			stfRepo.save(staff4);
+			
+			manRepo.save(manager1);
+			manRepo.save(manager2);
+			
+		
+			
 			
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
 			
