@@ -67,10 +67,10 @@ public class LapsApplication {
 			al1.setLeaveReason("Moving House");
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
-			al1.setStartDate(d1);
-			al1.setStaff(s3);
-			al1.setLeaveReason("Stomatch ache");
-			al1.setManagerComment("Not Set");
+			ml1.setStartDate(d1);
+			ml1.setStaff(s3);
+			ml1.setLeaveReason("Stomatch ache");
+			ml1.setManagerComment("Not Set");
 			
 			Overtime ot1 = new Overtime(d1,s1,3);
 			Overtime ot2 = new Overtime(d2,s2,3);

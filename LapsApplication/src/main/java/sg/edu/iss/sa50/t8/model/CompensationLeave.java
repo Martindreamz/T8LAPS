@@ -6,27 +6,23 @@ import javax.persistence.*;
 @DiscriminatorValue("Compensation Leave")
 public class CompensationLeave extends Leaves{
 
-	private int comLeaveHours;
+	private String claimQuota;
 
 	public CompensationLeave() {
 		super();
-		//super.setLeaveType("Compensation Leave");
 	}
 
-	public CompensationLeave(int comLeaveHours) {
+	public CompensationLeave(String claimQuota) {
 		super();
-		this.comLeaveHours = comLeaveHours;
-		//super.setLeaveType("Compensation Leave");
+		this.claimQuota = claimQuota;
 	}
 
-	public int getComLeaveHours() {
-		return comLeaveHours;
+	public String getClaimQuota() {
+		return claimQuota;
 	}
 
-	public void setComLeaveHours(int comLeaveHours) {
-		this.comLeaveHours = comLeaveHours;
+	public void setClaimQuota(String claimQuota) {
+		this.claimQuota = claimQuota;
 	}
-
-	
 
 }

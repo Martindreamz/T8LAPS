@@ -23,7 +23,7 @@ public class Overtime {
 	private Date overtimeDate; 
 	
 	@ManyToOne @JoinColumn(name="staff_id")
-	private Employee staff; 
+	private Staff staff; 
 	
 	private double totalHours;
 	
@@ -32,7 +32,7 @@ public class Overtime {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Overtime(@Past Date overtimeDate, Employee staff, int totalHours) {
+	public Overtime(@Past Date overtimeDate, Staff staff, int totalHours) {
 		super();
 		this.overtimeDate = overtimeDate;
 		this.staff = staff;
