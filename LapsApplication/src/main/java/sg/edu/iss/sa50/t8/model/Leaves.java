@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="Leave_Type")
+@DiscriminatorColumn(name="Leave_Type_Disc")
 public class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +30,7 @@ public class Leaves {
 	private Date startDate;
 
 	private String leaveReason;
-	//private String leaveType;
+	private String leaveType;
 	private LeaveStatus status;
 
 	private String managerComment;
@@ -77,7 +77,14 @@ public class Leaves {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	
+	public String getLeaveType() {
+		return leaveType;
+	}
 
+	public void setLeaveType(String leaveType) {
+		this.leaveType = leaveType;
+	}
 
 	public String getLeaveReason() {
 		return leaveReason;

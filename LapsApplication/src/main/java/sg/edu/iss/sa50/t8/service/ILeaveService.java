@@ -9,7 +9,6 @@ import sg.edu.iss.sa50.t8.model.CompensationLeave;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 
-
 @Service
 public interface ILeaveService {
 	public boolean saveAnnualLeave(AnnualLeave aLeave);	

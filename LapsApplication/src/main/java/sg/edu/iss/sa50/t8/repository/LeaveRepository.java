@@ -22,4 +22,6 @@ public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
 	 * @Query(value="SELECT * FROM Leaves where Leave_Type='Medical_Leave'"
 	 * ,nativeQuery = true) List<MedicalLeave> findAllMedicalLeaves();
 	 */
+	@Query(value="SELECT * FROM Leaves",nativeQuery = true)
+	List<Leaves> findAll();
 }

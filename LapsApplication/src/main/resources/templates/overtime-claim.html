@@ -16,31 +16,20 @@
 <body>
 	<h1 th:utext=#{leaves-apply.heading}></h1>
 
-	<form class="form-horizontal" action="#" th:action="@{/leaves/compensation/save}"
-		th:object="${compensationLeave}" method="post">
+	<form class="form-horizontal" action="#" th:action="@{/overtime/save}"
+		th:object="${overtime}" method="post">
+		<!-- <input type="hidden" id="staff" th:field="*{staff}">  -->
+		<input type="hidden" id="staff" th:field="6">
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="startdate">Start
+			<label class="control-label col-sm-2" for="startdate">Overtime
 				Date</label> 
-			<input type="date" th:field="*{startDate}" id="sdate" placeholder="dd/MM/yyyy" />
+			<input type="date" th:field="*{overtimeDate}" id="overtimedate" placeholder="dd/MM/yyyy" />
+			<p th:if="${#fields.hasErrors('overtimeDate')}" th:error="*{overtimeDate}"></p>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="claimQuota">Leave Quota</label>
-			<select th:field="*{claimQuota}">
-				<option th:value="#{compensation.form.am}" th:text="#{compensation.form.am}">
-			 	AM </option> 
-			 	<option th:value="#{compensation.form.pm}" th:text="#{compensation.form.pm}">
-			 	PM </option> 
-			</select>
+			<label class="control-label col-sm-2" for="enddate">Overtime Hours</label>
+			<input type="number" th:field="*{endDate}" id="edate" placeholder="Enter hours" />
 			
-		</div>
-		
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="comment">Leave
-				Reason</label>
-			<div class="col-sm-6">
-				<textarea class="form-control" rows="5" id="comment"
-					th:field="*{leaveReason}"></textarea>
-			</div>
 		</div>
 		
 		<div class="form-group">

@@ -52,26 +52,21 @@ public class AdminController {
 	}
 	
 
-/*
-	@RequestMapping("/admin-create")
-	public String addEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
-				model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
-				return "admin-create";	
-	}
-	*/
+
 	
 	@RequestMapping("/admin-delete/{id}")
-	public String deleteEmployee(@PathVariable("id") int id, Model model) {
+	public String delete(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
 		return "admin-delete";
 	}
 	
+	@RequestMapping("/admin-edit/{id}")
+	public String edit(@PathVariable("id") int id, Model model) {
+		model.addAttribute("employee", ((AdminService) aservice).findById(id));
+		return "admin-edit";
+	}
 	
 
-	
-
-	//Daryl part
-	
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
 		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
@@ -83,21 +78,43 @@ public class AdminController {
 		return "dashboard";
 	}
 	
-	@RequestMapping("/admin-edit/{id}")
-	public String edit(@PathVariable("id") int id, Model model) {
-		model.addAttribute("employee", ((AdminService) aservice).findById(id));
-		return "admin-edit";
+	
+	@RequestMapping("/admin-create")
+	public String create(Model model) {
+		model.addAttribute("employee", new Staff());
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "admin-create";
 	}
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/save")
 	public String save(@ModelAttribute("employee") Employee entry, Model model) {
+		Employee toSave = ((AdminService) aservice).findById(entry.getId());
+		toSave.setName(entry.getName());
+		toSave.setPassword(entry.getPassword());
+		toSave.setEmail(entry.getEmail());
+		
+		
+		if(((AdminService) aservice).save(toSave)) {
+			return "forward:/employee/dashboard";
+		}
+		else {
+			model.addAttribute("employee", toSave);
+			return "admin-edit";
+		}
+		/*
 		if(((AdminService) aservice).save(entry)) {
 			return "forward:/employee/dashboard";
 		}
 		else {
 			model.addAttribute("employee", entry);
 			return "admin-edit";
-		}
+		}*/
 	}
 	
 	

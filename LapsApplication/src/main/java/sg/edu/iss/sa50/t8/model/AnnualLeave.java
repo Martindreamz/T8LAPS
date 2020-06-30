@@ -23,7 +23,7 @@ public class AnnualLeave extends Leaves{
 	public AnnualLeave() {
 		super();
 		super.setStatus(LeaveStatus.Applied);
-		//super.setLeaveType("Annual Leave");
+		super.setLeaveType("Annual Leave");
 	}
 
 	public AnnualLeave(Date endDate, String contactDetails) {
@@ -31,7 +31,7 @@ public class AnnualLeave extends Leaves{
 		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
 		this.contactDetails = contactDetails;
-		//super.setLeaveType("Annual Leave");
+		super.setLeaveType("Annual Leave");
 	}
 
 	public Date getEndDate() {

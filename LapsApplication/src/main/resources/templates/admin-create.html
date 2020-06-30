@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-<form th:object="${employee}">
+<form th:object="${employee}"  th:action="@{/employee/create}" method="post">
   <div class="form-row">
   	<div class="form-group col-md-6">
       <label for="inputName4">Name</label>
@@ -28,14 +29,24 @@
   <div class="form-row">
   	<div class="form-group col-md-6">
       <label for="inputRole">Role</label>
-      <input type="text" class="form-control" id="inputRole" value="">
+      <input type="text" class="form-control" id="inputRole" th:field="*{DiscriminatorValue}" value="">
     </div>
     <div class="form-group col-md-6">
       <label for="inputManager">Manager</label>
-      <input type="text" class="form-control" id="inputManager" value="nil">
+      <input type="text" class="form-control" id="inputManager" th:field="*{manager.name}" value="nil" disabled>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Save</button>
+  <div class="form-row">
+  	<div class="form-group col-md-6">
+      <label for="inputAL">Annual Leaves</label>
+      <input type="text" class="form-control" id="inputAL" th:field="*{annualLeaveDays}" value="">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputML">Medical Leaves</label>
+      <input type="text" class="form-control" id="inputML" th:field="*{medicalLeaveDays}" value="nil" disabled>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
 </form>
 </div>
 	<!-- Optional JavaScript -->
