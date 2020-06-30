@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Overtime {
 	private Date overtimeDate; 
 	
 	@ManyToOne @JoinColumn(name="staff_id")
-	private Staff staff; 
+	private Employee staff; 
 	
 	private double totalHours;
 	
@@ -31,7 +32,7 @@ public class Overtime {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Overtime(@Past Date overtimeDate, Staff staff, int totalHours) {
+	public Overtime(@Past Date overtimeDate, Employee staff, int totalHours) {
 		super();
 		this.overtimeDate = overtimeDate;
 		this.staff = staff;
@@ -54,7 +55,7 @@ public class Overtime {
 		this.overtimeDate = overtimeDate;
 	}
 
-	public Staff getStaff() {
+	public Employee getStaff() {
 		return staff;
 	}
 
