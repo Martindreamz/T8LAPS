@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance
-//@DiscriminatorColumn (name="Leave_Type")
+@DiscriminatorColumn(name="Leave_Type")
 public class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
