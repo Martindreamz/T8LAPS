@@ -72,8 +72,10 @@ public class LapsApplication {
 			ml1.setLeaveReason("Stomatch ache");
 			ml1.setManagerComment("Not Set");
 			
-			Overtime ot1 = new Overtime(d1,s1,3);
-			Overtime ot2 = new Overtime(d2,s2,3);
+			Overtime ot1 = new Overtime(d1,s1,4);
+			ot1.setOverTimeStatus(OvertimeStatus.Approved);
+			Overtime ot2 = new Overtime(d2,s1,4);
+			ot1.setOverTimeStatus(OvertimeStatus.Approved);
 			
 			
 			empRepo.save(adm1);
