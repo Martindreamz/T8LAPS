@@ -34,7 +34,9 @@ public class Staff extends Employee{
 
 	public Staff() {
 	}
-
+	public Staff(String name, String email) {
+		super(name,email);
+	}
 	//Bianca New constructors
 	public Staff(String name, String email,Manager manager, int annualLeaveDays, int medicalLeaveDays) {
 		super(name,email);

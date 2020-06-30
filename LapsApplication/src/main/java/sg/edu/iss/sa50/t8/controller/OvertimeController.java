@@ -1,18 +1,18 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.sa50.t8.model.Overtime;
+import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.IOvertimeService;
 import sg.edu.iss.sa50.t8.service.OvertimeserviceImpl;
+import sg.edu.iss.sa50.t8.service.StaffService;
 
 @Controller
 @RequestMapping("/overtime")
@@ -28,7 +28,8 @@ public class OvertimeController {
 	@RequestMapping("/claim")
 	public String claim(Model model,HttpSession session) {
 		model.addAttribute("overtime", new Overtime());
-		model.addAttribute("staff", 6);
+		Staff s = new Staff("staff1","staff1@gmail.com");
+		model.addAttribute("staff", s);
 		return "overtime-claim";
 	}
 

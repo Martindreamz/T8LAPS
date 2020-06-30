@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Compensation_eligibility {
@@ -14,7 +14,7 @@ public class Compensation_eligibility {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne @JoinColumn(name="staff_id")
+	@OneToOne @JoinColumn(name="staff_id")
 	private Staff staff;
 	
 	private int availableHours;

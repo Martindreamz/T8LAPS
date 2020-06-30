@@ -18,7 +18,7 @@
 
 	<form class="form-horizontal" action="#" th:action="@{/overtime/save}"
 		th:object="${overtime}" method="post">
-		<!-- <input type="hidden" id="staff" th:field="*{staff}">  -->
+		<input type="hidden" id="staff" th:field="${staff}">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="startdate">Overtime
 				Date</label> 
