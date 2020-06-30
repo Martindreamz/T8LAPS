@@ -12,13 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import sg.edu.iss.sa50.t8.model.Admin;
-import sg.edu.iss.sa50.t8.model.AnnualLeave;
-import sg.edu.iss.sa50.t8.model.LeaveStatus;
-import sg.edu.iss.sa50.t8.model.Manager;
-import sg.edu.iss.sa50.t8.model.MedicalLeave;
-import sg.edu.iss.sa50.t8.model.Overtime;
-import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.model.*;
 import sg.edu.iss.sa50.t8.repository.*;
 import sg.edu.iss.sa50.t8.service.EmailService;
 

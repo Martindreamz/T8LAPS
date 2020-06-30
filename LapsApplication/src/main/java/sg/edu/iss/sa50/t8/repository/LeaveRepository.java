@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import sg.edu.iss.sa50.t8.model.AnnualLeave;
-import sg.edu.iss.sa50.t8.model.CompensationLeave;
-import sg.edu.iss.sa50.t8.model.Leaves;
-import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.*;
 
 public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
 	/*

@@ -9,13 +9,13 @@ public class CompensationLeave extends Leaves{
 
 	public CompensationLeave() {
 		super();
-		super.setLeaveType("Conpensation Leave");
+		super.setLeaveType("Compensation Leave");
 	}
 
 	public CompensationLeave(int comLeaveHours) {
 		super();
 		this.comLeaveHours = comLeaveHours;
-		super.setLeaveType("Conpensation Leave");
+		super.setLeaveType("Compensation Leave");
 	}
 
 	public int getComLeaveHours() {
