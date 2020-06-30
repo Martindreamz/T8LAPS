@@ -2,7 +2,6 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +16,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn ( name="Leave_Type")
-public abstract class Leaves {
+//@DiscriminatorColumn (name="Leave_Type")
+public class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -28,9 +27,10 @@ public abstract class Leaves {
 	private Date startDate;
 
 	private String leaveReason;
+	private String leaveType;
 	private LeaveStatus status;
 
-	private String mangerComment;
+	private String managerComment;
 	
 	@ManyToOne @JoinColumn(name="staff_id")
 	private Staff staff;
@@ -41,21 +41,21 @@ public abstract class Leaves {
 	}
 
 	public Leaves(Date startDate,int comLeaveHours, String leaveReason,
-			LeaveStatus status,String mangerComment) {
+			LeaveStatus status,String managerComment) {
 		super();
 		this.startDate = startDate;
 		this.leaveReason = leaveReason;
 		this.status = status;
-		this.mangerComment = mangerComment;
+		this.managerComment = managerComment;
 	}
 
 	public Leaves(Date startDate,int comLeaveHours, String leaveReason,
-			LeaveStatus status, String mangerComment, Staff staff) {
+			LeaveStatus status, String managerComment, Staff staff) {
 		super();
 		this.startDate = startDate;
 		this.leaveReason = leaveReason;
 		this.status = status;
-		this.mangerComment = mangerComment;
+		this.managerComment = managerComment;
 		this.staff = staff;
 	}
 
@@ -93,12 +93,12 @@ public abstract class Leaves {
 	}
 
 	
-	public String getMangerComment() {
-		return mangerComment;
+	public String getManagerComment() {
+		return managerComment;
 	}
 
-	public void setMangerComment(String mangerComment) {
-		this.mangerComment = mangerComment;
+	public void setManagerComment(String mangerComment) {
+		this.managerComment = mangerComment;
 	}
 
 	public Staff getStaff() {
@@ -107,6 +107,14 @@ public abstract class Leaves {
 
 	public void setStaff(Staff staff) {
 		this.staff = staff;
+	}
+
+	public String getLeaveType() {
+		return leaveType;
+	}
+
+	public void setLeaveType(String leaveType) {
+		this.leaveType = leaveType;
 	}
 	
 	

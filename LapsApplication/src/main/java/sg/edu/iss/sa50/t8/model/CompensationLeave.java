@@ -3,19 +3,19 @@ package sg.edu.iss.sa50.t8.model;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("Compensation_Leave")
 public class CompensationLeave extends Leaves{
 
 	private int comLeaveHours;
 
 	public CompensationLeave() {
 		super();
-		// TODO Auto-generated constructor stub
+		super.setLeaveType("Conpensation Leave");
 	}
 
 	public CompensationLeave(int comLeaveHours) {
 		super();
 		this.comLeaveHours = comLeaveHours;
+		super.setLeaveType("Conpensation Leave");
 	}
 
 	public int getComLeaveHours() {

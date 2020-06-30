@@ -19,15 +19,7 @@ import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
-import sg.edu.iss.sa50.t8.repository.ALRepository;
-import sg.edu.iss.sa50.t8.repository.AdminRepository;
-import sg.edu.iss.sa50.t8.repository.CLRepository;
-import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
-import sg.edu.iss.sa50.t8.repository.LeaveRepository;
-import sg.edu.iss.sa50.t8.repository.MLRepository;
-import sg.edu.iss.sa50.t8.repository.ManagerRepository;
-import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
-import sg.edu.iss.sa50.t8.repository.StaffRepository;
+import sg.edu.iss.sa50.t8.repository.*;
 import sg.edu.iss.sa50.t8.service.EmailService;
 
 
@@ -44,12 +36,6 @@ public class LapsApplication {
 	ManagerRepository manRepo;
 	@Autowired
 	LeaveRepository lRepo;
-	@Autowired
-	ALRepository alRepo;
-	@Autowired
-	MLRepository mlRepo;
-	@Autowired
-	CLRepository clRepo;
 	@Autowired
 	OvertimeRepository oRepo;
 	
@@ -75,14 +61,6 @@ public class LapsApplication {
 			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
 			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
 			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
-			//Constructor : Staff(name,email,int managerId, annualLeaveDays, @Max(30) int medicalLeaveDays)
-			 
-			/*List<Staff> list = new ArrayList<>();
-			list.add(s1);
-			list.add(s2);
-			list.add(s3);
-			list.add(s4);
-			man2.setStaffList(list);*/
 			
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
@@ -96,7 +74,7 @@ public class LapsApplication {
 			al1.setStartDate(d1);
 			al1.setStaff(s3);
 			al1.setLeaveReason("Stomatch ache");
-			al1.setMangerComment("Not Set");
+			al1.setManagerComment("Not Set");
 			
 			Overtime ot1 = new Overtime(d1,s1,3);
 			Overtime ot2 = new Overtime(d2,s2,3);
@@ -114,8 +92,8 @@ public class LapsApplication {
 			stfRepo.save(s4);
 			stfRepo.save(s5);
 			
-			alRepo.save(al1);
-			mlRepo.save(ml1);
+			lRepo.save(al1);
+			lRepo.save(ml1);
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);

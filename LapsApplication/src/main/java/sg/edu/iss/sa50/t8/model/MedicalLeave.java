@@ -2,7 +2,6 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -10,7 +9,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@DiscriminatorValue("Medical_Leave")
+
 public class MedicalLeave extends Leaves {
 
 	@Temporal(TemporalType.DATE)
@@ -20,13 +19,14 @@ public class MedicalLeave extends Leaves {
 	public MedicalLeave() {
 		super();
 		super.setStatus(LeaveStatus.Applied);
-		// TODO Auto-generated constructor stub
+		super.setLeaveType("Medical Leave");
 	}
 
 	public MedicalLeave(Date endDate) {
 		super();
 		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
+		super.setLeaveType("Medical Leave");
 	}
 
 	public Date getEndDate() {

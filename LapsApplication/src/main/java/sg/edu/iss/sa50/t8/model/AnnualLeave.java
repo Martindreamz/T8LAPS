@@ -2,7 +2,6 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -10,7 +9,6 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@DiscriminatorValue("Annual_Leave")
 public class AnnualLeave extends Leaves{
 	
 	@Temporal(TemporalType.DATE)
@@ -23,6 +21,7 @@ public class AnnualLeave extends Leaves{
 	public AnnualLeave() {
 		super();
 		super.setStatus(LeaveStatus.Applied);
+		super.setLeaveType("Annual Leave");
 	}
 
 	public AnnualLeave(Date endDate, String contactDetails) {
@@ -30,6 +29,7 @@ public class AnnualLeave extends Leaves{
 		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
 		this.contactDetails = contactDetails;
+		super.setLeaveType("Annual Leave");
 	}
 
 	public Date getEndDate() {
