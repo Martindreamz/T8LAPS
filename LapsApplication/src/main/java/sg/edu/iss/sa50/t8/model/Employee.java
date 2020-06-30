@@ -5,9 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="employee_Type")
-//changed all emp into one single table
-//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name="EMP_TYPE")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +17,8 @@ public class Employee {
 	private String password; 
 
     
-    public Employee() {
+
+	public Employee() {
         super();
         // TODO Auto-generated constructor stub 
     }
@@ -84,16 +83,11 @@ public class Employee {
     }
 
 
-	@Transient
-	public String getDiscriminatorValue(){
-		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
-	}
 
-	/*
-	 * public void setEmployeetype(employeeType employeetype) { this.employeetype =
-	 * employeetype; }
-	 * 
-	 */
+	@Transient
+    public String getDiscriminatorValue() {
+    	return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+    }
     
 
  

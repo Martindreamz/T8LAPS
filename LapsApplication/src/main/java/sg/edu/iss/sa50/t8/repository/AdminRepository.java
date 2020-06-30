@@ -13,4 +13,7 @@ public interface AdminRepository extends EmployeeRepository {
 	List<Employee> searchEmployee(String searchTerm);*/
 	
 	List<Employee> findByNameContaining(String searchTerm);
+	
+	Employee findById(int id); 
+	
 }

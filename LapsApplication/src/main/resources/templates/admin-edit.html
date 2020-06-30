@@ -12,10 +12,11 @@
 </head>
 <body>
 <div class="container">
-<form th:object="${employee}">
+<form th:object="${employee}" th:action="@{/employee/save}" method="post">
   <div class="form-row">
   	<div class="form-group col-md-6">
       <label for="inputName4">Name</label>
+      <input type="hidden" th:field="*{id}">
       <input type="text" class="form-control" id="inputName4" th:field="*{name}" value="">
     </div>
     <div class="form-group col-md-6">
@@ -30,7 +31,7 @@
   <div class="form-row">
   	<div class="form-group col-md-6">
       <label for="inputRole">Role</label>
-      <input type="text" class="form-control" id="inputRole" th:field="*{class.name}" value="">
+      <input type="text" class="form-control" id="inputRole" th:field="*{DiscriminatorValue}" value="">
     </div>
     <div class="form-group col-md-6">
       <label for="inputManager">Manager</label>
@@ -47,7 +48,7 @@
       <input type="text" class="form-control" id="inputML" th:field="*{medicalLeaveDays}" value="nil" disabled>
     </div>
   </div>
-  <button type="submit" th:href="@{/employee/save}" class="btn btn-primary">Save</button>
+  <button type="submit" class="btn btn-primary">Save</button>
 </form>
 </div>
 	<!-- Optional JavaScript -->
