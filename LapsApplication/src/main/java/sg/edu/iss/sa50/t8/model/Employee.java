@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 @DiscriminatorColumn(name="employee_Type")
 //changed all emp into one single table
 //@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public abstract class Employee {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
