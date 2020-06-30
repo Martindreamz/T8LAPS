@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import sg.edu.iss.sa50.t8.model.*;
-@
+
 public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
 	/*
 	 * @Query(value="SELECT * FROM Leaves where Leave_Type='Compensation_Leave'"
