@@ -52,26 +52,21 @@ public class AdminController {
 	}
 	
 
-/*
-	@RequestMapping("/admin-create")
-	public String addEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
-				model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
-				return "admin-create";	
-	}
-	*/
+
 	
 	@RequestMapping("/admin-delete/{id}")
-	public String deleteEmployee(@PathVariable("id") int id, Model model) {
+	public String delete(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
 		return "admin-delete";
 	}
 	
+	@RequestMapping("/admin-edit/{id}")
+	public String edit(@PathVariable("id") int id, Model model) {
+		model.addAttribute("employee", ((AdminService) aservice).findById(id));
+		return "admin-edit";
+	}
 	
 
-	
-
-	//Daryl part
-	
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
 		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
@@ -83,41 +78,19 @@ public class AdminController {
 		return "dashboard";
 	}
 	
+	
 	@RequestMapping("/admin-create")
-	public String dashboard(Model model) {
+	public String create(Model model) {
+		model.addAttribute("employee", new Staff());
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "admin-create";
 	}
 	
-	@RequestMapping("/admin-delete")
-	public String dashboard(Model model) {
-		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
-		return "admin-delete";
-	}
 	
-	@RequestMapping("/admin-createleavetype")
-	public String dashboard(Model model) {
-		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
-		return "admin-createleavetype";
-	}
 	
-	@RequestMapping("/admin-manageleavetype")
-	public String dashboard(Model model) {
-		model.addAttribute("leavetypeList", ((AdminService) aservice).findAll());
-		return "admin-manageleavetype";
-	}
 	
-	@RequestMapping("/admin-deleteleavetype")
-	public String dashboard(Model model) {
-		model.addAttribute("leavetypeList", ((AdminService) aservice).findAll());
-		return "admin-deleteleavetype";
-	}
 	
-	@RequestMapping("/admin-edit/{id}")
-	public String edit(@PathVariable("id") int id, Model model) {
-		model.addAttribute("employee", ((AdminService) aservice).findById(id));
-		return "admin-edit";
-	}
+	
 	
 	@RequestMapping("/save")
 	public String save(@ModelAttribute("employee") Employee entry, Model model) {

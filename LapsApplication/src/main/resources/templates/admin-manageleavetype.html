@@ -14,7 +14,7 @@
 
 <div class="container">
 <!-- Search Bar -->
-<form action="#" th:action="@{/employee/search-leavetype}" method="post" align="right">
+<form action="#" th:action="@{/employee/admin-manageleavetype}" method="post" align="right">
 	<input type="text" name="searchTerm">
 	<button type="submit">Search</button>
 </form>
@@ -30,7 +30,7 @@
   <tbody th:object="${leavetypeList}">
     <tr th:each="leavetype : ${leavetypeList}">
       <th scope="row" th:text="${leavetype.id}">Id</th>
-      <td th:text="${leavetype.name}">Name</td>
+      <td th:text="${leavetype.leavetype}">Name</td>
       <td>
       	<a class="btn btn-primary" th:href="@{/employee/admin-editleavetype/}+${leavetype.id}" role="button">Edit</a>
       	 	<a class="btn btn-primary" th:href="@{/employee/admin-deleteleavetype/}+${leavetype.id}" role="button">Delete</a>
