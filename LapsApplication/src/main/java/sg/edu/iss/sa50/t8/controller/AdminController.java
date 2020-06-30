@@ -83,6 +83,36 @@ public class AdminController {
 		return "dashboard";
 	}
 	
+	@RequestMapping("/admin-create")
+	public String dashboard(Model model) {
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "admin-create";
+	}
+	
+	@RequestMapping("/admin-delete")
+	public String dashboard(Model model) {
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "admin-delete";
+	}
+	
+	@RequestMapping("/admin-createleavetype")
+	public String dashboard(Model model) {
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "admin-createleavetype";
+	}
+	
+	@RequestMapping("/admin-manageleavetype")
+	public String dashboard(Model model) {
+		model.addAttribute("leavetypeList", ((AdminService) aservice).findAll());
+		return "admin-manageleavetype";
+	}
+	
+	@RequestMapping("/admin-deleteleavetype")
+	public String dashboard(Model model) {
+		model.addAttribute("leavetypeList", ((AdminService) aservice).findAll());
+		return "admin-deleteleavetype";
+	}
+	
 	@RequestMapping("/admin-edit/{id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
