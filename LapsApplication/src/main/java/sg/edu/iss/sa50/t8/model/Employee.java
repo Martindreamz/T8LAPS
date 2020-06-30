@@ -4,13 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-<<<<<<< HEAD
 @Inheritance
 @DiscriminatorColumn(name="EMP_TYPE")
-=======
-@Inheritance
-@DiscriminatorColumn(name="EMP_TYPE")
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,16 +15,8 @@ public class Employee {
     @NotBlank(message = "Email is mandatory")
     private String email;
 	private String password; 
-<<<<<<< HEAD
-
-    
-
-	public Employee() {
-=======
-
     public Employee() {
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
-        super();
+	    super();
         // TODO Auto-generated constructor stub 
     }
 
@@ -91,26 +78,10 @@ public class Employee {
     public String toString() {
         return "Employee [id=" + id + ", name=" + name + ", email=" + email + "]";
     }
-<<<<<<< HEAD
-
-
-=======
 
 	@Transient
 	public String getDiscriminatorValue(){
 		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
 	}
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
-
-<<<<<<< HEAD
-	@Transient
-    public String getDiscriminatorValue() {
-    	return this.getClass().getAnnotation(DiscriminatorValue.class).value();
-    }
-    
-
- 
-=======
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
 
 }
