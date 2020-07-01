@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Error Page</title>
+</head>
+<body>
+	<h1 th:utext=#{error.heading}></h1>
+	<h3 style="color: red" th:text="${errorMsg}" 
+		th:if="${not #strings.isEmpty(errorMsg)} "></h3>
+	
+
+	<a href="/employee/login">
+		<button>Employee Login</button>
+	</a>
+
+	<a href="/employee/adminlogin">
+		<button>Admin Login</button>
+	</a>
+
+</body>
+</html>

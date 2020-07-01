@@ -19,6 +19,10 @@ public class ManagerService implements IEmployeeService {
 	public Optional<Leaves> findById(int id) {
 		return lrepo.findById(id);
 	}
+	
+	public Staff findStaffById(int id) {
+		return empRepo.findStaffById(id);
+	}
 
 	public void approveLeave(Leaves leaves) {
 		leaves.setStatus(LeaveStatus.Approved);
