@@ -44,4 +44,9 @@ public class OvertimeserviceImpl implements IOvertimeService{
 		oRepo.updateOvertimeStatus(overtimeId, status);
 	}
 
+	@Override
+	public ArrayList<Overtime> findAllOvertime() {
+		return (ArrayList<Overtime>)oRepo.findAll();
+	}
+
 }

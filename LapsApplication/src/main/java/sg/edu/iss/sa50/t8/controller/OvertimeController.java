@@ -32,6 +32,13 @@ public class OvertimeController {
 		model.addAttribute("staff", s);
 		return "overtime-claim";
 	}
+	
+
+	@RequestMapping("/history")
+	public String History(Model model) {
+		model.addAttribute("overtimeList", overtimeService.findAllOvertime());
+		return "leaves-history";
+	}
 
 	/*
 	 * @RequestMapping("/save") public String

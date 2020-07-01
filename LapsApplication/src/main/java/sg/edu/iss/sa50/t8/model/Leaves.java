@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="Leave_Type_Disc")
+@DiscriminatorColumn(name="Leave_Type")
 public class Leaves {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
