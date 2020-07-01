@@ -5,24 +5,9 @@
 <title th:utext=#{admin.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{admin.heading}></h1>
-
-	<a href="/employee/home">
-		<button> Sign out</button>
-	</a>
-	
-	<a href="/employee/admin-blockleave">
-		<button> Set block leave</button>
-	</a>
-
-<a href="/employee/admin-create">
-		<button> Create Employee</button>
-	</a>
-	
-<a href="/employee/dashboard">
-		<button> Manage&View Employee</button>
-	</a>
-	
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::adminbar"></div>
+	<div th:insert="fragments/general.html::footer"></div>
 	
 	
 </body>

@@ -1,5 +1,6 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -35,38 +36,52 @@ import sg.edu.iss.sa50.t8.service.IEmployeeService;
 @Controller
 @RequestMapping("/employee")
 public class AdminController {
-	
+
 	@Autowired
 	@Qualifier("adminService")
 	protected IEmployeeService aservice;
-	
+
 	@Autowired
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;
 	}
-	
+
 	//admin
 	@RequestMapping("/admin")
-	public String admin() {
+	public String admin(@ModelAttribute("employee") Employee emp,HttpSession session,Model model) {
+		for(Admin a :((AdminService) aservice).findallAdmin()){
+			System.out.println(a);
+			if(emp.getName().equals(a.getName())){
+				System.out.println("username pass");
+				if (emp.getPassword().equals(a.getPassword())){
+					System.out.println("password correct");
 
-		return "admin";
+					session.setAttribute("user",a);					
+					return "admin";
+				}
+			}
+		}
+
+		model.addAttribute("errorMsg","Password is not correct. Pls try again.");
+		return "error";
 	}
-	
 
 
-	
+
+
+
 	@RequestMapping("/admin-delete/{id}")
 	public String delete(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
 		return "admin-delete";
 	}
-	
+
 	@RequestMapping("/admin-edit/{id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
 		return "admin-edit";
 	}
-	
+
 
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
@@ -78,29 +93,29 @@ public class AdminController {
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
 	}
-	
-	
+
+
 	@RequestMapping("/admin-create")
 	public String create(Model model) {
 		model.addAttribute("employee", new Staff());
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "admin-create";
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	@RequestMapping("/save")
 	public String save(@ModelAttribute("employee") Employee entry, Model model) {
 		Employee toSave = ((AdminService) aservice).findById(entry.getId());
 		toSave.setName(entry.getName());
 		toSave.setPassword(entry.getPassword());
 		toSave.setEmail(entry.getEmail());
-		
-		
+
+
 		if(((AdminService) aservice).save(toSave)) {
 			return "forward:/employee/dashboard";
 		}
@@ -117,6 +132,6 @@ public class AdminController {
 			return "admin-edit";
 		}*/
 	}
-	
-	
+
+
 }

@@ -5,15 +5,16 @@
 <title th:utext=#{admin-blockleave.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{admin-blockleave.heading}></h1>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::adminbar"></div>
 
 	<a href="/employee/adminlogin">
-		<button> Back</button>
-	</a>
-	
-	<a href="/employee/admin-setblockleave">
-		<button> Set</button>
+		<button>Back</button>
 	</a>
 
+	<a href="/employee/admin-setblockleave">
+		<button>Set</button>
+	</a>
+	<div th:insert="fragments/general.html::footer"></div>
 </body>
 </html>
