@@ -29,7 +29,7 @@
 				<tr th:each="al:${Leaves}">
 					<td th:text="${al.id}">id</td>
 					<td th:text="${al.leaveReason}">leaveReason</td>
-					<td th:text="*{DiscriminatorValue}">LeaveType</td>
+					<td th:text="${al.getDiscriminatorValue()}">LeaveType</td>
 					<td th:text="${al.startDate}">Start Date</td>
 					<td th:text="${al.endDate}">Duration</td>
 					<td th:text="${al.managerComment}">Manager Comment</td>

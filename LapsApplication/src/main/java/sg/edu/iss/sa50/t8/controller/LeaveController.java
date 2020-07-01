@@ -13,7 +13,12 @@ import com.sun.el.parser.ParseException;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.repository.StaffRepository;
+import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
 import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
 
@@ -23,6 +28,15 @@ import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
 @RequestMapping("/leaves")
 public class LeaveController {
 
+	private static final LeaveStatus Applied = null;
+
+	@Autowired
+	EmailService ems;
+	
+
+	@Autowired
+	StaffRepository srepo;
+	
 	@Autowired
 	protected ILeaveService leaveService;
 	
@@ -77,12 +91,18 @@ public class LeaveController {
 		if(count > 0 &&  dur <= adays ) {
         	long minus = dur - count;
         	System.out.println("less than 14 = " + minus);
+        	annualLeave.setStaff((Staff) srepo.findById(6).get()); //use session later
+        	annualLeave.setStatus(LeaveStatus.Applied);
+        	ems.notifyManager(annualLeave);
         	leaveService.saveAnnualLeave(annualLeave);
    		    model.addAttribute("Leaves",leaveService.findAllLeaves()); 
    		    return "leaves-history";
         }
         else {
         	System.out.println("greater than 14 = " + dur);
+        	annualLeave.setStaff((Staff) srepo.findById(6).get()); //use session later
+        	annualLeave.setStatus(LeaveStatus.Applied);
+        	ems.notifyManager(annualLeave);
         	leaveService.saveAnnualLeave(annualLeave);
    		    model.addAttribute("Leaves",leaveService.findAllLeaves()); 
    		    return "leaves-history";
@@ -92,6 +112,9 @@ public class LeaveController {
 	@RequestMapping("/medical/save")
 	public String saveMedicalForm(@ModelAttribute("medicalLeave") MedicalLeave medicalLeave, 
 			Model model) {
+		medicalLeave.setStaff((Staff) srepo.findById(6).get()); //use session later
+		medicalLeave.setStatus(LeaveStatus.Applied);
+    	ems.notifyManager(medicalLeave);
 		leaveService.saveMedicalLeave(medicalLeave);
 		model.addAttribute("Leaves", leaveService.findAllLeaves());
 		return "leaves-history";

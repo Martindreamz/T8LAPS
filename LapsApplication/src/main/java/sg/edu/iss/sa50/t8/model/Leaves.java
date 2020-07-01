@@ -30,7 +30,7 @@ public class Leaves {
 	private Date startDate;
 
 	private String leaveReason;
-	private String leaveType;
+	private LeaveType leaveType;
 	private LeaveStatus status;
 
 	private String managerComment;
@@ -78,11 +78,11 @@ public class Leaves {
 		this.startDate = startDate;
 	}
 	
-	public String getLeaveType() {
+	public LeaveType getLeaveType() {
 		return leaveType;
 	}
 
-	public void setLeaveType(String leaveType) {
+	public void setLeaveType(LeaveType leaveType) {
 		this.leaveType = leaveType;
 	}
 
