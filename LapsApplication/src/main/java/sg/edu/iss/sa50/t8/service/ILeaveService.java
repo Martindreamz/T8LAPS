@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 
@@ -14,7 +15,10 @@ public interface ILeaveService {
 	public boolean saveAnnualLeave(AnnualLeave aLeave);	
 	public boolean saveMedicalLeave(MedicalLeave mLeave);	
 	public boolean saveCompensationLeave(CompensationLeave cLeave);
-	
+	public void updateLeaveStatus(int leaveId,LeaveStatus status);
+	//public void updateLeaveStatus(int leaveId);
+	public Leaves findLeaveById(int leaveId);
+	public String findLeaveTypeById(int leaveId);
 	public ArrayList<Leaves> findAllLeaves();
 
 }
