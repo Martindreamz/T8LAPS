@@ -9,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sun.el.parser.ParseException;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Staff;
@@ -90,7 +92,7 @@ public class LeaveController {
 	
 	@RequestMapping("/annual/save")
 	public String saveAnnualForm(@ModelAttribute("annualLeave") AnnualLeave annualLeave, 
-			Model model) throws ParseException {
+			Model model,@SessionAttribute("user") Employee emp) throws ParseException {
 		
 		int count = 0;
 		int adays = 14;
@@ -110,18 +112,18 @@ public class LeaveController {
 		if(count > 0 &&  dur <= adays ) {
         	long minus = dur - count;
         	System.out.println("less than 14 = " + minus);
-        	annualLeave.setStaff((Staff) srepo.findById(6).get()); //use session later
+        	annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
         	annualLeave.setStatus(LeaveStatus.Applied);
-        	ems.notifyManager(annualLeave);
+//        	ems.notifyManager(annualLeave);
         	leaveService.saveAnnualLeave(annualLeave);
    		    model.addAttribute("Leaves",leaveService.findAllLeaves()); 
    		    return "leaves-history";
         }
         else {
         	System.out.println("greater than 14 = " + dur);
-        	annualLeave.setStaff((Staff) srepo.findById(6).get()); //use session later
+        	annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
         	annualLeave.setStatus(LeaveStatus.Applied);
-        	ems.notifyManager(annualLeave);
+//        	ems.notifyManager(annualLeave);
         	leaveService.saveAnnualLeave(annualLeave);
    		    model.addAttribute("Leaves",leaveService.findAllLeaves()); 
    		    return "leaves-history";
@@ -130,10 +132,10 @@ public class LeaveController {
 	
 	@RequestMapping("/medical/save")
 	public String saveMedicalForm(@ModelAttribute("medicalLeave") MedicalLeave medicalLeave, 
-			Model model) {
-		medicalLeave.setStaff((Staff) srepo.findById(6).get()); //use session later
+			Model model,@SessionAttribute("user") Employee emp) {
+		medicalLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
 		medicalLeave.setStatus(LeaveStatus.Applied);
-    	ems.notifyManager(medicalLeave);
+//    	ems.notifyManager(medicalLeave);
 		leaveService.saveMedicalLeave(medicalLeave);
 		model.addAttribute("Leaves", leaveService.findAllLeaves());
 		return "leaves-history";

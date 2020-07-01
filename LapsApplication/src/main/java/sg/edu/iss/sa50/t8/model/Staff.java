@@ -1,8 +1,12 @@
 package sg.edu.iss.sa50.t8.model;
 
-import javax.persistence.*;
 import java.util.List;
-import javax.validation.constraints.*;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("staff")
