@@ -77,9 +77,15 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin-edit/{id}")
-	public String edit(@PathVariable("id") int id, Model model) {
-		model.addAttribute("employee", ((AdminService) aservice).findById(id));
+	public String editAdmin(@PathVariable("id") int id, Model model) {
+		model.addAttribute("admin", ((AdminService) aservice).findAdminById(id));
 		return "admin-edit";
+	}
+	
+	@RequestMapping("/staff-edit/{id}")
+	public String editStaff(@PathVariable("id") int id, Model model) {
+		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
+		return "staff-edit";
 	}
 
 
@@ -108,30 +114,39 @@ public class AdminController {
 
 
 
-	@RequestMapping("/save")
-	public String save(@ModelAttribute("employee") Employee entry, Model model) {
-		Employee toSave = ((AdminService) aservice).findById(entry.getId());
-		toSave.setName(entry.getName());
-		toSave.setPassword(entry.getPassword());
-		toSave.setEmail(entry.getEmail());
-
-
+	@RequestMapping("/save-admin")
+	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
+		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
+		toSave.setName(admin.getName());
+		toSave.setPassword(admin.getPassword());
+		toSave.setEmail(admin.getEmail());
 		if(((AdminService) aservice).save(toSave)) {
 			return "forward:/employee/dashboard";
 		}
 		else {
-			model.addAttribute("employee", toSave);
+			model.addAttribute("admin", toSave);
 			return "admin-edit";
 		}
-		/*
-		if(((AdminService) aservice).save(entry)) {
+		
+	}
+	
+	@RequestMapping("/save-staff")
+	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
+		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
+		toSave.setName(staff.getName());
+		toSave.setPassword(staff.getPassword());
+		toSave.setEmail(staff.getEmail());
+		toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+		if(((AdminService) aservice).save(toSave)) {
 			return "forward:/employee/dashboard";
 		}
 		else {
-			model.addAttribute("employee", entry);
-			return "admin-edit";
-		}*/
+			model.addAttribute("staff", toSave);
+			return "staff-edit";
+		}
 	}
 
 
 }
+
+

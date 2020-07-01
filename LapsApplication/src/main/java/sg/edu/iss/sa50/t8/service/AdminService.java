@@ -44,6 +44,17 @@ public class AdminService implements IEmployeeService {
 	public List<Admin> findallAdmin(){
 		return arepo.findAllAdmin();
 	}
+	
+	public Admin findAdminById(int id) {
+		// TODO Auto-generated method stub
+		return arepo.findAdminById(id);
+	}
+	
+	public Staff findStaffById(int id) {
+		// TODO Auto-generated method stub
+		return arepo.findStaffById(id);
+	}
+	
 	@Autowired
 	EmployeeRepository eRepo;
 	
@@ -54,4 +65,6 @@ public class AdminService implements IEmployeeService {
 	public int findTotalOTHoursByEmpId(int empId) {
 		return eRepo.findTotalOTHoursByEmpId(empId);
 	}
+
+
 }

@@ -39,8 +39,13 @@
 					<th scope="row" th:text="${employee.id}">Id</th>
 					<td th:text="${employee.name}">Name</td>
 					<td th:text="${employee.email}">Email</td>
-					<td><a class="btn btn-primary"
+					<td th:if="${employee.DiscriminatorValue == 'Admin'}"><a class="btn btn-primary"
 						th:href="@{/employee/admin-edit/}+${employee.id}" role="button">Edit</a>
+						<a class="btn btn-primary"
+						th:href="@{/employee/admin-delete/}+${employee.id}" role="button">Delete</a>
+					</td>
+					<td th:if="${employee.DiscriminatorValue != 'Admin'}"><a class="btn btn-primary"
+						th:href="@{/employee/staff-edit/}+${employee.id}" role="button">Edit</a>
 						<a class="btn btn-primary"
 						th:href="@{/employee/admin-delete/}+${employee.id}" role="button">Delete</a>
 					</td>
