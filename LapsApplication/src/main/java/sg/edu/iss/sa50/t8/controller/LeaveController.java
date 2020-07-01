@@ -143,9 +143,11 @@ public class LeaveController {
 	
 	@RequestMapping("/compensation/save")
 	public String saveCompensationForm(@ModelAttribute("compLeave") CompensationLeave compLeave, 
-			Model model) {
+			Model model,@SessionAttribute("user") Employee emp) {
+		compLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
+		compLeave.setStatus(LeaveStatus.Applied);
 		//int totalOtHr =((StaffService) stService).findTotalOTHoursByEmpId(6);
-		int totalOtHr =((AdminService) aservice).findTotalOTHoursByEmpId(6);
+		int totalOtHr =((AdminService) aservice).findTotalOTHoursByEmpId(emp.getId());
 		
 		if(totalOtHr < 4) {
 			model.addAttribute("error","Sorry!You don't have eligilibility to apply this compensation leave.");
