@@ -102,12 +102,6 @@ public class LapsApplication {
 			System.out.println("I want to test the discriminator:");
 			System.out.println(al1.getDiscriminatorValue());
 			System.out.println(adm1.getDiscriminatorValue());
-			
-			/*
-			 * ems.notifyManager(al1); ems.notifyManager(ml1); ems.notifyStaff(al1);
-			 * ems.notifyStaff(ml1); ems.confirmStaffCancellation(al1);
-			 * ems.confirmStaffCancellation(ml1); System.out.println("emails sent");
-			 */
 
 			
 			

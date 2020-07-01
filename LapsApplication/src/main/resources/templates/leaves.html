@@ -5,11 +5,14 @@
 <title th:utext=#{leaves.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{leaves.heading}></h1>
-<h1 th:text="${session.user.name}"></h1>
-<h1 th:text="${session.user.id}"></h1>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
+	
 
-	<a href="/leaves/apply">
+<h1 th:text= "Welcome + ' ' + ${session.user.name}"></h1>
+
+
+	<!-- <a href="/leaves/apply">
 		<button> Apply </button>
 	</a>
 	
@@ -31,7 +34,7 @@
 	
 	<a href="/leaves/movement-register">
 		<button> Movement Register </button>
-	</a>
+	</a> -->
 
 	
 

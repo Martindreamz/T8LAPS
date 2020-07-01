@@ -5,14 +5,16 @@
 <title th:utext=#{employeelogin.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{employeelogin.heading}></h1>
-
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
 	<!-- <p th:if="${loginError}" class="error">Wrong user or password</p> -->
 	<form th:object=${employee} th:action="@{/employee/employeelogin}"
 		method="post">
 		<!-- <fieldset>
         <input type="hidden" th:field="*{id}">  
         </fieldset> -->
+		<br>
+		<br>
 		<fieldset>
 			Username: <input type="text" th:field="*{name}">
 		</fieldset>
@@ -25,13 +27,8 @@
 		<button type="submit">Log in</button>
 
 	</form>
+	<div th:insert="fragments/general.html::footer"></div>
 
-
-
-
-	<a href="/employee/home">
-		<button>Back</button>
-	</a>
 
 
 
