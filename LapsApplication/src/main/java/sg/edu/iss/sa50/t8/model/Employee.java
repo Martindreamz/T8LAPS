@@ -15,6 +15,8 @@ public class Employee {
     @NotBlank(message = "Email is mandatory")
     private String email;
 	private String password; 
+	private int totalOTHours;
+	
     public Employee() {
 	    super();
         // TODO Auto-generated constructor stub 
@@ -73,6 +75,13 @@ public class Employee {
 		this.password = password;
 	}
 
+	public int getTotalOTHours() {
+		return totalOTHours;
+	}
+
+	public void setTotalOTHours(int totalOTHours) {
+		this.totalOTHours = totalOTHours;
+	}
 
 	@Override
     public String toString() {
