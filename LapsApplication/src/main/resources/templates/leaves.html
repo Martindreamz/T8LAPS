@@ -7,9 +7,9 @@
 <body>
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::navigationbar"></div>
-	
 
-<h1 th:text= "Welcome + ' ' + ${session.user.name}"></h1>
+
+	<h1 th:text="Welcome + ' ' + ${session.user.name}"></h1>
 
 
 	<!-- <a href="/leaves/apply">
@@ -36,7 +36,7 @@
 		<button> Movement Register </button>
 	</a> -->
 
-	
+
 
 </body>
 </html>
