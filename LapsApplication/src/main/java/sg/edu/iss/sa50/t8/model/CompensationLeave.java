@@ -11,14 +11,12 @@ public class CompensationLeave extends Leaves{
 	public CompensationLeave() {
 		super();
 		super.setStatus(LeaveStatus.Applied);
-		super.setLeaveType(LeaveType.Compensation);
 	}
 
 	public CompensationLeave(String claimQuota) {
 		super();
 		this.claimQuota = claimQuota;
 		super.setStatus(LeaveStatus.Applied);
-		super.setLeaveType(LeaveType.Compensation);
 	}
 
 	public String getClaimQuota() {

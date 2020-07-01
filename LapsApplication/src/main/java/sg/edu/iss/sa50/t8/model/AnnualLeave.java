@@ -19,11 +19,9 @@ public class AnnualLeave extends Leaves{
 	
 	private String contactDetails;
 
-	//private LeaveType super.leaveType;
 	public AnnualLeave() {
 		super();
 		super.setStatus(LeaveStatus.Applied);
-		super.setLeaveType(LeaveType.Annual);
 	}
 
 	public AnnualLeave(Date endDate, String contactDetails) {
@@ -31,7 +29,6 @@ public class AnnualLeave extends Leaves{
 		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
 		this.contactDetails = contactDetails;
-		super.setLeaveType(LeaveType.Annual);
 	}
 
 	public Date getEndDate() {
