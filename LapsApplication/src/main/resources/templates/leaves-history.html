@@ -31,7 +31,7 @@
 					<td th:text="${l.leaveReason}">leaveReason</td>
 					<td th:text="${l.DiscriminatorValue}">LeaveType</td>
 					<td th:text="${l.startDate}">Start Date</td>
-					<td th:if="not ${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}">Duration</td>
+					<td th:if="not ${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${l.endDate}">Duration</td>
 					<td th:if="${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${l.claimQuota}">Duration</td>
 					<td th:text="${l.managerComment}">Manager Comment</td>
 					<td th:text="${l.status}">Otto</td>

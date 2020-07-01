@@ -9,23 +9,23 @@
 <body >
 <h1 th:utext=#{leaves-applicationdetails.heading}></h1>
 
-<form action="#" th:object="${leave}"
+<form action="#" th:object="${leaves}"
 	th:action="@{/manager/leavesAppDetails/respond}" method="post">
 <dl class="row">
   <dt class="col-sm-3">Staff Name</dt>
-  <dd class="col-sm-9" th:text="${leave.staff.name}" >Bianca</dd>
+  <dd class="col-sm-9" th:text="${leaves.staff.name}" >Bianca</dd>
 
   <dt class="col-sm-3">Leave Type</dt>
   <dd class="col-sm-9" th:text="*{DiscriminatorValue}"><p>Annual Leave Got Problem! Leave Type Cannot be found! </p>
   </dd>
 
   <dt class="col-sm-3" >Start Date</dt>
-  <dd class="col-sm-9" th:text="${leave.startDate}">01-07-2020</dd>
+  <dd class="col-sm-9" th:text="${leaves.startDate}">01-07-2020</dd>
   <dt class="col-sm-3" >End Date</dt>
-  <dd class="col-sm-9" th:text="${leave.endDate}">05-07-2020</dd>
+  <dd class="col-sm-9" th:text="${leaves.endDate}">05-07-2020</dd>
 
   <dt class="col-sm-3 text-truncate">Leave Reason</dt>
-  <dd class="col-sm-9" th:text="${leave.leaveReason}">There is so much in the world that I'd like to soak up with my eyes.</dd>
+  <dd class="col-sm-9" th:text="${leaves.leaveReason}">There is so much in the world that I'd like to soak up with my eyes.</dd>
 
  <dt class="col-sm-3">Your Comment</dt>
  <dd class="col-sm-9">
