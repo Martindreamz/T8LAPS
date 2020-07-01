@@ -23,7 +23,7 @@ public class iEmailService implements EmailService{
 	public void notifyManager(AnnualLeave leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(leave.getStaff().getManager().getEmail());
-		msg.setFrom("martni.dreamz@gmail.com");
+		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application from " + leave.getStaff().getName());
 		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\n"+leave.getStaff().getName()+ " applied annual leave from "+leave.getStartDate().toString()+" to "+
 				leave.getEndDate().toString()+"\n\nFrom,\nTeam8LAPS");
