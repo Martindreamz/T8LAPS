@@ -40,9 +40,9 @@ public class EmployeeController {
 		for(Employee e: sRepo.findAllNonAdmin()){
 			System.out.println(e);
 			if(emp.getName().equals(e.getName())){
-				System.out.println("username pass");
+				System.out.println("staff exist");
 				if (emp.getPassword().equals(e.getPassword())){
-					System.out.println("password correct");
+					System.out.println("staff password correct");
 //					if (e.getDiscriminatorValue().equals("Admin")) {
 //						System.out.println("too bad is admin");
 //						model.addAttribute("errorMsg","You are admin. Pls go to admin login entrance");

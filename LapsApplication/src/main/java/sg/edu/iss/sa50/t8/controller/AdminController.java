@@ -52,9 +52,9 @@ public class AdminController {
 		for(Admin a :((AdminService) aservice).findallAdmin()){
 			System.out.println(a);
 			if(emp.getName().equals(a.getName())){
-				System.out.println("username pass");
+				System.out.println("admin name exist");
 				if (emp.getPassword().equals(a.getPassword())){
-					System.out.println("password correct");
+					System.out.println("admin password correct");
 
 					session.setAttribute("user",a);					
 					return "admin";
