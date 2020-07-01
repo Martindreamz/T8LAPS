@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.AdminRepository;
 
 @Service
@@ -33,4 +34,8 @@ public class AdminService implements IEmployeeService {
 		return arepo.save(entry)!=null? true : false;
 	}
 	
+	
+	public List<Staff> findAllNonAdminStaff(){
+		return arepo.findAllNonAdminStaff();
+	}
 }
