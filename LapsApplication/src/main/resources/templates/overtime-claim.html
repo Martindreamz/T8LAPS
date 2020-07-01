@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:utext=#{leaves-apply.title}></title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<h1 th:utext=#{overtime-claim.heading}></h1>
+
+	<form class="form-horizontal" action="#" th:action="@{/overtime/save}"
+		th:object="${overtime}" method="post">
+		<input type="hidden" id="staff" th:field="${staff}">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="startdate">Overtime
+				Date</label> 
+			<input type="date" th:field="*{overtimeDate}" id="overtimedate" placeholder="dd/MM/yyyy" />
+			<p th:if="${#fields.hasErrors('overtimeDate')}" th:error="*{overtimeDate}"></p>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="enddate">Overtime Hours</label>
+			<input type="number" th:field="*{overtimeHours}" id="overtimeHours" placeholder="Enter hours" />
+			<!-- <p th:if="${#fields.hasErrors('overtimeHours')}" th:errors="*{overtimeHours}"></p>
+		 -->
+		 </div>
+		
+		<div class="form-group">
+			<div class="col-sm-6" style="float: right;">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-primary">Reset</button>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-<form th:object="${employee}" th:action="@{/employee/save}" method="post">
+<form th:object="${employee}" th:action="@{/employee/save}">
   <div class="form-row">
   	<div class="form-group col-md-6">
       <label for="inputName4">Name</label>
@@ -33,12 +33,12 @@
       <label for="inputRole">Role</label>
       <input type="text" class="form-control" id="inputRole" th:field="*{DiscriminatorValue}" value="">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6" th:if="${employee.DiscriminatorValue != 'Admin'}">
       <label for="inputManager">Manager</label>
       <input type="text" class="form-control" id="inputManager" th:field="*{manager.name}" value="nil" disabled>
     </div>
   </div>
-  <div class="form-row">
+  <div class="form-row" th:if="${employee.DiscriminatorValue != 'Admin'}">
   	<div class="form-group col-md-6">
       <label for="inputAL">Annual Leaves</label>
       <input type="text" class="form-control" id="inputAL" th:field="*{annualLeaveDays}" value="">

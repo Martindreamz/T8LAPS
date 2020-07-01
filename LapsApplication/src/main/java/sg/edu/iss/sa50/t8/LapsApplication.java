@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import sg.edu.iss.sa50.t8.model.*;
 import sg.edu.iss.sa50.t8.repository.*;
@@ -53,6 +54,7 @@ public class LapsApplication {
 			Manager man2 = new Manager("Joe2","martin.dreamz@hotmail.com",man1,16,15);
 			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
 			Staff s1 = new Staff("Martin","martin.dreamz@hotmail.com",man2,10,10);
+			s1.setTotalOTHours(3);
 			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
 			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
 			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
@@ -67,13 +69,15 @@ public class LapsApplication {
 			al1.setLeaveReason("Moving House");
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
-			al1.setStartDate(d1);
-			al1.setStaff(s3);
-			al1.setLeaveReason("Stomatch ache");
-			al1.setManagerComment("Not Set");
+			ml1.setStartDate(d1);
+			ml1.setStaff(s3);
+			ml1.setLeaveReason("Stomatch ache");
+			ml1.setManagerComment("Not Set");
 			
-			Overtime ot1 = new Overtime(d1,s1,3);
-			Overtime ot2 = new Overtime(d2,s2,3);
+			Overtime ot1 = new Overtime(d1,s1,4);
+			ot1.setOverTimeStatus(OvertimeStatus.Approved);
+			Overtime ot2 = new Overtime(d2,s1,4);
+			ot1.setOverTimeStatus(OvertimeStatus.Approved);
 			
 			
 			empRepo.save(adm1);

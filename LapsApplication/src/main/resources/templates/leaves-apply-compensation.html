@@ -11,54 +11,41 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 	<h1 th:utext=#{leaves-apply.heading}></h1>
-
-	<form class="form-horizontal" action="#" th:action="@{/leave/compensation/save}"
-		method="post">
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="name">Name</label>
-			<div class="col-sm-6">
-				<input type="text" class="form-control" id="name"
-					placeholder="Enter name">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="leavetype">Leave
-				Type</label>
-			<div class="col-sm-10 dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
-					data-toggle="dropdown">
-					Select here<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a href="#">Annual Leave</a></li>
-					<li><a href="#">Medical Leave</a></li>
-					<li><a href="#">Compensation Leave</a></li>
-				</ul>
-			</div>
-		</div>
+	<p th:if="not ${error==null}" th:text="${error}" style="color:red;"></p>
+		
+	<form class="form-horizontal" action="#" th:action="@{/leaves/compensation/save}"
+		th:object="${compensationLeave}" method="post">
+		<!-- <p th:if="${#fields.hasErrors('staff')}" th:errors="*{name}"></p>
+		 -->
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="startdate">Start
-				Date</label>
-			<div class="col-sm-6">
-				<input type="date" class="form-control" id="sdate">
-			</div>
+				Date</label> 
+			<input type="date" th:field="*{startDate}" id="sdate" placeholder="dd/MM/yyyy" />
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="enddate">End Date</label>
-			<div class="col-sm-6">
-				<input type="date" class="form-control" id="edate">
-			</div>
+			<label class="control-label col-sm-2" for="claimQuota">Leave Quota</label>
+			<select th:field="*{claimQuota}">
+				<option th:value="#{compensation.form.am}" th:text="#{compensation.form.am}">
+			 	AM </option> 
+			 	<option th:value="#{compensation.form.pm}" th:text="#{compensation.form.pm}">
+			 	PM </option> 
+			</select>
+			
 		</div>
+		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="comment">Leave
 				Reason</label>
 			<div class="col-sm-6">
-				<textarea class="form-control" rows="5" id="comment"></textarea>
+				<textarea class="form-control" rows="5" id="comment"
+					th:field="*{leaveReason}"></textarea>
 			</div>
 		</div>
+		
 		<div class="form-group">
 			<div class="col-sm-6" style="float: right;">
 				<button type="submit" class="btn btn-primary">Submit</button>

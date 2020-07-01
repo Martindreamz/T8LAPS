@@ -11,24 +11,35 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties
 public class BlockedLeaves {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	private String name;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat (pattern="yyyy-MM-dd")
-	private Date blockedDate;
+	private Date date;
 	
 	public BlockedLeaves() {}
 
-	public Date getBlockedDate() {
-		return blockedDate;
+	public String getName() {
+		return name;
 	}
 
-	public void setBlockedDate(Date blockedDate) {
-		this.blockedDate = blockedDate;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}	
 }

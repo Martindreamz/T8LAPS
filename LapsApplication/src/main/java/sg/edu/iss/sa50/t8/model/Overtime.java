@@ -2,15 +2,18 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Overtime {
@@ -18,64 +21,58 @@ public class Overtime {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-
 	@Past
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date overtimeDate; 
 	
 	@ManyToOne @JoinColumn(name="staff_id")
-	private Employee staff; 
+	private Staff staff; 
 	
-	private double totalHours;
+	private int overtimeHours;
+	
+	private OvertimeStatus overTimeStatus;
 	
 	public Overtime() {
 		super();
-		// TODO Auto-generated constructor stub
+		setOverTimeStatus(OvertimeStatus.Applied);
 	}
-
-	public Overtime(@Past Date overtimeDate, Employee staff, int totalHours) {
+	public Overtime(@Past Date overtimeDate, Staff staff, int overtimeHours) {
 		super();
 		this.overtimeDate = overtimeDate;
 		this.staff = staff;
-		this.totalHours = totalHours;
+		this.overtimeHours = overtimeHours;
+		setOverTimeStatus(OvertimeStatus.Applied);
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public Date getOvertimeDate() {
 		return overtimeDate;
 	}
-
 	public void setOvertimeDate(Date overtimeDate) {
 		this.overtimeDate = overtimeDate;
 	}
-
-	public Employee getStaff() {
+	public Staff getStaff() {
 		return staff;
 	}
-
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-
-	public double getTotalHours() {
-		return totalHours;
+	public int getOvertimeHours() {
+		return overtimeHours;
 	}
-
-	public void setTotalHours(double totalHours) {
-		this.totalHours = totalHours;
+	public void setOvertimeHours(int overtimeHours) {
+		this.overtimeHours = overtimeHours;
 	}
-
-	public Overtime(@Past Date overtimeDate, int totalHours) {
-		super();
-		this.overtimeDate = overtimeDate;
-		this.totalHours = totalHours;
+	public OvertimeStatus getOverTimeStatus() {
+		return overTimeStatus;
 	}
-	
+	public void setOverTimeStatus(OvertimeStatus overTimeStatus) {
+		this.overTimeStatus = overTimeStatus;
+	}
 	
 }

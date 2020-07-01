@@ -5,21 +5,21 @@ import java.util.List;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import sg.edu.iss.sa50.t8.model.*;
 @Primary
 public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
-	/*
-	 * @Query(value="SELECT * FROM Leaves where Leave_Type='Compensation_Leave'"
-	 * ,nativeQuery = true) List<CompensationLeave> findAllCompensationLeaves();
-	 * //@Query("select l from Leaves l where l.Leave_Type='Annual_Leave'") //Native
-	 * Queries
-	 * 
-	 * @Query(value="SELECT * FROM Leaves where Leave_Type='Annual_Leave'"
-	 * ,nativeQuery = true) List<AnnualLeave> findAllAnnualLeaves();
-	 * //@Query("select l from Leaves l where l.Leave_Type='Medical_Leave'")
-	 * 
-	 * @Query(value="SELECT * FROM Leaves where Leave_Type='Medical_Leave'"
-	 * ,nativeQuery = true) List<MedicalLeave> findAllMedicalLeaves();
-	 */
+
+	@Query(value="SELECT * FROM Leaves",nativeQuery = true)
+	List<Leaves> findAll();
+	
+	@Query(value="SELECT l FROM Leaves l WHERE l.staff = :staff "
+			+ "and l.status in (sg.edu.iss.sa50.t8.model.LeaveStatus.Applied,"
+			 +"sg.edu.iss.sa50.t8.model.LeaveStatus.Updated)") 
+	List<Leaves> findPendingleavesByStaff(@Param("staff") Staff Staff);
+	
+	@Query(value="SELECT l FROM Leaves l WHERE l.staff = :staff") 
+	List<Leaves> findAllLeavesByStaff(@Param("staff") Staff Staff);
+	 
 }

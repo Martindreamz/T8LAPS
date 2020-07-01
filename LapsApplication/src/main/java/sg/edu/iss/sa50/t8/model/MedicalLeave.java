@@ -20,14 +20,12 @@ public class MedicalLeave extends Leaves {
 	public MedicalLeave() {
 		super();
 		super.setStatus(LeaveStatus.Applied);
-		//super.setLeaveType("Medical Leave");
 	}
 
 	public MedicalLeave(Date endDate) {
 		super();
 		super.setStatus(LeaveStatus.Applied);
 		this.endDate = endDate;
-		//super.setLeaveType("Medical Leave");
 	}
 
 	public Date getEndDate() {

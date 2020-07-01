@@ -6,6 +6,8 @@
 </head>
 <body>
 	<h1 th:utext=#{leaves.heading}></h1>
+<h1 th:text="${session.user.name}"></h1>
+<h1 th:text="${session.user.id}"></h1>
 
 	<a href="/leaves/apply">
 		<button> Apply </button>
