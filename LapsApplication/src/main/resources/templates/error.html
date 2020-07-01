@@ -6,8 +6,8 @@
 </head>
 <body>
 	<h1 th:utext=#{error.heading}></h1>
-	<h3 style="color: red" th:text="${msg}" 
-		th:if="${not #strings.isEmpty(msg)} "></h3>
+	<h3 style="color: red" th:text="${errorMsg}" 
+		th:if="${not #strings.isEmpty(errorMsg)} "></h3>
 	
 
 	<a href="/employee/login">
