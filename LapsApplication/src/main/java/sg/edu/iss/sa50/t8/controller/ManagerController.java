@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import sg.edu.iss.sa50.t8.model.*;
 import sg.edu.iss.sa50.t8.service.*;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
@@ -38,11 +40,35 @@ public class ManagerController {
 		if (emp.getDiscriminatorValue().equals("Manager")) {
 			Manager man = (Manager) emp;
 			model.addAttribute("suboridateList", ((ManagerService) manService).findSub(man));
-		}
-		return "manager-dashboard";
+			return "manager-dashboard";
+		}else {
+			model.addAttribute("errorMsg","You are not a manger, pls login as a manager first.");
+			return "error";}
 	}
 	
+	@RequestMapping("/staffLeaveHistoryList/{id}")
+	public String staffLeaveHistory(Model model,
+			HttpSession session,@PathVariable("id") Integer id) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if (emp.getDiscriminatorValue().equals("Manager")) {
+			Manager man = (Manager) emp;
+			Staff sub = ((ManagerService) manService).findStaffById(id);
+			if (sub.getManager().getId()==man.getId()) {
+				model.addAttribute("Leaves",
+						((ManagerService) manService).findAllLeaveByStaff(sub));
+				return "manager-LeavesHistoryList";
+			}else {
+				model.addAttribute("errorMsg","Sorry you don't have authority. "
+						+ "This staff is not your subordinate.");
+				return "error";
+			}
+			}
+		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
+		return "error";
+		
+	}
 
+	
 	@RequestMapping("/leavesAppForApprovalList")
 	public String listforApproval(Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
@@ -54,14 +80,9 @@ public class ManagerController {
 		return "home";
 	}
 
-	/*
-	 * @RequestMapping("/history") public String History(Model model) {
-	 * model.addAttribute("Leaves", leaveService.findAllLeaves()); return
-	 * "leaves-history"; }
-	 */
 	@GetMapping("/leavesAppDetails/{id}")
 	public String showLeaveAppDetail(Model model, @PathVariable("id") Integer id, HttpSession session) {
-		model.addAttribute("leave", ((ManagerService) manService).findById(id).get());
+		model.addAttribute("leaves", ((ManagerService) manService).findById(id).get());
 		session.setAttribute("leavesId", id);
 		return "manager-leaveAppDetails";
 	}
