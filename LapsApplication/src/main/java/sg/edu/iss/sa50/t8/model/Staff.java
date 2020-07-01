@@ -16,8 +16,8 @@ public class Staff extends Employee{
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
 	
-	private double CurrentAnnualLeaves;
-	private double CurrentMedicalLeaves; 
+	private int CurrentAnnualLeaves;
+	private int CurrentMedicalLeaves; 
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
 	
@@ -45,36 +45,20 @@ public class Staff extends Employee{
 		this.CurrentMedicalLeaves = medicalLeaveDays;
 	}
 
-	public double getAnnualLeaveDays() {
+	public int getAnnualLeaveDays() {
 		return CurrentAnnualLeaves;
 	}
 
 
-	public void setAnnualLeaveDays(double d) {
-		this.CurrentAnnualLeaves = d;
+	public void setAnnualLeaveDays(int annualLeaveDays) {
+		this.CurrentAnnualLeaves = annualLeaveDays;
 	}
 
 
-	public double getMedicalLeaveDays() {
+	public int getMedicalLeaveDays() {
 		return CurrentMedicalLeaves;
 	}
 
-
-	public int getTotalAnnualLeaves() {
-		return TotalAnnualLeaves;
-	}
-
-	public void setTotalAnnualLeaves(int totalAnnualLeaves) {
-		TotalAnnualLeaves = totalAnnualLeaves;
-	}
-
-	public int getTotalMedicalLeaves() {
-		return TotalMedicalLeaves;
-	}
-
-	public void setTotalMedicalLeaves(int totalMedicalLeaves) {
-		TotalMedicalLeaves = totalMedicalLeaves;
-	}
 
 	public void setMedicalLeaveDays(int medicalLeaveDays) {
 		this.CurrentMedicalLeaves = medicalLeaveDays;

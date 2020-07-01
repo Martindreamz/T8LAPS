@@ -34,7 +34,7 @@ public class SchedulerController {
 			((AdminService) aservice).save(e);
 		});
 	}*/
-	
+	/*
 	//Testing purposes only
 	@Scheduled(fixedRate = 10000)
 	public void scheduleIncrementLeaves() {
@@ -54,5 +54,5 @@ public class SchedulerController {
 			System.out.print(e + " ");
 			System.out.println("AL: "+e.getAnnualLeaveDays());
 		});
-	}
+	}*/
 }
