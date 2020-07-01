@@ -7,6 +7,7 @@ import sg.edu.iss.sa50.t8.service.*;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,10 @@ public class ManagerController {
 		return "home";
 	}
 	
-	@GetMapping("/leavesAppDetails/{id}")
-	public String showLeaveAppDetail(Model model, @PathVariable("id") Integer id,HttpSession session) {	
-		model.addAttribute("leave", ((ManagerService) manService).findById(id).get());
-		session.setAttribute("leavesId", id);
+	@GetMapping("/leavesAppDetails/")
+	public String showLeaveAppDetail(Model model,@SessionAttribute("user") Employee emp,HttpSession session) {	
+		model.addAttribute("leave", ((ManagerService) manService).findById(emp.getId()).get());
+		session.setAttribute("leavesId", emp.getId()); //but i think this line actually dont need if you just want to pass id from same object
 		return "manager-leaveAppDetails";
 	}
 	

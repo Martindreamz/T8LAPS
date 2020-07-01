@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -34,9 +36,8 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("/employeelogin")
-	public String LoginSuccessful(@ModelAttribute("employee") Staff emp, Model model,  Employee user,HttpSession session) {
-		emp.getName();
-		sRepo.findAll();
+	public String LoginSuccessful(@ModelAttribute("employee") Staff emp,  Employee user,HttpSession session) {
+		
 		for(Employee e: sRepo.findAll()){
 			if(emp.getName().equals(e.getName())){
 				if (emp.getPassword().equals(e.getPassword())){
@@ -45,7 +46,8 @@ public class EmployeeController {
 				}
 			}
 		}
-		//        model.addAttribute("employee", emp);
+
 		return "employeelogin";
 	}
+	
 }
