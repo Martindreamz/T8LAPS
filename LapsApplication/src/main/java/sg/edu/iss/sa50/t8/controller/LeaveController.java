@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,11 +17,13 @@ import sg.edu.iss.sa50.t8.model.CompensationLeave;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Staff;
-import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.repository.StaffRepository;
+import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.EmailService;
+import sg.edu.iss.sa50.t8.service.IEmployeeService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
 import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
+import sg.edu.iss.sa50.t8.service.StaffService;
 
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
@@ -29,10 +32,26 @@ import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
 public class LeaveController {
 
 	private static final LeaveStatus Applied = null;
+//	@Autowired
+//	@Qualifier("StaffService")
+//	protected IEmployeeService stService;
+//	
+//	@Autowired
+//	public void setIEmployeeService(StaffService stService) {
+//		this.stService = stService;
+//	}
+	
+	@Autowired
+	@Qualifier("adminService")
+	protected IEmployeeService aservice;
+	
+	@Autowired
+	public void setIEeaveService(AdminService aservice) {
+		this.aservice = aservice;
+	}
 
 	@Autowired
 	EmailService ems;
-	
 
 	@Autowired
 	StaffRepository srepo;
@@ -123,6 +142,14 @@ public class LeaveController {
 	@RequestMapping("/compensation/save")
 	public String saveCompensationForm(@ModelAttribute("compLeave") CompensationLeave compLeave, 
 			Model model) {
+		//int totalOtHr =((StaffService) stService).findTotalOTHoursByEmpId(6);
+		int totalOtHr =((AdminService) aservice).findTotalOTHoursByEmpId(6);
+		
+		if(totalOtHr < 4) {
+			model.addAttribute("error","Sorry!You don't have eligilibility to apply this compensation leave.");
+			model.addAttribute("compensationLeave",compLeave);
+			return "leaves-apply-compensation";
+		}
 		leaveService.saveCompensationLeave(compLeave);
 		model.addAttribute("Leaves", leaveService.findAllLeaves());
 		return "leaves-history";
