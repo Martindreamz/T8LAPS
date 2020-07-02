@@ -16,6 +16,9 @@ public class ManagerService implements IEmployeeService {
 	@Autowired
 	EmployeeRepository empRepo;
 
+	@Autowired
+	OvertimeRepository oRepo;
+	
 	public Optional<Leaves> findById(int id) {
 		return lrepo.findById(id);
 	}
@@ -56,6 +59,19 @@ public class ManagerService implements IEmployeeService {
 		return empRepo.findSubordinates(man);
 	}
 	
-	
+	public List<Overtime> findStaffOvertime(Manager man){
+		
+		List<Overtime> overtimelist = new ArrayList<Overtime>();
+		
+		for (Staff staff : empRepo.findSubordinates(man)) {
+//			System.out.println(staff);
+			for(Overtime o : oRepo.findAllOvertimeByStaffId(staff.getId())){
+//				System.out.println(o);
+				overtimelist.add(o);
+			}
+		}	
+//		overtimelist.forEach(System.out::println);;
+		return overtimelist;
+	}
 
 }

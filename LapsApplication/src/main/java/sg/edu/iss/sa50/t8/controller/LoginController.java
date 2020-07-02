@@ -47,7 +47,7 @@ public class LoginController {
 	
 	
 	@RequestMapping("/adminlogin")
-	public String adminlogin(@ModelAttribute("employee") Employee emp,HttpSession session,Model model) {
+	public String adminlogin(@ModelAttribute("admin") Employee emp,HttpSession session,Model model) {
 		for(Admin a :((AdminService) aservice).findallAdmin()){
 			System.out.println(a);
 			if(emp.getName().equals(a.getName())){

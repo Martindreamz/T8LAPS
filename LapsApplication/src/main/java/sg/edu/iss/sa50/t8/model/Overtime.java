@@ -77,5 +77,10 @@ public class Overtime {
 	public void setOverTimeStatus(OvertimeStatus overTimeStatus) {
 		this.overTimeStatus = overTimeStatus;
 	}
+	@Override
+	public String toString() {
+		return "Overtime [id=" + id + ", overtimeDate=" + overtimeDate + ", staff=" + staff + ", overtimeHours="
+				+ overtimeHours + ", overTimeStatus=" + overTimeStatus + "]";
+	}
 	
 }

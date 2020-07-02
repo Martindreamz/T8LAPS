@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.OvertimeStatus;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.ManagerService;
 
@@ -134,4 +136,22 @@ public class ManagerController {
 		return "forward:/manager/list";
 	}
 
+	//Overtime
+	@RequestMapping("/overtimelist")
+	public String approveovertime(@SessionAttribute("user") Employee emp, Model model) {
+		if(emp.getDiscriminatorValue().equals("Manager")) {
+			model.addAttribute("overtimelist",manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).toArray());
+//			manService.findStaffOvertime((Manager) emp).forEach(System.out::println);
+			
+			System.out.println("printing the applied below");
+			manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).forEach(System.out::print);
+//			.stream().filter(x -> x.getOverTimeStatus().equals(OvertimeStatus.Applied))
+			System.out.println("end of above");
+//			System.out.println(manService.findStaffOvertime((Manager) emp).get(1).getOverTimeStatus());
+			return "manager-OTApprovalList";
+		}
+		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
+		return "error";
+	}
+	
 }
