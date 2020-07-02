@@ -1,7 +1,5 @@
 package sg.edu.iss.sa50.t8.service;
-
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +71,31 @@ public class AdminService implements IEmployeeService {
 	public int findTotalOTHoursByEmpId(int empId) {
 		return eRepo.findTotalOTHoursByEmpId(empId);
 	}
+	
 
+	public Employee saveAdminNew(Employee employee) {
+		return eRepo.save(employee);
+	}
+	
+	public Employee saveStaffNew(Employee employee) {
+		return eRepo.save(employee);
+	}
+	
+	
 
+	
+	public Employee saveAdmin(Employee employee) {
+		return eRepo.save(employee);
+	}
+	
+	public Employee saveStaff(Employee employee) {
+		return eRepo.save(employee);
+	}
+	
+	public void deleteStaff(Employee employee) {
+		eRepo.delete(employee);
+		
+	}
+	
 
 }

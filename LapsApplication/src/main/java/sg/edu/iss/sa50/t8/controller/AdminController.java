@@ -1,27 +1,19 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import sg.edu.iss.sa50.t8.model.*;
-import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.model.Admin;
+import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 
@@ -102,101 +94,88 @@ public class AdminController {
 
 
 	@RequestMapping("/admin-create")
-	public String create(@ModelAttribute("admin") Admin admin, Model model) {
-		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-		toSave.setName(admin.getName());
-		toSave.setPassword(admin.getPassword());
-		toSave.setEmail(admin.getEmail());
-		if(((AdminService) aservice).save(toSave)) {
-			return "admin-create";
-		}
-		else {
-			model.addAttribute("admin", toSave);
-			return "admin-create";
-		}
+	public String create(Model model) {
+		model.addAttribute("employee", new Staff()); 
+		return "admin-create";
 	}
-
-
-
+	
 	@RequestMapping("/admin-createadmin")
-	public String createAdmin(@ModelAttribute("admin") Admin admin, Model model) {
-		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-		toSave.setName(admin.getName());
-		toSave.setPassword(admin.getPassword());
-		toSave.setEmail(admin.getEmail());
-		if(((AdminService) aservice).save(toSave)) {
-			return "admin-createadmin";
-		}
-		else {
-			model.addAttribute("admin", toSave);
-			return "admin-createadmin";
-		}
+	public String createadmin(Model model) {
+		model.addAttribute("employee", new Admin()); 
+		return "admin-createadmin";
 	}
+
+
+
 
 
 
 	@RequestMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
-		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-		toSave.setName(admin.getName());
-		toSave.setPassword(admin.getPassword());
-		toSave.setEmail(admin.getEmail());
+	public String saveAdmin(@ModelAttribute("employee") Employee employee, Model model) {
+		Admin toSave = ((AdminService) aservice).findAdminById(employee.getId());
+		toSave.setName(employee.getName());
+		toSave.setPassword(employee.getPassword());
+		toSave.setEmail(employee.getEmail());
 		if(((AdminService) aservice).save(toSave)) {
+			model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 			return "dashboard";
 		}
 		else {
-			model.addAttribute("admin", toSave);
+			model.addAttribute("employee", toSave);
 			return "admin-edit";
 		}
 		
 	}
 	
 	@RequestMapping("/save-staff")
-	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
-		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
-		toSave.setName(staff.getName());
-		toSave.setPassword(staff.getPassword());
-		toSave.setEmail(staff.getEmail());
-		toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+	public String savestaff(@ModelAttribute("employee") Employee employee, Model model) {
+		Admin toSave = ((AdminService) aservice).findAdminById(employee.getId());
+		toSave.setName(employee.getName());
+		toSave.setPassword(employee.getPassword());
+		toSave.setEmail(employee.getEmail());
 		if(((AdminService) aservice).save(toSave)) {
+			model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 			return "dashboard";
 		}
 		else {
-			model.addAttribute("staff", toSave);
-			return "staff-edit";
+			model.addAttribute("employee", toSave);
+			return "admin-edit";
 		}
+		
 	}
 	
 	@RequestMapping("/save-adminnew")
-	public String saveAdminnew(@ModelAttribute("admin") Admin admin, Model model) {
-		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-		toSave.setName(admin.getName());
-		toSave.setPassword(admin.getPassword());
-		toSave.setEmail(admin.getEmail());
+	public String saveAdminnew(@ModelAttribute("employee") Employee employee, Model model) {
+		Admin toSave = ((AdminService) aservice).findAdminById(employee.getId());
+		toSave.setName(employee.getName());
+		toSave.setPassword(employee.getPassword());
+		toSave.setEmail(employee.getEmail());
 		if(((AdminService) aservice).save(toSave)) {
+			model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 			return "dashboard";
 		}
 		else {
-			model.addAttribute("admin", toSave);
+			model.addAttribute("employee", toSave);
 			return "admin-edit";
 		}
 		
 	}
 	
 	@RequestMapping("/save-staffnew")
-	public String saveStaffnew(@ModelAttribute("staff") Staff staff, Model model) {
-		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
-		toSave.setName(staff.getName());
-		toSave.setPassword(staff.getPassword());
-		toSave.setEmail(staff.getEmail());
-		toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+	public String savestaffnew(@ModelAttribute("employee") Employee employee, Model model) {
+		Admin toSave = ((AdminService) aservice).findAdminById(employee.getId());
+		toSave.setName(employee.getName());
+		toSave.setPassword(employee.getPassword());
+		toSave.setEmail(employee.getEmail());
 		if(((AdminService) aservice).save(toSave)) {
+			model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 			return "dashboard";
 		}
 		else {
-			model.addAttribute("staff", toSave);
-			return "staff-edit";
+			model.addAttribute("employee", toSave);
+			return "admin-edit";
 		}
+		
 	}
 		
 //		@RequestMapping("/create")
@@ -219,6 +198,7 @@ public class AdminController {
 			public String deleteStaff(@ModelAttribute("staff") Staff staff, Model model) {
 				Staff toDelete = ((AdminService) aservice).findStaffById(staff.getId());
 				if(((AdminService) aservice).delete(toDelete)) {
+					model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 					return "dashboard";
 				}
 				else {
