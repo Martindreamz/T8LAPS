@@ -6,63 +6,64 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../css/style.css" th:href="@{/css/style.css}" />
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link
-	href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"
-	rel="stylesheet" />
-<link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.css" />
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 
 </head>
 <body>
-	<header th:insert="fragments/general.html::header"></header>
-	<div th:insert="fragments/general.html::navigationbar"></div>
-	
-	<h1 th:utext=#{leaves-apply.heading}></h1>
+	<h1>Medical Leave Application Form</h1>
 
-	<form class="form-horizontal" action="#" th:action="@{/leaves/medical/save}"
-		method="post" th:object="${medicalLeave}">
-		<input type="hidden" th:field="*{id}"> 
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="startdate">Start
-				Date</label>
-			<div class="col-sm-6">
-				<input type="date" class="form-control" id="sdate" th:field="*{startDate}">
-			</div>
+	<h3 th:text="${session.user.name}"></h3>
+
+	<div class="container">
+		<div class="center">
+			<form class="form-horizontal" action="#"
+				th:action="@{/leaves/medical/save}" method="post"
+				th:object="${medicalLeave}">
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="startdate">Available
+						Leaves</label> <input id="avaAnn" th:value="${eMedAnnLeave}"
+						disabled="disabled"></input>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="startdate">Start
+						Date</label>
+					<div class="col-sm-6">
+						<input type="date" class="form-control" id="sdate"
+							th:field="*{startDate}">
+						<p th:if="${#fields.hasErrors('startDate')}"
+							th:errors="*{startDate}" style="color: red"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="enddate">End
+						Date</label>
+					<div class="col-sm-6">
+						<input type="date" class="form-control" id="edate"
+							th:field="*{endDate}">
+						<p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"
+							style="color: red"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="comment">Leave
+						Reason</label>
+					<div class="col-sm-6">
+						<textarea class="form-control" rows="5" id="comment"
+							th:field="*{leaveReason}"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6" style="float: right;">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="reset" class="btn btn-primary">Reset</button>
+					</div>
+				</div>
+
+			</form>
 		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="enddate">End Date</label>
-			<div class="col-sm-6">
-				<input type="date" class="form-control" id="edate" th:field="*{endDate}">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="comment">Leave
-				Reason</label>
-			<div class="col-sm-6">
-				<textarea class="form-control" rows="5" id="comment" th:field="*{leaveReason}"></textarea>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-3" style="float: right;">
-				<button type="submit" class="btn btn-primary">Submit</button>
-				
-			</div>
-			<div class="col-sm-3" style="float: right;" th:if="not ${#strings.isEmpty(formId)}">
-					<!-- <a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/update/}+${medicalLeave.id}"
-					th:text="#{leaves-history.update }">Update</a> -->
-					<a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${medicalLeave.id}"
-					th:text="#{leaves-history.delete }" class="btn btn-primary">Delete</a>
-				
-				<a th:href="@{/leaves/cancel/}+${medicalLeave.id}"
-					th:text="#{leaves-history.cancel }" class="btn btn-primary">Cancel</a>
-			</div>
-		</div>
-	</form>
+	</div>
 </body>
 </html>

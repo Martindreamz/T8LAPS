@@ -20,6 +20,8 @@ public interface ILeaveService {
 	public Leaves findLeaveById(int leaveId);
 	public String findLeaveTypeById(int leaveId);
 	public ArrayList<Leaves> findAllLeaves(int id);
+	public int findCurAnnLeave(int id);
+	public int findMedAnnLeave(int id);
 	
 
 }

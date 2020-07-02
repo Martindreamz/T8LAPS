@@ -3,10 +3,13 @@ package sg.edu.iss.sa50.t8.controller;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,14 +98,19 @@ public class LeaveController {
 	}
 
 	@RequestMapping("/annualAdd")
-	public String annualaddForm(Model model) {
+	public String annualaddForm(@SessionAttribute("user") Employee emp, 
+			Model model) {
 		model.addAttribute("annualLeave", new AnnualLeave());
+		int curAnn=leaveService.findCurAnnLeave(emp.getId());
+		model.addAttribute("eCurAnnLeave", curAnn);
 		return "leaves-apply-annual";
 	}
 
 	@RequestMapping("/medicalAdd")
-	public String medicaladdForm(Model model) {
+	public String medicaladdForm(@SessionAttribute("user") Employee emp, Model model) {
 		model.addAttribute("medicalLeave", new MedicalLeave());
+		int medAnn=leaveService.findMedAnnLeave(emp.getId());
+		model.addAttribute("eMedAnnLeave", medAnn);
 		return "leaves-apply-medical";
 	}
 
@@ -114,26 +122,24 @@ public class LeaveController {
 
 	
 	@RequestMapping("/annual/save")
-	public String saveAnnualForm(@ModelAttribute("annualLeave") AnnualLeave annualLeave, 
-			Model model,@SessionAttribute("user") Employee emp) throws ParseException {
-		
+	public String saveAnnualForm(@ModelAttribute("annualLeave") @Valid AnnualLeave annualLeave, 
+			BindingResult bindingResult, Model model,@SessionAttribute("user") Employee emp) throws ParseException {
+		int curAnn=leaveService.findCurAnnLeave(emp.getId());
+		model.addAttribute("eCurAnnLeave", curAnn);
+		if (bindingResult.hasErrors()) {
+			annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get());
+			return "leaves-apply-annual";
+		}
 		int count = 0;
-		int adays = 14;
-        long dur;
+        long duration;
         Date d1 = annualLeave.getStartDate();
 		Date d2 = annualLeave.getEndDate();
 		count = saturdaysundaycount(d1,d2);
-		dur = duration(d1, d2); 
-		
-		/*
-		 * if(count > 0) { return "leaves-applicationdetails"; } else {
-		 * System.out.println("Count of Sats & Sundays = "+count);
-		 * leaveService.saveAnnualLeave(annualLeave);
-		 * model.addAttribute("Leaves",leaveService.findAllLeaves()); return
-		 * "leaves-history"; }
-		 */
-		if(count > 0 &&  dur <= adays ) {
-        	long minus = dur - count;
+		duration = duration(d1, d2); 
+		System.out.println("duration" + duration);
+
+		if(count > 0 &&  duration <= 14 ) {
+        	long minus = duration - count;
         	System.out.println("less than 14 = " + minus);
         	annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
         	annualLeave.setStatus(LeaveStatus.Applied);
@@ -143,7 +149,7 @@ public class LeaveController {
    		    return "leaves-history";
         }
         else {
-        	System.out.println("greater than 14 = " + dur);
+        	System.out.println("greater than 14 = " + duration);
         	annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
         	annualLeave.setStatus(LeaveStatus.Applied);
 //        	ems.notifyManager(annualLeave);
@@ -154,14 +160,29 @@ public class LeaveController {
 	}
 	
 	@RequestMapping("/medical/save")
-	public String saveMedicalForm(@ModelAttribute("medicalLeave") MedicalLeave medicalLeave, 
-			Model model,@SessionAttribute("user") Employee emp) {
-		medicalLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
-		medicalLeave.setStatus(LeaveStatus.Applied);
-//    	ems.notifyManager(medicalLeave);
-		leaveService.saveMedicalLeave(medicalLeave);
-		model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
-		return "leaves-history";
+	public String saveMedicalForm(@ModelAttribute("medicalLeave") @Valid MedicalLeave medicalLeave, 
+			BindingResult bindingResult, Model model,@SessionAttribute("user") Employee emp) {
+		int medAnn=leaveService.findMedAnnLeave(emp.getId());
+		model.addAttribute("eMedAnnLeave", medAnn);
+		if (bindingResult.hasErrors()) {
+			return "leaves-apply-medical";
+		}
+		Date d1 = medicalLeave.getStartDate();
+		Date d2 = medicalLeave.getEndDate();
+		long duration = duration(d1, d2);
+		if(duration <= 60) {
+			medicalLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); //use session later
+			medicalLeave.setStatus(LeaveStatus.Applied);
+//	    	ems.notifyManager(medicalLeave);
+			leaveService.saveMedicalLeave(medicalLeave);
+			model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
+			return "leaves-history";
+			
+		}
+		else {
+			return "leaves-applicationdetails";
+		}
+		
 	}
 	
 	@RequestMapping("/compensation/save")
