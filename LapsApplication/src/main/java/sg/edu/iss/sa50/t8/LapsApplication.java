@@ -77,6 +77,9 @@ public class LapsApplication {
 
 			Date d3 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
 			Date d4 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2019");
+			
+			Date d5 = new SimpleDateFormat("MM/dd/yyyy").parse("09/09/2020");
+			Date d6 = new SimpleDateFormat("MM/dd/yyyy").parse("09/12/2020");
 
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
 			al1.setStartDate(d1);
@@ -89,6 +92,13 @@ public class LapsApplication {
 			ml2.setStaff(s3);
 			ml2.setLeaveReason("Fever");
 			ml2.setManagerComment("Not Set");
+			
+			MedicalLeave ml3 = new MedicalLeave(d6);
+			ml3.setStartDate(d5);
+			ml3.setStaff(s1);
+			ml3.setLeaveReason("High Fever");
+			ml3.setManagerComment("Not Set");
+			ml3.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
 			ml1.setStartDate(d1);
@@ -122,6 +132,7 @@ public class LapsApplication {
 			lRepo.save(al1);
 			lRepo.save(ml1);
 			lRepo.save(ml2);
+			lRepo.save(ml3);
 			lRepo.save(c);
 			
 			oRepo.save(ot1);
@@ -132,8 +143,6 @@ public class LapsApplication {
 			System.out.println(al1.getDiscriminatorValue());
 			System.out.println(adm1.getDiscriminatorValue());
 
-			
-			
 		}; 
 	}
 

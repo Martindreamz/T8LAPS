@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Leaves;
+import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Staff;
 @Primary
 public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
@@ -35,5 +37,9 @@ public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
 	@Query(value="UPDATE Leaves SET status=?2 WHERE id=?1",nativeQuery = true)
 	public void updateLeaveStatus(int leaveId,LeaveStatus status);
 	
+	@Query(value="SELECT l FROM AnnualLeave l WHERE id=:leaveId")
+	public AnnualLeave findAnnualLeaveById(@Param("leaveId") int leaveId);
 	
+	@Query(value="SELECT l FROM MedicalLeave l WHERE id=:leaveId")
+	public MedicalLeave findMedicalLeaveById(@Param("leaveId") int leaveId);
 }

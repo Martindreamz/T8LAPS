@@ -22,7 +22,7 @@
 					<th scope="col">Leave Reason</th>
 					<th scope="col">Leave Type</th>
 					<th scope="col">Start Date</th>
-					<th scope="col">Duration</th>
+					<th scope="col">Duration/End Date</th>
 					<th scope="col">Manager Comment</th>
 					<th scope="col">Leave Status</th>
 					<th scope="col"></th>
@@ -49,7 +49,7 @@
 						</a>
 					</td>
 					<td th:if="${#strings.equals(l.status,'Approved')}">
-						<a th:href="@{/leaves/cancel/}+${l.id}"
+						<a th:if="${#dates.createToday().before(l.startDate)}" th:href="@{/leaves/cancel/}+${l.id}"
 						th:text="#{leaves-history.cancel }">Cancel</a>
 					</td>
 					<td th:if="${#strings.equals(l.status,'Applied')}">
