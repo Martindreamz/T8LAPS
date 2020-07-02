@@ -15,11 +15,11 @@
 	<div th:insert="fragments/general.html::navigationbar"></div>
 
 
-<form action="#" th:object="${leaves}"
-	th:action="@{/manager/leavesAppDetails/respond}" method="post">
-<dl class="row">
-  <dt class="col-sm-3">Staff Name</dt>
-  <dd class="col-sm-9" th:text="${leaves.staff.name}"  >Bianca</dd>
+	<form action="#" th:object="${leaves}"
+		th:action="@{/manager/leavesAppDetails/respond}" method="post">
+		<dl class="row">
+			<dt class="col-sm-3">Staff Name</dt>
+			<dd class="col-sm-9" th:text="${leaves.staff.name}">Bianca</dd>
 
 
 			<dt class="col-sm-3">Leave Type</dt>
@@ -31,36 +31,48 @@
 			<dd class="col-sm-9" th:text="${leaves.startDate}">01-07-2020</dd>
 			<dt class="col-sm-3">End Date</dt>
 			<dd class="col-sm-9" th:text="${leaves.endDate}">05-07-2020</dd>
+			<dt class="col-sm-3">Leave Status</dt>
+			<dd class="col-sm-9" th:text="${leaves.status}">Applied/updated/cancelled/...</dd>
 
 
-  <dt class="col-sm-3 text-truncate">Leave Reason</dt>
-  <dd class="col-sm-9" th:text="${leaves.leaveReason}">There is so much in the world that I'd like to soak up with my eyes.</dd>
-<!-- <td th:if="${#strings.equals(l.status,'Applied')}">
-						<a th:href="@{/leaves/update/}+${l.id}"
-						th:text="#{leaves-history.update }">Update</a>
-					</td> -->
- <dt class="col-sm-3">Your Comment</dt>
- <dd class="col-sm-9" >
- 	<!-- th:switch="${leaves.status}" 
- 	<input th:case="'Applied'" type="text" th:field="*{managerComment}"></input>
- 	<input th:case="'Updated'" type="text" th:field="*{managerComment}"></input>
- 	<p th:case="*" th:text="*{managerComment}">This Leave doesn't need to approve/reject.</p>
- 	-->
- 	<input type="text" th:field="*{managerComment}">
- </dd>
+			<dt class="col-sm-3 text-truncate">Leave Reason</dt>
+			<dd class="col-sm-9" th:text="${leaves.leaveReason}">There is so
+				much in the world that I'd like to soak up with my eyes.</dd>
+			<dt class="col-sm-3">Your Comment</dt>
+			<dd class="col-sm-9">
+				<div th:switch="${leaves.status.name()}">
+					<div th:case="'Applied'">
+						<input type="text" th:field="*{managerComment}"></input>
+					</div>
+					<div th:case="'Updated'">
+						<input type="text" th:field="*{managerComment}"></input>
+					</div>
+					<div th:case="*">
+						<p th:text="*{managerComment}">This Leave doesn't need to
+							approve/reject.</p>
+					</div>
+				</div>
+				<!--  <input type="text" th:field="*{managerComment}">-->
+			</dd>
 
 
 
-</dl>
-<span th:if="${#strings.equals(leaves.status,'Applied')}">
-<button type="submit" name="action" value="approve">Approve</button>
-<button type="submit" name="action" value="reject">Reject</button>
-</span>
-<span th:if="${#strings.equals(leaves.status,'Updated')}">
-<button type="submit" name="action" value="approve">Approve</button>
-<button type="submit" name="action" value="reject">Reject</button>
-</span>
-</form>
+		</dl>
+		<div th:switch="${leaves.status.name()}">
+			<div th:case="'Applied'">
+			<button type="submit" name="action" value="approve">Approve</button>
+			<button type="submit" name="action" value="reject">Reject</button>
+			</div>
+			<div th:case="'Updated'">
+			<button type="submit" name="action" value="approve">Approve</button>
+			<button type="submit" name="action" value="reject">Reject</button>
+			</div>
+			<div th:case="*">
+			<p> There is nothing for you to approve or reject.</p>
+			</div>		
+		</div>
+		
+	</form>
 
 
 </body>
