@@ -17,7 +17,6 @@ import sg.edu.iss.sa50.t8.repository.StaffRepository;
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
 @Controller
-@SessionAttributes("user")
 @RequestMapping("/employee")
 public class EmployeeController {
 	//move 2 login methods into LoginControllers
@@ -49,8 +48,8 @@ public class EmployeeController {
 //						return "error";
 //					}
 //					else {
-						session.setAttribute("user",e);					
-						return "leaves";
+					session.setAttribute("user",e);					
+					return "leaves";
 					}
 //				}
 //				else {
