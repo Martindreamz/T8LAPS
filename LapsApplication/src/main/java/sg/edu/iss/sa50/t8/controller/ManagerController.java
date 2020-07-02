@@ -1,20 +1,20 @@
 package sg.edu.iss.sa50.t8.controller;
 
-import org.springframework.web.bind.annotation.*;
-
-import sg.edu.iss.sa50.t8.model.*;
-import sg.edu.iss.sa50.t8.service.*;
-
-import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Leaves;
+import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.service.ManagerService;
 
 @Controller
 @RequestMapping("/manager")
@@ -77,14 +77,37 @@ public class ManagerController {
 			model.addAttribute("Leaves", ((ManagerService) manService).findAllPendingLeaves(man));
 			return "manager-leavesApprovalList";
 		}
-		return "home";
+		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
+		return "error";
 	}
 
 	@RequestMapping("/leavesAppDetails/{id}")
-	public String showLeaveAppDetail(Model model, @PathVariable("id") Integer id, HttpSession session) {
-		model.addAttribute("leaves", ((ManagerService) manService).findById(id).get());
-		session.setAttribute("leavesId", id);
-		return "manager-leaveAppDetails";
+	public String showLeaveAppDetail(Model model, @PathVariable("id") Integer id, 
+			HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if (emp == null) {
+			model.addAttribute("errorMsg","Sorry you haven't log in."
+					+ "Pls Log in as a manager.");
+			return "error";}
+		if (emp.getDiscriminatorValue().equals("Manager")) {
+			Manager man = (Manager) emp;
+			/*ArrayList<Staff> stfL = ((ManagerService) manService).findSub(man);*/
+			Leaves l = ((ManagerService) manService).findById(id).get();
+			if (l.getStaff().getManager().getId()== man.getId()) {
+					session.setAttribute("leavesId", id);
+					model.addAttribute("leaves", l);
+					return "manager-leaveAppDetails";
+				}
+			else {
+				model.addAttribute("errorMsg","Sorry you don't have authority. "
+						+ "This staff is not your subordinate.");
+				return "error";
+			}
+		} else {
+			model.addAttribute("errorMsg","Sorry you don't have authority. "
+					+ "Pls Log in as a manager.");
+			return "error";
+		}
 	}
 
 	@RequestMapping(value = "leavesAppDetails/respond")

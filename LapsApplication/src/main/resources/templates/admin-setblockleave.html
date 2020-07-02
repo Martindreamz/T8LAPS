@@ -28,8 +28,8 @@
 			</thead>
 			<tbody th:object="${bLList}">
 				<tr th:each="blockedleave : ${bLList}">
-					<th scope="row" th:text="${blockedLeave.name}">name</th>
-					<td th:text="${blockedLeave}">date</td>
+					<th scope="row" th:text="${blockedleave.name}">name</th>
+					<td th:text="${blockedleave.date}">date</td>
 				</tr>
 			</tbody>
 		</table>

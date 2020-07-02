@@ -1,21 +1,27 @@
 package sg.edu.iss.sa50.t8;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.Scheduled;
 
-import sg.edu.iss.sa50.t8.model.*;
-import sg.edu.iss.sa50.t8.repository.*;
+import sg.edu.iss.sa50.t8.model.Admin;
+import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.LeaveStatus;
+import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.Overtime;
+import sg.edu.iss.sa50.t8.model.OvertimeStatus;
+import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.repository.LeaveRepository;
+import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
 import sg.edu.iss.sa50.t8.service.EmailService;
 
 

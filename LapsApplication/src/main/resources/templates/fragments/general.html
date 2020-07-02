@@ -13,9 +13,11 @@
 
 				<td th:if="${session.user != null}"><h1
 						style="text-align: center; color: white">
-						<a href="/employee/leaves">Leave Application System</a>
+						
+						<a th:if="${session.user.getDiscriminatorValue().equals('Admin')}" href ="/employee/admin">Leave Application System</a>
+						<a th:unless="${session.user.getDiscriminatorValue().equals('Admin')}" href="/employee/leaves">Leave Application System</a>
 					</h1></td>
-				<td th:if="${session.user == null}"><h1
+				<td th:if="${session.user == null }"><h1
 						style="text-align: center; color: white">
 						<a href="/employee/logout">Leave Application System</a>
 					</h1></td>
@@ -45,7 +47,7 @@
 
 					<td th:if="${session.user == null}"><a href="/employee/login">
 							<button>Employee Log In</button>
-					</a> <a href="/employee/adminlogin">
+					</a> <a href="/employee/login2">
 							<button>Admin Log In</button>
 					</a></td>
 				</tr>
@@ -66,7 +68,7 @@
 							<button>Manage&View Admin</button>
 					</a> <a href="/employee/admin-createadmin">
 							<button>Create Admin</button>
-					</a> <a href="/employee/admin-blockleave">
+					</a> <a href="/api/admin-setblockleave">
 							<button>Set block leave</button>
 					</a> <a href="/employee/home">
 							<button>Sign out</button>

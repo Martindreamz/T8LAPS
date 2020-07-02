@@ -3,7 +3,6 @@ package sg.edu.iss.sa50.t8.service;
 import org.springframework.mail.MailException;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
-import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 
 public interface EmailService {
