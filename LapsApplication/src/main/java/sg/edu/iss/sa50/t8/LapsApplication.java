@@ -53,7 +53,7 @@ public class LapsApplication {
 			Manager man1 = new Manager("Joe","martin.dreamz@hotmail.com",null,16,20);
 			Manager man2 = new Manager("Joe2","martin.dreamz@hotmail.com",man1,16,15);
 			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
-			Staff s1 = new Staff("Martin","martin.dreamz@hotmail.com",man2,10,10);
+			Staff s1 = new Staff("Martin1","martin.dreamz@hotmail.com",man2,10,10);
 			s1.setTotalOTHours(4);
 			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
 			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
@@ -75,11 +75,20 @@ public class LapsApplication {
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
 
+			Date d3 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
+			Date d4 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2019");
+
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
 			al1.setStartDate(d1);
 			al1.setStaff(s1);
 			al1.setLeaveReason("Moving House");
 			al1.setStatus(LeaveStatus.Approved);
+			
+			MedicalLeave ml2 = new MedicalLeave(d4);
+			ml2.setStartDate(d3);
+			ml2.setStaff(s3);
+			ml2.setLeaveReason("Fever");
+			ml2.setManagerComment("Not Set");
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
 			ml1.setStartDate(d1);
@@ -92,6 +101,11 @@ public class LapsApplication {
 			Overtime ot2 = new Overtime(d2,s1,4);
 			ot1.setOverTimeStatus(OvertimeStatus.Approved);
 			
+			CompensationLeave c =new CompensationLeave("Half Day PM");
+			c.setStartDate(d2);
+			c.setStaff(s1);
+			c.setLeaveReason("Compensation 1");
+			c.setStatus(LeaveStatus.Approved);
 			
 			empRepo.save(adm1);
 			empRepo.save(adm2);
@@ -107,6 +121,8 @@ public class LapsApplication {
 			
 			lRepo.save(al1);
 			lRepo.save(ml1);
+			lRepo.save(ml2);
+			lRepo.save(c);
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);

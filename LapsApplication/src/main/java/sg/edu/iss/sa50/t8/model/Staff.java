@@ -66,5 +66,37 @@ public class Staff extends Employee{
 		this.CurrentMedicalLeaves = medicalLeaveDays;
 	}
 
+	public int getCurrentAnnualLeaves() {
+		return CurrentAnnualLeaves;
+	}
 
+	public void setCurrentAnnualLeaves(int currentAnnualLeaves) {
+		CurrentAnnualLeaves = currentAnnualLeaves;
+	}
+
+	public int getCurrentMedicalLeaves() {
+		return CurrentMedicalLeaves;
+	}
+
+	public void setCurrentMedicalLeaves(int currentMedicalLeaves) {
+		CurrentMedicalLeaves = currentMedicalLeaves;
+	}
+
+	public int getTotalAnnualLeaves() {
+		return TotalAnnualLeaves;
+	}
+
+	public void setTotalAnnualLeaves(int totalAnnualLeaves) {
+		TotalAnnualLeaves = totalAnnualLeaves;
+	}
+
+	public int getTotalMedicalLeaves() {
+		return TotalMedicalLeaves;
+	}
+
+	public void setTotalMedicalLeaves(int totalMedicalLeaves) {
+		TotalMedicalLeaves = totalMedicalLeaves;
+	}
+
+	
 }

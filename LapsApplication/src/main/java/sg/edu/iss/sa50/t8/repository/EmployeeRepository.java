@@ -1,3 +1,4 @@
+
 package sg.edu.iss.sa50.t8.repository;
 
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Query(value="UPDATE Employee SET totalOTHours=?2 WHERE id=?1",nativeQuery = true)
 	public void updateTotalOTHoursByEmpId(int empId,int hr);
 	
-	@Query(value="SELECT totalOTHours FROM Employee WHERE id=?1",nativeQuery = true)
+	@Query(value="SELECT * FROM Employee where id =?1",nativeQuery = true)
+	public Employee findEmployeeById(int EmpId);
+	
+	@Query(value="SELECT totalothours FROM Employee WHERE id=?1",nativeQuery = true)
 	public int findTotalOTHoursByEmpId(int empId);
 	
 	@Query("SELECT s FROM Staff s where s.manager = :manager") 

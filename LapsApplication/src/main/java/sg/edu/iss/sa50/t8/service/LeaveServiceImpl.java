@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.LeaveRepository;
+import sg.edu.iss.sa50.t8.repository.StaffRepository;
 
 @Service
 public class LeaveServiceImpl implements ILeaveService{
@@ -30,11 +33,12 @@ public class LeaveServiceImpl implements ILeaveService{
 
 	@Override
 	public boolean saveMedicalLeave(MedicalLeave mLeave) {
-		if (leaveRepo.save(mLeave) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		/*
+		 * int id =mLeave.getId(); if (id>0) { Leaves l = leaveRepo.findLeaveById(id);
+		 * l.setId(id); leaveRepo.save(l); } else { return leaveRepo.save(mLeave) !=
+		 * null?true:false; } return true;
+		 */
+		return leaveRepo.save(mLeave) != null?true:false;
 	}
 
 	@Override
@@ -47,8 +51,8 @@ public class LeaveServiceImpl implements ILeaveService{
 	}
 
 	@Override
-	public ArrayList<Leaves> findAllLeaves() {
-		return (ArrayList<Leaves>)leaveRepo.findAll();
+	public ArrayList<Leaves> findAllLeaves(int id) {
+		return (ArrayList<Leaves>)leaveRepo.findAll(id);
 	}
 
 	@Override
@@ -66,6 +70,24 @@ public class LeaveServiceImpl implements ILeaveService{
 	@Override
 	public String findLeaveTypeById(int leaveId) {
 		return leaveRepo.findLeaveTypeById(leaveId);
+	}
+	
+	@Autowired
+	StaffRepository staffRepo;
+	
+	
+	@Override
+	public int findCurAnnLeave(int id) {
+		Staff s = (Staff) staffRepo.findEmployeeById(id);
+		int c = s.getCurrentAnnualLeaves();
+		return c;
+	}
+
+	@Override
+	public int findMedAnnLeave(int id) {
+		Staff s = (Staff) staffRepo.findEmployeeById(id);
+		int c = s.getCurrentMedicalLeaves();
+		return c;
 	}
 
 }

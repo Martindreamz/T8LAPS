@@ -14,8 +14,8 @@ import sg.edu.iss.sa50.t8.model.Staff;
 @Primary
 public interface LeaveRepository extends JpaRepository<Leaves, Integer>{
 
-	@Query(value="SELECT * FROM Leaves",nativeQuery = true)
-	List<Leaves> findAll();
+	@Query(value="SELECT * FROM Leaves WHERE staff_id=?1 and YEAR(start_date) = YEAR(CURDate())",nativeQuery = true)
+	List<Leaves> findAll(int staff_id);
 	
 	@Query(value="SELECT * FROM Leaves WHERE id=:leaveId",nativeQuery = true)
 	Leaves findLeaveById(@Param("leaveId") int leaveId);
