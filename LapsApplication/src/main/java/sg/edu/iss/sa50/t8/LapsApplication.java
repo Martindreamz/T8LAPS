@@ -107,6 +107,24 @@ public class LapsApplication {
 			al2.setLeaveReason("visit korea");
 			al2.setStatus(LeaveStatus.Approved);
 			
+			AnnualLeave al3 = new AnnualLeave(d2, "oversea travel");
+			al3.setStartDate(d1);
+			al3.setStaff(s5);
+			al3.setLeaveReason("Moving House");
+			al3.setStatus(LeaveStatus.Approved);
+			
+			AnnualLeave al4 = new AnnualLeave(d2, "oversea travel");
+			al4.setStartDate(d1);
+			al4.setStaff(man2);
+			al4.setLeaveReason("Moving House");
+			al4.setStatus(LeaveStatus.Approved);
+			
+			AnnualLeave al5 = new AnnualLeave(d6, "oversea travel");
+			al5.setStartDate(d5);
+			al5.setStaff(s5);
+			al5.setLeaveReason("Moving House");
+			al5.setStatus(LeaveStatus.Approved);
+			
 			MedicalLeave ml2 = new MedicalLeave(d4);
 			ml2.setStartDate(d3);
 			ml2.setStaff(s3);
@@ -166,6 +184,10 @@ public class LapsApplication {
 			empRepo.save(s5);
 			
 			lRepo.save(al1);
+			lRepo.save(al2);
+			lRepo.save(al3);
+			lRepo.save(al4);
+			lRepo.save(al5);
 			lRepo.save(ml1);
 			lRepo.save(ml2);
 			lRepo.save(ml3);
