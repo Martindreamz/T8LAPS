@@ -80,7 +80,7 @@ public class ManagerController {
 		return "home";
 	}
 
-	@GetMapping("/leavesAppDetails/{id}")
+	@RequestMapping("/leavesAppDetails/{id}")
 	public String showLeaveAppDetail(Model model, @PathVariable("id") Integer id, HttpSession session) {
 		model.addAttribute("leaves", ((ManagerService) manService).findById(id).get());
 		session.setAttribute("leavesId", id);

@@ -54,7 +54,7 @@ public class EmployeeController {
 					}
 //				}
 //				else {
-					model.addAttribute("errorMsg","Password is not correct. Pls try again.");
+					model.addAttribute("errorMsg","Name or Password is not correct. Pls try again. OR U ARE ADMIN :)");
 					return "error";
 				}
 

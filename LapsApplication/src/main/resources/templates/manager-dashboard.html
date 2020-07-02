@@ -29,10 +29,10 @@
   <tbody th:object="${suboridateList}">
     <tr th:each="employee : ${suboridateList}">
       <th scope="row" th:text="${employee.id}">Id</th>
-      <td th:href="@{/manager/staffLeaveHistoryList/}+${employee.id}" th:text="${employee.name}">Name</td>
+      <td><a th:href="@{/manager/staffLeaveHistoryList/}+${employee.id}"  
+      			th:text="${employee.name}">Name</a></td>
       <td th:text="${employee.email}">Email</td>
       <td>
-      	<!-- <a class="btn btn-primary" th:href="@{/employee/admin-edit/}+${employee.id}" role="button">a_button</a> -->
       </td>
     </tr>
   </tbody>

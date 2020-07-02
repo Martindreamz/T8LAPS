@@ -11,7 +11,7 @@
 	  <table class="table">
 	  	<thead>
 		    <tr>
-		      <th scope="col">#</th>
+		      <th scope="col">id</th>
 		      <th scope="col">Leave Reason</th>
 		      <th scope="col">Leave Type</th>
 		      <th scope="col">Start Date</th>
@@ -23,14 +23,15 @@
 		 </thead>
 		 <tbody>
 		    <tr th:each="al:${Leaves}" >
-		    <td th:text="${al.id}">id</td>
+		    <td><a th:text="${al.id}" 
+		    	th:href="@{/manager/leavesAppDetails/}+${al.id}">id</a></td>
 		      <td th:text="${al.leaveReason}">leaveReason</td>
 		      <td th:text="${al.DiscriminatorValue}">LeaveType</td>
 		      <td th:text="${al.startDate}">Start Date</td>
 			  <td ></td>
 			  <td th:text="${al.managerComment}">Manager Comment</td>
 		      <td th:text="${al.status}">Otto</td>
-		      <td><a th:href="@{/leaves/apply}" th:text="#{leaves-history.detail.link }"></a></td>
+		      <td><a th:text="#{leaves-history.detail.link }"></a></td>
 		    </tr>
 		  </tbody>
 	  </table>
