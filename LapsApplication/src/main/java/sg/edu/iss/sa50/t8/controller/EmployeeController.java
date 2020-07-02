@@ -45,21 +45,22 @@ public class EmployeeController {
 					System.out.println("staff password correct");
 //					if (e.getDiscriminatorValue().equals("Admin")) {
 //						System.out.println("too bad is admin");
-//						model.addAttribute("errorMsg","You are admin. Pls go to admin login entrance");
+//						model.addAttribute("errorMsg","You are admin. Please login as an admin");
 //						return "error";
 //					}
 //					else {
 						session.setAttribute("user",e);					
 						return "leaves";
 					}
-//				}
-//				else {
+//							}
+//									else {
 					model.addAttribute("errorMsg","Password is not correct. Pls try again.");
 					return "error";
 				}
 
 			}
-//		}
-		return "employeelogin";
+			//		}
+			return "employeelogin";
+		}
 	}
 }
