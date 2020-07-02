@@ -3,21 +3,16 @@ package sg.edu.iss.sa50.t8.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.StaffRepository;
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
 @Controller
-@SessionAttributes("user")
 @RequestMapping("/employee")
 public class EmployeeController {
 	//move 2 login methods into LoginControllers
@@ -49,8 +44,8 @@ public class EmployeeController {
 //						return "error";
 //					}
 //					else {
-						session.setAttribute("user",e);					
-						return "leaves";
+					session.setAttribute("user",e);					
+					return "leaves";
 					}
 //				}
 //				else {
