@@ -63,11 +63,20 @@ public class LapsApplication {
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
 
+			Date d3 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
+			Date d4 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2019");
+
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
 			al1.setStartDate(d1);
 			al1.setStaff(s1);
 			al1.setLeaveReason("Moving House");
 			al1.setStatus(LeaveStatus.Approved);
+			
+			MedicalLeave ml2 = new MedicalLeave(d4);
+			ml2.setStartDate(d3);
+			ml2.setStaff(s3);
+			ml2.setLeaveReason("Fever");
+			ml2.setManagerComment("Not Set");
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
 			ml1.setStartDate(d1);
@@ -80,6 +89,11 @@ public class LapsApplication {
 			Overtime ot2 = new Overtime(d2,s1,4);
 			ot1.setOverTimeStatus(OvertimeStatus.Approved);
 			
+			CompensationLeave c =new CompensationLeave("Half Day PM");
+			c.setStartDate(d2);
+			c.setStaff(s1);
+			c.setLeaveReason("Compensation 1");
+			c.setStatus(LeaveStatus.Approved);
 			
 			empRepo.save(adm1);
 			empRepo.save(adm2);
@@ -95,6 +109,8 @@ public class LapsApplication {
 			
 			lRepo.save(al1);
 			lRepo.save(ml1);
+			lRepo.save(ml2);
+			lRepo.save(c);
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);

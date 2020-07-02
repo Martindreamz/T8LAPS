@@ -24,6 +24,7 @@
 
 	<form class="form-horizontal" action="#" th:action="@{/leaves/medical/save}"
 		method="post" th:object="${medicalLeave}">
+		<input type="hidden" th:field="*{id}"> 
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="startdate">Start
 				Date</label>
@@ -45,9 +46,18 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-sm-6" style="float: right;">
+			<div class="col-sm-3" style="float: right;">
 				<button type="submit" class="btn btn-primary">Submit</button>
-				<button type="reset" class="btn btn-primary">Reset</button>
+				
+			</div>
+			<div class="col-sm-3" style="float: right;" th:if="not ${#strings.isEmpty(formId)}">
+					<!-- <a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/update/}+${medicalLeave.id}"
+					th:text="#{leaves-history.update }">Update</a> -->
+					<a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${medicalLeave.id}"
+					th:text="#{leaves-history.delete }" class="btn btn-primary">Delete</a>
+				
+				<a th:href="@{/leaves/cancel/}+${medicalLeave.id}"
+					th:text="#{leaves-history.cancel }" class="btn btn-primary">Cancel</a>
 			</div>
 		</div>
 	</form>

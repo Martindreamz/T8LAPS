@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +30,8 @@ public class Overtime {
 	@ManyToOne @JoinColumn(name="staff_id")
 	private Staff staff; 
 	
+	@Min(1)
+	@Max(24)
 	private int overtimeHours;
 	
 	private OvertimeStatus overTimeStatus;

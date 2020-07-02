@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
@@ -30,11 +31,12 @@ public class LeaveServiceImpl implements ILeaveService{
 
 	@Override
 	public boolean saveMedicalLeave(MedicalLeave mLeave) {
-		if (leaveRepo.save(mLeave) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		/*
+		 * int id =mLeave.getId(); if (id>0) { Leaves l = leaveRepo.findLeaveById(id);
+		 * l.setId(id); leaveRepo.save(l); } else { return leaveRepo.save(mLeave) !=
+		 * null?true:false; } return true;
+		 */
+		return leaveRepo.save(mLeave) != null?true:false;
 	}
 
 	@Override
@@ -47,8 +49,8 @@ public class LeaveServiceImpl implements ILeaveService{
 	}
 
 	@Override
-	public ArrayList<Leaves> findAllLeaves() {
-		return (ArrayList<Leaves>)leaveRepo.findAll();
+	public ArrayList<Leaves> findAllLeaves(int id) {
+		return (ArrayList<Leaves>)leaveRepo.findAll(id);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.AdminRepository;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
@@ -45,10 +46,15 @@ public class AdminService implements IEmployeeService {
 	EmployeeRepository eRepo;
 	
 	public void updateTotalOTHoursByEmpId(int empId, int hr) {
-		eRepo.updateTotalOTHoursByEmpId(empId, hr);
+		Employee emp = eRepo.findEmployeeById(empId);
+		emp.setTotalOTHours(hr);
+		eRepo.save(emp);
 	}
 
+	public Employee findEmployeeById(int EmpId) {
+		return eRepo.findEmployeeById(EmpId);
+	}
 	public int findTotalOTHoursByEmpId(int empId) {
-		return eRepo.findTotalOTHoursByEmpId(empId);
+		return (Integer)eRepo.findTotalOTHoursByEmpId(empId);
 	}
 }

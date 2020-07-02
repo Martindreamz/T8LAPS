@@ -35,8 +35,16 @@
 					<td th:if="${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${l.claimQuota}">Duration</td>
 					<td th:text="${l.managerComment}">Manager Comment</td>
 					<td th:text="${l.status}">Status</td>
-					<td><a th:href="@{/leaves/apply}"
-						th:text="#{leaves-history.detail.link }"></a></td>
+					<td th:if="${#strings.equals(l.status,'Approved')}">
+						<a th:href="@{/leaves/detail/}+${l.id}+'?formId=c'"
+						th:text="#{leaves-history.detail.link }">Detail
+						</a>
+					</td>
+					<td th:if="${#strings.equals(l.status,'Applied')}">
+						<a th:href="@{/leaves/detail/}+${l.id}+'?formId=ucd'"
+						th:text="#{leaves-history.detail.link }">Detail
+						</a>
+					</td>
 					<td th:if="${#strings.equals(l.status,'Approved')}">
 						<a th:href="@{/leaves/cancel/}+${l.id}"
 						th:text="#{leaves-history.cancel }">Cancel</a>

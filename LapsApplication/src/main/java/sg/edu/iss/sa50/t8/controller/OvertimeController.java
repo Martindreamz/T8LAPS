@@ -1,22 +1,29 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.repository.StaffRepository;
 import sg.edu.iss.sa50.t8.service.IOvertimeService;
 import sg.edu.iss.sa50.t8.service.OvertimeserviceImpl;
-import sg.edu.iss.sa50.t8.service.StaffService;
 
 @Controller
 @RequestMapping("/overtime")
 public class OvertimeController {
+	@Autowired
+	StaffRepository srepo;
+	
 	@Autowired
 	protected IOvertimeService overtimeService;
 	
@@ -35,9 +42,9 @@ public class OvertimeController {
 	
 
 	@RequestMapping("/history")
-	public String History(Model model) {
-		model.addAttribute("overtimeList", overtimeService.findAllOvertime());
-		return "leaves-history";
+	public String History(Model model,@SessionAttribute("user") Employee emp) {
+		model.addAttribute("overtime", overtimeService.findAllOvertimeByStaffId(emp.getId()));
+		return "overtime-history";
 	}
 
 	/*
@@ -50,10 +57,16 @@ public class OvertimeController {
 	 */
 	
 	@RequestMapping("/save")
-	public String save(@ModelAttribute("overtime") Overtime overtime,
-			Model model) {
+	public String save(@ModelAttribute("overtime") @Valid Overtime overtime,
+			BindingResult bindingResult,
+			Model model,@SessionAttribute("user") Employee emp) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("error", "Overtime Date must be past date and claimed overtime hr can't be more than 24 hr");
+			return "forward:/overtime/claim";
+		}
+		overtime.setStaff((Staff) srepo.findById(emp.getId()).get());
 		overtimeService.saveOvertime(overtime);
-		model.addAttribute("overtime", overtimeService.findAllOvertimeByStaffId(6));
+		model.addAttribute("overtime", overtimeService.findAllOvertimeByStaffId(emp.getId()));
 		return "overtime-history";
 	}
 }
