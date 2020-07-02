@@ -13,6 +13,7 @@
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::navigationbar"></div>
 	
+	<h1 th:utext="#{leaves-history.heading}"></h1>
 	<div class="table-responsive-lg">
 		<table class="table">
 			<thead>
@@ -63,75 +64,7 @@
 			</tbody>
 		</table>
 	</div>
-	
-	<div class="table-responsive-lg">
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Leave Reason</th>
-					<th scope="col">Leave Type</th>
-					<th scope="col">Start Date</th>
-					<th scope="col">Duration</th>
-					<th scope="col">Manager Comment</th>
-					<th scope="col">Leave Status</th>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="l:${Leaves}">
-					<td th:text="${l.id}">id</td>
-					<td th:text="${l.leaveReason}">leaveReason</td>
-					<td th:text="${l.DiscriminatorValue}">LeaveType</td>
-					<td th:text="${l.startDate}">Start Date</td>
-					<td
-						th:if="not ${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}"
-						th:text="${l.endDate}">Duration</td>
-					<td
-						th:if="${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}"
-						th:text="${l.claimQuota}">Duration</td>
-					<td th:text="${l.managerComment}">Manager Comment</td>
-					<td th:text="${l.status}">Status</td>
-<<<<<<< HEAD
-					<td th:if="${#strings.equals(l.status,'Approved')}">
-						<a th:href="@{/leaves/detail/}+${l.id}+'?formId=c'"
-						th:text="#{leaves-history.detail.link }">Detail
-						</a>
-					</td>
-					<td th:if="${#strings.equals(l.status,'Applied')}">
-						<a th:href="@{/leaves/detail/}+${l.id}+'?formId=ucd'"
-						th:text="#{leaves-history.detail.link }">Detail
-						</a>
-					</td>
-					<td th:if="${#strings.equals(l.status,'Approved')}">
-						<a th:href="@{/leaves/cancel/}+${l.id}"
-						th:text="#{leaves-history.cancel }">Cancel</a>
-					</td>
-					<td th:if="${#strings.equals(l.status,'Applied')}">
-						<a th:href="@{/leaves/update/}+${l.id}"
-						th:text="#{leaves-history.update }">Update</a>
-					</td>
-					<td th:if="${#strings.equals(l.status,'Applied')}">
-						<a th:href="@{/leaves/delete/}+${l.id}"
-						th:text="#{leaves-history.delete }">Delete</a>
-					</td>
-=======
-					<td><a th:href="@{/leaves/apply}"
-						th:text="#{leaves-history.detail.link }"></a></td>
-					<td th:if="${#strings.equals(l.status,'Approved')}"><a
-						th:href="@{/leaves/cancel/}+${l.id}"
-						th:text="#{leaves-history.cancel }">Cancel</a></td>
-					<td th:if="${#strings.equals(l.status,'Applied')}"><a
-						th:href="@{/leaves/update/}+${l.id}"
-						th:text="#{leaves-history.update }">Update</a></td>
-					<td th:if="${#strings.equals(l.status,'Applied')}"><a
-						th:href="@{/leaves/delete/}+${l.id}"
-						th:text="#{leaves-history.delete }">Delete</a></td>
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
-				</tr>
-			</tbody>
-		</table>
-	</div>
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
