@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.sa50.t8.model.BlockedLeaves;
+import sg.edu.iss.sa50.t8.service.BlockedLeavesService;
 import sg.edu.iss.sa50.t8.service.ParsingService;
 
 @Controller
@@ -22,12 +24,16 @@ public class ApiController {
 	@Autowired
 	private ParsingService jsonParsingService;
 	
-	@GetMapping("/admin-setblockleave")
+	@Autowired
+	private BlockedLeavesService blservice;
+	
+	@RequestMapping("/admin-setblockleave")
 	public String setBlockedLeaves(Model model) {
 		List<BlockedLeaves> blockedLeaves = new ArrayList<>();
 		try {
 			blockedLeaves = jsonParsingService.parse(JSON_URL);
-		
+			blservice.Clear();
+			blockedLeaves.stream().forEach(x -> blservice.save(x));
 			model.addAttribute("bLList", blockedLeaves);
 		
 		}
@@ -37,4 +43,20 @@ public class ApiController {
 		}
 		return "admin-setblockleave";
 	}
+	
+	
+	public void setBlockedLeavesOnScheduled() {
+		List<BlockedLeaves> blockedLeaves = new ArrayList<>();
+		try {
+			blockedLeaves = jsonParsingService.parse(JSON_URL);
+			blservice.Clear();
+			blockedLeaves.stream().forEach(x -> blservice.save(x));
+		
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
