@@ -70,7 +70,7 @@
 								<a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${medicalLeave.id}"
 								th:text="#{leaves-history.delete }" class="btn btn-primary">Delete</a>
 							
-								<a th:href="@{/leaves/cancel/}+${medicalLeave.id}"
+								<a th:if="${#dates.createToday().before(l.startDate)}" th:href="@{/leaves/cancel/}+${medicalLeave.id}"
 								th:text="#{leaves-history.cancel }" class="btn btn-primary">Cancel</a>
 						</div>
 					</div>

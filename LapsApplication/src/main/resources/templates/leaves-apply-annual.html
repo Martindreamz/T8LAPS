@@ -91,8 +91,8 @@
 							<a class="btn btn-primary" th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${annualLeave.id}"
 							th:text="#{leaves-history.delete }">Delete</a>
 						
-						<a class="btn btn-primary" th:href="@{/leaves/cancel/}+${annualLeave.id}"
-							th:text="#{leaves-history.cancel }">Cancel</a>
+						<a th:if="${#dates.createToday().before(l.startDate)}" class="btn btn-primary" th:href="@{/leaves/cancel/}+${annualLeave.id}"
+							th:text="#{leaves-history.cancel }" >Cancel</a>
 					</div>
 				</div>
 			</div>
