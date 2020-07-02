@@ -19,9 +19,11 @@ public interface ILeaveService {
 	public Leaves findLeaveById(int leaveId);
 	public String findLeaveTypeById(int leaveId);
 	public ArrayList<Leaves> findAllLeaves(int id);
-	public int findCurAnnLeave(int id);
-	public int findMedAnnLeave(int id);
-	
-
+	public long findCurAnnLeave(int id);
+	public long findMedAnnLeave(int id);
+	public AnnualLeave findAnnualLeaveById(int leaveId);
+	public MedicalLeave findMedicalLeaveById(int leaveId);
+	public void updateCurAnnLeaveDate(int staffId,long days);
+	public void updateCurMedLeaveDate(int staffId,long days);
 }
 

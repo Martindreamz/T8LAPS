@@ -60,8 +60,8 @@
 						<a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${compensationLeave.id}"
 						th:text="#{leaves-history.delete }" class="btn btn-primary">Delete</a>
 					
-					<a th:href="@{/leaves/cancel/}+${compensationLeave.id}"
-						th:text="#{leaves-history.cancel }" class="btn btn-primary">Cancel</a>
+					<a th:if="${#dates.createToday().before(l.startDate)}" th:href="@{/leaves/cancel/}+${compensationLeave.id}"
+						th:text="#{leaves-history.cancel }" class="btn btn-primary" >Cancel</a>
 				</div>
 			</div>
 		</div>
