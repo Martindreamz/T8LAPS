@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.repository.StaffRepository;
-import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 import sg.edu.iss.sa50.t8.service.StaffService;
 //split to architecture design controller
