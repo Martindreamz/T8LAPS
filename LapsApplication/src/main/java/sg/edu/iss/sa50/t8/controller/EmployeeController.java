@@ -48,8 +48,8 @@ public class EmployeeController {
 //						return "error";
 //					}
 //					else {
-						session.setAttribute("user",e);					
-						return "leaves";
+					session.setAttribute("user",e);					
+					return "leaves";
 					}
 //				}
 //				else {
