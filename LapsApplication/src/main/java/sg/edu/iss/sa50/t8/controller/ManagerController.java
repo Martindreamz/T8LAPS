@@ -94,7 +94,7 @@ public class ManagerController {
 			Manager man = (Manager) emp;
 			/*ArrayList<Staff> stfL = ((ManagerService) manService).findSub(man);*/
 			Leaves l = ((ManagerService) manService).findById(id).get();
-			if (l.getStaff().getManager().equals(man)) {
+			if (l.getStaff().getManager().getId()== man.getId()) {
 					session.setAttribute("leavesId", id);
 					model.addAttribute("leaves", l);
 					return "manager-leaveAppDetails";
