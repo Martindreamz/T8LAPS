@@ -1,21 +1,20 @@
 package sg.edu.iss.sa50.t8.controller;
 
-import org.springframework.web.bind.annotation.*;
-
-import sg.edu.iss.sa50.t8.model.*;
-import sg.edu.iss.sa50.t8.service.*;
-
-import java.util.ArrayList;
-import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Leaves;
+import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.service.ManagerService;
 
 @Controller
 @RequestMapping("/manager")
