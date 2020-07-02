@@ -17,28 +17,28 @@
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::adminbar"></div>
 	<div class="container">
-		<form th:object="${employee}" th:action="@{/employee/delete}"
+		<form th:object="${employee}" th:action="@{/employee/admin-delete}"
 			method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputName4">Name</label> <input type="text"
-						class="form-control" id="inputName4" th:field="*{name}" value="">
+						class="form-control" id="inputName4" th:field="*{name}" value="" readonly>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword4">Password</label> <input type="text"
 						class="form-control" id="inputPassword4" th:field="*{password}"
-						value="">
+						value="" readonly>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail4">Email</label> <input type="email"
-					class="form-control" id="inputEmail4" th:field="*{email}" value="">
+					class="form-control" id="inputEmail4" th:field="*{email}" value="" readonly>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputRole">Role</label> <input type="text"
 						class="form-control" id="inputRole"
-						th:field="*{DiscriminatorValue}" value="">
+						th:field="*{DiscriminatorValue}" value="" readonly>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputManager">Manager</label> <input type="text"
@@ -50,7 +50,7 @@
 				<div class="form-group col-md-6">
 					<label for="inputAL">Annual Leaves</label> <input type="text"
 						class="form-control" id="inputAL" th:field="*{annualLeaveDays}"
-						value="">
+						value="" disabled>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputML">Medical Leaves</label> <input type="text"

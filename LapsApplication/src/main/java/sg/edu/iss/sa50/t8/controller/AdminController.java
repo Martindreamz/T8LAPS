@@ -109,7 +109,19 @@ public class AdminController {
 	}
 
 
+	@RequestMapping("/admin-createadmin")
+	public String createadmin(Model model) {
+		model.addAttribute("employee", new Staff());
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "admin-createadmin";
+	}
 
+	@RequestMapping("/admin-delete")
+	public String deleteadmin(Model model) {
+		model.addAttribute("employee", new Staff());
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "admin-delete";
+	}
 
 
 
@@ -144,6 +156,32 @@ public class AdminController {
 			model.addAttribute("staff", toSave);
 			return "staff-edit";
 		}
+		
+		@RequestMapping("/create")
+		public String createStaff(@ModelAttribute("staff") Staff staff, Model model) {
+			Staff toCreate = ((AdminService) aservice).findStaffById(staff.getId());
+			toCreate.setName(staff.getName());
+			toCreate.setPassword(staff.getPassword());
+			toCreate.setEmail(staff.getEmail());
+			toCreate.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+			if(((AdminService) aservice).save(toCreate)) {
+				return "forward:/employee/dashboard";
+			}
+			else {
+				model.addAttribute("staff", toCreate);
+				return "staff-edit";
+			}
+			
+			@RequestMapping("/delete")
+			public String deleteStaff(@ModelAttribute("staff") Staff staff, Model model) {
+				Staff toDelete = ((AdminService) aservice).findStaffById(staff.getId());
+				if(((AdminService) aservice).delete(toDelete)) {
+					return "forward:/employee/dashboard";
+				}
+				else {
+					model.addAttribute("staff", toDelete);
+					return "staff-edit";
+				}
 	}
 
 

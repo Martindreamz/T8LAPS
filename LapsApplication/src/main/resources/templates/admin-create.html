@@ -17,7 +17,7 @@
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::adminbar"></div>
 	<div class="container">
-		<form th:object="${employee}" th:action="@{/employee/create}"
+		<form th:object="${employee}" th:action="@{/employee/admin-create}"
 			method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
