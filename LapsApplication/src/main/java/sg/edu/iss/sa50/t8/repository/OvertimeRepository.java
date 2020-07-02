@@ -20,4 +20,5 @@ public interface OvertimeRepository extends JpaRepository<Overtime, Integer>{
 	
 	@Query(value="UPDATE overtime SET overTimeStatus=?2 WHERE id=?1",nativeQuery = true)
 	public void updateOvertimeStatus(int overtimeId,OvertimeStatus status);
+	
 }

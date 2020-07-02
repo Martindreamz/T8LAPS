@@ -3,13 +3,15 @@ package sg.edu.iss.sa50.t8.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.repository.StaffRepository;
+import sg.edu.iss.sa50.t8.service.IEmployeeService;
+import sg.edu.iss.sa50.t8.service.StaffService;
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
 @Controller
@@ -21,7 +23,13 @@ public class EmployeeController {
 
 	//employee
 	@Autowired
-	StaffRepository sRepo;
+	@Qualifier("staffService")
+	protected IEmployeeService sservice;
+
+	@Autowired
+	public void setIStaffService(StaffService sservice) {
+		this.sservice = sservice;
+	}
 
 	//employee
 	@RequestMapping("/leaves")
@@ -31,8 +39,7 @@ public class EmployeeController {
 
 	@RequestMapping("/employeelogin")
 	public String LoginSuccessful(@ModelAttribute("employee") Employee emp, Model model,HttpSession session) {
-
-		for(Employee e: sRepo.findAllNonAdmin()){
+		for(Employee e: ((StaffService)sservice).findAllNonAdminStaff()){
 			System.out.println(e);
 			if(emp.getName().equals(e.getName())){
 				System.out.println("staff exist");

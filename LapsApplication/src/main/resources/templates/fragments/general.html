@@ -50,7 +50,11 @@
 					</a> <a
 						th:if="${session.user.getDiscriminatorValue().equals('Manager')}"
 						href="/manager/leavesAppForApprovalList">
-							<button>Pending Approvals</button>
+							<button>Approve Leaves</button>
+					</a> <a
+						th:if="${session.user.getDiscriminatorValue().equals('Manager')}"
+						href="/manager/overtimelist">
+							<button>Approve Overtime</button>
 					</a> <a href="/employee/logout">
 							<button>Logout</button>
 					</a></td>

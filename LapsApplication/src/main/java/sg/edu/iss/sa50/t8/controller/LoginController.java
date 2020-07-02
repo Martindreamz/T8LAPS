@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.repository.AdminRepository;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 
@@ -27,8 +26,6 @@ public class LoginController {
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;}
 
-	@Autowired
-	AdminRepository aRepo;
 
 	@RequestMapping("/home")
 	public String home() {
@@ -47,7 +44,7 @@ public class LoginController {
 	
 	
 	@RequestMapping("/adminlogin")
-	public String adminlogin(@ModelAttribute("employee") Employee emp,HttpSession session,Model model) {
+	public String adminlogin(@ModelAttribute("admin") Employee emp,HttpSession session,Model model) {
 		for(Admin a :((AdminService) aservice).findallAdmin()){
 			System.out.println(a);
 			if(emp.getName().equals(a.getName())){
