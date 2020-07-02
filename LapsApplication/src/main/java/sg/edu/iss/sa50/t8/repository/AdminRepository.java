@@ -15,12 +15,17 @@ public interface AdminRepository extends EmployeeRepository {
 			+ "OR e.name LIKE ?1%")
 	List<Employee> searchEmployee(String searchTerm);*/
 	
-	List<Employee> findByNameContaining(String searchTerm);
+	@Query("SELECT e from Employee e where e.name LIKE :searchTerm")
+	List<Employee> findByNameContaining(@Param("searchTerm") String searchTerm);
 	
-	Employee findById(int id); 
+	@Query("SELECT e FROM Employee e WHERE e.id = :id")
+	Employee findById(@Param("id") int id); 
 	
 	@Query("SELECT s FROM Admin s")
 	List<Admin> findAllAdmin();
+	
+	@Query("SELECT e FROM Employee e WHERE e.class = 'Manager'")
+	List<Staff> findAllManager();
 	
 	@Query("SELECT e FROM Employee e WHERE e.class != 'Admin'")
 	List<Staff> findAllNonAdminStaff();

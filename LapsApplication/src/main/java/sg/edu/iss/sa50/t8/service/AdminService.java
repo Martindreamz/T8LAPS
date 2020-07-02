@@ -36,6 +36,14 @@ public class AdminService implements IEmployeeService {
 		return arepo.save(entry)!=null? true : false;
 	}
 	
+	public boolean create(Employee entry) {
+		return arepo.save(entry)!=null? true : false;
+	}
+	
+	public boolean delete(Employee entry) {
+		return arepo.save(entry)!=null? true : false;
+	}
+	
 	
 	public List<Staff> findAllNonAdminStaff(){
 		return arepo.findAllNonAdminStaff();
@@ -65,6 +73,7 @@ public class AdminService implements IEmployeeService {
 	public int findTotalOTHoursByEmpId(int empId) {
 		return eRepo.findTotalOTHoursByEmpId(empId);
 	}
+
 
 
 }
