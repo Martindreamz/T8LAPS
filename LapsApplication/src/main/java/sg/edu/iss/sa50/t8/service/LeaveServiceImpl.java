@@ -20,7 +20,10 @@ public class LeaveServiceImpl implements ILeaveService{
 
 	@Autowired
 	LeaveRepository leaveRepo;
-
+	
+	@Autowired
+	StaffRepository staffRepo;
+	
 	@Override
 	public boolean saveAnnualLeave(AnnualLeave aLeave) {
 		if (leaveRepo.save(aLeave) != null) {
@@ -71,22 +74,41 @@ public class LeaveServiceImpl implements ILeaveService{
 		return leaveRepo.findLeaveTypeById(leaveId);
 	}
 	
-	@Autowired
-	StaffRepository staffRepo;
 	
 	
 	@Override
-	public int findCurAnnLeave(int id) {
+	public long findCurAnnLeave(int id) {
 		Staff s = (Staff) staffRepo.findEmployeeById(id);
-		int c = s.getCurrentAnnualLeaves();
+		long c = s.getCurrentAnnualLeaves();
 		return c;
 	}
 
 	@Override
-	public int findMedAnnLeave(int id) {
+	public long findMedAnnLeave(int id) {
 		Staff s = (Staff) staffRepo.findEmployeeById(id);
-		int c = s.getCurrentMedicalLeaves();
+		long c = s.getCurrentMedicalLeaves();
 		return c;
+	}
+	
+	@Override
+	public AnnualLeave findAnnualLeaveById(int leaveId) {
+		return leaveRepo.findAnnualLeaveById(leaveId);
+	}
+	
+	@Override
+	public MedicalLeave findMedicalLeaveById(int leaveId) {
+		return leaveRepo.findMedicalLeaveById(leaveId);
+	}
+	
+	public void updateCurAnnLeaveDate(int staffId,long days) {
+		Staff staff = staffRepo.findStaffById(staffId);
+		staff.setCurrentAnnualLeaves(days);
+		staffRepo.save(staff);
+	}
+	public void updateCurMedLeaveDate(int staffId,long days) {
+		Staff staff = staffRepo.findStaffById(staffId);
+		staff.setCurrentMedicalLeaves(days);
+		staffRepo.save(staff);
 	}
 
 }

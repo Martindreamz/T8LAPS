@@ -101,7 +101,7 @@ public class LeaveController {
 	public String annualaddForm(@SessionAttribute("user") Employee emp, 
 			Model model) {
 		model.addAttribute("annualLeave", new AnnualLeave());
-		int curAnn=leaveService.findCurAnnLeave(emp.getId());
+		long curAnn=leaveService.findCurAnnLeave(emp.getId());
 		model.addAttribute("eCurAnnLeave", curAnn);
 		return "leaves-apply-annual";
 	}
@@ -109,7 +109,7 @@ public class LeaveController {
 	@RequestMapping("/medicalAdd")
 	public String medicaladdForm(@SessionAttribute("user") Employee emp, Model model) {
 		model.addAttribute("medicalLeave", new MedicalLeave());
-		int medAnn=leaveService.findMedAnnLeave(emp.getId());
+		long medAnn=leaveService.findMedAnnLeave(emp.getId());
 		model.addAttribute("eMedAnnLeave", medAnn);
 		return "leaves-apply-medical";
 	}
@@ -124,7 +124,7 @@ public class LeaveController {
 	@RequestMapping("/annual/save")
 	public String saveAnnualForm(@ModelAttribute("annualLeave") @Valid AnnualLeave annualLeave, 
 			BindingResult bindingResult, Model model,@SessionAttribute("user") Employee emp) throws ParseException {
-		int curAnn=leaveService.findCurAnnLeave(emp.getId());
+		long curAnn=leaveService.findCurAnnLeave(emp.getId());
 		model.addAttribute("eCurAnnLeave", curAnn);
 		if (bindingResult.hasErrors()) {
 			annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get());
@@ -162,7 +162,7 @@ public class LeaveController {
 	@RequestMapping("/medical/save")
 	public String saveMedicalForm(@ModelAttribute("medicalLeave") @Valid MedicalLeave medicalLeave, 
 			BindingResult bindingResult, Model model,@SessionAttribute("user") Employee emp) {
-		int medAnn=leaveService.findMedAnnLeave(emp.getId());
+		long medAnn=leaveService.findMedAnnLeave(emp.getId());
 		model.addAttribute("eMedAnnLeave", medAnn);
 		if (bindingResult.hasErrors()) {
 			return "leaves-apply-medical";
@@ -214,10 +214,27 @@ public class LeaveController {
 		Leaves l = leaveService.findLeaveById(id);
 		String lType = l.getDiscriminatorValue();
 		if(lType.equalsIgnoreCase("Annual Leave")) {
+			AnnualLeave al = leaveService.findAnnualLeaveById(id);
+			if(al.getStatus().equals(LeaveStatus.Approved)) {
+				Date d1 = al.getStartDate();
+				Date d2 = al.getEndDate();
+				long duration = duration(d1, d2);
+				System.out.println("An Appl:"+duration);
+				long existingDays = leaveService.findCurAnnLeave(al.getStaff().getId());
+				leaveService.updateCurAnnLeaveDate(al.getId(), duration+existingDays);
 			
+			}
 		}
 		else if(lType.equalsIgnoreCase("Medical Leave")) {
-			
+			MedicalLeave ml = leaveService.findMedicalLeaveById(id);
+			if(ml.getStatus().equals(LeaveStatus.Approved)) {
+				Date d1 = ml.getStartDate();
+				Date d2 = ml.getEndDate();
+				long duration = duration(d1, d2);
+				System.out.println("Med Appl: "+duration);
+				long existingDays = leaveService.findMedAnnLeave(ml.getStaff().getId());
+				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), duration+existingDays);
+			}
 		}
 		else {
 			if(l.getStatus().equals(LeaveStatus.Approved)) {
@@ -252,10 +269,25 @@ public class LeaveController {
 		Leaves l = leaveService.findLeaveById(id);
 		String lType = l.getDiscriminatorValue();
 		if(lType.equalsIgnoreCase("Annual Leave")) {
+			AnnualLeave al = leaveService.findAnnualLeaveById(id);
+			if(al.getStatus().equals(LeaveStatus.Approved)) {
+				Date d1 = al.getStartDate();
+				Date d2 = al.getEndDate();
+				long duration = duration(d1, d2);
+				long existingDays = leaveService.findCurAnnLeave(al.getStaff().getId());
+				leaveService.updateCurAnnLeaveDate(al.getId(), duration+existingDays);
 			
+			}
 		}
 		else if(lType.equalsIgnoreCase("Medical Leave")) {
-			
+			MedicalLeave ml = leaveService.findMedicalLeaveById(id);
+			if(ml.getStatus().equals(LeaveStatus.Approved)) {
+				Date d1 = ml.getStartDate();
+				Date d2 = ml.getEndDate();
+				long duration = duration(d1, d2);
+				long existingDays = leaveService.findMedAnnLeave(ml.getStaff().getId());
+				leaveService.updateCurMedLeaveDate(ml.getId(), duration+existingDays);
+			}
 		}
 		else {
 			if(l.getStatus().equals(LeaveStatus.Approved)) {
