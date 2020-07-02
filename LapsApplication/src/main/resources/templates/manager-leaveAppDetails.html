@@ -13,6 +13,8 @@
 <body>
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::navigationbar"></div>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
 
 
 	<form action="#" th:object="${leaves}"
@@ -60,20 +62,21 @@
 		</dl>
 		<div th:switch="${leaves.status.name()}">
 			<div th:case="'Applied'">
-			<button type="submit" name="action" value="approve">Approve</button>
-			<button type="submit" name="action" value="reject">Reject</button>
+				<button type="submit" name="action" value="approve">Approve</button>
+				<button type="submit" name="action" value="reject">Reject</button>
 			</div>
 			<div th:case="'Updated'">
-			<button type="submit" name="action" value="approve">Approve</button>
-			<button type="submit" name="action" value="reject">Reject</button>
+				<button type="submit" name="action" value="approve">Approve</button>
+				<button type="submit" name="action" value="reject">Reject</button>
 			</div>
 			<div th:case="*">
-			<p> There is nothing for you to approve or reject.</p>
-			</div>		
+				<p>There is nothing for you to approve or reject.</p>
+			</div>
 		</div>
-		
+
 	</form>
 
+	<div th:insert="fragments/general.html::footer"></div>
 
 </body>
 </html>

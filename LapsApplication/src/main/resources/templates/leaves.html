@@ -9,7 +9,8 @@
 	<div th:insert="fragments/general.html::navigationbar"></div>
 
 
-	<h1 th:text="Welcome + ' ' + ${session.user.name} + ${session.user.getDiscriminatorValue()}"></h1>
+	<h1
+		th:text="Welcome + ' ' + ${session.user.name} + ' ' + ${session.user.getDiscriminatorValue()}"></h1>
 
 
 	<!-- <a href="/leaves/apply">
@@ -36,6 +37,7 @@
 		<button> Movement Register </button>
 	</a> -->
 
+	<div th:insert="fragments/general.html::footer"></div>
 
 
 </body>
