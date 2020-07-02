@@ -73,5 +73,14 @@ public class ManagerService implements IEmployeeService {
 //		overtimelist.forEach(System.out::println);;
 		return overtimelist;
 	}
+	
+	public Overtime findOvertime(int id) {
+		return oRepo.findById(id).get();
+	}
+	
+	public void SetOTStatus(Overtime ot) {
+		oRepo.save(ot);
+	}
+
 
 }

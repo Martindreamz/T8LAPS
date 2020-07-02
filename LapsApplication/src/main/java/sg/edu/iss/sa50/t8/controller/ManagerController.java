@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.OvertimeStatus;
 import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.service.IOvertimeService;
 import sg.edu.iss.sa50.t8.service.ManagerService;
 
 @Controller
@@ -47,7 +49,7 @@ public class ManagerController {
 			model.addAttribute("errorMsg","You are not a manger, pls login as a manager first.");
 			return "error";}
 	}
-	
+
 	@RequestMapping("/staffLeaveHistoryList/{id}")
 	public String staffLeaveHistory(Model model,
 			HttpSession session,@PathVariable("id") Integer id) {
@@ -64,13 +66,13 @@ public class ManagerController {
 						+ "This staff is not your subordinate.");
 				return "error";
 			}
-			}
+		}
 		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
 		return "error";
-		
+
 	}
 
-	
+
 	@RequestMapping("/leavesAppForApprovalList")
 	public String listforApproval(Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
@@ -96,10 +98,10 @@ public class ManagerController {
 			/*ArrayList<Staff> stfL = ((ManagerService) manService).findSub(man);*/
 			Leaves l = ((ManagerService) manService).findById(id).get();
 			if (l.getStaff().getManager().getId()== man.getId()) {
-					session.setAttribute("leavesId", id);
-					model.addAttribute("leaves", l);
-					return "manager-leaveAppDetails";
-				}
+				session.setAttribute("leavesId", id);
+				model.addAttribute("leaves", l);
+				return "manager-leaveAppDetails";
+			}
 			else {
 				model.addAttribute("errorMsg","Sorry you don't have authority. "
 						+ "This staff is not your subordinate.");
@@ -141,17 +143,31 @@ public class ManagerController {
 	public String approveovertime(@SessionAttribute("user") Employee emp, Model model) {
 		if(emp.getDiscriminatorValue().equals("Manager")) {
 			model.addAttribute("overtimelist",manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).toArray());
-//			manService.findStaffOvertime((Manager) emp).forEach(System.out::println);
-			
-			System.out.println("printing the applied below");
-			manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).forEach(System.out::print);
-//			.stream().filter(x -> x.getOverTimeStatus().equals(OvertimeStatus.Applied))
-			System.out.println("end of above");
-//			System.out.println(manService.findStaffOvertime((Manager) emp).get(1).getOverTimeStatus());
+			//			manService.findStaffOvertime((Manager) emp).forEach(System.out::println);
+
+			//			System.out.println("printing the applied below");
+			//			manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).forEach(System.out::print);
+			//			.stream().filter(x -> x.getOverTimeStatus().equals(OvertimeStatus.Applied))
+			//			System.out.println("end of above");
+			//			System.out.println(manService.findStaffOvertime((Manager) emp).get(1).getOverTimeStatus());
 			return "manager-OTApprovalList";
 		}
 		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
 		return "error";
 	}
-	
+
+	@RequestMapping("/overtimeprocessed")
+	public String overtimeprocessed(@SessionAttribute("user") Employee emp,Overtime ot,Model model) {
+		if(emp.getDiscriminatorValue().equals("Manager")) {
+			Overtime newOT = manService.findOvertime(ot.getId());
+			System.out.println(newOT);
+			newOT.setOverTimeStatus(ot.getOverTimeStatus());
+			System.out.println(newOT);
+			manService.SetOTStatus(newOT);
+			System.out.println("done saving");
+			return "manager-OTApprovalList";
+		}
+		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
+		return "error";
+	}
 }
