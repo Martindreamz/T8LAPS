@@ -23,6 +23,14 @@ public class BlockedLeaves {
 	private Date date;
 	
 	public BlockedLeaves() {}
+	
+	
+
+	public BlockedLeaves(String name, Date date) {
+		super();
+		this.name = name;
+		this.date = date;
+	}
 
 	@Override
 	public String toString() {

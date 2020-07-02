@@ -33,13 +33,13 @@
 					<td th:text="${ot.staff.name}">Staffname</td>
 					<td th:text="${ot.overtimeHours}">overtimehours</td>
 					<td>
-						<form action="/manager/overtimeprocessed" th:object="${ot}"
+						<form action="/manager/overtimeprocessed" th:object="${et}"
 							method="POST">
-							<input type="hidden" name ="id" th:value="${ot.id}"> 
+							<input type="hidden" name ="id" th:value="${ot.id}">
 							<button name="overTimeStatus" value="Approved" type="submit">Approve</button>
 						</form>
 					</td>
-					<td><<form action="/manager/overtimeprocessed" th:object="${ot}"
+					<td><form action="/manager/overtimeprocessed" th:object="${ot}"
 							method="POST">
 							<input type="hidden" name ="id" th:value="${ot.id}"> 
 							<button name="overTimeStatus" value="Rejected" type="submit">Reject</button>

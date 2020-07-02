@@ -1,11 +1,13 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -143,13 +145,7 @@ public class ManagerController {
 	public String approveovertime(@SessionAttribute("user") Employee emp, Model model) {
 		if(emp.getDiscriminatorValue().equals("Manager")) {
 			model.addAttribute("overtimelist",manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).toArray());
-			//			manService.findStaffOvertime((Manager) emp).forEach(System.out::println);
 
-			//			System.out.println("printing the applied below");
-			//			manService.findStaffOvertime((Manager) emp).stream().filter(x -> x.getOverTimeStatus() == OvertimeStatus.Applied).forEach(System.out::print);
-			//			.stream().filter(x -> x.getOverTimeStatus().equals(OvertimeStatus.Applied))
-			//			System.out.println("end of above");
-			//			System.out.println(manService.findStaffOvertime((Manager) emp).get(1).getOverTimeStatus());
 			return "manager-OTApprovalList";
 		}
 		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
@@ -157,16 +153,23 @@ public class ManagerController {
 	}
 
 	@RequestMapping("/overtimeprocessed")
-	public String overtimeprocessed(@SessionAttribute("user") Employee emp,Overtime ot,Model model) {
+	public String overtimeprocessed(@SessionAttribute("user") Employee emp,Overtime et,BindingResult bindingresult, Model model) {
 		if(emp.getDiscriminatorValue().equals("Manager")) {
-			Overtime newOT = manService.findOvertime(ot.getId());
+			//			if(bindingresult.hasErrors()) {
+			//				model.addAttribute("errorMsg","binding result error");
+			//				return "error";
+			//			}
+			System.out.println(et);
+			Overtime newOT = (Overtime) manService.findOvertime(et.getId());
 			System.out.println(newOT);
-			newOT.setOverTimeStatus(ot.getOverTimeStatus());
+			newOT.setOverTimeStatus(et.getOverTimeStatus());
 			System.out.println(newOT);
 			manService.SetOTStatus(newOT);
 			System.out.println("done saving");
+			
 			return "manager-OTApprovalList";
 		}
+		
 		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
 		return "error";
 	}

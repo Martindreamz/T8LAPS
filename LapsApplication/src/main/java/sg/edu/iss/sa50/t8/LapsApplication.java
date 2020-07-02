@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.BlockedLeaves;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Manager;
@@ -19,6 +20,7 @@ import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.OvertimeStatus;
 import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.repository.BlockedLeavesRepository;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.repository.LeaveRepository;
 import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
@@ -44,6 +46,9 @@ public class LapsApplication {
 	
 	@Autowired
 	EmailService ems;
+	
+	@Autowired
+	BlockedLeavesRepository blRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(LapsApplication.class, args);
@@ -86,12 +91,21 @@ public class LapsApplication {
 			
 			Date d5 = new SimpleDateFormat("MM/dd/yyyy").parse("09/09/2020");
 			Date d6 = new SimpleDateFormat("MM/dd/yyyy").parse("09/12/2020");
+			
+			Date d7 = new SimpleDateFormat("MM/dd/yyyy").parse("08/08/2020");
+			Date d8 = new SimpleDateFormat("MM/dd/yyyy").parse("08/12/2020");
 
 			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
 			al1.setStartDate(d1);
 			al1.setStaff(s1);
 			al1.setLeaveReason("Moving House");
 			al1.setStatus(LeaveStatus.Approved);
+			
+			AnnualLeave al2 = new AnnualLeave(d8, "asia missing");
+			al2.setStartDate(d7);
+			al2.setStaff(s1);
+			al2.setLeaveReason("visit korea");
+			al2.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml2 = new MedicalLeave(d4);
 			ml2.setStartDate(d3);
@@ -139,15 +153,56 @@ public class LapsApplication {
 			lRepo.save(ml1);
 			lRepo.save(ml2);
 			lRepo.save(ml3);
+			lRepo.save(al2);
 			lRepo.save(c);
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);
+		
+			Date h1 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/01/01");
+			Date h2 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/01/25");
+			Date h3 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/01/26");
+			Date h4 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/04/10");			
+			Date h5 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/05/01");
+			Date h6 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/05/07");			
+			Date h7 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/05/24");
+			Date h8 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/07/31");
+			Date h9 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/08/09");
+			Date h10 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/11/14");
+			Date h11 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/12/25");
+
+			BlockedLeaves blLeaves1 = new BlockedLeaves("New Year", h1);
+			BlockedLeaves blLeaves2 = new BlockedLeaves("Chinese New Year", h2);
+			BlockedLeaves blLeaves3 = new BlockedLeaves("Chinese New Year", h3);
+			BlockedLeaves blLeaves4 = new BlockedLeaves("Good Friday", h4);
+			BlockedLeaves blLeaves5 = new BlockedLeaves("Labour's Day", h5);
+			BlockedLeaves blLeaves6 = new BlockedLeaves("Vesak's Day", h6);
+			BlockedLeaves blLeaves7 = new BlockedLeaves("Hari Raya Puasa", h7);
+			BlockedLeaves blLeaves8 = new BlockedLeaves("Hari Raya Hagi", h8);
+			BlockedLeaves blLeaves9 = new BlockedLeaves("National Day", h9);
+			BlockedLeaves blLeaves10 = new BlockedLeaves("Deepavali", h10);
+			BlockedLeaves blLeaves11 = new BlockedLeaves("Christmas Day", h11);
+			
+			blRepo.save(blLeaves1);
+			blRepo.save(blLeaves2);
+			blRepo.save(blLeaves3);
+			blRepo.save(blLeaves4);
+			blRepo.save(blLeaves5);
+			blRepo.save(blLeaves6);
+			blRepo.save(blLeaves7);
+			blRepo.save(blLeaves8);
+			blRepo.save(blLeaves9);
+			blRepo.save(blLeaves10);
+			blRepo.save(blLeaves11);
+			
 			
 			System.out.println("CHEERS! At Least Run Liao. Check all DB tables ba.");
 			System.out.println("I want to test the discriminator:");
 			System.out.println(al1.getDiscriminatorValue());
 			System.out.println(adm1.getDiscriminatorValue());
+			
+	
+			
 
 		}; 
 	}
