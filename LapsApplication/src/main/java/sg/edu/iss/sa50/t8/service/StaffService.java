@@ -9,34 +9,35 @@ import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.AdminRepository;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.repository.StaffRepository;
 
 @Service
 public class StaffService implements IEmployeeService {
 	
 	@Autowired
-	AdminRepository arepo;
+	StaffRepository sRepo;
 
 	
 	public List<Employee> searchEmployee(String searchTerm){
 		//return arepo.searchEmployee(searchTerm);
-		return arepo.findByNameContaining(searchTerm);
+		return sRepo.findByNameContaining(searchTerm);
 	}
 	
 	public List<Employee> findAll(){
-		return arepo.findAll();
+		return sRepo.findAll();
 	}
 	
-	public Employee findById(int id) {
-		return arepo.findById(id);
+	public Staff findById(int id) {
+		return sRepo.findByStaffId(id);
 	}
 	
 	public boolean save(Employee entry) {
-		return arepo.save(entry)!=null? true : false;
+		return sRepo.save(entry)!=null? true : false;
 	}
 	
 	
 	public List<Staff> findAllNonAdminStaff(){
-		return arepo.findAllNonAdminStaff();
+		return sRepo.findAllNonAdmin();
 	}
 
 	
