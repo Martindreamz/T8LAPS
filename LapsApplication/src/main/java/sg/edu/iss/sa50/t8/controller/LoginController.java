@@ -27,8 +27,6 @@ public class LoginController {
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;}
 
-	@Autowired
-	AdminRepository aRepo;
 
 	@RequestMapping("/home")
 	public String home() {

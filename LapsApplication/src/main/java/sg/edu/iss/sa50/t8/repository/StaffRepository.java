@@ -15,13 +15,15 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 	List<Staff> findAllNonAdmin();
 	
 	Employee findEmployeeById(int id);
-	
-
-
 	 List<Employee> findByNameContaining(String searchTerm);
 	
 	 @Query("SELECT s FROM Staff s WHERE s.class = 'Staff' AND s.id = :id")
 	 Staff findByStaffId(@Param("id") int id);
+	 
+	 Staff findStaffById(int id);
+	 
+	 @Query("SELECT e FROM Employee e")
+	 List<Employee> findall();
 
 }
 

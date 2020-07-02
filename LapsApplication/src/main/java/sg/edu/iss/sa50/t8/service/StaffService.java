@@ -17,23 +17,23 @@ public class StaffService implements IEmployeeService {
 	@Autowired
 	StaffRepository sRepo;
 
-	
 	public List<Employee> searchEmployee(String searchTerm){
 		//return arepo.searchEmployee(searchTerm);
 		return sRepo.findByNameContaining(searchTerm);
 	}
 	
-	public List<Employee> findAll(){
-		return sRepo.findAll();
-	}
+	/*
+	 * public List<Employee> findAll(){ return sRepo.findAll(); }
+	 */
 	
 	public Staff findById(int id) {
 		return sRepo.findByStaffId(id);
 	}
 	
-	public boolean save(Employee entry) {
-		return sRepo.save(entry)!=null? true : false;
-	}
+	/*
+	 * public boolean save(Employee entry) { return sRepo.save(entry)!=null? true :
+	 * false; }
+	 */
 	
 	
 	public List<Staff> findAllNonAdminStaff(){

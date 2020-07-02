@@ -41,7 +41,6 @@ public class EmployeeController {
 
 	@RequestMapping("/employeelogin")
 	public String LoginSuccessful(@ModelAttribute("employee") Employee emp, Model model,HttpSession session) {
-
 		for(Employee e: ((StaffService)sservice).findAllNonAdminStaff()){
 			System.out.println(e);
 			if(emp.getName().equals(e.getName())){
