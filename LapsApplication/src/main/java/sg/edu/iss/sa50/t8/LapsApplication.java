@@ -69,7 +69,7 @@ public class LapsApplication {
 			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
 			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
 			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
-			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
+			Staff s5 = new Staff("Yirui2","martin.dreamz@hotmail.com",man2,4,18);
 			
 			
 			
@@ -129,7 +129,23 @@ public class LapsApplication {
 			Overtime ot1 = new Overtime(d1,s1,4);
 			ot1.setOverTimeStatus(OvertimeStatus.Approved);
 			Overtime ot2 = new Overtime(d2,s1,4);
-			ot1.setOverTimeStatus(OvertimeStatus.Approved);
+			ot2.setOverTimeStatus(OvertimeStatus.Rejected);
+			Overtime ot3 = new Overtime(d1,s1,1);
+			ot3.setOverTimeStatus(OvertimeStatus.Applied);
+			Overtime ot4 = new Overtime(d2,s1,3);
+			ot4.setOverTimeStatus(OvertimeStatus.Applied);
+			Overtime ot5 = new Overtime(d1,s5,4);
+			ot5.setOverTimeStatus(OvertimeStatus.Applied);
+			Overtime ot6 = new Overtime(d2,s5,4);
+			ot6.setOverTimeStatus(OvertimeStatus.Applied);
+			Overtime ot7 = new Overtime(d1,s5,1);
+			ot7.setOverTimeStatus(OvertimeStatus.Applied);
+			Overtime ot8 = new Overtime(d2,s5,3);
+			ot8.setOverTimeStatus(OvertimeStatus.Applied);
+			
+			
+			
+			
 			
 			CompensationLeave c =new CompensationLeave("Half Day PM");
 			c.setStartDate(d2);
@@ -158,7 +174,14 @@ public class LapsApplication {
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);
+			oRepo.save(ot3);
+			oRepo.save(ot4);
+			oRepo.save(ot5);
+			oRepo.save(ot6);
+			oRepo.save(ot7);
+			oRepo.save(ot8);
 		
+
 			Date h1 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/01/01");
 			Date h2 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/01/25");
 			Date h3 = new SimpleDateFormat("yyyy/MM/dd").parse("2020/01/26");

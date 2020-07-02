@@ -82,5 +82,11 @@ public class ManagerService implements IEmployeeService {
 		oRepo.save(ot);
 	}
 
+	public void AddOvertimeHours(Overtime ot) {
+		Staff staff = empRepo.findStaffById(ot.getStaff().getId());
+		staff.setTotalOTHours(staff.getTotalOTHours()
+				+ot.getOvertimeHours());
+		empRepo.save(staff);
+	}
 
 }

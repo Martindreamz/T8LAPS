@@ -1,7 +1,6 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,12 +18,14 @@ import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.OvertimeStatus;
 import sg.edu.iss.sa50.t8.model.Staff;
-import sg.edu.iss.sa50.t8.service.IOvertimeService;
+import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.ManagerService;
 
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
+	@Autowired
+	EmailService emailservice;
 
 	@Autowired
 	@Qualifier("managerService")
@@ -153,23 +154,34 @@ public class ManagerController {
 	}
 
 	@RequestMapping("/overtimeprocessed")
-	public String overtimeprocessed(@SessionAttribute("user") Employee emp,Overtime et,BindingResult bindingresult, Model model) {
+	public String overtimeprocessed(@SessionAttribute("user") Employee emp,Overtime et, Model model) {
 		if(emp.getDiscriminatorValue().equals("Manager")) {
-			//			if(bindingresult.hasErrors()) {
-			//				model.addAttribute("errorMsg","binding result error");
-			//				return "error";
-			//			}
-			System.out.println(et);
+			
+			//			fetching OT from db
 			Overtime newOT = (Overtime) manService.findOvertime(et.getId());
+			System.out.println("OT fetched from db");
 			System.out.println(newOT);
+
+			//			setting status from manager
 			newOT.setOverTimeStatus(et.getOverTimeStatus());
-			System.out.println(newOT);
+
+			//adding OT hours when necessary
+			if (newOT.getOverTimeStatus().equals(OvertimeStatus.Approved)) {
+				manService.AddOvertimeHours(newOT);;
+			}
+
+			//			save records in db
 			manService.SetOTStatus(newOT);
 			System.out.println("done saving");
-			
-			return "manager-OTApprovalList";
+
+			//			notify staff via email
+			emailservice.notifyStaffForOT(newOT);
+			System.out.println("Staff notification email sent");
+
+			//			redirect
+			return "forward:/manager/overtimelist";
 		}
-		
+
 		model.addAttribute("errorMsg","Sorry you don't have authority. Pls Login as a manager.");
 		return "error";
 	}
