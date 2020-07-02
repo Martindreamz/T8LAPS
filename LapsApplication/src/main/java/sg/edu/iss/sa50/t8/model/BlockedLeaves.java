@@ -14,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties
 public class BlockedLeaves {
 	
 	@Id
@@ -26,6 +25,11 @@ public class BlockedLeaves {
 	private Date date;
 	
 	public BlockedLeaves() {}
+
+	@Override
+	public String toString() {
+		return "BlockedLeaves [name=" + name + ", date=" + date + "]";
+	}
 
 	public String getName() {
 		return name;

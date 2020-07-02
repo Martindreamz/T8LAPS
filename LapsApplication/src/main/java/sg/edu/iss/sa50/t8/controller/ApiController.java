@@ -1,5 +1,6 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,17 @@ public class ApiController {
 	
 	@GetMapping("/admin-setblockleave")
 	public String setBlockedLeaves(Model model) {
-		List<BlockedLeaves> blockedLeaves = (List<BlockedLeaves>) jsonParsingService.parse(JSON_URL);
-		model.addAttribute("bLList", blockedLeaves);
+		List<BlockedLeaves> blockedLeaves = new ArrayList<>();
+		try {
+			blockedLeaves = jsonParsingService.parse(JSON_URL);
+		
+			model.addAttribute("bLList", blockedLeaves);
+		
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "admin-setblockleave";
 	}
 }
