@@ -26,12 +26,12 @@ public class OvertimeController {
 	
 	@Autowired
 	protected IOvertimeService overtimeService;
-	
+
 	@Autowired
 	public void setIOvertimeService(OvertimeserviceImpl overtimeSerImpl) {
 		this.overtimeService = overtimeSerImpl;
 	}
-	
+
 	@RequestMapping("/claim")
 	public String claim(Model model,HttpSession session) {
 		model.addAttribute("overtime", new Overtime());
@@ -39,7 +39,7 @@ public class OvertimeController {
 		model.addAttribute("staff", s);
 		return "overtime-claim";
 	}
-	
+
 
 	@RequestMapping("/history")
 	public String History(Model model,@SessionAttribute("user") Employee emp) {
@@ -55,7 +55,7 @@ public class OvertimeController {
 	 * model.addAttribute("overtime", overtimeService.findAllOvertimeByStaffId(6));
 	 * return "overtime-history"; }
 	 */
-	
+
 	@RequestMapping("/save")
 	public String save(@ModelAttribute("overtime") @Valid Overtime overtime,
 			BindingResult bindingResult,

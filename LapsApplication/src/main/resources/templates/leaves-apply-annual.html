@@ -16,7 +16,8 @@
 <script src="popup.js"></script>
 </head>
 <body>
-	<h1 th:utext=#{leaves-apply.heading}></h1>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
 
 	<form class="form-horizontal" action="#"
 		th:action="@{/leaves/annual/save}" th:object="${annualLeave}"

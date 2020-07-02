@@ -5,12 +5,13 @@
 <title th:utext=#{leaves-applicationdetails.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{leaves-applicationdetails.heading}></h1>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
 
 	<a href="/leave/pending">
-		<button> Approve</button>
+		<button>Approve</button>
 	</a>
-	
+
 
 </body>
 </html>

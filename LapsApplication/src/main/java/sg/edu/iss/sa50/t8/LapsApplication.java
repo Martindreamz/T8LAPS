@@ -60,6 +60,18 @@ public class LapsApplication {
 			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
 			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
 			
+			
+			
+			//set max leaves
+			man1.setAnnualLeaveDays(18);
+			man2.setAnnualLeaveDays(18);
+			man3.setAnnualLeaveDays(18);
+			s1.setAnnualLeaveDays(14);
+			s2.setAnnualLeaveDays(14);
+			s3.setAnnualLeaveDays(14);
+			s4.setAnnualLeaveDays(14);
+			s5.setAnnualLeaveDays(14);
+			
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
 
@@ -119,12 +131,6 @@ public class LapsApplication {
 			System.out.println("I want to test the discriminator:");
 			System.out.println(al1.getDiscriminatorValue());
 			System.out.println(adm1.getDiscriminatorValue());
-			
-			/*
-			 * ems.notifyManager(al1); ems.notifyManager(ml1); ems.notifyStaff(al1);
-			 * ems.notifyStaff(ml1); ems.confirmStaffCancellation(al1);
-			 * ems.confirmStaffCancellation(ml1); System.out.println("emails sent");
-			 */
 
 			
 			

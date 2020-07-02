@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.Staff;
@@ -41,6 +42,19 @@ public class AdminService implements IEmployeeService {
 		return arepo.findAllNonAdminStaff();
 	}
 
+	public List<Admin> findallAdmin(){
+		return arepo.findAllAdmin();
+	}
+	
+	public Admin findAdminById(int id) {
+		// TODO Auto-generated method stub
+		return arepo.findAdminById(id);
+	}
+	
+	public Staff findStaffById(int id) {
+		// TODO Auto-generated method stub
+		return arepo.findStaffById(id);
+	}
 	
 	@Autowired
 	EmployeeRepository eRepo;
@@ -57,4 +71,6 @@ public class AdminService implements IEmployeeService {
 	public int findTotalOTHoursByEmpId(int empId) {
 		return (Integer)eRepo.findTotalOTHoursByEmpId(empId);
 	}
+
+
 }

@@ -7,8 +7,6 @@ import javax.validation.constraints.Max;
 @Entity
 @DiscriminatorValue("Manager")
 public class Manager extends Staff{
-	@OneToOne
-	private Team team;
 	
 	public Manager() {
 		super();

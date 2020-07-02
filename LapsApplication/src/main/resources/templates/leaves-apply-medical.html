@@ -11,15 +11,18 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script
-  src="https://code.jquery.com/jquery-2.2.4.js"></script>
-  <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link
+	href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"
+	rel="stylesheet" />
 <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.css" />
 
 </head>
 <body>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
+	
 	<h1 th:utext=#{leaves-apply.heading}></h1>
 
 	<form class="form-horizontal" action="#" th:action="@{/leaves/medical/save}"

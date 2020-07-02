@@ -2,19 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title th:utext=#{leaves-applications.title}></title>
+<title th:utext=#{home.title}></title>
 </head>
 <body>
+
 	<header th:insert="fragments/general.html::header"></header>
+	
+	<h1 th:utext=#{home.heading}></h1>
+	
 	<div th:insert="fragments/general.html::navigationbar"></div>
 
-	<a href="/leaves/applicationdetail">
+	<a href="/employee/login">
 		<button>Employee Login</button>
 	</a>
 
-	<a href="/employee/leaves">
-		<button>Back</button>
+	<a href="/employee/adminlogin">
+		<button>Admin Login</button>
 	</a>
+	<footer th:insert="fragments/general.html::footer"></footer>
 
 </body>
 </html>
