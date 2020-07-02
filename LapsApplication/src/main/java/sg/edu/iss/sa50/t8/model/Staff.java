@@ -25,8 +25,6 @@ public class Staff extends Employee{
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
 	
-	@ManyToOne
-	private Team team;
 	
 	public Manager getManager() {
 		return manager;

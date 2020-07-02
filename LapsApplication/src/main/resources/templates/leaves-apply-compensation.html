@@ -14,29 +14,31 @@
 
 </head>
 <body>
-	<h1 th:utext=#{leaves-apply.heading}></h1>
-	<p th:if="not ${error==null}" th:text="${error}" style="color:red;"></p>
-		
-	<form class="form-horizontal" action="#" th:action="@{/leaves/compensation/save}"
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
+	<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
+
+	<form class="form-horizontal" action="#"
+		th:action="@{/leaves/compensation/save}"
 		th:object="${compensationLeave}" method="post">
 		<!-- <p th:if="${#fields.hasErrors('staff')}" th:errors="*{name}"></p>
 		 -->
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="startdate">Start
-				Date</label> 
-			<input type="date" th:field="*{startDate}" id="sdate" placeholder="dd/MM/yyyy" />
+				Date</label> <input type="date" th:field="*{startDate}" id="sdate"
+				placeholder="dd/MM/yyyy" />
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="claimQuota">Leave Quota</label>
-			<select th:field="*{claimQuota}">
-				<option th:value="#{compensation.form.am}" th:text="#{compensation.form.am}">
-			 	AM </option> 
-			 	<option th:value="#{compensation.form.pm}" th:text="#{compensation.form.pm}">
-			 	PM </option> 
+			<label class="control-label col-sm-2" for="claimQuota">Leave
+				Quota</label> <select th:field="*{claimQuota}">
+				<option th:value="#{compensation.form.am}"
+					th:text="#{compensation.form.am}">AM</option>
+				<option th:value="#{compensation.form.pm}"
+					th:text="#{compensation.form.pm}">PM</option>
 			</select>
-			
+
 		</div>
-		
+
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="comment">Leave
 				Reason</label>
@@ -45,7 +47,7 @@
 					th:field="*{leaveReason}"></textarea>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<div class="col-sm-6" style="float: right;">
 				<button type="submit" class="btn btn-primary">Submit</button>

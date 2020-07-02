@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="ISO-8859-1">
 <title th:utext=#{home.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{home.heading}></h1>
-
-	<a href="/employee/login">
-		<button>Employee Login</button>
-	</a>
-
-	<a href="/employee/adminlogin">
-		<button>Admin Login</button>
-	</a>
-
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
+	<div th:insert="fragments/general.html::footer"></div>
 </body>
 </html>

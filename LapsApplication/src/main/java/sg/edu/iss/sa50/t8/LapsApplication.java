@@ -54,11 +54,23 @@ public class LapsApplication {
 			Manager man2 = new Manager("Joe2","martin.dreamz@hotmail.com",man1,16,15);
 			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
 			Staff s1 = new Staff("Martin","martin.dreamz@hotmail.com",man2,10,10);
-			s1.setTotalOTHours(3);
+			s1.setTotalOTHours(4);
 			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
 			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
 			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
 			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
+			
+			
+			
+			//set max leaves
+			man1.setAnnualLeaveDays(18);
+			man2.setAnnualLeaveDays(18);
+			man3.setAnnualLeaveDays(18);
+			s1.setAnnualLeaveDays(14);
+			s2.setAnnualLeaveDays(14);
+			s3.setAnnualLeaveDays(14);
+			s4.setAnnualLeaveDays(14);
+			s5.setAnnualLeaveDays(14);
 			
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
@@ -67,6 +79,7 @@ public class LapsApplication {
 			al1.setStartDate(d1);
 			al1.setStaff(s1);
 			al1.setLeaveReason("Moving House");
+			al1.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
 			ml1.setStartDate(d1);
@@ -102,12 +115,6 @@ public class LapsApplication {
 			System.out.println("I want to test the discriminator:");
 			System.out.println(al1.getDiscriminatorValue());
 			System.out.println(adm1.getDiscriminatorValue());
-			
-			/*
-			 * ems.notifyManager(al1); ems.notifyManager(ml1); ems.notifyStaff(al1);
-			 * ems.notifyStaff(ml1); ems.confirmStaffCancellation(al1);
-			 * ems.confirmStaffCancellation(ml1); System.out.println("emails sent");
-			 */
 
 			
 			

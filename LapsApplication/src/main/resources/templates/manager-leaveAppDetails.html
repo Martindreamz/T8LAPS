@@ -1,42 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
 <meta charset="ISO-8859-1">
 <title th:utext=#{leaves-applicationdetails.title}></title>
 </head>
-<body >
-<h1 th:utext=#{leaves-applicationdetails.heading}></h1>
+<body>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
 
-<form action="#" th:object="${leaves}"
-	th:action="@{/manager/leavesAppDetails/respond}" method="post">
-<dl class="row">
-  <dt class="col-sm-3">Staff Name</dt>
-  <dd class="col-sm-9" th:text="${leaves.staff.name}" >Bianca</dd>
 
-  <dt class="col-sm-3">Leave Type</dt>
-  <dd class="col-sm-9" th:text="*{DiscriminatorValue}"><p>Annual Leave Got Problem! Leave Type Cannot be found! </p>
-  </dd>
+	<form action="#" th:object="${leaves}"
+		th:action="@{/manager/leavesAppDetails/respond}" method="post">
+		<dl class="row">
+			<dt class="col-sm-3">Staff Name</dt>
+			<dd class="col-sm-9" th:text="${leaves.staff.name}">Bianca</dd>
 
-  <dt class="col-sm-3" >Start Date</dt>
-  <dd class="col-sm-9" th:text="${leaves.startDate}">01-07-2020</dd>
-  <dt class="col-sm-3" >End Date</dt>
-  <dd class="col-sm-9" th:text="${leaves.endDate}">05-07-2020</dd>
 
-  <dt class="col-sm-3 text-truncate">Leave Reason</dt>
-  <dd class="col-sm-9" th:text="${leaves.leaveReason}">There is so much in the world that I'd like to soak up with my eyes.</dd>
+			<dt class="col-sm-3">Leave Type</dt>
+			<dd class="col-sm-9" th:text="*{DiscriminatorValue}">
+				<p>Annual Leave Got Problem! Leave Type Cannot be found!</p>
+			</dd>
 
- <dt class="col-sm-3">Your Comment</dt>
- <dd class="col-sm-9">
- 	<input type="text" th:field="*{managerComment}">
- </dd>
+			<dt class="col-sm-3">Start Date</dt>
+			<dd class="col-sm-9" th:text="${leaves.startDate}">01-07-2020</dd>
+			<dt class="col-sm-3">End Date</dt>
+			<dd class="col-sm-9" th:text="${leaves.endDate}">05-07-2020</dd>
+			<dt class="col-sm-3">Leave Status</dt>
+			<dd class="col-sm-9" th:text="${leaves.status}">Applied/updated/cancelled/...</dd>
 
-</dl>
-<button type="submit" name="action" value="approve">Approve</button>
-<button type="submit" name="action" value="reject">Reject</button>
+
+			<dt class="col-sm-3 text-truncate">Leave Reason</dt>
+			<dd class="col-sm-9" th:text="${leaves.leaveReason}">There is so
+				much in the world that I'd like to soak up with my eyes.</dd>
+			<dt class="col-sm-3">Your Comment</dt>
+			<dd class="col-sm-9">
+				<div th:switch="${leaves.status.name()}">
+					<div th:case="'Applied'">
+						<input type="text" th:field="*{managerComment}"></input>
+					</div>
+					<div th:case="'Updated'">
+						<input type="text" th:field="*{managerComment}"></input>
+					</div>
+					<div th:case="*">
+						<p th:text="*{managerComment}">This Leave doesn't need to
+							approve/reject.</p>
+					</div>
+				</div>
+				<!--  <input type="text" th:field="*{managerComment}">-->
+			</dd>
+
+
+
+		</dl>
+		<div th:switch="${leaves.status.name()}">
+			<div th:case="'Applied'">
+			<button type="submit" name="action" value="approve">Approve</button>
+			<button type="submit" name="action" value="reject">Reject</button>
+			</div>
+			<div th:case="'Updated'">
+			<button type="submit" name="action" value="approve">Approve</button>
+			<button type="submit" name="action" value="reject">Reject</button>
+			</div>
+			<div th:case="*">
+			<p> There is nothing for you to approve or reject.</p>
+			</div>		
+		</div>
 		
-</form>
+	</form>
+
 
 </body>
 </html>

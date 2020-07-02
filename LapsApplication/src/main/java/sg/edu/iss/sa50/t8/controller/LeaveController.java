@@ -3,11 +3,14 @@ package sg.edu.iss.sa50.t8.controller;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -25,7 +28,6 @@ import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
 import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
-import sg.edu.iss.sa50.t8.service.StaffService;
 
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
@@ -163,6 +165,36 @@ public class LeaveController {
 	public String History(Model model) {
 		model.addAttribute("Leaves", leaveService.findAllLeaves());
 		return "leaves-history";
+	}
+	
+	@RequestMapping(value="/cancel/{id}")
+	public String cancel(@PathVariable("id") Integer id,Model model) {
+		leaveService.updateLeaveStatus(id,LeaveStatus.Cancelled);
+		return "forward:/leaves/history";
+	}
+	
+	@RequestMapping(value="/update/{id}")
+	public String update(@PathVariable("id") Integer id,Model model) {
+		String lType = leaveService.findLeaveTypeById(id);
+		if(lType.equalsIgnoreCase("Annual Leave")) {
+			model.addAttribute("annualLeave",leaveService.findLeaveById(id));
+			return "leaves-apply-annual";
+		}
+		else if(lType.equalsIgnoreCase("Medical Leave")){
+			model.addAttribute("medicalLeave",leaveService.findLeaveById(id));
+			return "leaves-apply-medical";
+		}
+		else{
+			model.addAttribute("compensationLeave",leaveService.findLeaveById(id));
+			return "leaves-apply-compensation";
+		}
+	}
+	
+	@RequestMapping(value="/delete/{id}")
+	public String delete(@PathVariable("id") Integer id,Model model) {
+		leaveService.updateLeaveStatus(id,LeaveStatus.Deleted);
+		//model.addAttribute("Leaves", leaveService.findAllLeaves());
+		return "forward:/leaves/history";
 	}
 	
 	public static int saturdaysundaycount(Date d1, Date d2) {
