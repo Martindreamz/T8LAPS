@@ -48,24 +48,9 @@ public class AdminController {
 
 	//admin
 	@RequestMapping("/admin")
-	public String admin(@ModelAttribute("employee") Employee emp,HttpSession session,Model model) {
-		for(Admin a :((AdminService) aservice).findallAdmin()){
-			System.out.println(a);
-			if(emp.getName().equals(a.getName())){
-				System.out.println("admin name exist");
-				if (emp.getPassword().equals(a.getPassword())){
-					System.out.println("admin password correct");
-
-					session.setAttribute("user",a);					
-					return "admin";
-				}
-			}
-		}
-
-		model.addAttribute("errorMsg","Password is not correct. Pls try again.");
-		return "error";
+	public String admin() {
+		return "admin";
 	}
-
 
 
 

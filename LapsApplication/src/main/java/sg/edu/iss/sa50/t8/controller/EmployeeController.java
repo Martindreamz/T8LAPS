@@ -17,7 +17,6 @@ import sg.edu.iss.sa50.t8.repository.StaffRepository;
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
 @Controller
-@SessionAttributes("user")
 @RequestMapping("/employee")
 public class EmployeeController {
 	//move 2 login methods into LoginControllers
