@@ -17,6 +17,7 @@ public class Staff extends Employee{
 	//managerid is the FK need to build mapping 
 	@ManyToOne  @JoinColumn(name="manager_id")
 	private Manager manager;
+	
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
 	

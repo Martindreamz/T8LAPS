@@ -10,7 +10,7 @@ function checkSelect() {
 	var s = document.getElementById('staff');
 	var role = $("p").text();
 	var id = objS.options[objS.selectedIndex].value;
-	if (id == 'Admin') { //choose admin
+	if (id == "Admin") { //choose admin
 		//if (!role.equals("Admin"))
 		s.style.visibility = 'hidden';
 	} else { //choose staff or manager
@@ -49,8 +49,9 @@ function checkSelect() {
 			method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputName4">Name</label> <input type="hidden"
-						th:field="*{id}"> <input type="text" class="form-control"
+					<label for="inputName4">Name</label> 
+					<input type="hidden" th:field="*{id}"> 
+					<input type="text" class="form-control"
 						id="inputName4" th:field="*{name}" value="">
 				</div>
 				<div class="form-group col-md-6">
@@ -71,9 +72,9 @@ function checkSelect() {
 					<div class="dropList">
 						<select id="drop" onchange="checkSelect()" th:field="*{DiscriminatorValue}">
 							<option th:value="*{DiscriminatorValue}" style="display: none"></option>
-							<option value="Staff" th:field="*{DiscriminatorValue}">Staff</option>
-							<option value="Manager" th:field="*{DiscriminatorValue}">Manager</option>
-							<option value="Admin" th:field="*{DiscriminatorValue}">Administrator</option>
+							<option value="Staff" th:text="Staff">Staff</option>
+							<option value="Manager" th:text="Manager">Manager</option>
+							<option value="Admin" th:text="Admin">Administrator</option>
 						</select>
 					</div>
 
@@ -99,7 +100,7 @@ function checkSelect() {
 						<label for="inputManager">Manager</label> 
 						<select id="drop" th:field="*{manager}">
 							<option value="0" style="display: none" th:each="m : ${managerList}">Select Manager</option>
-							<option th:value="${m}" th:text="${m.name}">Manager</option>
+							<option th:value="${m}" th:text="${m.name}" th:field="*{manager}">Manager</option>
 						</select>
 					</div>
 				</div>

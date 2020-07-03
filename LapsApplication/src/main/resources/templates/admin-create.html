@@ -39,9 +39,16 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputRole">Role</label> <input type="text"
+					<label for="inputRole">Role</label> 
+					 <input type="text"
 						class="form-control" id="inputRole"
 						th:field="*{DiscriminatorValue}" value="">
+					<!-- <select id="drop" th:field="*{DiscriminatorValue}">
+							<option th:value="*{DiscriminatorValue}" style="display: none"></option>
+							<option value="Staff" th:text="Staff">Staff</option>
+							<option value="Manager" th:text="Manager">Manager</option>
+							<option value="Admin" th:text="Admin">Administrator</option>
+					</select> -->
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button>

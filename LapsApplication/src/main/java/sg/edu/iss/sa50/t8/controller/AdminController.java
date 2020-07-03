@@ -122,7 +122,6 @@ public class AdminController {
 		return "BiancaJS-adminedit";
 	}
 
-
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
 		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
@@ -134,7 +133,6 @@ public class AdminController {
 		return "dashboard";
 	}
 
-	
 }
 
 
