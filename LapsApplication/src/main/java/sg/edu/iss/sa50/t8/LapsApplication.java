@@ -252,6 +252,30 @@ public class LapsApplication {
 			c.setLeaveReason("Compensation 1");
 			c.setStatus(LeaveStatus.Approved);
 			
+			CompensationLeave c1 =new CompensationLeave("Half Day AM");
+			c1.setStartDate(d4);
+			c1.setStaff(s11);
+			c1.setLeaveReason("Compensation 1.1");
+			c1.setStatus(LeaveStatus.Approved);
+			
+			CompensationLeave c2 =new CompensationLeave("Half Day PM");
+			c2.setStartDate(d4);
+			c2.setStaff(s11);
+			c2.setLeaveReason("Compensation 1.2");
+			c2.setStatus(LeaveStatus.Approved);
+			
+			CompensationLeave c3 =new CompensationLeave("Half Day AM");
+			c3.setStartDate(d12);
+			c3.setStaff(s13);
+			c3.setLeaveReason("Compensation 2.1");
+			c3.setStatus(LeaveStatus.Rejected);
+			
+			CompensationLeave c4 =new CompensationLeave("Half Day PM");
+			c4.setStartDate(d12);
+			c4.setStaff(s13);
+			c4.setLeaveReason("Compensation 2.2");
+			c4.setStatus(LeaveStatus.Approved);
+			
 			empRepo.save(adm1);
 			empRepo.save(adm2);
 			empRepo.save(man1);
@@ -290,6 +314,10 @@ public class LapsApplication {
 			lRepo.save(ml6);
 			lRepo.save(al2);
 			lRepo.save(c);
+			lRepo.save(c1);
+			lRepo.save(c2);
+			lRepo.save(c3);
+			lRepo.save(c4);
 			
 			oRepo.save(ot1);
 			oRepo.save(ot2);
