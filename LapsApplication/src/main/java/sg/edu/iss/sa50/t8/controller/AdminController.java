@@ -68,11 +68,7 @@ public class AdminController {
 
 	//Admin create form
 	@RequestMapping("/admin-create")
-<<<<<<< HEAD
-	public String createAdmin(Model model) {
-		model.addAttribute("staff", new Staff());
-	
-=======
+
 	public String createAdmin(Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
 		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
@@ -80,21 +76,10 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-		model.addAttribute("admin", new Admin());
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
+		model.addAttribute("staff", new Staff());
 		return "admin-create";
 	}
-<<<<<<< HEAD
-	//Admin create form
-	@RequestMapping("/admin-allEmp")
-	public String createAllEmployee(Model model) {
-		model.addAttribute("emp", new Employee());
-		//model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
-		//return "staff-edit";
-		model.addAttribute("url","save-all");
-		return "BiancaJS-adminedit";
-	}
-=======
+
 //	//Admin create form
 //	@RequestMapping("/admin-allEmp")
 //	public String createAllEmployee(Model model) {
@@ -105,19 +90,9 @@ public class AdminController {
 //		return "BiancaJS-adminedit";
 //	}
 //	
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
 
-<<<<<<< HEAD
 
-	//	
-	//	//Admin create form
-	//	@RequestMapping("/admin-create")
-	//	public String create(Model model) {
-	//		model.addAttribute("admin", new Admin());
-	//		return "admin-create";
-	//	}
-	//	
-=======
+
 //	
 //	//Admin create form
 //	@RequestMapping("/admin-create")
@@ -126,7 +101,7 @@ public class AdminController {
 //		return "admin-create";
 //	}
 	
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
+
 	//Staff create form
 	@RequestMapping("/staff-create")
 	public String staffCreate(Model model, HttpSession session) {
@@ -183,13 +158,7 @@ public class AdminController {
 			return "admin-edit";
 		}
 	}*/
-<<<<<<< HEAD
 
-	@RequestMapping("/save-staff")
-	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
-		if(((AdminService) aservice).save(staff)) {
-			return "forward:/employee/dashboard";
-=======
 	
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
@@ -198,18 +167,13 @@ public class AdminController {
 			model.addAttribute("errorMsg","Sorry you haven't log in."
 					+ "Pls Log in as an admin.");
 			return "error";
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
+
 		}
 		
 		model.addAttribute("admin", ((AdminService) aservice).findAdminById(id));
 		return "admin-edit";
 	}
-<<<<<<< HEAD
 
-
-
-	@RequestMapping("/admin-edit/{id}")
-=======
 	
 	@RequestMapping("/staff-edit/{id}")
 	public String editStaff(@PathVariable("id") int id, Model model, HttpSession session) {
@@ -326,8 +290,7 @@ public class AdminController {
 
 
 	}
-<<<<<<< HEAD
-=======
+
 	
 	@RequestMapping("/save-staff")
 	public String saveStaff(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
@@ -352,7 +315,7 @@ public class AdminController {
 	}
 	
 	
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
+
 }
 
 
