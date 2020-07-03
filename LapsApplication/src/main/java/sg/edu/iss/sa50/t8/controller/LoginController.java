@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 
@@ -22,6 +23,7 @@ public class LoginController {
 	@Qualifier("adminService")
 	protected IEmployeeService aservice;
 
+	
 	@Autowired
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;}
@@ -34,14 +36,20 @@ public class LoginController {
 
 	// admin-login
 
-		@RequestMapping("/login2")
-		public String adminLogin(Model model) { 
-			Employee emp = new Employee();
-			model.addAttribute("admin", emp);
+	@RequestMapping("/login2")
+	public String adminLogin(Model model) { 
+		Staff emp = new Staff();
+		model.addAttribute("admin", emp);
 
-			return "adminlogin";
-		}
+		return "adminlogin";
+	}
 	
+	@RequestMapping("/bianca")
+	public String biancaJS(Model model) {
+		Employee emp = new Employee();
+		model.addAttribute("emp", emp);
+		return "BiancaJS-adminedit";
+	}
 	
 	@RequestMapping("/adminlogin")
 	public String adminlogin(@ModelAttribute("admin") Employee emp,HttpSession session,Model model) {

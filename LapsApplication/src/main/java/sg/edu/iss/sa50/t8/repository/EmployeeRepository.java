@@ -2,6 +2,7 @@
 package sg.edu.iss.sa50.t8.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,4 +28,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Query("SELECT s FROM Staff s where s.id = :stfId") 
 	Staff findStaffById(@Param("stfId") int id);
 	
+	@Query(value="SELECT m FROM Manager m")
+	List<Employee> findAllManager();
 }

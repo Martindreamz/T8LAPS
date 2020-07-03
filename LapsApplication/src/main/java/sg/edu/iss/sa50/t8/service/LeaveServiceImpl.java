@@ -75,8 +75,6 @@ public class LeaveServiceImpl implements ILeaveService{
 		return leaveRepo.findLeaveTypeById(leaveId);
 	}
 	
-	
-	
 	@Override
 	public long findCurAnnLeave(int id) {
 		Staff s = (Staff) staffRepo.findEmployeeById(id);

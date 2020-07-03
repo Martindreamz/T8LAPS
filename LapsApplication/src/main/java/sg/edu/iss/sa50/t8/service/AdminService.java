@@ -2,21 +2,45 @@ package sg.edu.iss.sa50.t8.service;
 
 import java.util.List;
 
+import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.AdminRepository;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
+import sg.edu.iss.sa50.t8.repository.ManagerRepository;
+import sg.edu.iss.sa50.t8.repository.StaffRepository;
 
 @Service
 public class AdminService implements IEmployeeService {
 	
 	@Autowired
 	AdminRepository arepo;
-
+	
+	@Autowired
+	StaffRepository srepo;
+	
+	@Transactional
+	public void deleteAdminById(int adminId) {
+		arepo.deleteAdminById(adminId);
+	}
+	
+	@Transactional
+	public void deleteStaffById(int adminId) {
+		srepo.deleteStaffById(adminId);
+	}
+	
+	public List<Employee> findAllManager() {
+		return eRepo.findAllManager();
+	}
+	
+	public boolean saveAdmin(Admin admin) {
+		return arepo.save(admin)!=null? true : false;
+	}
 	
 	public List<Employee> searchEmployee(String searchTerm){
 		//return arepo.searchEmployee(searchTerm);

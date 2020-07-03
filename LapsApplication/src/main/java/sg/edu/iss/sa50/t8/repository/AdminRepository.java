@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -27,4 +28,8 @@ public interface AdminRepository extends EmployeeRepository {
 	
 	@Query("SELECT e FROM Employee e WHERE e.class = 'Admin' AND e.id = :id")
 	Admin findAdminById(@Param("id") int id);
+	
+	@Modifying
+	@Query("delete from Admin where id=?1")
+	void deleteAdminById(int adminId);
 } 
