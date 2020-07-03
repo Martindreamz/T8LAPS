@@ -94,17 +94,20 @@ public class LeaveController {
 			model.addAttribute("eCurAnnLeave", curAnn);
 			model.addAttribute("formId", formId);
 			model.addAttribute("annualLeave", leaveService.findLeaveById(id));
-			return "leaves-update-annual";
+			//return "leaves-update-annual";
+			return "view-detail-annual";
 		} else if (lType.equalsIgnoreCase("Medical Leave")) {
 			long medAnn = leaveService.findMedAnnLeave(emp.getId());
 			model.addAttribute("eMedAnnLeave", medAnn);
 			model.addAttribute("formId", formId);
 			model.addAttribute("medicalLeave", leaveService.findLeaveById(id));
-			return "leaves-update-medical";
+			//return "leaves-update-medical";
+			return "view-detail-medical";
 		} else {
 			model.addAttribute("formId", formId);
 			model.addAttribute("compensationLeave", leaveService.findLeaveById(id));
-			return "leaves-apply-compensation";
+			//return "leaves-apply-compensation";
+			return "view-detail-compensation";
 		}
 	}
 

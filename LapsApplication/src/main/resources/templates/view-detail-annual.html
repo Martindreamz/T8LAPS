@@ -12,38 +12,56 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="applyform.css">
+<script src="popup.js"></script>
 </head>
 <body>
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::navigationbar"></div>
-	<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
 
-	<h1 class="text-center">Compensation Leave Application Form</h1>
-	<span style="padding-left: 50px"> Welcome <span
-		th:text="${session.user.name}"></span></span>
+	<h1 class="text-center">Annual Leave Application Form</h1>
+	<span style="padding-left: 50px"> Welcome <span th:text="${session.user.name}"></span></span>
 	<div class="container">
-		<div class="col-md-6 col-md-offset-2">
+	 <div class="col-md-6 col-md-offset-2">
 			<form class="form-horizontal" action="#"
-				th:action="@{/leaves/compensation/save}"
-				th:object="${compensationLeave}" method="post">
+				th:action="@{/leaves/annual/save}" th:object="${annualLeave}"
+				method="post">
 				
-				<input type="hidden" th:field="*{id}">
+				<div class="form-group">
+					<p th:if="not ${error1==null}" th:text="${error1}" style="color: red;"></p>
+					<label class="control-label col-sm-6" for="startdate">Available
+						Leaves</label>
+					<div class="col-sm-6">
+						<input id="avaAnn" th:value="${eCurAnnLeave}" disabled="disabled" class="form-control"></input>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="control-label col-sm-6" for="startdate">Start
 						Date</label>
 					<div class="col-sm-6">
-						<input type="date" th:field="*{startDate}" id="sdate" class="form-control"
-							placeholder="yyyy-MM-dd" disabled/>
-						<p th:if="not ${errorDate==null}" th:text="${errorDate}" style="color: red;"></p>
+						<input type="date" class="form-control" id="sdate"
+							th:field="*{startDate}" th:text="${#dates.format(annualLeave.startDate, 'yyyy-MM-dd')}" disabled>
 					</div>
 				</div>
+
+
 				<div class="form-group">
-					<label class="control-label col-sm-6" for="claimQuota">Leave
-						Quota</label>
+					<label class="control-label col-sm-6" for="enddate">End
+						Date</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control"
-							th:text="*{claimQuota}" disabled/>
+						<input type="date" class="form-control" id="edate"
+							th:field="*{endDate}" disabled>
+					</div>
+					<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-sm-6" for="contactdetails">Contact
+						Details</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="ctdetails"
+							th:field="*{contactDetails}" disabled>
 					</div>
 				</div>
 
@@ -53,13 +71,14 @@
 					<div class="col-sm-6">
 						<textarea class="form-control" rows="5" id="comment"
 							th:field="*{leaveReason}" disabled></textarea>
+
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="control-label col-sm-6"></div>
-					<div class="col-sm-6" th:if="${#strings.equals(compensationLeave.status,'Applied')}">
-						<a th:href="@{/leaves/delete/}+${compensationLeave.id}"
+					<div class="col-sm-6" th:if="${#strings.equals(annualLeave.status,'Applied')}">
+						<a th:href="@{/leaves/delete/}+${annualLeave.id}"
 						th:text="#{leaves-history.delete }" class="btn btn-primary col-sm-12">Delete</a>
 					</div>
 				
@@ -67,28 +86,30 @@
 				
 				<div class="form-group">
 					<div class="control-label col-sm-6"></div>
-					<div class="col-sm-6" th:if="${#strings.equals(compensationLeave.status,'Applied')}">
-							<a th:href="@{/leaves/update/}+${compensationLeave.id}"
+					<div class="col-sm-6" th:if="${#strings.equals(annualLeave.status,'Applied')}">
+							<a th:href="@{/leaves/update/}+${annualLeave.id}"
 							th:text="#{leaves-history.update }" class="btn btn-primary col-sm-12">Update</a>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="control-label col-sm-6"></div>
-					<div class="col-sm-6"  th:if="${#strings.equals(compensationLeave.status,'Approved')}">
-						<a th:if="${#dates.createToday().before(compensationLeave.startDate)}" th:href="@{/leaves/cancel/}+${compensationLeave.id}"
+					<div class="col-sm-6"  th:if="${#strings.equals(annualLeave.status,'Approved')}">
+						<a th:if="${#dates.createToday().before(annualLeave.startDate)}" th:href="@{/leaves/cancel/}+${annualLeave.id}"
 						th:text="#{leaves-history.cancel }" class="btn btn-primary col-sm-12">Cancel</a>
 					</div>
 				</div>
+				
 				<div class="form-group">
 					<div class="control-label col-sm-6"></div>
 					<div class="col-sm-6">
 						<a th:href="@{/leaves/history}" class="btn btn-primary col-sm-12">Back to History</a>
 					</div>
 				</div>
-
+			
 			</form>
 		</div>
-	</div>
+		</div>
+
 </body>
 </html>
