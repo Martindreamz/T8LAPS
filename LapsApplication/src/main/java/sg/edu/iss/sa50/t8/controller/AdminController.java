@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,14 +55,6 @@ public class AdminController {
 		return "admin-create";
 	}
 	
-	// Save method for Admin creation
-	@RequestMapping("/admin/create")
-	public String saveAdmin(@ModelAttribute("admin") Admin admin,
-			Model model,@SessionAttribute("user") Employee emp) {
-		((AdminService) aservice).saveAdmin(admin);
-		return "admin";
-	}
-	
 	//Staff create form
 	@RequestMapping("/staff-create")
 	public String staffCreate(Model model) {
@@ -69,22 +62,64 @@ public class AdminController {
 		return "staff-create";
 	}
 	
+	// Delete admin/staff Part
+	@Transactional
 	@RequestMapping("/admin-delete/{id}")
-	public String delete(@PathVariable("id") int id, Model model) {
-		model.addAttribute("employee", ((AdminService) aservice).findById(id));
-		return "admin-delete";
+	public String deleteAdmin(@PathVariable("id") int id, Model model) {
+		((AdminService) aservice).deleteAdminById(id);
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "dashboard";
+	}
+	
+	@Transactional
+	@RequestMapping("/staff-delete/{id}")
+	public String deleteStaff(@PathVariable("id") int id, Model model) {
+		((AdminService) aservice).deleteStaffById(id);
+		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		return "dashboard";
 	}
 
+	//Save Part
+	
+	@RequestMapping("/save-admin")
+	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
+		if(((AdminService) aservice).save(admin)) {
+			return "forward:/employee/dashboard";
+		}
+		else {
+			model.addAttribute("admin", admin);
+			return "admin-edit";
+		}
+	}
+	
+	@RequestMapping("/save-staff")
+	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
+		if(((AdminService) aservice).save(staff)) {
+			return "forward:/employee/dashboard";
+		}
+		else {
+			model.addAttribute("staff", staff);
+			return "staff-edit";
+		}
+	}
+
+	////
+	
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model) {
-		model.addAttribute("admin", ((AdminService) aservice).findAdminById(id));
-		return "admin-edit";
+		model.addAttribute("emp", ((AdminService) aservice).findAdminById(id));
+		//return "admin-edit";
+		model.addAttribute("url","save-admin");
+		return "BiancaJS-adminedit";
 	}
 	
 	@RequestMapping("/staff-edit/{id}")
 	public String editStaff(@PathVariable("id") int id, Model model) {
-		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
-		return "staff-edit";
+		model.addAttribute("emp", ((AdminService) aservice).findStaffById(id));
+		model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
+		//return "staff-edit";
+		model.addAttribute("url","save-staff");
+		return "BiancaJS-adminedit";
 	}
 
 
@@ -99,39 +134,7 @@ public class AdminController {
 		return "dashboard";
 	}
 
-	@RequestMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
-		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-		toSave.setName(admin.getName());
-		toSave.setPassword(admin.getPassword());
-		toSave.setEmail(admin.getEmail());
-		if(((AdminService) aservice).save(toSave)) {
-			return "forward:/employee/dashboard";
-		}
-		else {
-			model.addAttribute("admin", toSave);
-			return "admin-edit";
-		}
-		
-	}
 	
-	@RequestMapping("/save-staff")
-	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
-		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
-		toSave.setName(staff.getName());
-		toSave.setPassword(staff.getPassword());
-		toSave.setEmail(staff.getEmail());
-		toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
-		if(((AdminService) aservice).save(toSave)) {
-			return "forward:/employee/dashboard";
-		}
-		else {
-			model.addAttribute("staff", toSave);
-			return "staff-edit";
-		}
-	}
-
-
 }
 
 

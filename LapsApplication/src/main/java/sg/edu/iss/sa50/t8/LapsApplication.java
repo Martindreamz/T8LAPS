@@ -23,6 +23,7 @@ import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.BlockedLeavesRepository;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.repository.LeaveRepository;
+import sg.edu.iss.sa50.t8.repository.ManagerRepository;
 import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
 import sg.edu.iss.sa50.t8.service.EmailService;
 
@@ -48,6 +49,9 @@ public class LapsApplication {
 	EmailService ems;
 	
 	@Autowired
+	ManagerRepository mRepo;
+	
+	@Autowired
 	BlockedLeavesRepository blRepo;
 	
 	public static void main(String[] args) {
@@ -64,12 +68,12 @@ public class LapsApplication {
 			Manager man1 = new Manager("Joe","martin.dreamz@hotmail.com",null,16,20);
 			Manager man2 = new Manager("Joe2","martin.dreamz@hotmail.com",man1,16,15);
 			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
-			Staff s1 = new Staff("Martin1","martin.dreamz@hotmail.com",man2,10,10);
+			Staff s1 = new Staff("Martin1","martin.dreamz@hotmail.com",man2,(long)10,(long)10);
 			s1.setTotalOTHours(4);
-			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,12,10);
-			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,14,10);
-			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,20,60);
-			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,4,18);
+			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,(long)12,(long)10);
+			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,(long)14,(long)10);
+			Staff s4 = new Staff("Yirui","e0533384@u.nus.edu",man1,(long)20,(long)60);
+			Staff s5 = new Staff("Yirui2","e0533385@u.nus.edu",man2,(long)4,(long)18);
 			
 			
 			

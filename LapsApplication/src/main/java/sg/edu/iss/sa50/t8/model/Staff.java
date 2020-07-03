@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-@DiscriminatorValue("staff")
+@DiscriminatorValue("Staff")
 public class Staff extends Employee{
 	
 	//Check & Edit by Bianca: add validation and mapping setting
@@ -20,8 +20,7 @@ public class Staff extends Employee{
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
 	
-	private long CurrentAnnualLeaves;
-	private long CurrentMedicalLeaves; 
+	
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
 	
@@ -40,47 +39,12 @@ public class Staff extends Employee{
 		super(name,email);
 	}
 	//Bianca New constructors
-	public Staff(String name, String email,Manager manager, int annualLeaveDays, int medicalLeaveDays) {
-		super(name,email);
+	public Staff(String name, String email,Manager manager, Long annualLeaveDays, Long medicalLeaveDays) {
+		super(name,email,annualLeaveDays,medicalLeaveDays);
 		this.manager = manager;
-		this.CurrentAnnualLeaves = annualLeaveDays;
-		this.CurrentMedicalLeaves = medicalLeaveDays;
-	}
-
-	public long getAnnualLeaveDays() {
-		return CurrentAnnualLeaves;
 	}
 
 
-	public void setAnnualLeaveDays(long annualLeaveDays) {
-		this.CurrentAnnualLeaves = annualLeaveDays;
-	}
-
-
-//	public int getMedicalLeaveDays() {
-//		return CurrentMedicalLeaves;
-//	}
-
-
-	public void setMedicalLeaveDays(int medicalLeaveDays) {
-		this.CurrentMedicalLeaves = medicalLeaveDays;
-	}
-
-	public long getCurrentAnnualLeaves() {
-		return CurrentAnnualLeaves;
-	}
-
-	public void setCurrentAnnualLeaves(long currentAnnualLeaves) {
-		CurrentAnnualLeaves = currentAnnualLeaves;
-	}
-
-	public long getCurrentMedicalLeaves() {
-		return CurrentMedicalLeaves;
-	}
-
-	public void setCurrentMedicalLeaves(long currentMedicalLeaves) {
-		CurrentMedicalLeaves = currentMedicalLeaves;
-	}
 
 	public int getTotalAnnualLeaves() {
 		return TotalAnnualLeaves;

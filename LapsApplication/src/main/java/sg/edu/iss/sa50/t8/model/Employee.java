@@ -16,9 +16,12 @@ public class Employee {
     private String email;
 	private String password; 
 	
+	private long CurrentAnnualLeaves;
+	private long CurrentMedicalLeaves; 
+	
 	private int totalOTHours;
 	
-    public Employee() {
+	public Employee() {
 	    super();
         // TODO Auto-generated constructor stub 
     }
@@ -29,6 +32,12 @@ public class Employee {
         this.email = email;
     	  password = "000000"; 
         
+    }
+    public Employee(String name,String email,Long annualLeaveDays,Long medicalLeaveDays) {
+    	this.name = name;
+        this.email = email;
+        this.CurrentAnnualLeaves = annualLeaveDays;
+        this.CurrentMedicalLeaves = medicalLeaveDays;
     }
 
     public int getId() {
@@ -92,6 +101,37 @@ public class Employee {
 	@Transient
 	public String getDiscriminatorValue(){
 		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+	}
+	
+	//Theingi
+	public long getAnnualLeaveDays() {
+		return CurrentAnnualLeaves;
+	}
+
+
+	public void setAnnualLeaveDays(long annualLeaveDays) {
+		this.CurrentAnnualLeaves = annualLeaveDays;
+	}
+
+
+	public void setMedicalLeaveDays(int medicalLeaveDays) {
+		this.CurrentMedicalLeaves = medicalLeaveDays;
+	}
+
+	public long getCurrentAnnualLeaves() {
+		return CurrentAnnualLeaves;
+	}
+
+	public void setCurrentAnnualLeaves(long currentAnnualLeaves) {
+		CurrentAnnualLeaves = currentAnnualLeaves;
+	}
+
+	public long getCurrentMedicalLeaves() {
+		return CurrentMedicalLeaves;
+	}
+
+	public void setCurrentMedicalLeaves(long currentMedicalLeaves) {
+		CurrentMedicalLeaves = currentMedicalLeaves;
 	}
 
 }

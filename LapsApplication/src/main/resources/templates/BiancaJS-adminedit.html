@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,22 +5,17 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script type="text/JavaScript">
-	function checkSelect() {
-		var objS = document.getElementById("drop");
-		var a = document.getElementById('admin');
-		var s = document.getElementById('staff');
-		var role = $("p").text();
-		var id = objS.options[objS.selectedIndex].value;
-		if (id == 3) { //choose admin
-			//if (!role.equals("Admin"))
-			s.style.visibility = 'hidden';
-			a.style.visibility = 'hidden';
-		}
-		else { //choose staff or manager
-			s.style.visibility = 'visible'; 
-			a.style.visibility = 'visible'; 
-			
-		}
+function checkSelect() {
+	var objS = document.getElementById("drop");
+	var s = document.getElementById('staff');
+	var role = $("p").text();
+	var id = objS.options[objS.selectedIndex].value;
+	if (id == 'Admin') { //choose admin
+		//if (!role.equals("Admin"))
+		s.style.visibility = 'hidden';
+	} else { //choose staff or manager
+		s.style.visibility = 'visible';
+	}
 
 	}
 	function test() {
@@ -30,7 +23,7 @@
 		if (t.style.visibility == 'hidden') {
 			t.style.visibility = 'visible';
 		} else {
-			t.style.display="none";
+			t.style.display = "none";
 		}
 	}
 </script>
@@ -50,8 +43,9 @@
 		js Test<br>
 	</div>
 	<button onclick="test()">Click</button>-->
+	<h1>Bianca JS</h1>
 	<div class="container">
-		<form th:object="${emp}" th:action="@{/employee/save-admin}"
+		<form th:object="${emp}" th:action="@{/employee/}+${url}"
 			method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -72,59 +66,65 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputRole">Role</label>
-					<p class="form-control" id="inputRole" th:text="*{DiscriminatorValue}" value=""></p>
+					<p class="form-control" id="inputRole"
+						th:text="*{DiscriminatorValue}" value=""></p>
 					<div class="dropList">
-						<select id="drop" onchange="checkSelect()">
+						<select id="drop" onchange="checkSelect()" th:field="*{DiscriminatorValue}">
 							<option th:value="*{DiscriminatorValue}" style="display: none"></option>
-							<option value="1" th:field="*{DiscriminatorValue}">Staff</option>
-							<option value="2" th:field="*{DiscriminatorValue}">Manager</option>
-							<option value="3" th:field="*{DiscriminatorValue}">Administrator</option>
+							<option value="Staff" th:field="*{DiscriminatorValue}">Staff</option>
+							<option value="Manager" th:field="*{DiscriminatorValue}">Manager</option>
+							<option value="Admin" th:field="*{DiscriminatorValue}">Administrator</option>
 						</select>
 					</div>
 
 				</div>
-				
+
 			</div>
-			
+
 			<div th:unless="${#strings.equals(emp.DiscriminatorValue,'Admin')}">
-			<div class="form-row" id="staff">
-				<div class="form-group col-md-6">
-					<label for="inputAL">Annual Leaves</label> <input type="text"
-						class="form-control" id="inputAL" 
-						th:field="*{CurrentAnnualLeaves}" value="">
-				</div>
-				<div class="form-group col-md-6">
-					<label for="inputML">Medical Leaves</label> <input type="text"
-						class="form-control" id="inputML"
-						th:field="*{CurrentMedicalLeaves}" value="nil">
-				</div>
-				<div class="form-group col-md-6" >
-					<label for="inputManager">Manager</label> <input type="text"
-						class="form-control" id="inputManager" 
-						th:field="*{manager.name}"
-						value="nil">
-				</div>
-			</div>
-			<div th:if="${#strings.equals(emp.DiscriminatorValue,'Admin')}">
-				<div class="form-group col-md-6">
-					<label for="inputAL">Annual Leaves</label> <input type="text"
-						class="form-control" id="inputAL" 
-						th:field="*{CurrentAnnualLeaves}" value="">
-				</div>
-				<div class="form-group col-md-6">
-					<label for="inputML">Medical Leaves</label> <input type="text"
-						class="form-control" id="inputML"
-						th:field="*{CurrentMedicalLeaves}" value="nil">
-				</div>
-				<div class="form-group col-md-6" >
-					<label for="inputManager">Manager</label> <input type="text"
-						class="form-control" id="inputManager" 
-						th:field="*{manager.name}"
-						value="nil">
+				<div class="form-row" id="staff">
+					<input type="hidden"
+						th:field="*{id}">
+					<div class="form-group col-md-6">
+						<label for="inputAL">Annual Leaves</label> <input type="text"
+							class="form-control" id="inputAL"
+							th:field="*{CurrentAnnualLeaves}" value="">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputML">Medical Leaves</label> <input type="text"
+							class="form-control" id="inputML"
+							th:field="*{CurrentMedicalLeaves}" value="nil">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputManager">Manager</label> 
+						<select id="drop" th:field="*{manager}">
+							<option value="0" style="display: none" th:each="m : ${managerList}">Select Manager</option>
+							<option th:value="${m}" th:text="${m.name}">Manager</option>
+						</select>
+					</div>
 				</div>
 			</div>
-			</div>
-			
+
+			<!-- <div th:if="${#strings.equals(emp.DiscriminatorValue,'Admin')}">
+				<div class="form-row" id="admin">
+					<div class="form-group col-md-6">
+						<label for="inputAL">Annual Leaves</label> <input type="text"
+							class="form-control" id="inputAL"
+							th:field="*{CurrentAnnualLeaves}" value="">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputML">Medical Leaves</label> <input type="text"
+							class="form-control" id="inputML"
+							th:field="*{CurrentMedicalLeaves}" value="nil">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputManager">Manager</label> <input type="text"
+							class="form-control" id="inputManager" th:field="*{name}"
+							value="nil">
+					</div>
+				</div>
+			</div> -->
+
 			<button type="submit" class="btn btn-primary">Save</button>
 		</form>
 	</div>
@@ -143,4 +143,4 @@
 		crossorigin="anonymous"></script>
 	<div th:insert="fragments/general.html::footer"></div>
 </body>
-</html>
+</html> 
