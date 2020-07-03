@@ -142,6 +142,16 @@ public class LeaveController {
 		}
 		Date d1 = annualLeave.getStartDate();
 		Date d2 = annualLeave.getEndDate();	
+		if (!d1.after(new Date())) {
+			model.addAttribute("errorDate", "Start Date must be future date.");
+			model.addAttribute("annualLeave", annualLeave);
+			return "leaves-apply-annual";
+		}
+		if (!d2.after(new Date())) {
+			model.addAttribute("errorEndDate", "End Date must be future date.");
+			model.addAttribute("annualLeave", annualLeave);
+			return "leaves-apply-annual";
+		}
 		long duration = duration(d1, d2);
 		int satsunCount = saturdaysundaycount(d1, d2);
 		long actualleavesdays = ActualLeaveDays(d1, d2);
@@ -166,8 +176,12 @@ public class LeaveController {
 			model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 			return "leaves-history";}
 		}
+		else if(existingDays < actualleavesdays) {
+			model.addAttribute("error1", "You have not enough eligible leave days to apply this.");
+			return "leaves-apply-annual";
+		}
 		else {
-			model.addAttribute("error", "Start date must not be later than end date.");
+			model.addAttribute("error", "Start date must be earlier than end date.");
 			return "leaves-apply-annual";
 		}
 		
@@ -183,6 +197,18 @@ public class LeaveController {
 		}
 		Date d1 = medicalLeave.getStartDate();
 		Date d2 = medicalLeave.getEndDate();
+		
+		if (!d1.after(new Date())) {
+			model.addAttribute("errorDate", "Start Date must be future date.");
+			model.addAttribute("medicalLeave", medicalLeave);
+			return "leaves-apply-medical";
+		}
+		if (!d2.after(new Date())) {
+			model.addAttribute("errorEndDate", "End Date must be future date.");
+			model.addAttribute("medicalLeave", medicalLeave);
+			return "leaves-apply-medical";
+		}
+		
 		long duration = duration(d1, d2);
 		//long actualleavesdays = ActualLeaveDays(d1, d2);
 		boolean startDateBeforeEndDate = compareDates(d1, d2);
@@ -197,8 +223,12 @@ public class LeaveController {
 			model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 			return "leaves-history";
 		}
+		else if(existingDays < duration) {
+			model.addAttribute("error1", "You have not enough eligible leave days to apply this.");
+			return "leaves-apply-medical";
+		}
 		else {
-			model.addAttribute("error", "Start date must not be later than end date.");
+			model.addAttribute("error", "Start date must be earlier than end date.");
 			return "leaves-apply-medical";
 		}
 
@@ -211,12 +241,21 @@ public class LeaveController {
 		compLeave.setStatus(LeaveStatus.Applied);
 		// int totalOtHr =((StaffService) stService).findTotalOTHoursByEmpId(6);
 		int totalOtHr = ((AdminService) aservice).findTotalOTHoursByEmpId(emp.getId());
-
+		Date startDate = compLeave.getStartDate();
+		
+		if (!startDate.after(new Date())) {
+			model.addAttribute("errorDate", "Start Date must be future date.");
+			model.addAttribute("compensationLeave", compLeave);
+			return "leaves-apply-compensation";
+		}
 		if (totalOtHr < 4) {
 			model.addAttribute("error", "Sorry!You don't have eligilibility to apply this compensation leave.");
 			model.addAttribute("compensationLeave", compLeave);
 			return "leaves-apply-compensation";
 		}
+		int updateHr = ((AdminService) aservice).findTotalOTHoursByEmpId(emp.getId());
+		updateHr -= 4;
+		((AdminService) aservice).updateTotalOTHoursByEmpId(emp.getId(), updateHr);
 		leaveService.saveCompensationLeave(compLeave);
 		model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 		return "leaves-history";
@@ -328,7 +367,8 @@ public class LeaveController {
 				long existingDays = leaveService.findMedAnnLeave(ml.getStaff().getId());
 				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), actualleavedays + existingDays);
 			}
-		} else {
+		} 
+		else {
 			if (l.getStatus().equals(LeaveStatus.Approved)) {
 				int updateHr = ((AdminService) aservice).findTotalOTHoursByEmpId(l.getStaff().getId());
 				updateHr += 4;
@@ -364,17 +404,19 @@ public class LeaveController {
 		String lType = l.getDiscriminatorValue();
 		if (lType.equalsIgnoreCase("Annual Leave")) {
 			AnnualLeave al = leaveService.findAnnualLeaveById(id);
-			if (al.getStatus().equals(LeaveStatus.Approved)) {
+			if (al.getStatus().equals(LeaveStatus.Applied)) {
 				Date d1 = al.getStartDate();
 				Date d2 = al.getEndDate();
 				long actualleavedays = ActualLeaveDays(d1, d2);
 				System.out.println("An Appl:" + actualleavedays);
 				long existingDays = leaveService.findCurAnnLeave(al.getStaff().getId());
+				System.out.println("Annual Delete Day Add: "+ actualleavedays + existingDays);
 				leaveService.updateCurAnnLeaveDate(al.getStaff().getId(), actualleavedays + existingDays);
+
 			}
 		} else if (lType.equalsIgnoreCase("Medical Leave")) {
 			MedicalLeave ml = leaveService.findMedicalLeaveById(id);
-			if (ml.getStatus().equals(LeaveStatus.Approved)) {
+			if (ml.getStatus().equals(LeaveStatus.Applied)) {
 				Date d1 = ml.getStartDate();
 				Date d2 = ml.getEndDate();
 				long actualleavedays = ActualLeaveDays(d1, d2);
@@ -382,8 +424,9 @@ public class LeaveController {
 				long existingDays = leaveService.findMedAnnLeave(ml.getStaff().getId());
 				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), actualleavedays + existingDays);
 			}
-		} else {
-			if (l.getStatus().equals(LeaveStatus.Approved)) {
+		}
+		else {
+			if (l.getStatus().equals(LeaveStatus.Applied)) {
 				int updateHr = ((AdminService) aservice).findTotalOTHoursByEmpId(l.getStaff().getId());
 				updateHr += 4;
 				((AdminService) aservice).updateTotalOTHoursByEmpId(l.getStaff().getId(), updateHr);

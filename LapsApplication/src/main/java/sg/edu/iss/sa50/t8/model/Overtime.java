@@ -22,7 +22,7 @@ public class Overtime {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-//	@Past
+	//@Past
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date overtimeDate; 

@@ -27,10 +27,11 @@
 			<form class="form-horizontal" action="#"
 				th:action="@{/leaves/medical/save}" th:object="${medicalLeave}"
 				method="post">
-
 				<div class="form-group">
+					<p th:if="not ${error1==null}" th:text="${error1}" style="color: red;"></p>
 					<label class="control-label col-sm-6" for="startdate">Available
 						Leaves</label>
+					
 					<div class="col-sm-6">
 						<input id="avaAnn" th:value="${eMedAnnLeave}" disabled="disabled"
 							class="form-control"></input>
@@ -42,12 +43,11 @@
 					<label class="control-label col-sm-6" for="startdate">Start
 						Date</label>
 					<div class="col-sm-6">
-						<!-- 						<p th:if="not ${dateError==null}" th:text="${dateError}" -->
-						<!-- 							style="color: red;"></p> -->
 						<input type="date" class="form-control" id="sdate"
-							th:field="*{startDate}">
+							th:field="*{startDate}" th:text="${#dates.format(medicalLeave.startDate, 'yyyy-MM-dd')}">
 						<p th:if="${#fields.hasErrors('startDate')}"
 							th:errors="*{startDate}" style="color: red"></p>
+						<p th:if="not ${errorDate==null}" th:text="${errorDate}" style="color: red;"></p>
 					</div>
 				</div>
 
@@ -58,8 +58,9 @@
 					<div class="col-sm-6">
 						<input type="date" class="form-control" id="edate"
 							th:field="*{endDate}">
+						<p th:if="not ${errorEndDate==null}" th:text="${errorEndDate}" style="color: red;"></p>
 						<p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"
-							style="color: red"></p>
+							style="color: red" th:text="${#dates.format(annualLeave.endDate, 'yyyy-MM-dd')}"></p>
 					</div>
 				</div>
 				<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>

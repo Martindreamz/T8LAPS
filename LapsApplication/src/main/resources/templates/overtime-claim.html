@@ -26,8 +26,8 @@
 		<div class="col-md-6 col-md-offset-2">
 			<form class="form-horizontal" action="#"
 				th:action="@{/overtime/save}" th:object="${overtime}" method="post">
-				<input type="hidden" th:field="*{id}"> <input type="hidden"
-					id="staff" th:field="${staff}">
+				<input type="hidden" th:field="*{id}"><!--  <input type="hidden"
+					id="staff" th:field="${staff}"> -->
 
 				<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
 
@@ -39,6 +39,7 @@
 							id="overtimedate" placeholder="dd/MM/yyyy" />
 						<p th:if="${#fields.hasErrors('overtimeDate')}"
 							th:error="*{overtimeDate}"></p>
+						<p th:if="not ${errorDate==null}" th:text="${errorDate}" style="color: red;"></p>
 					</div>
 				</div>
 

@@ -1,5 +1,7 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -66,7 +68,14 @@ public class OvertimeController {
 			Model model,@SessionAttribute("user") Employee emp) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("error", "Overtime Date must be past date and claimed overtime hr can't be more than 24 hr");
-			return "forward:/overtime/claim";
+			model.addAttribute("overtime", overtime);
+			return "overtime-claim";
+		}
+		Date d1 = overtime.getOvertimeDate();
+		if (d1.after(new Date())) {
+			model.addAttribute("errorDate", "Overtime claim Date must not be future date.");
+			model.addAttribute("overtime", overtime);
+			return "overtime-claim";
 		}
 		overtime.setStaff((Staff) srepo.findById(emp.getId()).get());
 		overtimeService.saveOvertime(overtime);

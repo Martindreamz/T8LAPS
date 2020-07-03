@@ -27,7 +27,7 @@
 			<tbody>
 				<tr th:each="ot:${overtime}">
 					<td th:text="${ot.id}">id</td>
-					<td th:text="${ot.overtimeDate}">Overtime Date</td>
+					<td th:text="${#dates.format(ot.overtimeDate, 'yyyy-MM-dd')}">Overtime Date</td>
 					<td th:text="${ot.overtimeHours}">overtime hours</td>
 					<td th:text="${ot.overTimeStatus}">overTimeStatus</td>
 
