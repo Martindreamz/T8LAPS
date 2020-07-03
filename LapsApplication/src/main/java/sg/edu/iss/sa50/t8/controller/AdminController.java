@@ -49,14 +49,13 @@ public class AdminController {
 	
 
 	//Admin create form
-	@RequestMapping("/admin-allEmp")
-	public String createAllEmployee(Model model) {
-		model.addAttribute("emp", new Employee());
-		//model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
-		//return "staff-edit";
-		model.addAttribute("url","save-all");
-		return "BiancaJS-adminedit";
-	}
+	/*
+	 * @RequestMapping("/admin-allEmp") public String createAllEmployee(Model model)
+	 * { model.addAttribute("emp", new Employee());
+	 * //model.addAttribute("managerList", ((AdminService)
+	 * aservice).findAllManager()); //return "staff-edit";
+	 * model.addAttribute("url","save-all"); return "BiancaJS-adminedit"; }
+	 */
 	
 	/* Bianca Jul 3rd Bug fixing
 	 * @RequestMapping("/save-staff") public String

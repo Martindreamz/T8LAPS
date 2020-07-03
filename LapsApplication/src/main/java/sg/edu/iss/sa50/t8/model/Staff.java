@@ -23,8 +23,7 @@ public class Staff extends Employee{
  
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
-	private long CurrentAnnualLeaves;
-	private long CurrentMedicalLeaves;
+	
 	
 	
 	public Manager getManager() {
