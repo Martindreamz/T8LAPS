@@ -110,7 +110,7 @@ public class ManagerController {
 		return "error";
 	}
 
-	@RequestMapping("/leavesAppDetails/{id}")
+	@RequestMapping("/leavesAppDetails/{id}") 
 	public String showLeaveAppDetail(Model model, @PathVariable("id") Integer id, 
 			HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
@@ -124,6 +124,9 @@ public class ManagerController {
 			if (l.getStaff().getManager().getId()== man.getId()) {
 				session.setAttribute("leavesId", id);
 				model.addAttribute("leaves", l);
+				model.addAttribute("leaves", l);
+				List<Leaves> matesLeavesList = ((ManagerService) manService).findAllSubLeavesByPeriod(l, man);
+				model.addAttribute("MatesLeaves", matesLeavesList);
 				return "manager-leaveAppDetails";
 			}
 			else {

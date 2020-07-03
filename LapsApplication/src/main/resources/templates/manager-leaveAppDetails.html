@@ -75,7 +75,32 @@
 		th:if="${not #strings.isEmpty(errorRem)} "></p>
 
 	</form>
-
+	<h3>Other Leaves for the same period (If any)</h3>
+	<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Staff Name</th>
+					<th scope="col">Leave Reason</th>
+					<th scope="col">Leave Type</th>
+					<th scope="col">Start Date</th>
+					<th scope="col">End Date</th>
+					<th scope="col">Leave Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(MatesLeaves)} "th:each="l:${MatesLeaves}">
+					<td><a th:text="${l.id}"
+						th:href="@{/manager/leavesAppDetails/}+${l.id}">id</a></td>
+					<td th:text="${l.Staff.name}">Staff Name</td>
+					<td th:text="${l.leaveReason}">leaveReason</td>
+					<td th:text="${l.DiscriminatorValue}">LeaveType</td>
+					<td th:text="${l.startDate}">Start Date</td>
+					<td th:text="${l.endDate}">End Date</td>
+					<td th:text="${l.status}">Otto</td>
+				</tr>
+			</tbody>
+		</table>
 	<div th:insert="fragments/general.html::footer"></div>
 
 </body>
