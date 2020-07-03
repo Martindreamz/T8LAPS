@@ -1,6 +1,7 @@
 package sg.edu.iss.sa50.t8.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import sg.edu.iss.sa50.t8.model.CompensationLeave;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.Staff;
 
 @Service
 public interface ILeaveService {
@@ -25,5 +27,6 @@ public interface ILeaveService {
 	public MedicalLeave findMedicalLeaveById(int leaveId);
 	public void updateCurAnnLeaveDate(int staffId,long days);
 	public void updateCurMedLeaveDate(int staffId,long days);
+	public List<Leaves> findAllLeavesByStaff(Staff Staff);
 }
 

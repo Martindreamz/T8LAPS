@@ -37,13 +37,13 @@
 							<button>Apply Overtime</button>
 					</a><a href="/overtime/history">
 							<button>Overtime History</button>
-					</a> <a href="/leaves/movement-register">
+					</a> <a href="/employee/movement-register">
 							<button>Movement Register</button>
-					</a> <a
+					</a> <!-- <a
 						th:if="${session.user.getDiscriminatorValue().equals('Manager')}"
 						href="/leaves/generate-report">
 							<button>Generate Report</button>
-					</a> <a
+					</a> --> <a
 						th:if="${session.user.getDiscriminatorValue().equals('Manager')}"
 						href="/manager/staffList">
 							<button>Staff List</button>
@@ -73,21 +73,21 @@
 		<div th:fragment="adminbar" id="adminbar">
 			<table width="100%" style="background-color: #0E508D">
 				<tr align="center">
-					<td>
-						<!-- need a check here later --> <a href="/employee/dashboard">
-							<button>Manage&View Employee</button>
+					<td><a href="/employee/dashboard">
+							<button>Manage & View Employee</button>
 					</a> <a href="/employee/admin-create">
 							<button>Create Employee</button>
+<!--Theingi_Emp_Save_Impl Keep by Bianca 
 					</a> <a href="/employee/dashboard">
 							<button>Manage&View Admin</button>
 					</a> <a href="/employee/admin-create">
 							<button>Create Admin</button>
+-->
 					</a> <a href="/api/admin-setblockleave">
 							<button>Set block leave</button>
-					</a> <a href="/employee/home">
-							<button>Sign out</button>
-					</a>
-					</td>
+					</a> <a href="/employee/logout">
+							<button>Logout</button>
+					</a></td>
 				</tr>
 			</table>
 		</div>

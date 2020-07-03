@@ -1,7 +1,6 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -71,6 +70,7 @@ public class AdminController {
 	public String create(Model model) {
 		model.addAttribute("admin", new Admin());
 		return "admin-create";
+
 	}
 	
 	//Staff create form
@@ -97,8 +97,7 @@ public class AdminController {
 		return "dashboard";
 	}
 
-	//Save Part
-	
+	//Save Part	
 	@RequestMapping("/save-admin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
 		if(((AdminService) aservice).save(admin)) {
@@ -118,10 +117,10 @@ public class AdminController {
 		else {
 			model.addAttribute("staff", staff);
 			return "staff-edit";
+
 		}
 	}
 
-	////
 	
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model) {

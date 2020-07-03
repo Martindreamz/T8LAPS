@@ -71,6 +71,8 @@
 				<p>There is nothing for you to approve or reject.</p>
 			</div>
 		</div>
+		<p style="color: red" th:text="${errorRem}"
+		th:if="${not #strings.isEmpty(errorRem)} "></p>
 
 	</form>
 

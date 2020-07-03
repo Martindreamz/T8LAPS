@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.Staff;
 
 public interface StaffRepository extends JpaRepository<Staff, Integer> {
@@ -29,6 +30,9 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 	 @Modifying
 	 @Query("delete from Staff  where id=?1")
 	 void deleteStaffById(int staffId);
+
+	 @Query("select e from Employee e where e.class != 'Admin' and e.manager.id = ?1")
+	 List<Staff> findAllStaffbyManager(int id);r
 
 }
 

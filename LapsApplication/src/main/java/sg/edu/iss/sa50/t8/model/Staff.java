@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @DiscriminatorValue("Staff")
@@ -20,10 +26,11 @@ public class Staff extends Employee{
 	
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
-	
-	
+ 
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
+	private long CurrentAnnualLeaves;
+	private long CurrentMedicalLeaves;
 	
 	
 	public Manager getManager() {

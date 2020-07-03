@@ -2,8 +2,10 @@
 package sg.edu.iss.sa50.t8.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
@@ -107,6 +109,11 @@ public class LeaveServiceImpl implements ILeaveService{
 		Staff staff = staffRepo.findStaffById(staffId);
 		staff.setCurrentMedicalLeaves(days);
 		staffRepo.save(staff);
+	}
+	
+	@Override
+	public List<Leaves> findAllLeavesByStaff(Staff Staff){
+		return leaveRepo.findAllLeavesByStaff(Staff);
 	}
 
 }

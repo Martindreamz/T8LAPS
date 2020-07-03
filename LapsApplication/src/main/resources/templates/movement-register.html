@@ -18,33 +18,18 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col" style="text-align:center;">ID</th>
-					<th scope="col" style="text-align:center;">Overtime Date</th>
-					<th scope="col" style="text-align:center;">Staff Name</th>
-					<th scope="col" style="text-align:center;">Overtime Hours</th>
-					<th scope="col" colspan="2" style="text-align:center;">Status</th>
+					<th scope="col">Name</th>
+					<th scope="col">Start Date</th>
+					<th scope="col">Leave Type</th>
+					
 
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${not #lists.isEmpty(overtimelist)}" th:each="ot:${overtimelist}">
-					<td th:text="${ot.id}" style="text-align:center;">ID</td>
-					<td th:text="${ot.overtimeDate}" style="text-align:center;">overtimeDate</td>
-					<td th:text="${ot.staff.name}" style="text-align:center;">Staffname</td>
-					<td th:text="${ot.overtimeHours}" style="text-align:center;">overtimehours</td>
-					<td  style="text-align:center;">
-						<form action="/manager/overtimeprocessed" th:object="${et}"
-							method="POST">
-							<input type="hidden" name ="id" th:value="${ot.id}">
-							<button name="overTimeStatus" value="Approved" type="submit">Approve</button>
-						</form>
-					</td>
-					<td style="text-align:center;"><form action="/manager/overtimeprocessed" th:object="${ot}"
-							method="POST">
-							<input type="hidden" name ="id" th:value="${ot.id}"> 
-							<button name="overTimeStatus" value="Rejected" type="submit">Reject</button>
-						</form></td>
-
+				<tr th:if="${not #lists.isEmpty(movelist)}" th:each="leave:${movelist}">
+					<td th:text="${leave.staff.name}">Name</td>
+					<td th:text="${leave.startDate}">Start Date</td>
+					<td th:text="${leave.getDiscriminatorValue()}">Leave Type</td>
 				</tr>
 			</tbody>
 		</table>

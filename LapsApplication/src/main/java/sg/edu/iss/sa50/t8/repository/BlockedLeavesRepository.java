@@ -12,7 +12,7 @@ public interface BlockedLeavesRepository extends JpaRepository<BlockedLeaves, In
 
 	void deleteAll();
 	
-	@Query(value="SELECT date FROM BlockedLeaves",nativeQuery = true)
+	@Query(value="SELECT date FROM blocked_leaves",nativeQuery = true)
 	List<Date> findAllDates();
 	
 }
