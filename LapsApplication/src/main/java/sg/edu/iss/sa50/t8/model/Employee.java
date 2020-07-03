@@ -22,9 +22,7 @@ public class Employee {
 	private long CurrentMedicalLeaves; 
 	
 	private int totalOTHours;
-	Employee() {
-	    super();
-        // TODO Auto-generated constructor stub 
+	public Employee() {
     }
 
     public Employee(String name, String email) {
