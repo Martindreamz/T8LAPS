@@ -12,13 +12,12 @@
 <body>
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::navigationbar"></div>
-	<h1 th:utext="#{leaves-manage.heading}"></h1>
+	<h1 th:utext="#{leaves-history.heading}"></h1>
 	<div class="table-responsive-lg">
 		<table class="table">
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
-					<th scope="col">Staff Name</th>
 					<th scope="col">Leave Reason</th>
 					<th scope="col">Leave Type</th>
 					<th scope="col">Start Date</th>
@@ -30,12 +29,11 @@
 				<tr th:each="al:${Leaves}">
 					<td><a th:href="@{/manager/leavesAppDetails/}+${al.id}"
 						th:text="${al.id}">id</a></td>
-					<td th:text="${al.staff.name}">Staff Name</td>
 					<td th:text="${al.leaveReason}">leaveReason</td>
 					<td th:text="${al.DiscriminatorValue}">LeaveType</td>
 					<td th:text="${al.startDate}">Start Date</td>
 					<td th:text="${al.endDate}">End Date</td>
-					<td th:text="${al.status}">Otto</td>
+					<td th:text="${al.status}">Leave Status</td>
 				</tr>
 			</tbody>
 		</table>
