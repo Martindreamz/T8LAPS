@@ -53,24 +53,25 @@ function checkSelect() {
 					<input type="hidden" th:field="*{id}"> 
 					<input type="text" class="form-control"
 						id="inputName4" th:field="*{name}" value="">
+					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword4">Password</label> <input type="text"
 						class="form-control" id="inputPassword4" th:field="*{password}"
 						value="">
+					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail4">Email</label> <input type="email"
 					class="form-control" id="inputEmail4" th:field="*{email}" value="">
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputRole">Role</label>
-					<p class="form-control" id="inputRole"
-						th:text="*{DiscriminatorValue}" value=""></p>
 					<div class="dropList">
-						<select id="drop" onchange="checkSelect()" th:field="*{DiscriminatorValue}">
+						<select id="drop" class="form-control"  onchange="checkSelect()" th:field="*{DiscriminatorValue}">
 							<option th:value="*{DiscriminatorValue}" style="display: none"></option>
 							<option value="Staff" th:text="Staff">Staff</option>
 							<option value="Manager" th:text="Manager">Manager</option>
@@ -96,12 +97,19 @@ function checkSelect() {
 							class="form-control" id="inputML"
 							th:field="*{CurrentMedicalLeaves}" value="nil">
 					</div>
-					<div class="form-group col-md-6">
+					<div class="form-group col-md-6" th:if="${#strings.equals(emp.DiscriminatorValue,'Staff')}">
 						<label for="inputManager">Manager</label> 
-						<select id="drop" th:field="*{manager}">
+						<input type="text"
+								class="form-control" id="inputManager" th:field="*{manager.name}"
+								value="nil">
+						<!-- <select id="drop" th:field="*{manager}">
 							<option value="0" style="display: none" th:each="m : ${managerList}">Select Manager</option>
 							<option th:value="${m}" th:text="${m.name}" th:field="*{manager}">Manager</option>
-						</select>
+						</select>-->
+					    <select class="form-control" th:field="*{manager.id}"  id="drop">
+						    <option value="0" th:value="*{manager.name}">Select Manager</option>
+						    <option th:each="m : ${managerList}" th:value="${m.id}" th:text="${m.name}"></option>
+					    </select>
 					</div>
 				</div>
 			</div>
