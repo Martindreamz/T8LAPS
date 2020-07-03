@@ -1,6 +1,7 @@
 package sg.edu.iss.sa50.t8.model;
 
 import javax.persistence.DiscriminatorValue;
+
 import javax.persistence.Entity;
 
 @Entity

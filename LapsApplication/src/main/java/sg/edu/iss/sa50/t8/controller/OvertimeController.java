@@ -15,6 +15,7 @@ import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.StaffRepository;
+import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.IOvertimeService;
 import sg.edu.iss.sa50.t8.service.OvertimeserviceImpl;
 
@@ -23,6 +24,9 @@ import sg.edu.iss.sa50.t8.service.OvertimeserviceImpl;
 public class OvertimeController {
 	@Autowired
 	StaffRepository srepo;
+	
+	@Autowired
+	EmailService emailservice;
 	
 	@Autowired
 	protected IOvertimeService overtimeService;
@@ -66,7 +70,8 @@ public class OvertimeController {
 		}
 		overtime.setStaff((Staff) srepo.findById(emp.getId()).get());
 		overtimeService.saveOvertime(overtime);
-//		ems.
+		emailservice.notifyStaffForOT(overtime);
+		
 		model.addAttribute("overtime", overtimeService.findAllOvertimeByStaffId(emp.getId()));
 		return "overtime-history";
 	}
