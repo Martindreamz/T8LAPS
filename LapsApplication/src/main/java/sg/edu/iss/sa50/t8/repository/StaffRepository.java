@@ -32,7 +32,7 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 	 void deleteStaffById(int staffId);
 
 	 @Query("select e from Employee e where e.class != 'Admin' and e.manager.id = ?1")
-	 List<Staff> findAllStaffbyManager(int id);r
+	 List<Staff> findAllStaffbyManager(int id);
 
 }
 
