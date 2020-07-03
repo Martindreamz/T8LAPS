@@ -39,11 +39,11 @@
 							<button>Overtime History</button>
 					</a> <a href="/employee/movement-register">
 							<button>Movement Register</button>
-					</a> <a
+					</a> <!-- <a
 						th:if="${session.user.getDiscriminatorValue().equals('Manager')}"
 						href="/leaves/generate-report">
 							<button>Generate Report</button>
-					</a> <a
+					</a> --> <a
 						th:if="${session.user.getDiscriminatorValue().equals('Manager')}"
 						href="/manager/staffList">
 							<button>Staff List</button>
@@ -74,13 +74,13 @@
 			<table width="100%" style="background-color: #0E508D">
 				<tr align="center">
 					<td><a href="/employee/dashboard">
-							<button>Manage&View Employee</button>
+							<button>Manage & View Employee</button>
 					</a> <a href="/employee/admin-create">
 							<button>Create Employee</button>
-					</a> <a href="/employee/dashboard">
+					<!-- </a> <a href="/employee/dashboard">
 							<button>Manage&View Admin</button>
 					</a> <a href="/employee/admin-create">
-							<button>Create Admin</button>
+							<button>Create Admin</button> -->
 					</a> <a href="/api/admin-setblockleave">
 							<button>Set block leave</button>
 					</a> <a href="/employee/logout">
