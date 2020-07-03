@@ -6,7 +6,21 @@
 <meta charset="ISO-8859-1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<script type="text/JavaScript">
+	function myFunction(){
+		var x, text;
+		var y;
+		x = document.getElementById("inputAL").value;
+		y = document.getElementById("maxAL").value;
+		if(isNaN(x) || x > y){
+			text = "Input not valid"
+		}
+		else{
+			text = "Input OK"
+		}
+		document.getElementById("err").innerHTML = text;
+	}
+</script>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -24,16 +38,19 @@
 					<label for="inputName4">Name</label> <input type="hidden"
 						th:field="*{id}"> <input type="text" class="form-control"
 						id="inputName4" th:field="*{name}" value="">
+						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword4">Password</label> <input type="text"
 						class="form-control" id="inputPassword4" th:field="*{password}"
 						value="">
+						<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail4">Email</label> <input type="email"
 					class="form-control" id="inputEmail4" th:field="*{email}" value="">
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -52,6 +69,8 @@
 					<label for="inputAL">Annual Leaves</label> <input type="text"
 						class="form-control" id="inputAL" th:field="*{CurrentAnnualLeaves}"
 						value="">
+						<input type="hidden" th:field="*{TotalAnnualLeaves}" id="maxAL">
+						<p id="err"></p>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputML">Medical Leaves</label> <input type="text"

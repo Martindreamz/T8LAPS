@@ -10,6 +10,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @DiscriminatorValue("staff")
@@ -22,12 +25,10 @@ public class Staff extends Employee{
 	private Manager manager;
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
-	
-	@Min(0) 
-	private long CurrentAnnualLeaves;
-	private long CurrentMedicalLeaves; 
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
+	private long CurrentAnnualLeaves;
+	private long CurrentMedicalLeaves;
 	
 	
 	public Manager getManager() {
