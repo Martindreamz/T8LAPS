@@ -36,6 +36,7 @@ public class Employee {
         this.email = email;
         this.CurrentAnnualLeaves = annualLeaveDays;
         this.CurrentMedicalLeaves = medicalLeaveDays;
+        password = "000000"; 
     }
 
     public int getId() {

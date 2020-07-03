@@ -34,5 +34,6 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 	 @Query("select e from Employee e where e.class != 'Admin' and e.manager.id = ?1")
 	 List<Staff> findAllStaffbyManager(int id);
 
+
 }
 
