@@ -184,6 +184,18 @@ public class LapsApplication {
 			al10.setLeaveReason("New Years");
 			al10.setStatus(LeaveStatus.Approved);
 			
+			AnnualLeave al11 = new AnnualLeave(d12, " ");
+			al11.setStartDate(d11);
+			al11.setStaff(s6);
+			al11.setLeaveReason("March holidays");
+			al11.setStatus(LeaveStatus.Approved);
+			
+			AnnualLeave al12 = new AnnualLeave(d10, " ");
+			al12.setStartDate(d9);
+			al12.setStaff(s9);
+			al12.setLeaveReason("March holidays");
+			al12.setStatus(LeaveStatus.Approved);
+			
 			MedicalLeave ml2 = new MedicalLeave(d4);
 			ml2.setStartDate(d3);
 			ml2.setStaff(s3);
@@ -201,25 +213,29 @@ public class LapsApplication {
 			ml1.setStartDate(d1);
 			ml1.setStaff(s3);
 			ml1.setLeaveReason("Stomach ache");
-			ml1.setManagerComment("Not Set");
+			ml1.setManagerComment(" ");
+			
 			
 			MedicalLeave ml4 = new MedicalLeave(d4);
-			ml4.setStartDate(d1);
+			ml4.setStartDate(d3);
 			ml4.setStaff(s6);
 			ml4.setLeaveReason("Stomach ache");
 			ml4.setManagerComment("Me too");
+			ml4.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml5 = new MedicalLeave(d12);
 			ml5.setStartDate(d11);
 			ml5.setStaff(s8);
 			ml5.setLeaveReason("Covid-19");
 			ml5.setManagerComment("Rest well");
+			ml5.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml6 = new MedicalLeave(d13);
 			ml6.setStartDate(d14);
 			ml6.setStaff(s9);
 			ml6.setLeaveReason("Covid-19");
 			ml6.setManagerComment("Rest well");
+			ml6.setStatus(LeaveStatus.Approved);
 			
 			Overtime ot1 = new Overtime(d1,s1,4);
 			ot1.setOverTimeStatus(OvertimeStatus.Approved);
@@ -306,12 +322,16 @@ public class LapsApplication {
 			lRepo.save(al6);
 			lRepo.save(al7);
 			lRepo.save(al8);
+			lRepo.save(al9);
+			lRepo.save(al10);
+			
 			lRepo.save(ml1);
 			lRepo.save(ml2);
 			lRepo.save(ml3);
 			lRepo.save(ml4);
 			lRepo.save(ml5);
 			lRepo.save(ml6);
+			
 			lRepo.save(al2);
 			lRepo.save(c);
 			lRepo.save(c1);
