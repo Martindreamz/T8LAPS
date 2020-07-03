@@ -17,6 +17,9 @@ public class AdminService implements IEmployeeService {
 	@Autowired
 	AdminRepository arepo;
 
+	public boolean saveAdmin(Admin admin) {
+		return arepo.save(admin)!=null? true : false;
+	}
 	
 	public List<Employee> searchEmployee(String searchTerm){
 		//return arepo.searchEmployee(searchTerm);

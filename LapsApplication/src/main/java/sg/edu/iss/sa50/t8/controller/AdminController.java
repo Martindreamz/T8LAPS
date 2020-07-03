@@ -1,15 +1,21 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import sg.edu.iss.sa50.t8.model.Admin;
+import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
@@ -35,15 +41,34 @@ public class AdminController {
 		this.aservice = aservice;
 	}
 
-	//admin
+	//After Login, show this method
 	@RequestMapping("/admin")
 	public String admin() {
 		return "admin";
 	}
-
-
-
-
+	
+	//Admin create form
+	@RequestMapping("/admin-create")
+	public String create(Model model) {
+		model.addAttribute("admin", new Admin());
+		return "admin-create";
+	}
+	
+	// Save method for Admin creation
+	@RequestMapping("/admin/create")
+	public String saveAdmin(@ModelAttribute("admin") Admin admin,
+			Model model,@SessionAttribute("user") Employee emp) {
+		((AdminService) aservice).saveAdmin(admin);
+		return "admin";
+	}
+	
+	//Staff create form
+	@RequestMapping("/staff-create")
+	public String staffCreate(Model model) {
+		model.addAttribute("staff", new Staff());
+		return "staff-create";
+	}
+	
 	@RequestMapping("/admin-delete/{id}")
 	public String delete(@PathVariable("id") int id, Model model) {
 		model.addAttribute("employee", ((AdminService) aservice).findById(id));
@@ -73,20 +98,6 @@ public class AdminController {
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
 	}
-
-
-	@RequestMapping("/admin-create")
-	public String create(Model model) {
-		model.addAttribute("employee", new Staff());
-		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
-		return "admin-create";
-	}
-
-
-
-
-
-
 
 	@RequestMapping("/save-admin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {

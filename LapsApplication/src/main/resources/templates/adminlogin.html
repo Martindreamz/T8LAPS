@@ -9,9 +9,7 @@
 	<div th:insert="fragments/general.html::navigationbar"></div>
 	<!-- <p th:if="${loginError}" class="error">Wrong user or password</p> -->
 	<form th:object=${admin} th:action="@{/employee/adminlogin}" method="post">
-		<!-- <fieldset>
-        <input type="hidden" th:field="*{id}">  
-        </fieldset> -->
+		<input type="hidden" th:field="*{id}">
 		<br> <br>
 		<fieldset>
 			Username: <input type="text" th:field="*{name}">
