@@ -97,6 +97,39 @@ public class AdminService implements IEmployeeService {
 		// TODO Auto-generated method stub
 		return arepo.findManagerById(id);
 	}
+	
+	public void SeedNewStaff(Staff staff) {
+		Staff employee = new Staff();
+		employee.setName(staff.getName());
+		employee.setPassword(staff.getPassword());
+		employee.setEmail(staff.getEmail());
+		employee.setManager(arepo.findManagerById(staff.getManId()));
+		employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+		employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
+		employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
+		employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
+		eRepo.save(employee);
+	}
+	
+	public void SeedNewManager(Staff staff) {
+		Manager employee = new Manager();
+		employee.setName(staff.getName());
+		employee.setPassword(staff.getPassword());
+		employee.setEmail(staff.getEmail());
+		employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+		employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
+		employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
+		employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
+		eRepo.save(employee);			
+	}
+	
+	public void SeedNewAdmin(Staff staff) {
+		Admin employee = new Admin();
+		employee.setName(staff.getName());
+		employee.setPassword(staff.getPassword());
+		employee.setEmail(staff.getEmail());
+		eRepo.save(employee);			
+	}
 
 
 }

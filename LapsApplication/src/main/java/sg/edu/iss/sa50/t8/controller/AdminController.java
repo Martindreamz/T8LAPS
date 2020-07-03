@@ -81,27 +81,27 @@ public class AdminController {
 		return "admin-create";
 	}
 
-//	//Admin create form
-//	@RequestMapping("/admin-allEmp")
-//	public String createAllEmployee(Model model) {
-//		model.addAttribute("emp", new Employee());
-//		//model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
-//		//return "staff-edit";
-//		model.addAttribute("url","save-all");
-//		return "BiancaJS-adminedit";
-//	}
-//	
+	//	//Admin create form
+	//	@RequestMapping("/admin-allEmp")
+	//	public String createAllEmployee(Model model) {
+	//		model.addAttribute("emp", new Employee());
+	//		//model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
+	//		//return "staff-edit";
+	//		model.addAttribute("url","save-all");
+	//		return "BiancaJS-adminedit";
+	//	}
+	//	
 
 
 
-//	
-//	//Admin create form
-//	@RequestMapping("/admin-create")
-//	public String create(Model model) {
-//		model.addAttribute("admin", new Admin());
-//		return "admin-create";
-//	}
-	
+	//	
+	//	//Admin create form
+	//	@RequestMapping("/admin-create")
+	//	public String create(Model model) {
+	//		model.addAttribute("admin", new Admin());
+	//		return "admin-create";
+	//	}
+
 
 	//Staff create form
 	@RequestMapping("/staff-create")
@@ -112,7 +112,7 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-		
+
 		model.addAttribute("staff", new Staff());
 		return "staff-create";
 	}
@@ -127,7 +127,7 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-		
+
 		((AdminService) aservice).deleteAdminById(id);
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
@@ -142,7 +142,7 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-		
+
 		((AdminService) aservice).deleteStaffById(id);
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
@@ -160,7 +160,7 @@ public class AdminController {
 		}
 	}*/
 
-	
+
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
@@ -170,12 +170,12 @@ public class AdminController {
 			return "error";
 
 		}
-		
+
 		model.addAttribute("admin", ((AdminService) aservice).findAdminById(id));
 		return "admin-edit";
 	}
 
-	
+
 	@RequestMapping("/staff-edit/{id}")
 	public String editStaff(@PathVariable("id") int id, Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
@@ -184,11 +184,11 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-		
+
 		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
 		return "staff-edit";
 	}
-	
+
 	/*@RequestMapping("/admin-edit/{id}")
 >>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
 	public String editAdmin(@PathVariable("id") int id, Model model) {
@@ -208,7 +208,7 @@ public class AdminController {
 
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
-		
+
 		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
 		return "dashboard";
 	}
@@ -220,7 +220,7 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-		
+
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
 	}
@@ -258,62 +258,35 @@ public class AdminController {
 	//Martin New
 	@RequestMapping("/save-admin")
 	public String saveAdmin(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
-		
-		System.out.println("id" + staff.getManId());
-		System.out.println("name"+staff.getName());
-		System.out.println("pw"+staff.getPassword());
-		System.out.println("email"+staff.getEmail());
-		System.out.println("type"+staff.getType());
-		System.out.println("annualleave"+staff.getAnnualLeaveDays());
+
+		//		System.out.println("id" + staff.getManId());
+		//		System.out.println("name"+staff.getName());
+		//		System.out.println("pw"+staff.getPassword());
+		//		System.out.println("email"+staff.getEmail());
+		//		System.out.println("type"+staff.getType());
+//		System.out.println("annualleave"+staff.getAnnualLeaveDays());
 		if(staff.getType().equals("Staff") && staff.getManId() ==0 && staff.getAnnualLeaveDays()==0) {
-		model.addAttribute("staff",staff);		
-		model.addAttribute("manlist",((AdminService) aservice).findAllManager());
-		
+			model.addAttribute("staff",staff);		
+			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 			return "admin-create";
 		}
-		
 		if(staff.getType().equals("Manager") && staff.getAnnualLeaveDays()==0) {
 			model.addAttribute("staff",staff);		
 			return "admin-create";
 		}
 		if(staff.getType().equals("Staff")) {
-			Staff employee = new Staff();
-			employee.setName(staff.getName());
-			employee.setPassword(staff.getPassword());
-			employee.setEmail(staff.getEmail());
-			employee.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
-			employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
-			employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
-			employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
-			employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
-			((AdminService) aservice).save(employee);			
+			((AdminService) aservice).SeedNewStaff(staff);;			
 		}
 		if(staff.getType().equals("Manager")) {
-			Manager employee = new Manager();
-			employee.setName(staff.getName());
-			employee.setPassword(staff.getPassword());
-			employee.setEmail(staff.getEmail());
-			employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
-			employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
-			employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
-			employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
-			((AdminService) aservice).save(employee);			
+			((AdminService) aservice).SeedNewManager(staff);;			
 		}
 		if(staff.getType().equals("Admin")) {
-			Admin employee = new Admin();
-			employee.setName(staff.getName());
-			employee.setPassword(staff.getPassword());
-			employee.setEmail(staff.getEmail());
-			((AdminService) aservice).save(employee);			
-		}	
-		
-
+			((AdminService) aservice).SeedNewAdmin(staff);;			
+		}
 		return "forward:/employee/dashboard";
-
-
 	}
 
-	
+
 	@RequestMapping("/save-staff")
 	public String saveStaff(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
 		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
@@ -335,8 +308,8 @@ public class AdminController {
 			}
 		}
 	}
-	
-	
+
+
 
 }
 
