@@ -116,7 +116,7 @@ public class AdminController {
 	}
 
 	//Save Part	
-	@RequestMapping("/save-admin")
+	/*@RequestMapping("/save-admin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
 		if(((AdminService) aservice).save(admin)) {
 			return "forward:/employee/dashboard";
@@ -125,7 +125,7 @@ public class AdminController {
 			model.addAttribute("admin", admin);
 			return "admin-edit";
 		}
-	}
+	}*/
 	
 	@RequestMapping("/save-staff")
 	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
