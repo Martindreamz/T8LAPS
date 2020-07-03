@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.Staff;
 
 public interface AdminRepository extends EmployeeRepository {
@@ -32,4 +33,7 @@ public interface AdminRepository extends EmployeeRepository {
 	@Modifying
 	@Query("delete from Admin where id=?1")
 	void deleteAdminById(int adminId);
+	
+	@Query("SELECT e FROM Employee e WHERE e.class = 'Manager' AND e.id = :id")
+	Manager findManagerById(@Param("id") int id);
 } 

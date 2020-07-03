@@ -150,7 +150,7 @@ public class ManagerController {
 			manService.approveLeave(leaves);
 			manService.setComment(leaves, manCom);
 			session.removeAttribute("leavesId");
-			return "forward:/manager/list";
+			return "forward:/manager/leavesAppForApprovalList";
 		}
 		if (action.equals("reject")) {
 			// validate first: check if comment is not empty
@@ -187,9 +187,9 @@ public class ManagerController {
 				leaveService.updateCurMedLeaveDate(lcast.getStaff().getId(), actualdays + currBalance);
 			}
 			session.removeAttribute("leavesId");
-			return "forward:/manager/list";
+			return "forward:/manager/leavesAppForApprovalList";
 		}
-		return "forward:/manager/list";
+		return "forward:/manager/leavesAppForApprovalList";
 	}
 
 	//Overtime

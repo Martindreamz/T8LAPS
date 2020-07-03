@@ -1,14 +1,13 @@
 package sg.edu.iss.sa50.t8.service;
 
 import java.util.List;
-
-import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.AdminRepository;
 import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
@@ -92,6 +91,11 @@ public class AdminService implements IEmployeeService {
 	}
 	public int findTotalOTHoursByEmpId(int empId) {
 		return (Integer)eRepo.findTotalOTHoursByEmpId(empId);
+	}
+
+	public Manager findManagerById(int id) {
+		// TODO Auto-generated method stub
+		return arepo.findManagerById(id);
 	}
 
 
