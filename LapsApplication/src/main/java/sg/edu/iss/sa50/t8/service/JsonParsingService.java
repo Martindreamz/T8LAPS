@@ -12,17 +12,12 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import sg.edu.iss.sa50.t8.model.BlockedLeaves;
 
 @Service
 public class JsonParsingService implements ParsingService {
-	
-	@Autowired
-	private RestTemplate restTemplate; 
 	
 	@Override
 	public List<BlockedLeaves> parse(String url) throws Exception {

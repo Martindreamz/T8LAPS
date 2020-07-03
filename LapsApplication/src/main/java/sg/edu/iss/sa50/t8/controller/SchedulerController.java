@@ -21,9 +21,6 @@ public class SchedulerController {
 	private IEmployeeService aservice;
 	
 	@Autowired
-	private ApiController controller;
-	
-	@Autowired
 	public void setILeaveService(AdminService aservice) {
 		this.aservice = aservice;
 	}

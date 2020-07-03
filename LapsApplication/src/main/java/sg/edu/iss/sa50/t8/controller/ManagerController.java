@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +20,14 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sun.el.parser.ParseException;
 
-import sg.edu.iss.sa50.t8.model.*;
+import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Leaves;
+import sg.edu.iss.sa50.t8.model.Manager;
+import sg.edu.iss.sa50.t8.model.MedicalLeave;
+import sg.edu.iss.sa50.t8.model.Overtime;
+import sg.edu.iss.sa50.t8.model.OvertimeStatus;
+import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.BlockedLeavesRepository;
 import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
