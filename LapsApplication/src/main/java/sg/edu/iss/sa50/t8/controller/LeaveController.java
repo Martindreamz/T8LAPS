@@ -141,11 +141,12 @@ public class LeaveController {
 			return "leaves-apply-annual";
 		}
 		Date d1 = annualLeave.getStartDate();
-		Date d2 = annualLeave.getEndDate();		
+		Date d2 = annualLeave.getEndDate();	
 		long duration = duration(d1, d2);
 		int satsunCount = saturdaysundaycount(d1, d2);
 		long actualleavesdays = ActualLeaveDays(d1, d2);
 		boolean startDateBeforeEndDate = compareDates(d1, d2);
+		
 		long existingDays = leaveService.findCurAnnLeave(emp.getId());
 		annualLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); // use session later
 		annualLeave.setStatus(LeaveStatus.Applied);
@@ -166,7 +167,7 @@ public class LeaveController {
 			return "leaves-history";}
 		}
 		else {
-			model.addAttribute("error", "You are not eligible");
+			model.addAttribute("error", "Start date must not be later than end date.");
 			return "leaves-apply-annual";
 		}
 		
@@ -197,8 +198,8 @@ public class LeaveController {
 			return "leaves-history";
 		}
 		else {
-			model.addAttribute("error", "You are not eligible");
-			return "leaves-apply-annual";
+			model.addAttribute("error", "Start date must not be later than end date.");
+			return "leaves-apply-medical";
 		}
 
 	}
@@ -271,7 +272,7 @@ public class LeaveController {
 		Date oldd1 = oldAnnualLeave.getStartDate();
 		Date oldd2 = oldAnnualLeave.getEndDate();
 		long oldActual = ActualLeaveDays(oldd1, oldd2);
-		long existingDays = leaveService.findCurAnnLeave(emp.getId());
+		long existingDays = leaveService.findMedAnnLeave(emp.getId());
 		long totaloldLeaves = oldActual + existingDays;
 		
 		Date d1 = medicalLeave.getStartDate();
@@ -284,7 +285,7 @@ public class LeaveController {
 		if (medicalLeave.getStatus().equals(LeaveStatus.Applied) && existingDays >= actualleavesdays
 				&& startDateBeforeEndDate == true) {
 			long updateActualLeaves = totaloldLeaves - actualleavesdays;
-			leaveService.updateCurAnnLeaveDate(emp.getId(), updateActualLeaves);
+			leaveService.updateCurMedLeaveDate(emp.getId(), updateActualLeaves);
 			leaveService.saveMedicalLeave(medicalLeave);
 			model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 				return "leaves-history";
@@ -345,12 +346,12 @@ public class LeaveController {
 			long curAnn = leaveService.findCurAnnLeave(emp.getId());
 			model.addAttribute("eCurAnnLeave", curAnn);
 			model.addAttribute("annualLeave", leaveService.findLeaveById(id));
-			return "leaves-apply-annual";
+			return "leaves-update-annual";
 		} else if (lType.equalsIgnoreCase("Medical Leave")) {
 			long medAnn = leaveService.findMedAnnLeave(emp.getId());
 			model.addAttribute("eMedAnnLeave", medAnn);
 			model.addAttribute("medicalLeave", leaveService.findLeaveById(id));
-			return "leaves-apply-medical";
+			return "leaves-update-medical";
 		} else {
 			model.addAttribute("compensationLeave", leaveService.findLeaveById(id));
 			return "leaves-apply-compensation";

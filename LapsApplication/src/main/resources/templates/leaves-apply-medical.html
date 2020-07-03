@@ -20,9 +20,10 @@
 	<div th:insert="fragments/general.html::navigationbar"></div>
 
 	<h1 class="text-center">Medical Leave Application Form</h1>
-	<span style="padding-left: 50px"> Welcome <span th:text="${session.user.name}"></span></span>
+	<span style="padding-left: 50px"> Welcome <span
+		th:text="${session.user.name}"></span></span>
 	<div class="container">
-	 <div class="col-md-6 col-md-offset-2">
+		<div class="col-md-6 col-md-offset-2">
 			<form class="form-horizontal" action="#"
 				th:action="@{/leaves/medical/save}" th:object="${medicalLeave}"
 				method="post">
@@ -31,7 +32,8 @@
 					<label class="control-label col-sm-6" for="startdate">Available
 						Leaves</label>
 					<div class="col-sm-6">
-						<input id="avaAnn" th:value="${eMedAnnLeave}" disabled="disabled" class="form-control"></input>
+						<input id="avaAnn" th:value="${eMedAnnLeave}" disabled="disabled"
+							class="form-control"></input>
 					</div>
 				</div>
 				<input type="hidden" th:field="*{id}">
@@ -40,8 +42,8 @@
 					<label class="control-label col-sm-6" for="startdate">Start
 						Date</label>
 					<div class="col-sm-6">
-<!-- 						<p th:if="not ${dateError==null}" th:text="${dateError}" -->
-<!-- 							style="color: red;"></p> -->
+						<!-- 						<p th:if="not ${dateError==null}" th:text="${dateError}" -->
+						<!-- 							style="color: red;"></p> -->
 						<input type="date" class="form-control" id="sdate"
 							th:field="*{startDate}">
 						<p th:if="${#fields.hasErrors('startDate')}"
@@ -60,7 +62,7 @@
 							style="color: red"></p>
 					</div>
 				</div>
-
+				<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
 				<div class="form-group">
 					<label class="control-label col-sm-6" for="comment">Leave
 						Reason</label>
@@ -70,30 +72,30 @@
 
 					</div>
 				</div>
-				
+
 				<div class="form-group">
-					<div class="control-label col-sm-6"> </div>
+					<div class="control-label col-sm-6"></div>
 					<div class="col-sm-6">
 						<button type="submit" class="btn btn-primary col-sm-12" id="myBtn">Submit</button>
 					</div>
 				</div>
-						
-					
-					<!-- 				<div class="col-sm-3" style="float: right;"> -->
-					<!-- 					<div th:if="not ${#strings.isEmpty(formId)}">
-<!-- 							<a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/update/}+${annualLeave.id}" -->
-					<!-- 							th:text="#{leaves-history.update }">Update</a> -->
-					<!-- 							<a class="btn btn-primary" th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${annualLeave.id}" -->
-					<!-- 							th:text="#{leaves-history.delete }">Delete</a> -->
 
-					<!-- 						<a th:if="${#dates.createToday().before(annualLeave.startDate)}" class="btn btn-primary" th:href="@{/leaves/cancel/}+${annualLeave.id}" -->
-					<!-- 							th:text="#{leaves-history.cancel }" >Cancel</a> -->
-					<!-- 					</div> -->
-					<!-- 				</div> -->
-				
+
+				<!-- 				<div class="col-sm-3" style="float: right;"> -->
+				<!-- 					<div th:if="not ${#strings.isEmpty(formId)}">
+<!-- 							<a th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/update/}+${annualLeave.id}" -->
+				<!-- 							th:text="#{leaves-history.update }">Update</a> -->
+				<!-- 							<a class="btn btn-primary" th:if="${#strings.equals(formId,'ucd')}" th:href="@{/leaves/delete/}+${annualLeave.id}" -->
+				<!-- 							th:text="#{leaves-history.delete }">Delete</a> -->
+
+				<!-- 						<a th:if="${#dates.createToday().before(annualLeave.startDate)}" class="btn btn-primary" th:href="@{/leaves/cancel/}+${annualLeave.id}" -->
+				<!-- 							th:text="#{leaves-history.cancel }" >Cancel</a> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+
 			</form>
 		</div>
-		</div>
+	</div>
 
 </body>
 </html>
