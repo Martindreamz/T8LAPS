@@ -56,14 +56,14 @@ public class AdminController {
 
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model) {
-		model.addAttribute("admin", ((AdminService) aservice).findAdminById(id));
-		return "admin-edit";
+		model.addAttribute("emp", ((AdminService) aservice).findAdminById(id));
+		return "BiancaJS";
 	}
 	
 	@RequestMapping("/staff-edit/{id}")
 	public String editStaff(@PathVariable("id") int id, Model model) {
-		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
-		return "staff-edit";
+		model.addAttribute("emp", ((AdminService) aservice).findStaffById(id));
+		return "BiancaJS";
 	}
 
 

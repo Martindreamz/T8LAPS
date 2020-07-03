@@ -118,8 +118,10 @@ public class ManagerController {
 	}
 
 	@RequestMapping(value = "leavesAppDetails/respond")
-	public String responseTrySessionID(@RequestParam(value = "managerComment") String manCom,
-			@RequestParam(value = "action", required = true) String action, HttpSession session) {
+	public String responseTrySessionID(HttpSession session,
+			@RequestParam(value = "managerComment") String manCom,
+			@RequestParam(value = "action", required = true) String action, 
+			Model model) {
 		Integer id = (Integer) session.getAttribute("leavesId");
 		Leaves leaves = manService.findById(id).get();
 		if (action.equals("approve")) {
@@ -130,6 +132,12 @@ public class ManagerController {
 			return "forward:/manager/list";
 		}
 		if (action.equals("reject")) {
+			//if (bindingResult.hasErrors()) {
+			if (manCom.isEmpty()) {
+				model.addAttribute("errorRem", "You must make comment before rejecting."); 
+				model.addAttribute("leaves", leaves); 
+				return "manager-leaveAppDetails";
+				}
 			// validate first: check if comment is not empty
 			// if (bindingResult.hasErrors()) {return "manager-leaveAppDetails";}else {
 			// change status into approved
