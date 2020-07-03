@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
@@ -258,32 +259,53 @@ public class AdminController {
 	@RequestMapping("/save-admin")
 	public String saveAdmin(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
 		
-		System.out.println(staff.getManId());
-		System.out.println(staff.getName());
-		System.out.println(staff.getPassword());
-		System.out.println(staff.getEmail());
-		System.out.println(staff.getManId());
-		System.out.println(staff.getType());
-		if(staff.getType().equals("Staff") && staff.getManId() ==0) {
+		System.out.println("id" + staff.getManId());
+		System.out.println("name"+staff.getName());
+		System.out.println("pw"+staff.getPassword());
+		System.out.println("email"+staff.getEmail());
+		System.out.println("type"+staff.getType());
+		System.out.println("annualleave"+staff.getAnnualLeaveDays());
+		if(staff.getType().equals("Staff") && staff.getManId() ==0 && staff.getAnnualLeaveDays()==0) {
 		model.addAttribute("staff",staff);		
 		model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 		
 			return "admin-create";
 		}
 		
-		if(staff.getType().equals("Manager") && staff.getManId() ==0) {
+		if(staff.getType().equals("Manager") && staff.getAnnualLeaveDays()==0) {
 			model.addAttribute("staff",staff);		
-			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
+			return "admin-create";
 		}
-//		if(staff.getType().equals("Staff")) {
-//			Staff newstaff = new Staff( )
-//		}
-		System.out.println(staff.getName());
-		System.out.println(staff.getPassword());
-		System.out.println(staff.getEmail());
-		System.out.println(staff.getManId());
-		System.out.println(staff.getType());
-		
+		if(staff.getType().equals("Staff")) {
+			Staff employee = new Staff();
+			employee.setName(staff.getName());
+			employee.setPassword(staff.getPassword());
+			employee.setEmail(staff.getEmail());
+			employee.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
+			employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+			employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
+			employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
+			employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
+			((AdminService) aservice).save(employee);			
+		}
+		if(staff.getType().equals("Manager")) {
+			Manager employee = new Manager();
+			employee.setName(staff.getName());
+			employee.setPassword(staff.getPassword());
+			employee.setEmail(staff.getEmail());
+			employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+			employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
+			employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
+			employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
+			((AdminService) aservice).save(employee);			
+		}
+		if(staff.getType().equals("Admin")) {
+			Admin employee = new Admin();
+			employee.setName(staff.getName());
+			employee.setPassword(staff.getPassword());
+			employee.setEmail(staff.getEmail());
+			((AdminService) aservice).save(employee);			
+		}	
 		
 
 		return "forward:/employee/dashboard";
