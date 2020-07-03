@@ -1,9 +1,13 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import javax.validation.Valid;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,19 +93,24 @@ public class AdminController {
 
 
 	@RequestMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
-		Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-		toSave.setName(admin.getName());
-		toSave.setPassword(admin.getPassword());
-		toSave.setEmail(admin.getEmail());
-		if(((AdminService) aservice).save(toSave)) {
-			return "forward:/employee/dashboard";
-		}
-		else {
-			model.addAttribute("admin", toSave);
+	public String saveAdmin(@ModelAttribute("admin") @Valid Admin admin, BindingResult result, Model model) {
+		if(result.hasFieldErrors()) {
+			model.addAttribute("admin", admin);
 			return "admin-edit";
 		}
-		
+		else {
+			Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
+			toSave.setName(admin.getName());
+			toSave.setPassword(admin.getPassword());
+			toSave.setEmail(admin.getEmail());
+			if(((AdminService) aservice).save(toSave)) {
+				return "forward:/employee/dashboard";
+			}
+			else {
+				model.addAttribute("admin", toSave);
+				return "admin-edit";
+			}
+		}
 	}
 	
 	@RequestMapping("/save-staff")

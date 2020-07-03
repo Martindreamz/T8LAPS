@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @DiscriminatorValue("staff")
@@ -20,6 +23,7 @@ public class Staff extends Employee{
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
 	
+	@Min(0) 
 	private long CurrentAnnualLeaves;
 	private long CurrentMedicalLeaves; 
 	private int TotalAnnualLeaves;
