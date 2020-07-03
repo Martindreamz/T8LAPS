@@ -14,7 +14,7 @@ public class Manager extends Staff{
 	//Bianca New constructors Jue 28th
 	public Manager(String name, String email,
 			Manager manager, 
-			int annualLeaveDays, int medicalLeaveDays) {
+			long annualLeaveDays, long medicalLeaveDays) {
 		super(name,email,manager,annualLeaveDays,medicalLeaveDays);
 	}
 	
