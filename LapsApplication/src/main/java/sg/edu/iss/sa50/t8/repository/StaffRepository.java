@@ -26,13 +26,14 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 	 
 	 @Query("SELECT e FROM Employee e")
 	 List<Employee> findall();
-	 
+
 	 @Modifying
 	 @Query("delete from Staff  where id=?1")
 	 void deleteStaffById(int staffId);
 
 	 @Query("select e from Employee e where e.class != 'Admin' and e.manager.id = ?1")
 	 List<Staff> findAllStaffbyManager(int id);
+
 
 }
 
