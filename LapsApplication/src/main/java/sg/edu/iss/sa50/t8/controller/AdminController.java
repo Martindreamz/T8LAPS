@@ -1,7 +1,6 @@
 package sg.edu.iss.sa50.t8.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
@@ -46,7 +47,6 @@ public class AdminController {
 		return "admin";
 	}
 	
-	
 	@RequestMapping("/save-staff")
 	public String saveAllEmployee(@ModelAttribute("emp") Employee emp, Model model) {
 		if(((AdminService) aservice).save(emp)) {
@@ -61,7 +61,25 @@ public class AdminController {
 		model.addAttribute("admin", new Admin());
 		return "admin-create";
 	}
+	//Admin create form
+	@RequestMapping("/admin-allEmp")
+	public String createAllEmployee(Model model) {
+		model.addAttribute("emp", new Employee());
+		//model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
+		//return "staff-edit";
+		model.addAttribute("url","save-all");
+		return "BiancaJS-adminedit";
+	}
 	
+
+//	
+//	//Admin create form
+//	@RequestMapping("/admin-create")
+//	public String create(Model model) {
+//		model.addAttribute("admin", new Admin());
+//		return "admin-create";
+//	}
+//	
 	//Staff create form
 	@RequestMapping("/staff-create")
 	public String staffCreate(Model model) {
@@ -86,8 +104,7 @@ public class AdminController {
 		return "dashboard";
 	}
 
-	//Save Part
-	
+	//Save Part	
 	@RequestMapping("/save-admin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
 		if(((AdminService) aservice).save(admin)) {
@@ -107,10 +124,9 @@ public class AdminController {
 		else {
 			model.addAttribute("staff", staff);
 			return "staff-edit";
+
 		}
 	}
-
-	////
 	
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model) {

@@ -20,10 +20,9 @@ public class Employee {
 	
 	private long CurrentAnnualLeaves;
 	private long CurrentMedicalLeaves; 
-	
 	private int totalOTHours;
-	public Employee() {
-    }
+
+	public Employee() {}
 
     public Employee(String name, String email) {
         super();

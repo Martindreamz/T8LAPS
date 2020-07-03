@@ -26,6 +26,7 @@ public class Staff extends Employee{
 	
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
+ 
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
 	private long CurrentAnnualLeaves;
