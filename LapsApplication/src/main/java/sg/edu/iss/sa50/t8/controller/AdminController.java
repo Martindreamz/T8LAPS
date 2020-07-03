@@ -46,7 +46,7 @@ public class AdminController {
 	public String admin() {
 		return "admin";
 	}
-	
+
 
 	//Admin create form
 	/*
@@ -56,7 +56,7 @@ public class AdminController {
 	 * aservice).findAllManager()); //return "staff-edit";
 	 * model.addAttribute("url","save-all"); return "BiancaJS-adminedit"; }
 	 */
-	
+
 	/* Bianca Jul 3rd Bug fixing
 	 * @RequestMapping("/save-staff") public String
 	 * saveAllEmployee(@ModelAttribute("emp") Employee emp, Model model) {
@@ -64,11 +64,12 @@ public class AdminController {
 	 * "forward:/employee/dashboard"; } return "error"; }
 	 */
 
-	
+
 	//Admin create form
 	@RequestMapping("/admin-create")
 	public String createAdmin(Model model) {
-		model.addAttribute("admin", new Admin());
+		model.addAttribute("staff", new Staff());
+	
 		return "admin-create";
 	}
 	//Admin create form
@@ -80,23 +81,23 @@ public class AdminController {
 		model.addAttribute("url","save-all");
 		return "BiancaJS-adminedit";
 	}
-	
 
-//	
-//	//Admin create form
-//	@RequestMapping("/admin-create")
-//	public String create(Model model) {
-//		model.addAttribute("admin", new Admin());
-//		return "admin-create";
-//	}
-//	
+
+	//	
+	//	//Admin create form
+	//	@RequestMapping("/admin-create")
+	//	public String create(Model model) {
+	//		model.addAttribute("admin", new Admin());
+	//		return "admin-create";
+	//	}
+	//	
 	//Staff create form
 	@RequestMapping("/staff-create")
 	public String staffCreate(Model model) {
 		model.addAttribute("staff", new Staff());
 		return "staff-create";
 	}
-	
+
 	// Delete admin/staff Part
 	@Transactional
 	@RequestMapping("/admin-delete/{id}")
@@ -105,7 +106,7 @@ public class AdminController {
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
 	}
-	
+
 	@Transactional
 	@RequestMapping("/staff-delete/{id}")
 	public String deleteStaff(@PathVariable("id") int id, Model model) {
@@ -125,7 +126,7 @@ public class AdminController {
 			return "admin-edit";
 		}
 	}*/
-	
+
 	@RequestMapping("/save-staff")
 	public String saveStaff(@ModelAttribute("staff") Staff staff, Model model) {
 		if(((AdminService) aservice).save(staff)) {
@@ -137,16 +138,16 @@ public class AdminController {
 
 		}
 	}
-	
 
-	
+
+
 	@RequestMapping("/admin-edit/{id}")
 	public String editAdmin(@PathVariable("id") int id, Model model) {
 		model.addAttribute("emp", ((AdminService) aservice).findAdminById(id));
 		model.addAttribute("url","save-admin");
 		return "BiancaJS-adminedit";
 	}
-	
+
 	@RequestMapping("/staff-edit/{id}")
 	public String editStaff(@PathVariable("id") int id, Model model) {
 		model.addAttribute("emp", ((AdminService) aservice).findStaffById(id));
@@ -167,35 +168,72 @@ public class AdminController {
 		return "dashboard";
 	}
 
-//	@RequestMapping("/admin-create")
-//	public String create(Model model) {
-//		model.addAttribute("employee", new Staff());
-//		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
-//		return "admin-create";
-//	}
+	//	@RequestMapping("/admin-create")
+	//	public String create(Model model) {
+	//		model.addAttribute("employee", new Staff());
+	//		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+	//		return "admin-create";
+	//	}
 
+
+	//Theingi Old controller
+	//	@RequestMapping("/save-admin")
+	//	public String saveAdmin(@ModelAttribute("admin") @Valid Admin admin, BindingResult result, Model model) {
+	//		if(result.hasFieldErrors()) {
+	//			model.addAttribute("admin", admin);
+	//			return "admin-edit";
+	//		}
+	//		else {
+	//			Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
+	//			toSave.setName(admin.getName());
+	//			toSave.setPassword(admin.getPassword());
+	//			toSave.setEmail(admin.getEmail());
+	//			if(((AdminService) aservice).save(toSave)) {
+	//				return "forward:/employee/dashboard";
+	//			}
+	//			else {
+	//				model.addAttribute("admin", toSave);
+	//				return "admin-edit";
+	//			}
+	//		}
+	//	}
+
+	//Martin New
 	@RequestMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute("admin") @Valid Admin admin, BindingResult result, Model model) {
-		if(result.hasFieldErrors()) {
-			model.addAttribute("admin", admin);
-			return "admin-edit";
+	public String saveAdmin(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
+		
+		System.out.println(staff.getManId());
+		System.out.println(staff.getName());
+		System.out.println(staff.getPassword());
+		System.out.println(staff.getEmail());
+		System.out.println(staff.getManId());
+		System.out.println(staff.getType());
+		if(staff.getType().equals("Staff") && staff.getManId() ==0) {
+		model.addAttribute("staff",staff);		
+		model.addAttribute("manlist",((AdminService) aservice).findAllManager());
+		
+			return "admin-create";
 		}
-		else {
-			Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
-			toSave.setName(admin.getName());
-			toSave.setPassword(admin.getPassword());
-			toSave.setEmail(admin.getEmail());
-			if(((AdminService) aservice).save(toSave)) {
-				return "forward:/employee/dashboard";
-			}
-			else {
-				model.addAttribute("admin", toSave);
-				return "admin-edit";
-			}
+		
+		if(staff.getType().equals("Manager") && staff.getManId() ==0) {
+			model.addAttribute("staff",staff);		
+			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 		}
+//		if(staff.getType().equals("Staff")) {
+//			Staff newstaff = new Staff( )
+//		}
+		System.out.println(staff.getName());
+		System.out.println(staff.getPassword());
+		System.out.println(staff.getEmail());
+		System.out.println(staff.getManId());
+		System.out.println(staff.getType());
+		
+		
+
+		return "forward:/employee/dashboard";
+
+
 	}
-	
-	
 }
 
 

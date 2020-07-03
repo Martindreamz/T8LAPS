@@ -17,32 +17,44 @@
 <body>
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::adminbar"></div>
+
+
 	<div class="container">
-		<form th:object="${admin}" th:action="@{/employee/save-admin}" method="post">
+		<form th:object="${staff}" th:action="@{/employee/save-admin}"
+			method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputName4">Name</label> 
-						<input type="hidden"
-						th:field="*{id}">
-						<input type="text" class="form-control"
-						id="inputName4" th:field="*{name}" value="">
+					<label for="inputName4">Name</label> <input type="hidden"
+						th:field="*{id}" name="id"> <input type="text"
+						class="form-control" id="inputName4" name="name"
+						th:field="*{name}">
+
+
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword4">Password</label> <input type="text"
-						class="form-control" id="inputPassword4" th:field="*{password}"
-						value="">
+						class="form-control" id="inputPassword4" name="password"
+						th:field="*{password}">
+
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail4">Email</label> <input type="email"
-					class="form-control" id="inputEmail4" th:field="*{email}" value="">
+					class="form-control" id="inputEmail4" name="email"
+					th:field="*{email}">
+
+
 			</div>
-			<div class="form-row">
+			<div class="form-row" th:if="${staff.type==null}">
 				<div class="form-group col-md-6">
-					<label for="inputRole">Role</label> 
-					 <input type="text"
-						class="form-control" id="inputRole"
-						th:field="*{DiscriminatorValue}" value="">
+					<label for="inputRole">Role</label> <select name="type">
+						<option value="Admin">Admin</option>
+						<option value="Staff">Staff</option>
+						<option value="Manager">Manager</option>
+
+					</select>
+					<!-- <input type="text" class="form-control" id="inputRole" value=""> -->
+					<!-- th:field="*{DiscriminatorValue}"  -->
 					<!-- <select id="drop" th:field="*{DiscriminatorValue}">
 							<option th:value="*{DiscriminatorValue}" style="display: none"></option>
 							<option value="Staff" th:text="Staff">Staff</option>
@@ -50,6 +62,72 @@
 							<option value="Admin" th:text="Admin">Administrator</option>
 					</select> -->
 				</div>
+			</div>
+			<div th:if="${staff.type=='Staff'}" class="form-row">
+				<input type="hidden" th:field="${staff.type}" name="type"
+					value="Staff">
+				<div class="form-group col-md-6">
+					<label for="inputRole">Manager Name</label> <select name="manId">
+						<option th:each="man:${manlist}" th:value="${man.id}"
+							th:text="${man.name}"></option>
+
+
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Current Annual Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="CurrentAnnualLeaves" th:field="*{CurrentAnnualLeaves}">
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Current Medical Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="CurrentMedicalLeaves" th:field="*{CurrentMedicalLeaves}">
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Total Annual Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="TotalAnnualLeaves" th:field="*{TotalAnnualLeaves}">
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Total Medical Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="TotalMedicalLeaves" th:field="*{TotalMedicalLeaves}">
+				</div>
+
+			</div>
+			<div th:if="${staff.type=='Manager'}" class="form-row">
+				<input type="hidden" th:field="${staff.type}" name="type"
+					value="Staff">
+
+				<div class="form-group">
+					<label for="inputEmail4">Current Annual Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="CurrentAnnualLeaves" th:field="*{CurrentAnnualLeaves}">
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Current Medical Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="CurrentMedicalLeaves" th:field="*{CurrentMedicalLeaves}">
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Total Annual Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="TotalAnnualLeaves" th:field="*{TotalAnnualLeaves}">
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail4">Total Medical Leaves</label> <input
+						type="text" class="form-control" id="inputEmail4"
+						name="TotalMedicalLeaves" th:field="*{TotalMedicalLeaves}">
+				</div>
+
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button>
 		</form>

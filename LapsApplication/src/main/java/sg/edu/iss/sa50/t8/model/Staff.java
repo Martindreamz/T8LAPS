@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue("Staff")
@@ -24,8 +25,27 @@ public class Staff extends Employee{
 	private int TotalAnnualLeaves;
 	private int TotalMedicalLeaves;
 	
+	@Transient
+	private String type;
+	@Transient
+	private int manId;
 	
-	
+	public int getManId() {
+		return manId;
+	}
+
+	public void setManId(int manId) {
+		this.manId = manId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public Manager getManager() {
 		return manager;
 	}
