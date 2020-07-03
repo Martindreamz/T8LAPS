@@ -100,6 +100,7 @@ public class AdminService implements IEmployeeService {
 	
 	public void SeedNewStaff(Staff staff) {
 		Staff employee = new Staff();
+		employee.setId(staff.getId());
 		employee.setName(staff.getName());
 		employee.setPassword(staff.getPassword());
 		employee.setEmail(staff.getEmail());
@@ -113,6 +114,7 @@ public class AdminService implements IEmployeeService {
 	
 	public void SeedNewManager(Staff staff) {
 		Manager employee = new Manager();
+		employee.setId(staff.getId());
 		employee.setName(staff.getName());
 		employee.setPassword(staff.getPassword());
 		employee.setEmail(staff.getEmail());
@@ -125,10 +127,20 @@ public class AdminService implements IEmployeeService {
 	
 	public void SeedNewAdmin(Staff staff) {
 		Admin employee = new Admin();
+		employee.setId(staff.getId());
 		employee.setName(staff.getName());
 		employee.setPassword(staff.getPassword());
 		employee.setEmail(staff.getEmail());
 		eRepo.save(employee);			
+	}
+	
+	public void deleteEmpbyID(int id) {
+		eRepo.deleteEmployeeById(id);
+	}
+
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+	eRepo.deleteById(id);	
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -30,4 +31,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
 	@Query(value="SELECT m FROM Manager m")
 	List<Employee> findAllManager();
+	
+	@Modifying
+	@Query("delete  from Employee where id=?1")
+	void deleteEmployeeById(int Id);
 }

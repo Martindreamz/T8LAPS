@@ -32,6 +32,9 @@
 					<th scope="col">Id</th>
 					<th scope="col">Name</th>
 					<th scope="col">Email</th>
+					<th scope="col">Role</th>
+					<th scope="col" colspan="2">Manage</th>
+
 				</tr>
 			</thead>
 			<tbody th:object="${employeeList}">
@@ -39,16 +42,14 @@
 					<th scope="row" th:text="${employee.id}">Id</th>
 					<td th:text="${employee.name}">Name</td>
 					<td th:text="${employee.email}">Email</td>
-					<td th:if="${employee.DiscriminatorValue == 'Admin'}"><a class="btn btn-primary"
+					<td th:text="${employee.DiscriminatorValue}">Role</td>
+
+					<td align="center"><a class="btn btn-primary"
 						th:href="@{/employee/admin-edit/}+${employee.id}" role="button">Edit</a>
 						<a class="btn btn-primary"
 						th:href="@{/employee/admin-delete/}+${employee.id}" role="button">Delete</a>
 					</td>
-					<td th:if="${employee.DiscriminatorValue != 'Admin'}"><a class="btn btn-primary"
-						th:href="@{/employee/staff-edit/}+${employee.id}" role="button">Edit</a>
-						<a class="btn btn-primary"
-						th:href="@{/employee/staff-delete/}+${employee.id}" role="button">Delete</a>
-					</td>
+
 				</tr>
 			</tbody>
 		</table>

@@ -29,7 +29,19 @@ public class Staff extends Employee{
 	private String type;
 	@Transient
 	private int manId;
+	@Transient
+	private boolean fromedit;
+	@Transient
+	private int tempid;
 	
+	public boolean isFromedit() {
+		return fromedit;
+	}
+
+	public void setFromedit(boolean fromedit) {
+		this.fromedit = fromedit;
+	}
+
 	public int getManId() {
 		return manId;
 	}
