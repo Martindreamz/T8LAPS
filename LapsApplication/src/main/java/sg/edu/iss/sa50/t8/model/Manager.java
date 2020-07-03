@@ -17,6 +17,9 @@ public class Manager extends Staff{
 			int annualLeaveDays, int medicalLeaveDays) {
 		super(name,email,manager,annualLeaveDays,medicalLeaveDays);
 	}
-	
+	public Manager(String name, String email,
+			Manager manager) {
+		super(name,email,manager);
+	}
 
 }

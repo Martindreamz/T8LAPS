@@ -13,9 +13,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.validation.annotation.Validated;
+
+import sg.edu.iss.sa50.t8.Validation.Leave;
 
 @Entity
 @DiscriminatorValue("staff")
+@Leave
 public class Staff extends Employee{
 	
 	//Check & Edit by Bianca: add validation and mapping setting
@@ -50,6 +54,10 @@ public class Staff extends Employee{
 		this.manager = manager;
 		this.CurrentAnnualLeaves = annualLeaveDays;
 		this.CurrentMedicalLeaves = medicalLeaveDays;
+	}
+	public Staff(String name, String email,Manager manager) {
+		super(name,email);
+		this.manager = manager;
 	}
 
 	public long getAnnualLeaveDays() {

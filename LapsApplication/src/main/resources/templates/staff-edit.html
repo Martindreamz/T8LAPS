@@ -6,21 +6,7 @@
 <meta charset="ISO-8859-1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<script type="text/JavaScript">
-	function myFunction(){
-		var x, text;
-		var y;
-		x = document.getElementById("inputAL").value;
-		y = document.getElementById("maxAL").value;
-		if(isNaN(x) || x > y){
-			text = "Input not valid"
-		}
-		else{
-			text = "Input OK"
-		}
-		document.getElementById("err").innerHTML = text;
-	}
-</script>
+
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -69,8 +55,7 @@
 					<label for="inputAL">Annual Leaves</label> <input type="text"
 						class="form-control" id="inputAL" th:field="*{CurrentAnnualLeaves}"
 						value="">
-						<input type="hidden" th:field="*{TotalAnnualLeaves}" id="maxAL">
-						<p id="err"></p>
+						<p th:if="${#fields.hasErrors('CurrentAnnualLeaves')}" th:errors="*{CurrentAnnualLeaves}"></p>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputML">Medical Leaves</label> <input type="text"
