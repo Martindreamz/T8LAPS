@@ -19,6 +19,5 @@ public class Manager extends Staff{
 			long annualLeaveDays, long medicalLeaveDays) {
 		super(name,email,manager,annualLeaveDays,medicalLeaveDays);
 	}
-	
 
 }

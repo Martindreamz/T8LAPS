@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
+import sg.edu.iss.sa50.t8.model.Manager;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
@@ -49,23 +50,6 @@ public class AdminController {
 
 
 	//Admin create form
-	/*
-	 * @RequestMapping("/admin-allEmp") public String createAllEmployee(Model model)
-	 * { model.addAttribute("emp", new Employee());
-	 * //model.addAttribute("managerList", ((AdminService)
-	 * aservice).findAllManager()); //return "staff-edit";
-	 * model.addAttribute("url","save-all"); return "BiancaJS-adminedit"; }
-	 */
-
-	/* Bianca Jul 3rd Bug fixing
-	 * @RequestMapping("/save-staff") public String
-	 * saveAllEmployee(@ModelAttribute("emp") Employee emp, Model model) {
-	 * if(((AdminService) aservice).save(emp)) { return
-	 * "forward:/employee/dashboard"; } return "error"; }
-	 */
-
-
-	//Admin create form
 	@RequestMapping("/admin-create")
 
 	public String createAdmin(Model model, HttpSession session) {
@@ -79,28 +63,6 @@ public class AdminController {
 		model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 		return "admin-create";
 	}
-
-	//	//Admin create form
-	//	@RequestMapping("/admin-allEmp")
-	//	public String createAllEmployee(Model model) {
-	//		model.addAttribute("emp", new Employee());
-	//		//model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
-	//		//return "staff-edit";
-	//		model.addAttribute("url","save-all");
-	//		return "BiancaJS-adminedit";
-	//	}
-	//	
-
-
-
-	//	
-	//	//Admin create form
-	//	@RequestMapping("/admin-create")
-	//	public String create(Model model) {
-	//		model.addAttribute("admin", new Admin());
-	//		return "admin-create";
-	//	}
-
 
 	//Staff create form
 	@RequestMapping("/staff-create")
@@ -125,75 +87,6 @@ public class AdminController {
 		//need to set cascading delete to allow deletion of manager/staff
 		return "dashboard";
 	}
-
-
-	//	@RequestMapping("/admin-edit/{id}")
-	//	public String editAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
-	//		Employee emp = (Employee) session.getAttribute("user");
-	//		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
-	//			model.addAttribute("errorMsg","Sorry you haven't log in."
-	//					+ "Pls Log in as an admin.");
-	//			return "error";
-	//
-	//		}
-	////		check the type
-	//		Employee currentemp = ((AdminService) aservice).findById(id);
-	//
-	//
-	//		if(currentemp.getDiscriminatorValue().equals("Staff")) {
-	//			currentemp.setType("Staff");
-	//			currentemp.setFromedit(true);
-	//			model.addAttribute("staff", currentemp);
-	//			return "admin-create";
-	//		}
-	//
-	//		if(currentemp.getDiscriminatorValue().equals("Admin")) {
-	//			currentemp.setType("Admin");
-	//			currentemp.setFromedit(true);
-	//			model.addAttribute("staff", currentemp);
-	//			return "admin-create";
-	//		}
-	//
-	//		if(currentemp.getDiscriminatorValue().equals("Manager")) {
-	//			currentemp.setType("Manager");
-	//			currentemp.setFromedit(true);
-	//			model.addAttribute("staff", currentemp);
-	//			return "admin-create";
-	//		}
-	//		return "admin-create";
-	//	}
-	//
-
-	//	//Theingi old
-	//	@RequestMapping("/staff-edit/{id}")
-	//	public String editStaff(@PathVariable("id") int id, Model model, HttpSession session) {
-	//		Employee emp = (Employee) session.getAttribute("user");
-	//		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
-	//			model.addAttribute("errorMsg","Sorry you haven't log in."
-	//					+ "Pls Log in as an admin.");
-	//			return "error";
-	//		}
-	//
-	//		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
-	//		return "staff-edit";
-	//	}
-
-	/*@RequestMapping("/admin-edit/{id}")
->>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
-	public String editAdmin(@PathVariable("id") int id, Model model) {
-		model.addAttribute("emp", ((AdminService) aservice).findAdminById(id));
-		model.addAttribute("url","save-admin");
-		return "BiancaJS-adminedit";
-	}
-
-	@RequestMapping("/staff-edit/{id}")
-	public String editStaff(@PathVariable("id") int id, Model model) {
-		model.addAttribute("emp", ((AdminService) aservice).findStaffById(id));
-		model.addAttribute("managerList", ((AdminService) aservice).findAllManager());
-		//return "staff-edit";
-		model.addAttribute("url","save-staff");
-		return "BiancaJS-adminedit";
-	}*/
 
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model, HttpSession session) {
@@ -257,7 +150,7 @@ public class AdminController {
 				model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 				return "admin-create";
 			}
-			
+
 			staff.setFromedit(false);
 			model.addAttribute("staff",staff);		
 			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
@@ -331,7 +224,7 @@ public class AdminController {
 				model.addAttribute("staff",staff);
 				return "admin-create";
 			}
-			
+
 			if(((AdminService) aservice).findById(staff.getId())!=null) {
 				((AdminService) aservice).deleteById(staff.getId());
 			} //this are newly added
@@ -389,13 +282,24 @@ public class AdminController {
 
 	@RequestMapping("/save-staff")
 	public String saveStaff(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model, HttpSession session) {
+		//		validating user
 		Employee emp = (Employee) session.getAttribute("user");
 		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
 			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
 			return "error";}
+
+		//		checking input errors
 		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
 		if(result.hasErrors()) {
-			model.addAttribute("staff", toSave);
+
+			if(((AdminService) aservice).findById(staff.getId()).getDiscriminatorValue().equals("Staff")){
+				staff.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
+				model.addAttribute("staff", staff);
+				model.addAttribute("manlist",((AdminService) aservice).findAllManager());
+			}else {				
+				staff.setType("Manager");
+				model.addAttribute("staff", staff);
+			}
 			return "staff-edit";
 		}
 		else {

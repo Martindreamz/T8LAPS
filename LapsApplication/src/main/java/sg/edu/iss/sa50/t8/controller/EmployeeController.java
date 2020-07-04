@@ -47,24 +47,6 @@ public class EmployeeController {
 		return "leaves";
 	}
 
-	@RequestMapping("/employeelogin")
-	public String LoginSuccessful(@ModelAttribute("employee") Employee emp, Model model,HttpSession session) {
-		for(Employee e: ((StaffService)sservice).findAllNonAdminStaff()){
-			System.out.println(e);
-			if(emp.getName().equals(e.getName())){
-				System.out.println("staff exist");
-				if (emp.getPassword().equals(e.getPassword())){
-					System.out.println("staff password correct");
-					session.setAttribute("user",e);					
-					return "leaves";
-				}
-				model.addAttribute("errorMsg","Name or Password is not correct. Pls try again. OR U ARE ADMIN :)");
-				return "error";
-			}
-		}
-		return "employeelogin";
-	}
-
 	@RequestMapping("/movement-register")
 	public String movementregister(@SessionAttribute("user") Employee emp,Model model) {
 		if(!emp.getDiscriminatorValue().equals("Admin")) {

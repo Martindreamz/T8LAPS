@@ -13,16 +13,17 @@ import javax.persistence.Transient;
 @Entity
 @DiscriminatorValue("Staff")
 public class Staff extends Employee{
-	
+
 	//Check & Edit by Bianca: add validation and mapping setting
-	
+
 	//managerid is the FK need to build mapping 
 	@ManyToOne  @JoinColumn(name="manager_id")
 	private Manager manager;
-	
+
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
- 
+
+	public Staff() {}
 
 	public Manager getManager() {
 		return manager;
@@ -32,8 +33,6 @@ public class Staff extends Employee{
 		this.manager = manager;
 	}
 
-	public Staff() {
-	}
 	public Staff(String name, String email) {
 		super(name,email);
 	}
