@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,41 +23,6 @@ public class Staff extends Employee{
 	@OneToMany(mappedBy="staff") 
 	private List<Leaves> leaves;
  
-	private int TotalAnnualLeaves;
-	private int TotalMedicalLeaves;
-	
-	@Transient
-	private String type;
-	@Transient
-	private int manId;
-	@Transient
-	private boolean fromedit;
-	@Transient
-	private int tempid;
-	
-	public boolean isFromedit() {
-		return fromedit;
-	}
-
-	public void setFromedit(boolean fromedit) {
-		this.fromedit = fromedit;
-	}
-
-	public int getManId() {
-		return manId;
-	}
-
-	public void setManId(int manId) {
-		this.manId = manId;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public Manager getManager() {
 		return manager;
@@ -78,22 +44,4 @@ public class Staff extends Employee{
 	}
 
 
-
-	public int getTotalAnnualLeaves() {
-		return TotalAnnualLeaves;
-	}
-
-	public void setTotalAnnualLeaves(int totalAnnualLeaves) {
-		TotalAnnualLeaves = totalAnnualLeaves;
-	}
-
-	public int getTotalMedicalLeaves() {
-		return TotalMedicalLeaves;
-	}
-
-	public void setTotalMedicalLeaves(int totalMedicalLeaves) {
-		TotalMedicalLeaves = totalMedicalLeaves;
-	}
-
-	
 }

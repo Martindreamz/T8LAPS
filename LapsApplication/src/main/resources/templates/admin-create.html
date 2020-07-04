@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -21,7 +19,7 @@
 	<h1 th:text="${staff.id}"></h1>
 	<div class="container">
 		<form action="#" th:object="${staff}"
-			th:action="@{/employee/save-admin}" method="post">
+			th:action="@{/employee/save}" method="post">
 			
 			<div class="form-group col-md-6">
 				<label for="inputName4">Name</label><input type="hidden"

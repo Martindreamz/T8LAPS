@@ -41,7 +41,7 @@
 				<div class="form-group col-md-6">
 					<label for="inputRole">Role</label> <input type="text"
 						class="form-control" id="inputRole"
-						th:field="*{DiscriminatorValue}" value="">
+						th:field="*{DiscriminatorValue}" value="" disabled>
 				</div>
 				<div class="form-group col-md-6" th:if="${staff.DiscriminatorValue == 'Staff'}">
 					<label for="inputManager">Manager</label> <input type="text"
@@ -54,7 +54,7 @@
 					<label for="inputAL">Annual Leaves</label> <input type="text"
 						class="form-control" id="inputAL" th:field="*{CurrentAnnualLeaves}"
 						value="">
-						<p style="color: black" th:text="${error}" th:if="${not #strings.isEmpty(error)} "></p>
+						<!--<p style="color: black" th:text="${error}" th:if="${not #strings.isEmpty(error)} "></p>  -->
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputML">Medical Leaves</label> <input type="text"

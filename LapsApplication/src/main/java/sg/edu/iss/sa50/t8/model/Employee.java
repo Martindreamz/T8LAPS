@@ -20,8 +20,24 @@ public class Employee {
 	
 	private long CurrentAnnualLeaves;
 	private long CurrentMedicalLeaves; 
+	private int TotalAnnualLeaves;
+	private int TotalMedicalLeaves;
+	
+
 	private int totalOTHours;
 
+	
+	@Transient
+	private String type;
+	@Transient
+	private int manId;
+	@Transient
+	private boolean fromedit;
+	@Transient
+	private int tempid;
+	
+	
+	
 	public Employee() {}
 
     public Employee(String name, String email) {
@@ -131,6 +147,54 @@ public class Employee {
 
 	public void setCurrentMedicalLeaves(long currentMedicalLeaves) {
 		CurrentMedicalLeaves = currentMedicalLeaves;
+	}
+	public int getTotalAnnualLeaves() {
+		return TotalAnnualLeaves;
+	}
+
+	public void setTotalAnnualLeaves(int totalAnnualLeaves) {
+		TotalAnnualLeaves = totalAnnualLeaves;
+	}
+
+	public int getTotalMedicalLeaves() {
+		return TotalMedicalLeaves;
+	}
+
+	public void setTotalMedicalLeaves(int totalMedicalLeaves) {
+		TotalMedicalLeaves = totalMedicalLeaves;
+	}
+	
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getManId() {
+		return manId;
+	}
+
+	public void setManId(int manId) {
+		this.manId = manId;
+	}
+
+	public boolean isFromedit() {
+		return fromedit;
+	}
+
+	public void setFromedit(boolean fromedit) {
+		this.fromedit = fromedit;
+	}
+
+	public int getTempid() {
+		return tempid;
+	}
+
+	public void setTempid(int tempid) {
+		this.tempid = tempid;
 	}
 
 }

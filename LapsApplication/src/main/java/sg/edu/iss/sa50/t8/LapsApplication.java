@@ -1,7 +1,9 @@
 package sg.edu.iss.sa50.t8;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,7 +27,7 @@ import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.repository.LeaveRepository;
 import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
 import sg.edu.iss.sa50.t8.service.EmailService;
-
+import sg.edu.iss.sa50.t8.model.Leaves;
 
 @SpringBootApplication
 public class LapsApplication {
@@ -393,9 +395,56 @@ public class LapsApplication {
 			System.out.println(al1.getDiscriminatorValue());
 			System.out.println(adm1.getDiscriminatorValue());
 			
-	
-			
-
+//			Admin adm1 = new Admin("Martin","martin.dreamz@hotmail.com");
+//			Manager man1 = new Manager("Joe","martin.dreamz@hotmail.com",null,16,20);
+//			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,(long)12,(long)10);
+//			
+//			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("05/01/2020");
+//			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2020");
+//
+//			Date d3 = new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2019");
+//			Date d4 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
+//			
+//			Date d5 = new SimpleDateFormat("MM/dd/yyyy").parse("09/09/2020");
+//			Date d6 = new SimpleDateFormat("MM/dd/yyyy").parse("09/12/2020");
+//			
+//			Date d7 = new SimpleDateFormat("MM/dd/yyyy").parse("08/08/2020");
+//			Date d8 = new SimpleDateFormat("MM/dd/yyyy").parse("08/12/2020");
+//			
+//			Date d9 = new SimpleDateFormat("MM/dd/yyyy").parse("03/03/2020");
+//			Date d10 = new SimpleDateFormat("MM/dd/yyyy").parse("03/12/2020");
+//			
+//			Date d11 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
+//			Date d12 = new SimpleDateFormat("MM/dd/yyyy").parse("03/08/2020");
+//			
+//			Date d13 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
+//			Date d14 = new SimpleDateFormat("MM/dd/yyyy").parse("01/08/2019");
+//			
+//			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
+//			al1.setStartDate(d1);
+//			al1.setLeaveReason("Moving House");
+//			al1.setStatus(LeaveStatus.Approved);
+//			
+//			AnnualLeave al2 = new AnnualLeave(d8, "asia missing");
+//			al2.setStartDate(d7);
+//			al2.setLeaveReason("visit korea");
+//			al2.setStatus(LeaveStatus.Approved);
+//			
+//			AnnualLeave al3 = new AnnualLeave(d2, "oversea travel");
+//			al3.setStartDate(d1);
+//			al3.setLeaveReason("Moving House");
+//			al3.setStatus(LeaveStatus.Approved);
+//
+//			List<Leaves> list = new ArrayList<>();
+//			list.add(al1);
+//			list.add(al2);
+//			list.add(al3);
+//			
+//			s2.setLeaves(list);
+//			
+//			empRepo.save(adm1);
+//			empRepo.save(s2);
+//			empRepo.save(man1);
 		}; 
 	}
 
