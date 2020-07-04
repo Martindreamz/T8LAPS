@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.controller;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,12 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import sg.edu.iss.sa50.t8.model.Admin;
 import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.model.Manager;
-import sg.edu.iss.sa50.t8.model.Overtime;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
@@ -234,13 +232,19 @@ public class AdminController {
 		System.out.println("email"+staff.getEmail());
 		System.out.println("type"+staff.getType());
 		System.out.println("annualleave"+staff.getAnnualLeaveDays());
-		if(staff.getType().equals("Staff") && staff.getManId() ==0 && staff.getAnnualLeaveDays()==0) {
+		if(staff.getType().equals("Staff") && staff.getManId() == 0 && staff.getTotalAnnualLeaves()==0) {
 			staff.setFromedit(false);
 			model.addAttribute("staff",staff);		
 			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 			return "admin-create";
 		}
-		if(staff.getType().equals("Manager") && staff.getAnnualLeaveDays()==0) {
+		if(staff.getType().equals("Staff") && staff.getTotalAnnualLeaves()==0) {
+			staff.setFromedit(false);
+			model.addAttribute("staff",staff);		
+			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
+			return "admin-create";
+		}
+		if(staff.getType().equals("Manager") && staff.getTotalAnnualLeaves()==0) {
 			staff.setFromedit(false);
 			model.addAttribute("staff",staff);		
 			return "admin-create";
@@ -283,6 +287,7 @@ public class AdminController {
 			toSave.setPassword(staff.getPassword());
 			toSave.setEmail(staff.getEmail());
 			toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+			toSave.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
 			if(((AdminService) aservice).save(toSave)) {
 				return "forward:/employee/dashboard";
 			}
@@ -341,6 +346,8 @@ public class AdminController {
 		}
 		
 		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
+		model.addAttribute("manlist",((AdminService) aservice).findAllManager());
+
 		return "staff-edit";
 	}
 

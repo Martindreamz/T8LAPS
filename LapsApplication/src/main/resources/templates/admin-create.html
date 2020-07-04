@@ -16,13 +16,13 @@
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::adminbar"></div>
 
-	<h1 th:text="${staff.id}"></h1>
+	<!-- <h1 th:text="${staff.id}"></h1> -->
 	<div class="container">
 		<form action="#" th:object="${staff}"
 			th:action="@{/employee/save}" method="post">
 			
 			<div class="form-group col-md-6">
-				<label for="inputName4">Name</label><input type="hidden"
+				<input type="hidden"
 					class="form-control" id="inputName4" name="id" th:field="*{id}">
 
 
@@ -63,7 +63,7 @@
 
 			<div th:if="${staff.type=='Staff'}" class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputRole">Manager Name</label> <select name="manId">
+					<label for="inputRole">Manager Name</label> <select name="manId" class="form-control">
 						<option th:each="man:${manlist}" th:value="${man.id}"
 							th:text="${man.name}"></option>
 					</select>
