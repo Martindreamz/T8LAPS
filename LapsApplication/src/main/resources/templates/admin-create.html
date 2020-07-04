@@ -18,12 +18,12 @@
 
 	<!-- <h1 th:text="${staff.id}"></h1> -->
 	<div class="container">
-		<form action="#" th:object="${staff}"
-			th:action="@{/employee/save}" method="post">
-			
+		<form action="#" th:object="${staff}" th:action="@{/employee/save}"
+			method="post">
+
 			<div class="form-group col-md-6">
-				<input type="hidden"
-					class="form-control" id="inputName4" name="id" th:field="*{id}">
+				<input type="hidden" class="form-control" id="inputName4" name="id"
+					th:field="*{id}">
 
 
 			</div>
@@ -33,6 +33,8 @@
 					<label for="inputName4">Name</label><input type="text"
 						class="form-control" id="inputName4" name="name"
 						th:field="*{name}">
+					<p th:if="not ${errorName==null}" th:text="${errorName}"
+						style="color: red;"></p>
 
 
 				</div>
@@ -40,20 +42,21 @@
 					<label for="inputPassword4">Password</label> <input type="text"
 						class="form-control" id="inputPassword4" name="password"
 						th:field="*{password}">
-
+<p th:if="not ${errorPw==null}" th:text="${errorPw}" style="color: red;"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail4">Email</label> <input type="email"
 					class="form-control" id="inputEmail4" name="email"
 					th:field="*{email}">
+<p th:if="not ${errorMail==null}" th:text="${errorMail}" style="color: red;"></p>
 
 
 			</div>
 			<div class="form-row" th:if="${staff.type==null or staff.fromedit}">
 				<div class="form-group col-md-6">
 					<label for="inputRole">Role</label> <select name="type">
-						<option value="Admin" >Admin</option>
+						<option value="Admin">Admin</option>
 						<option value="Staff">Staff</option>
 						<option value="Manager">Manager</option>
 					</select>
@@ -63,7 +66,8 @@
 
 			<div th:if="${staff.type=='Staff'}" class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputRole">Manager Name</label> <select name="manId" class="form-control">
+					<label for="inputRole">Manager Name</label> <select name="manId"
+						class="form-control">
 						<option th:each="man:${manlist}" th:value="${man.id}"
 							th:text="${man.name}"></option>
 					</select>
@@ -94,12 +98,16 @@
 					<label for="inputEmail4">Total Annual Leaves</label> <input
 						type="text" class="form-control" id="inputEmail4"
 						name="TotalAnnualLeaves" th:field="*{TotalAnnualLeaves}">
+						<p th:if="not ${errorCAL==0}" th:text="${errorCAL}" style="color: red;"></p>
+						
 				</div>
 
 				<div class="form-group">
 					<label for="inputEmail4">Total Medical Leaves</label> <input
 						type="text" class="form-control" id="inputEmail4"
 						name="TotalMedicalLeaves" th:field="*{TotalMedicalLeaves}">
+						<p th:if="not ${errorMAL==0}" th:text="${errorMAL}" style="color: red;"></p>
+						
 				</div>
 			</div>
 
