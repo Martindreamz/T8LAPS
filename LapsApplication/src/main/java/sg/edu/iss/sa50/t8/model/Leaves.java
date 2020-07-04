@@ -117,9 +117,4 @@ public class Leaves {
 	public String getDiscriminatorValue(){
 		return this.getClass().getAnnotation(DiscriminatorValue.class).value();
 	}
-	/*This is what I found online
-	 * @Transient public String getDiscriminatorValue(){ DiscriminatorValue val =
-	 * this.getClass().getAnnotation(DiscriminatorValue.class); return val == null ?
-	 * null : val.value(); }
-	 */
 }
