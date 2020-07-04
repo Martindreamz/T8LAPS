@@ -103,8 +103,8 @@ public class LapsApplication {
 			s14.setAnnualLeaveDays(14);
 			s15.setAnnualLeaveDays(14);
 			
-			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("05/01/2020");
-			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2020");
+			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("08/01/2020");
+			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("08/03/2020");
 
 			Date d3 = new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2019");
 			Date d4 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
@@ -115,11 +115,11 @@ public class LapsApplication {
 			Date d7 = new SimpleDateFormat("MM/dd/yyyy").parse("08/08/2020");
 			Date d8 = new SimpleDateFormat("MM/dd/yyyy").parse("08/12/2020");
 			
-			Date d9 = new SimpleDateFormat("MM/dd/yyyy").parse("03/03/2020");
-			Date d10 = new SimpleDateFormat("MM/dd/yyyy").parse("03/12/2020");
+			Date d9 = new SimpleDateFormat("MM/dd/yyyy").parse("10/07/2020");
+			Date d10 = new SimpleDateFormat("MM/dd/yyyy").parse("15/07/2020");
 			
-			Date d11 = new SimpleDateFormat("MM/dd/yyyy").parse("03/05/2020");
-			Date d12 = new SimpleDateFormat("MM/dd/yyyy").parse("03/08/2020");
+			Date d11 = new SimpleDateFormat("MM/dd/yyyy").parse("08/05/2020");
+			Date d12 = new SimpleDateFormat("MM/dd/yyyy").parse("08/08/2020");
 			
 			Date d13 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
 			Date d14 = new SimpleDateFormat("MM/dd/yyyy").parse("01/08/2019");
@@ -158,6 +158,7 @@ public class LapsApplication {
 			al6.setStartDate(d9);
 			al6.setStaff(s6);
 			al6.setLeaveReason("school holidays");
+			al6.setManagerComment("Sorry,Project first.");
 			al6.setStatus(LeaveStatus.Rejected);
 			
 			AnnualLeave al7 = new AnnualLeave(d4, "overseas travel");
@@ -200,27 +201,26 @@ public class LapsApplication {
 			ml2.setStartDate(d3);
 			ml2.setStaff(s3);
 			ml2.setLeaveReason("Fever");
-			ml2.setManagerComment("Not Set");
+			ml2.setManagerComment("Do not find an excuse");
+			ml2.setStatus(LeaveStatus.Rejected);
 			
 			MedicalLeave ml3 = new MedicalLeave(d6);
 			ml3.setStartDate(d5);
 			ml3.setStaff(s1);
 			ml3.setLeaveReason("High Fever");
-			ml3.setManagerComment("Not Set");
+			ml3.setManagerComment("Can");
 			ml3.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml1 = new MedicalLeave(d2);
 			ml1.setStartDate(d1);
 			ml1.setStaff(s3);
 			ml1.setLeaveReason("Stomach ache");
-			ml1.setManagerComment(" ");
 			
 			
 			MedicalLeave ml4 = new MedicalLeave(d4);
 			ml4.setStartDate(d3);
 			ml4.setStaff(s6);
-			ml4.setLeaveReason("Stomach ache");
-			ml4.setManagerComment("Me too");
+			ml4.setLeaveReason("Stomach ache too");
 			ml4.setStatus(LeaveStatus.Approved);
 			
 			MedicalLeave ml5 = new MedicalLeave(d12);
@@ -261,7 +261,6 @@ public class LapsApplication {
 			
 			
 			
-			
 			CompensationLeave c =new CompensationLeave("Half Day PM");
 			c.setStartDate(d2);
 			c.setStaff(s1);
@@ -284,7 +283,7 @@ public class LapsApplication {
 			c3.setStartDate(d12);
 			c3.setStaff(s13);
 			c3.setLeaveReason("Compensation 2.1");
-			c3.setStatus(LeaveStatus.Rejected);
+			c3.setStatus(LeaveStatus.Applied);
 			
 			CompensationLeave c4 =new CompensationLeave("Half Day PM");
 			c4.setStartDate(d12);

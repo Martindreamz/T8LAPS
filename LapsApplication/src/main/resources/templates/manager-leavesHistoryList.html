@@ -21,7 +21,8 @@
 					<th scope="col">Leave Reason</th>
 					<th scope="col">Leave Type</th>
 					<th scope="col">Start Date</th>
-					<th scope="col">End Date</th>
+					<th scope="col">End Date/Half Day Period</th>
+					<th scope="col">Manager Comment</th>
 					<th scope="col">Leave Status</th>
 				</tr>
 			</thead>
@@ -32,7 +33,9 @@
 					<td th:text="${al.leaveReason}">leaveReason</td>
 					<td th:text="${al.DiscriminatorValue}">LeaveType</td>
 					<td th:text="${al.startDate}">Start Date</td>
-					<td th:text="${al.endDate}">End Date</td>
+					<td th:if="not ${#strings.equals(al.DiscriminatorValue,'Compensation Leave')}" th:text="${#dates.format(al.endDate, 'yyyy-MM-dd')}">Enddate</td>
+					<td th:if="${#strings.equals(al.DiscriminatorValue,'Compensation Leave')}" th:text="${al.claimQuota}">AM/PM</td>
+					<td th:text="${al.managerComment}">Manager Comment</td>
 					<td th:text="${al.status}">Leave Status</td>
 				</tr>
 			</tbody>

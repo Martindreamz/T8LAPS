@@ -22,7 +22,7 @@
 					<th scope="col">Leave Reason</th>
 					<th scope="col">Leave Type</th>
 					<th scope="col">Start Date</th>
-					<th scope="col">End Date</th>
+					<th scope="col">End Date/Half Day Period</th>
 					<th scope="col">Leave Status</th>
 				</tr>
 			</thead>
@@ -30,11 +30,12 @@
 				<tr th:each="al:${Leaves}">
 					<td><a th:text="${al.id}"
 						th:href="@{/manager/leavesAppDetails/}+${al.id}">id</a></td>
-					<td th:text="${al.Staff.name}">leaveReason</td>
+					<td th:text="${al.Staff.name}">name</td>
 					<td th:text="${al.leaveReason}">leaveReason</td>
 					<td th:text="${al.DiscriminatorValue}">LeaveType</td>
 					<td th:text="${al.startDate}">Start Date</td>
-					<td th:text="${al.endDate}">End Date</td>
+					<td th:if="not ${#strings.equals(al.DiscriminatorValue,'Compensation Leave')}" th:text="${al.endDate}">End Date</td>
+					<td th:if="${#strings.equals(al.DiscriminatorValue,'Compensation Leave')}" th:text="${al.claimQuota}">End Date</td>
 					<td th:text="${al.status}">Otto</td>
 				</tr>
 			</tbody>

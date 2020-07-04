@@ -29,15 +29,22 @@
 
 			<dt class="col-sm-3">Start Date</dt>
 			<dd class="col-sm-9" th:text="${leaves.startDate}">01-07-2020</dd>
-			<dt class="col-sm-3">End Date</dt>
-			<dd class="col-sm-9" th:text="${leaves.endDate}">05-07-2020</dd>
+			
+			<dt class="col-sm-3" th:if="not ${#strings.equals(leaves.DiscriminatorValue,'Compensation Leave')}">End Date</dt>
+			<dd class="col-sm-9" th:if="not ${#strings.equals(leaves.DiscriminatorValue,'Compensation Leave')}" th:text="${leaves.endDate}">05-07-2020</dd>
+			
+			<dt class="col-sm-3" th:if="${#strings.equals(leaves.DiscriminatorValue,'Compensation Leave')}">AM/PM</dt>
+			<dd class="col-sm-9" th:if="${#strings.equals(leaves.DiscriminatorValue,'Compensation Leave')}" th:text="${leaves.claimQuota}">AM</dd>
+			
 			<dt class="col-sm-3">Leave Status</dt>
 			<dd class="col-sm-9" th:text="${leaves.status}">Applied/updated/cancelled/...</dd>
-
 
 			<dt class="col-sm-3 text-truncate">Leave Reason</dt>
 			<dd class="col-sm-9" th:text="${leaves.leaveReason}">There is so
 				much in the world that I'd like to soak up with my eyes.</dd>
+			<dt class="col-sm-3" th:if="${#strings.equals(leaves.DiscriminatorValue,'Annual Leave')}">Contact Detail</dt>
+			<dd class="col-sm-9" th:if="${#strings.equals(leaves.DiscriminatorValue,'Annual Leave')}" th:text="${leaves.contactDetails}">contact details</dd>
+			
 			<dt class="col-sm-3">Your Comment</dt>
 			<dd class="col-sm-9">
 				<div th:switch="${leaves.status.name()}">
@@ -84,7 +91,7 @@
 					<th scope="col">Leave Reason</th>
 					<th scope="col">Leave Type</th>
 					<th scope="col">Start Date</th>
-					<th scope="col">End Date</th>
+					<th scope="col">End Date/Half Day Period</th>
 					<th scope="col">Leave Status</th>
 				</tr>
 			</thead>
@@ -96,7 +103,9 @@
 					<td th:text="${l.leaveReason}">leaveReason</td>
 					<td th:text="${l.DiscriminatorValue}">LeaveType</td>
 					<td th:text="${l.startDate}">Start Date</td>
-					<td th:text="${l.endDate}">End Date</td>
+					<td th:if="not ${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${#dates.format(l.endDate, 'yyyy-MM-dd')}">enddate</td>
+					<td th:if="${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" 
+					th:text="${l.claimQuota}">am/pm</td>
 					<td th:text="${l.status}">Otto</td>
 				</tr>
 			</tbody>
