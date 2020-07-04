@@ -20,15 +20,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.sun.el.parser.ParseException;
 
-import sg.edu.iss.sa50.t8.model.AnnualLeave;
-import sg.edu.iss.sa50.t8.model.Employee;
-import sg.edu.iss.sa50.t8.model.Leaves;
-import sg.edu.iss.sa50.t8.model.Manager;
-import sg.edu.iss.sa50.t8.model.MedicalLeave;
-import sg.edu.iss.sa50.t8.model.Overtime;
-import sg.edu.iss.sa50.t8.model.OvertimeStatus;
-import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.model.*;
 import sg.edu.iss.sa50.t8.repository.BlockedLeavesRepository;
+import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
 import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
@@ -188,6 +182,12 @@ public class ManagerController {
 				long currBalance = leaveService.findMedAnnLeave(lcast.getStaff().getId());
 				System.out.println("rejecting AnnualLeave Application: add balance back" + currBalance);
 				leaveService.updateCurMedLeaveDate(lcast.getStaff().getId(), actualdays + currBalance);
+			}
+			if (leaves.getDiscriminatorValue().equals("Compensation Leave")) {
+				System.out.println("rejecting CompLeave: add 4 OT hours balance back");
+				CompensationLeave lcast = (CompensationLeave) leaves;
+				int updateHr = ((ManagerService) manService).findTotalOTHoursByEmpId(lcast.getStaff().getId());
+				((ManagerService) manService).updateTotalOTHoursByEmpId(lcast.getStaff().getId(), updateHr+4);
 			}
 			session.removeAttribute("leavesId");
 			return "forward:/manager/leavesAppForApprovalList";
