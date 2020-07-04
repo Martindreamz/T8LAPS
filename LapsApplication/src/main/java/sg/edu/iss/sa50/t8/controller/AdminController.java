@@ -278,7 +278,7 @@ public class AdminController {
 			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
 			return "error";}
 		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
-		if(result.hasFieldErrors()) {
+		if(result.hasErrors()) {
 			model.addAttribute("staff", toSave);
 			return "staff-edit";
 		}
@@ -304,7 +304,7 @@ public class AdminController {
 		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
 			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
 			return "error";}
-		if(result.hasFieldErrors()) {
+		if(result.hasErrors()) {
 			model.addAttribute("admin", admin);
 			return "admin-edit";
 		}

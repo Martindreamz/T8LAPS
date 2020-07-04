@@ -44,8 +44,11 @@
 						th:field="*{DiscriminatorValue}" value="" disabled>
 				</div>
 				<div class="form-group col-md-6" th:if="${staff.DiscriminatorValue == 'Staff'}">
-					<label for="inputRole">Manager Name</label> <select name="manId" class="form-control">
+					<label for="inputRole">Manager Name</label> 
+					<select name="manId" class="form-control">
 						<option th:each="man:${manlist}" th:value="${man.id}"
+							th:text="${man.name}" th:if="${#strings.equals(staff.manager.name, man.name)}" selected></option>
+						<option th:each="man:${manlist}"  th:if="not ${#strings.equals(staff.manager.name, man.name)}" th:value="${man.id}"
 							th:text="${man.name}"></option>
 					</select>
 				</div>
