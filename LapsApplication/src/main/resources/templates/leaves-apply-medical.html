@@ -48,6 +48,7 @@
 						<p th:if="${#fields.hasErrors('startDate')}"
 							th:errors="*{startDate}" style="color: red"></p>
 						<p th:if="not ${errorDate==null}" th:text="${errorDate}" style="color: red;"></p>
+						<p th:if="not ${errorSameDate==null}" th:text="${errorSameDate}" style="color: red;"></p>
 					</div>
 				</div>
 

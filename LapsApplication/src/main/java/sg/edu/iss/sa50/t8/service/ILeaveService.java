@@ -26,7 +26,10 @@ public interface ILeaveService {
 	public AnnualLeave findAnnualLeaveById(int leaveId);
 	public MedicalLeave findMedicalLeaveById(int leaveId);
 	public void updateCurAnnLeaveDate(int staffId,long days);
-	public void updateCurMedLeaveDate(int staffId,long days);
-	public List<Leaves> findAllLeavesByStaff(Staff Staff);
+	public void updateCurMedLeaveDate(int staffId,long days);	
+	public List<AnnualLeave> findAllAnnualLeavesByStaffId(Staff staff);
+	public List<MedicalLeave> findAllMedicalLeavesByStaffId(Staff staff);
+	public List<CompensationLeave> findAllCompensationLeavesByStaffId(Staff staff);
+	public List<Leaves> findAllLeavesByStaff(Staff staff);
 }
 

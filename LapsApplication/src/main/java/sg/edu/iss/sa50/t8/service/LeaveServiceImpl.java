@@ -115,5 +115,21 @@ public class LeaveServiceImpl implements ILeaveService{
 		return leaveRepo.findAllLeavesByStaff(Staff);
 	}
 
+	
+	@Override
+	public List<AnnualLeave> findAllAnnualLeavesByStaffId(Staff staff) {
+		return leaveRepo.findAllAnnualLeavesByStaffId(staff);
+	}
+
+	@Override
+	public List<MedicalLeave> findAllMedicalLeavesByStaffId(Staff staff) {
+		return leaveRepo.findAllMedicalLeavesByStaffId(staff);
+	}
+
+	@Override
+	public List<CompensationLeave> findAllCompensationLeavesByStaffId(Staff staff) {
+		return leaveRepo.findAllCompensationLeavesByStaffId(staff);
+	}
+
 }
 

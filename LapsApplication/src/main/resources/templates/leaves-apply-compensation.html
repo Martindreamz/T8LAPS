@@ -16,7 +16,7 @@
 <body>
 	<header th:insert="fragments/general.html::header"></header>
 	<div th:insert="fragments/general.html::navigationbar"></div>
-	<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
+	
 
 	<h1 class="text-center">Compensation Leave Application Form</h1>
 	<span style="padding-left: 50px"> Welcome <span
@@ -31,6 +31,8 @@
 				<input type="hidden" th:field="*{id}">
 
 				<div class="form-group">
+				<p th:if="not ${error==null}" th:text="${error}" style="color: red;"></p>
+				<p th:if="not ${errorSameQuota==null}" th:text="${errorSameQuota}" style="color: red;"></p>
 					<label class="control-label col-sm-6" for="startdate">Start
 						Date</label>
 					<div class="col-sm-6">
