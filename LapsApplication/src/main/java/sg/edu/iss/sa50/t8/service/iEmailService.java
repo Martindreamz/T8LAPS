@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Overtime;
 
@@ -107,6 +108,18 @@ public class iEmailService implements EmailService{
 		msg.setSubject("Overtime Application on " + ot.getOvertimeDate() + " " + ot.getOverTimeStatus());
 		msg.setText("Dear " + ot.getStaff().getName()+ ",\nYour application of "+ot.getOvertimeHours()+" hours of overtime on "+
 				ot.getOvertimeDate()+" has been "+ ot.getOverTimeStatus()+".\n\nFrom,\nTeam8LAPS");
+		jvm.send(msg);
+	}
+	
+	
+	@Override
+	public void notifyStaff(Leaves leave) throws MailException{
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setFrom("gdipsa50t8@gmail.com");
+		msg.setSubject("Leave application on " + leave.getStartDate() + " " + leave.getStatus());
+		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour leave application on "+leave.getStartDate().toString()
+				 +" has been " + leave.getStatus()+".\n\nFrom,\nTeam8LAPS");
 		jvm.send(msg);
 	}
 }

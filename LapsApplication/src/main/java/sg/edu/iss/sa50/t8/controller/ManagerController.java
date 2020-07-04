@@ -146,6 +146,7 @@ public class ManagerController {
 			// change status into approved
 			manService.approveLeave(leaves);
 			manService.setComment(leaves, manCom);
+			emailservice.notifyStaff(leaves);
 			session.removeAttribute("leavesId");
 			return "forward:/manager/leavesAppForApprovalList";
 		}
@@ -154,6 +155,7 @@ public class ManagerController {
 			if (manCom.isEmpty()) {
 				model.addAttribute("errorRem", "You must make comment before rejecting."); 
 				model.addAttribute("leaves", leaves); 
+				emailservice.notifyStaff(leaves);
 				return "manager-leaveAppDetails";
 				}
 			manService.rejectLeave(leaves);

@@ -196,13 +196,13 @@ public class LeaveController {
 			if (duration <= 14) {
 				long weekendExclude = duration - satsunCount;
 				leaveService.updateCurAnnLeaveDate(emp.getId(), existingDays - weekendExclude);
-//	        	ems.notifyManager(annualLeave);
+	        	ems.notifyManager(annualLeave);
 				leaveService.saveAnnualLeave(annualLeave);
 				model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 				return "leaves-history";
 			} else {
 				leaveService.updateCurAnnLeaveDate(emp.getId(), existingDays - actualleavesdays);
-//        	ems.notifyManager(annualLeave);
+        	ems.notifyManager(annualLeave);
 				leaveService.saveAnnualLeave(annualLeave);
 				model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 				return "leaves-history";
@@ -278,7 +278,7 @@ public class LeaveController {
 		if (medicalLeave.getStatus().equals(LeaveStatus.Applied) && existingDays >= duration
 				&& startDateBeforeEndDate == true && duration <= 60) {
 			leaveService.updateCurMedLeaveDate(emp.getId(), existingDays - duration);
-//        	ems.notifyManager(annualLeave);
+        	ems.notifyManager(medicalLeave);
 			leaveService.saveMedicalLeave(medicalLeave);
 			model.addAttribute("Leaves", leaveService.findAllLeaves(emp.getId()));
 			return "leaves-history";
