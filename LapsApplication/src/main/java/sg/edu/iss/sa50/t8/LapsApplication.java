@@ -145,9 +145,12 @@ public class LapsApplication {
 			
 			Date d13 = new SimpleDateFormat("MM/dd/yyyy").parse("01/05/2019");
 			Date d14 = new SimpleDateFormat("MM/dd/yyyy").parse("01/08/2019");
-
-			AnnualLeave al1 = new AnnualLeave(d2, "oversea travel");
-			al1.setStartDate(d1);
+			
+			Date d20 = new SimpleDateFormat("MM/dd/yyyy").parse("07/02/2020");
+			Date d21 = new SimpleDateFormat("MM/dd/yyyy").parse("07/05/2020");
+			
+			AnnualLeave al1 = new AnnualLeave(d21, "oversea travel");
+			al1.setStartDate(d20);
 			al1.setStaff(s1);
 			al1.setLeaveReason("Moving House");
 			al1.setStatus(LeaveStatus.Approved);
