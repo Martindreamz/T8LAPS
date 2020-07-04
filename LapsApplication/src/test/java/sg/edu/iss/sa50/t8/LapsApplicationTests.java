@@ -72,25 +72,25 @@ class LapsApplicationTests {
 		
 		
 		
-		//set max leaves
-		man1.setAnnualLeaveDays(18);
-		man2.setAnnualLeaveDays(18);
-		man3.setAnnualLeaveDays(18);
-		s1.setAnnualLeaveDays(14);
-		s2.setAnnualLeaveDays(14);
-		s3.setAnnualLeaveDays(14);
-		s4.setAnnualLeaveDays(14);
-		s5.setAnnualLeaveDays(14);
-		s6.setAnnualLeaveDays(14);
-		s7.setAnnualLeaveDays(14);
-		s8.setAnnualLeaveDays(14);
-		s9.setAnnualLeaveDays(14);
-		s10.setAnnualLeaveDays(14);
-		s11.setAnnualLeaveDays(14);
-		s12.setAnnualLeaveDays(14);
-		s13.setAnnualLeaveDays(14);
-		s14.setAnnualLeaveDays(14);
-		s15.setAnnualLeaveDays(14);
+//		//set max leaves
+//		man1.setAnnualLeaveDays(18);
+//		man2.setAnnualLeaveDays(18);
+//		man3.setAnnualLeaveDays(18);
+//		s1.setAnnualLeaveDays(14);
+//		s2.setAnnualLeaveDays(14);
+//		s3.setAnnualLeaveDays(14);
+//		s4.setAnnualLeaveDays(14);
+//		s5.setAnnualLeaveDays(14);
+//		s6.setAnnualLeaveDays(14);
+//		s7.setAnnualLeaveDays(14);
+//		s8.setAnnualLeaveDays(14);
+//		s9.setAnnualLeaveDays(14);
+//		s10.setAnnualLeaveDays(14);
+//		s11.setAnnualLeaveDays(14);
+//		s12.setAnnualLeaveDays(14);
+//		s13.setAnnualLeaveDays(14);
+//		s14.setAnnualLeaveDays(14);
+//		s15.setAnnualLeaveDays(14);
 		
 		Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("05/01/2020");
 		Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2020");

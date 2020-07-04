@@ -23,6 +23,10 @@ public class AdminService implements IEmployeeService {
 	@Autowired
 	StaffRepository srepo;
 	
+
+	@Autowired
+	EmployeeRepository eRepo;
+	
 	@Transactional
 	public void deleteAdminById(int adminId) {
 		arepo.deleteAdminById(adminId);
@@ -77,20 +81,8 @@ public class AdminService implements IEmployeeService {
 		return arepo.findStaffById(id);
 	}
 	
-	@Autowired
-	EmployeeRepository eRepo;
-	
-	public void updateTotalOTHoursByEmpId(int empId, int hr) {
-		Employee emp = eRepo.findEmployeeById(empId);
-		emp.setTotalOTHours(hr);
-		eRepo.save(emp);
-	}
-
 	public Employee findEmployeeById(int EmpId) {
 		return eRepo.findEmployeeById(EmpId);
-	}
-	public int findTotalOTHoursByEmpId(int empId) {
-		return (Integer)eRepo.findTotalOTHoursByEmpId(empId);
 	}
 
 	public Manager findManagerById(int id) {
@@ -105,8 +97,8 @@ public class AdminService implements IEmployeeService {
 		employee.setPassword(staff.getPassword());
 		employee.setEmail(staff.getEmail());
 		employee.setManager(arepo.findManagerById(staff.getManId()));
-		employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
-		employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
+		employee.setTotalAnnualLeaves(staff.getTotalAnnualLeaves());
+		employee.setTotalMedicalLeaves(staff.getTotalMedicalLeaves());
 		employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
 		employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
 		eRepo.save(employee);
@@ -118,8 +110,8 @@ public class AdminService implements IEmployeeService {
 		employee.setName(staff.getName());
 		employee.setPassword(staff.getPassword());
 		employee.setEmail(staff.getEmail());
-		employee.setAnnualLeaveDays(staff.getAnnualLeaveDays());
-		employee.setMedicalLeaveDays(staff.getTotalMedicalLeaves());
+		employee.setCurrentAnnualLeaves(staff.getTotalAnnualLeaves());
+		employee.setCurrentMedicalLeaves(staff.getTotalMedicalLeaves());
 		employee.setCurrentAnnualLeaves(staff.getCurrentAnnualLeaves());
 		employee.setCurrentMedicalLeaves(staff.getCurrentMedicalLeaves());
 		eRepo.save(employee);			

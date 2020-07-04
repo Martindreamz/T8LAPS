@@ -42,12 +42,6 @@ public class AdminController {
 		this.aservice = aservice;
 	}
 
-	//After Login, show this method
-	@RequestMapping("/admin")
-	public String admin() {
-		return "admin";
-	}
-
 
 	//Admin create form
 	@RequestMapping("/admin-create")

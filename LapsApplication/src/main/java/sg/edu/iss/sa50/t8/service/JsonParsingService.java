@@ -30,7 +30,8 @@ public class JsonParsingService implements ParsingService {
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
-		con.setRequestProperty("User-Agent", "Mozilla/5.0");
+		
+		//feed JSON response as String
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
@@ -38,11 +39,11 @@ public class JsonParsingService implements ParsingService {
 			response.append(inputLine);
 		} in.close();
 		
-		
 		JSONObject obj_JSONObject = new JSONObject(response.toString());
 		
 		JSONArray obj_JSONArray = obj_JSONObject.getJSONArray("holidays");
 		
+		//Loop through JSONArray, find Date and Name -> append to List<BlockedLeaves>
 		for(int i = 0, size = obj_JSONArray.length(); i<size; i++) {
 			JSONObject objInArray = obj_JSONArray.getJSONObject(i);
 			Iterator key = objInArray.keys();
@@ -64,7 +65,6 @@ public class JsonParsingService implements ParsingService {
 		}
 		blockedLeaves.stream().forEach(System.out::println);
 		return blockedLeaves;
-		
 		
 	}
 

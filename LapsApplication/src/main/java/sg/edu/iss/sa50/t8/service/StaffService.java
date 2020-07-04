@@ -53,9 +53,13 @@ public class StaffService implements IEmployeeService {
 		return eRepo.findTotalOTHoursByEmpId(empId);
 	}
 
-
+	public Employee findEmployeeById(int EmpId) {
+		return eRepo.findEmployeeById(EmpId);
+	}
+	
+	
 }
-
+	
 //@Service
 //public class StaffService implements IEmployeeService {
 //	@Autowired

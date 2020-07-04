@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
+import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Staff;
+import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.repository.LeaveRepository;
 import sg.edu.iss.sa50.t8.repository.StaffRepository;
 
@@ -24,6 +26,9 @@ public class LeaveServiceImpl implements ILeaveService{
 	
 	@Autowired
 	StaffRepository staffRepo;
+	
+	@Autowired
+	EmployeeRepository eRepo;
 	
 	@Override
 	public boolean saveAnnualLeave(AnnualLeave aLeave) {
@@ -130,6 +135,6 @@ public class LeaveServiceImpl implements ILeaveService{
 	public List<CompensationLeave> findAllCompensationLeavesByStaffId(Staff staff) {
 		return leaveRepo.findAllCompensationLeavesByStaffId(staff);
 	}
-
+	
 }
 

@@ -38,6 +38,7 @@ import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
 import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
+import sg.edu.iss.sa50.t8.service.StaffService;
 
 //split to architecture design controller
 //need to discuss to shift methods to respective controllers
@@ -46,23 +47,16 @@ import sg.edu.iss.sa50.t8.service.LeaveServiceImpl;
 public class LeaveController {
 
 	private static final LeaveStatus Applied = null;
-//	@Autowired
-//	@Qualifier("StaffService")
-//	protected IEmployeeService stService;
-//	
-//	@Autowired
-//	public void setIEmployeeService(StaffService stService) {
-//		this.stService = stService;
-//	}
-
 	@Autowired
-	@Qualifier("adminService")
-	protected IEmployeeService aservice;
-
+	@Qualifier("staffService")
+	protected IEmployeeService stService;
+	
 	@Autowired
-	public void setIEeaveService(AdminService aservice) {
-		this.aservice = aservice;
+	public void setIEmployeeService(StaffService stService) {
+		this.stService = stService;
 	}
+
+
 
 	@Autowired
 	BlockedLeavesRepository blRepo;
@@ -301,7 +295,7 @@ public class LeaveController {
 		compLeave.setStaff((Staff) srepo.findById(emp.getId()).get()); // use session later
 		compLeave.setStatus(LeaveStatus.Applied);
 		// int totalOtHr =((StaffService) stService).findTotalOTHoursByEmpId(6);
-		int totalOtHr = ((AdminService) aservice).findTotalOTHoursByEmpId(emp.getId());
+		int totalOtHr = ((StaffService) stService).findTotalOTHoursByEmpId(emp.getId());
 		Date startDate = compLeave.getStartDate();
 
 		if (!startDate.after(new Date())) {
@@ -342,9 +336,9 @@ public class LeaveController {
 			}}
 		
 		
-		int updateHr = ((AdminService) aservice).findTotalOTHoursByEmpId(emp.getId());
+		int updateHr = ((StaffService) stService).findTotalOTHoursByEmpId(emp.getId());
 		updateHr -= 4;
-		((AdminService) aservice).updateTotalOTHoursByEmpId(emp.getId(), updateHr);
+		((StaffService) stService).updateTotalOTHoursByEmpId(emp.getId(), updateHr);
 		leaveService.saveCompensationLeave(compLeave);
 		ems.notifyStaff(compLeave);
 		ems.notifyManager(compLeave);
@@ -467,9 +461,9 @@ public class LeaveController {
 			}
 		} else {
 			if (l.getStatus().equals(LeaveStatus.Approved)) {
-				int updateHr = ((AdminService) aservice).findTotalOTHoursByEmpId(l.getStaff().getId());
+				int updateHr = ((StaffService) stService).findTotalOTHoursByEmpId(l.getStaff().getId());
 				updateHr += 4;
-				((AdminService) aservice).updateTotalOTHoursByEmpId(l.getStaff().getId(), updateHr);
+				((StaffService) stService).updateTotalOTHoursByEmpId(l.getStaff().getId(), updateHr);
 			}
 		}
 		leaveService.updateLeaveStatus(id, LeaveStatus.Cancelled);
@@ -523,9 +517,9 @@ public class LeaveController {
 			}
 		} else {
 			if (l.getStatus().equals(LeaveStatus.Applied)) {
-				int updateHr = ((AdminService) aservice).findTotalOTHoursByEmpId(l.getStaff().getId());
+				int updateHr = ((StaffService) stService).findTotalOTHoursByEmpId(l.getStaff().getId());
 				updateHr += 4;
-				((AdminService) aservice).updateTotalOTHoursByEmpId(l.getStaff().getId(), updateHr);
+				((StaffService) stService).updateTotalOTHoursByEmpId(l.getStaff().getId(), updateHr);
 			}
 		}
 		leaveService.updateLeaveStatus(id, LeaveStatus.Deleted);
