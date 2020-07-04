@@ -20,7 +20,7 @@
 	<div th:insert="fragments/general.html::navigationbar"></div>
 
 	<h1 class="text-center">Annual Leave Application Form</h1>
-	<span style="padding-left: 50px"> Welcome <span th:text="${session.user.name}"></span></span>
+	<span style="padding-left: 150px"> Welcome <span th:text="${session.user.name}"></span></span>
 	<div class="container">
 	 <div class="col-md-6 col-md-offset-2">
 			<form class="form-horizontal" action="#"
@@ -41,7 +41,7 @@
 						Date</label>
 					<div class="col-sm-6">
 						<input type="date" class="form-control" id="sdate"
-							th:field="*{startDate}" th:text="${#dates.format(annualLeave.startDate, 'yyyy-MM-dd')}" disabled>
+							th:field="*{startDate}" disabled>
 					</div>
 				</div>
 

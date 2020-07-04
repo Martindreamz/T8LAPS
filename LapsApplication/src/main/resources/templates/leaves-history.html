@@ -14,35 +14,35 @@
 	<div th:insert="fragments/general.html::navigationbar"></div>
 	
 	<h1 class="text-center">Leave History</h1>
-	<span style="padding-left: 50px"> Welcome <span th:text="${session.user.name}"></span></span>
+	<span style="padding-left: 150px" class="text-center"> Welcome <span th:text="${session.user.name}" class="text-center"></span></span>
 	<div class="container">
 	 <div class="col-md-12 col-md-offset-2">
 <!-- 	<h1 th:utext="#{leaves-history.heading}"></h1> -->
 	<div class="table-responsive-lg">
-		<table class="table table-striped table-responsive-md btn-table">
-			<thead class="table table-striped table-responsive-lg btn-table">
+		<table>
+			<thead>
 				<tr>
-					<th scope="col" class="control-label col-md-2">#</th>
-					<th scope="col" class="control-label col-md-2">Leave Reason</th>
-					<th scope="col" class="control-label col-md-2">Leave Type</th>
-					<th scope="col" class="control-label col-md-2" >Start Date</th>
-					<th scope="col" class="control-label col-md-2">Duration/End Date</th>
-					<th scope="col" class="control-label col-md-2">Manager Comment</th>
-					<th scope="col" class="control-label col-md-2">Leave Status</th>
-					<th scope="col" class="control-label col-md-2"></th>
+					<th>#</th>
+					<th>Leave Reason</th>
+					<th>Leave Type</th>
+					<th>Start Date</th>
+					<th>Claim Quota/End Date</th>
+					<th>Manager Comment</th>
+					<th>Leave Status</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody class="table table-striped table-responsive-lg btn-table">
-				<tr th:each="l:${Leaves}" class="table table-striped table-responsive-lg btn-table">
-					<td th:text="${l.id}" class="control-label col-md-2">id</td>
-					<td th:text="${l.leaveReason}" class="control-label col-md-2">leaveReason</td>
-					<td th:text="${l.DiscriminatorValue}" class="control-label col-md-2">LeaveType</td>
-					<td th:text="${#dates.format(l.startDate, 'yyyy-MM-dd')}" class="control-label col-md-6">Start Date</td>
-					<td th:if="not ${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${#dates.format(l.endDate, 'yyyy-MM-dd')}" class="control-label col-md-2">Duration</td>
-					<td th:if="${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${l.claimQuota}" class="control-label col-md-2">Duration</td>
-					<td th:text="${l.managerComment}" class="control-label col-md-2">Manager Comment</td>
+				<tr th:each="l:${Leaves}">
+					<td th:text="${l.id}">id</td>
+					<td th:text="${l.leaveReason}">leaveReason</td>
+					<td th:text="${l.DiscriminatorValue}">LeaveType</td>
+					<td th:text="${#dates.format(l.startDate, 'yyyy-MM-dd')}">Start Date</td>
+					<td th:if="not ${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${#dates.format(l.endDate, 'yyyy-MM-dd')}">Duration</td>
+					<td th:if="${#strings.equals(l.DiscriminatorValue,'Compensation Leave')}" th:text="${l.claimQuota}">Duration</td>
+					<td th:text="${l.managerComment}">Manager Comment</td>
 					<td th:text="${l.status}" class="control-label col-md-2">Status</td>
-					<td th:if="${#strings.equals(l.status,'Approved')}" class="control-label col-md-2"> 
+					<td th:if="${#strings.equals(l.status,'Approved')}"> 
 						<a th:href="@{/leaves/detail/}+${l.id}+'?formId=c'"
 						th:text="#{leaves-history.detail.link }" >Detail
 						</a>
