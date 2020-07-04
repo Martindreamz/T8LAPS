@@ -1,5 +1,7 @@
 package sg.edu.iss.sa50.t8.model;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 
 import javax.persistence.Entity;

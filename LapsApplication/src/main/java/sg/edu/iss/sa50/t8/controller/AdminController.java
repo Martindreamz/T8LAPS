@@ -78,6 +78,7 @@ public class AdminController {
 			return "error";
 		}
 		model.addAttribute("staff", new Staff());
+		model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 		return "admin-create";
 	}
 
@@ -121,111 +122,49 @@ public class AdminController {
 	@Transactional
 	@RequestMapping("/admin-delete/{id}")
 	public String deleteAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
-		Employee emp = (Employee) session.getAttribute("user");
-		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
-			model.addAttribute("errorMsg","Sorry you haven't log in."
-					+ "Pls Log in as an admin.");
-			return "error";
-		}
-
-		((AdminService) aservice).deleteAdminById(id);
+		((AdminService) aservice).deleteById(id);
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
+		//need to set cascading delete to allow deletion of manager/staff
 		return "dashboard";
 	}
 
-	@Transactional
-	@RequestMapping("/staff-delete/{id}")
-	public String deleteStaff(@PathVariable("id") int id, Model model, HttpSession session) {
-		Employee emp = (Employee) session.getAttribute("user");
-		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
-			model.addAttribute("errorMsg","Sorry you haven't log in."
-					+ "Pls Log in as an admin.");
-			return "error";
-		}
 
-		((AdminService) aservice).deleteStaffById(id);
-		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
-		return "dashboard";
-	}
-
-	//Save Part	
-	/*@RequestMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute("admin") Admin admin, Model model) {
-		if(((AdminService) aservice).save(admin)) {
-			return "forward:/employee/dashboard";
-		}
-		else {
-			model.addAttribute("admin", admin);
-			return "admin-edit";
-		}
-	}*/
-
-
-	@RequestMapping("/admin-edit/{id}")
-	public String editAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
-		Employee emp = (Employee) session.getAttribute("user");
-		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
-			model.addAttribute("errorMsg","Sorry you haven't log in."
-					+ "Pls Log in as an admin.");
-			return "error";
-
-		}
-//		check the type
-		Employee currentemp = ((AdminService) aservice).findById(id);
-
-
-		if(currentemp.getDiscriminatorValue().equals("staff")) {
-			model.addAttribute("staff", currentemp);
-			return "admin-create";
-		}
-
-		if(currentemp.getDiscriminatorValue().equals("Admin")) {
-			Staff newstaff = new Staff();
-			newstaff.setId(id);
-			newstaff.setPassword(currentemp.getPassword());
-			newstaff.setName(currentemp.getName());
-			newstaff.setEmail(currentemp.getEmail());
-			newstaff.setType("Admin");
-			newstaff.setFromedit(true);
-			model.addAttribute("staff", newstaff);
-			return "admin-create";
-		}
-
-		if(currentemp.getDiscriminatorValue().equals("Manager")) {
-			Staff cemp = (Staff) currentemp;
-			Staff newstaff = new Staff();
-			newstaff.setId(id);	
-			newstaff.setName(cemp.getName());	
-			newstaff.setPassword(cemp.getPassword());
-			newstaff.setEmail(cemp.getEmail());
-			newstaff.setAnnualLeaveDays(cemp.getAnnualLeaveDays());
-			newstaff.setMedicalLeaveDays(cemp.getTotalMedicalLeaves());
-			newstaff.setCurrentAnnualLeaves(cemp.getCurrentAnnualLeaves());
-			newstaff.setCurrentMedicalLeaves(cemp.getCurrentMedicalLeaves());
-			newstaff.setType("Manager");
-			newstaff.setFromedit(true);
-			model.addAttribute("staff", newstaff);
-			return "admin-create";
-		}
-
-
-
-		return "admin-create";
-	}
-
-
-	@RequestMapping("/staff-edit/{id}")
-	public String editStaff(@PathVariable("id") int id, Model model, HttpSession session) {
-		Employee emp = (Employee) session.getAttribute("user");
-		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
-			model.addAttribute("errorMsg","Sorry you haven't log in."
-					+ "Pls Log in as an admin.");
-			return "error";
-		}
-
-		model.addAttribute("staff", new Staff());
-		return "staff-create";
-	}
+//	@RequestMapping("/admin-edit/{id}")
+//	public String editAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
+//		Employee emp = (Employee) session.getAttribute("user");
+//		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+//			model.addAttribute("errorMsg","Sorry you haven't log in."
+//					+ "Pls Log in as an admin.");
+//			return "error";
+//
+//		}
+////		check the type
+//		Employee currentemp = ((AdminService) aservice).findById(id);
+//
+//
+//		if(currentemp.getDiscriminatorValue().equals("Staff")) {
+//			currentemp.setType("Staff");
+//			currentemp.setFromedit(true);
+//			model.addAttribute("staff", currentemp);
+//			return "admin-create";
+//		}
+//
+//		if(currentemp.getDiscriminatorValue().equals("Admin")) {
+//			currentemp.setType("Admin");
+//			currentemp.setFromedit(true);
+//			model.addAttribute("staff", currentemp);
+//			return "admin-create";
+//		}
+//
+//		if(currentemp.getDiscriminatorValue().equals("Manager")) {
+//			currentemp.setType("Manager");
+//			currentemp.setFromedit(true);
+//			model.addAttribute("staff", currentemp);
+//			return "admin-create";
+//		}
+//		return "admin-create";
+//	}
+//
 
 	//	//Theingi old
 	//	@RequestMapping("/staff-edit/{id}")
@@ -260,10 +199,10 @@ public class AdminController {
 
 	@RequestMapping("/search-employee")
 	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
-
 		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
 		return "dashboard";
 	}
+	
 	@RequestMapping("/dashboard")
 	public String dashboard(Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
@@ -272,12 +211,11 @@ public class AdminController {
 					+ "Pls Log in as an admin.");
 			return "error";
 		}
-
 		model.addAttribute("employeeList", ((AdminService) aservice).findAll());
 		return "dashboard";
 	}
 
-	@RequestMapping("/save-admin")
+	@RequestMapping("/save")
 	public String saveAdmin(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
 		System.out.println("id"+staff.getId());
 		System.out.println("Managerid" + staff.getManId());
@@ -298,21 +236,21 @@ public class AdminController {
 			return "admin-create";
 		}
 		if(staff.getType().equals("Staff")) {
-//			if(((AdminService) aservice).findById(staff.getId())!=null) {
-//				((AdminService) aservice).deleteById(staff.getId());
-//			} //this are newly added
+			if(((AdminService) aservice).findById(staff.getId())!=null) {
+				((AdminService) aservice).deleteById(staff.getId());
+			} //this are newly added
 			((AdminService) aservice).SeedNewStaff(staff);;			
 		}
 		if(staff.getType().equals("Manager")) {
-//			if(((AdminService) aservice).findById(staff.getId())!=null) {
-//				((AdminService) aservice).deleteById(staff.getId());
-//			}//this are newly added	
+			if(((AdminService) aservice).findById(staff.getId())!=null) {
+				((AdminService) aservice).deleteById(staff.getId());
+			}//this are newly added	
 			((AdminService) aservice).SeedNewManager(staff);;			
 		}
 		if(staff.getType().equals("Admin")) {
-//			if(((AdminService) aservice).findById(staff.getId())!=null) {
-//				((AdminService) aservice).deleteById(staff.getId());
-//			}//this are newly added
+			if(((AdminService) aservice).findById(staff.getId())!=null) {
+				((AdminService) aservice).deleteById(staff.getId());
+			}//this are newly added
 			((AdminService) aservice).SeedNewAdmin(staff);;			
 		}
 		return "forward:/employee/dashboard";
@@ -340,7 +278,53 @@ public class AdminController {
 			}
 		}
 	}
+	
+	@RequestMapping("/save-admin")
+	public String saveAdmin(@ModelAttribute("admin") @Valid Admin admin, BindingResult result, Model model) {
+		if(result.hasFieldErrors()) {
+			model.addAttribute("admin", admin);
+			return "admin-edit";
+		}
+		else {
+			Admin toSave = ((AdminService) aservice).findAdminById(admin.getId());
+			toSave.setName(admin.getName());
+			toSave.setPassword(admin.getPassword());
+			toSave.setEmail(admin.getEmail());
+			if(((AdminService) aservice).save(toSave)) {
+				return "forward:/employee/dashboard";
+			}
+			else {
+				model.addAttribute("admin", toSave);
+				return "admin-edit";
+			}
+		}
+	}
 
+	@RequestMapping("/admin-edit/{id}")
+	public String editAdmin(@PathVariable("id") int id, Model model, HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+			model.addAttribute("errorMsg","Sorry you haven't log in."
+					+ "Pls Log in as an admin.");
+			return "error";
+		}
+		
+		model.addAttribute("admin", ((AdminService) aservice).findAdminById(id));
+		return "admin-edit";
+	}
+	
+	@RequestMapping("/staff-edit/{id}")
+	public String editStaff(@PathVariable("id") int id, Model model, HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+			model.addAttribute("errorMsg","Sorry you haven't log in."
+					+ "Pls Log in as an admin.");
+			return "error";
+		}
+		
+		model.addAttribute("staff", ((AdminService) aservice).findStaffById(id));
+		return "staff-edit";
+	}
 
 
 }
