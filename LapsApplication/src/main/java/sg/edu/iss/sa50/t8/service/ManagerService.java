@@ -114,13 +114,10 @@ public class ManagerService implements IEmployeeService {
 		List<Overtime> overtimelist = new ArrayList<Overtime>();
 
 		for (Staff staff : empRepo.findSubordinates(man)) {
-//			System.out.println(staff);
 			for (Overtime o : oRepo.findAllOvertimeByStaffId(staff.getId())) {
-//				System.out.println(o);
 				overtimelist.add(o);
 			}
 		}
-//		overtimelist.forEach(System.out::println);;
 		return overtimelist;
 	}
 

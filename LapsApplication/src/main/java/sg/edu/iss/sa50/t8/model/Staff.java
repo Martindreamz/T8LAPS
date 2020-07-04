@@ -13,10 +13,14 @@ import javax.persistence.Transient;
 @Entity
 @DiscriminatorValue("Staff")
 public class Staff extends Employee{
+<<<<<<< HEAD
 
 	//Check & Edit by Bianca: add validation and mapping setting
 
 	//managerid is the FK need to build mapping 
+=======
+	
+>>>>>>> branch 'master' of https://github.com/Martindreamz/T8LAPS.git
 	@ManyToOne  @JoinColumn(name="manager_id")
 	private Manager manager;
 
@@ -36,7 +40,7 @@ public class Staff extends Employee{
 	public Staff(String name, String email) {
 		super(name,email);
 	}
-	//Bianca New constructors
+	//New constructors
 	public Staff(String name, String email,Manager manager, Long annualLeaveDays, Long medicalLeaveDays) {
 		super(name,email,annualLeaveDays,medicalLeaveDays);
 		this.manager = manager;

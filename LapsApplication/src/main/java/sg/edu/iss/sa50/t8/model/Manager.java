@@ -13,7 +13,7 @@ public class Manager extends Staff{
 	public Manager() {
 		super();
 	}
-	//Bianca New constructors Jue 28th
+	
 	public Manager(String name, String email,
 			Manager manager, 
 			long annualLeaveDays, long medicalLeaveDays) {
