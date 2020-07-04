@@ -54,8 +54,16 @@ public class Employee {
         this.CurrentMedicalLeaves = medicalLeaveDays;
         password = "000000"; 
     }
+    
+    
 
-    public int getId() {
+    public Employee(int totalAnnualLeaves, int totalMedicalLeaves) {
+		super();
+		TotalAnnualLeaves = totalAnnualLeaves;
+		TotalMedicalLeaves = 60;
+	}
+
+	public int getId() {
         return id;
     }
 
