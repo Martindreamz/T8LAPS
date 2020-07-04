@@ -41,7 +41,9 @@ public class EmployeeController {
 
 	//employee
 	@RequestMapping("/leaves")
-	public String Leaves() {
+	public String Leaves(@SessionAttribute("user") Employee emp, HttpSession session) {
+		session.setAttribute("user", ((StaffService) sservice).findById(emp.getId()));
+		
 		return "leaves";
 	}
 

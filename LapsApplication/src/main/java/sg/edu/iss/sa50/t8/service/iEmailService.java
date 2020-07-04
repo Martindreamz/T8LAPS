@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
+import sg.edu.iss.sa50.t8.model.CompensationLeave;
 import sg.edu.iss.sa50.t8.model.Leaves;
 import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Overtime;
@@ -27,7 +28,7 @@ public class iEmailService implements EmailService{
 		msg.setTo(leave.getStaff().getManager().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application from " + leave.getStaff().getName());
-		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\n"+leave.getStaff().getName()+ " applied annual leave from "+leave.getStartDate().toString()+" to "+
+		msg.setText("Dear " + leave.getStaff().getManager().getName()+ ",\n\n"+leave.getStaff().getName()+ " applied annual leave from "+leave.getStartDate().toString()+" to "+
 				leave.getEndDate().toString()+".\n\nFrom,\nTeam8LAPS");
 		jvm.send(msg);
 	}
@@ -38,7 +39,7 @@ public class iEmailService implements EmailService{
 		msg.setTo(leave.getStaff().getManager().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application from " + leave.getStaff().getName());
-		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\n"+leave.getStaff().getName()+ " applied medical leave from "+leave.getStartDate().toString()+" to "+
+		msg.setText("Dear " + leave.getStaff().getManager().getName()+ ",\n\n"+leave.getStaff().getName()+ " applied medical leave from "+leave.getStartDate().toString()+" to "+
 				leave.getEndDate().toString()+".\n\nFrom,\nTeam8LAPS");
 		jvm.send(msg);
 
@@ -46,7 +47,7 @@ public class iEmailService implements EmailService{
 	@Override
 	public void notifyStaff(AnnualLeave leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setTo(leave.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application on " + leave.getStartDate() + " " + leave.getStatus());
 		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour application for annual leave from "+leave.getStartDate().toString()+" to "+
@@ -58,7 +59,7 @@ public class iEmailService implements EmailService{
 	@Override
 	public void notifyStaff(MedicalLeave leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setTo(leave.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application on " + leave.getStartDate() + " " + leave.getStatus());
 		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour application for medical leave from "+leave.getStartDate().toString()+" to "+
@@ -69,7 +70,7 @@ public class iEmailService implements EmailService{
 	@Override
 	public void confirmStaffCancellation(AnnualLeave leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setTo(leave.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave cancellation on " + leave.getStartDate());
 		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nThis is to confirm your cancellation of annual leave from "+leave.getStartDate().toString()+" to "+
@@ -80,7 +81,7 @@ public class iEmailService implements EmailService{
 	@Override
 	public void confirmStaffCancellation(MedicalLeave leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setTo(leave.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave cancellation on " + leave.getStartDate());
 		msg.setText("Dear " + leave.getStaff().getName()+ ",\nThis is to confirm your cancellation of medical leave from "+leave.getStartDate().toString()+" to "+
@@ -88,7 +89,7 @@ public class iEmailService implements EmailService{
 		jvm.send(msg);
 
 	}
-	
+
 	@Override
 	public void notifyManagerForOT(Overtime ot) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
@@ -99,27 +100,59 @@ public class iEmailService implements EmailService{
 				ot.getOvertimeDate()+".\n\nFrom,\nTeam8LAPS");
 		jvm.send(msg);
 	}
-	
+
 	@Override
 	public void notifyStaffForOT(Overtime ot) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(ot.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Overtime Application on " + ot.getOvertimeDate() + " " + ot.getOverTimeStatus());
-		msg.setText("Dear " + ot.getStaff().getName()+ ",\nYour application of "+ot.getOvertimeHours()+" hours of overtime on "+
+		msg.setText("Dear " + ot.getStaff().getName()+ ",\n\nYour application of "+ot.getOvertimeHours()+" hours of overtime on "+
 				ot.getOvertimeDate()+" has been "+ ot.getOverTimeStatus()+".\n\nFrom,\nTeam8LAPS");
 		jvm.send(msg);
 	}
-	
-	
+
+
 	@Override
 	public void notifyStaff(Leaves leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setTo(leave.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application on " + leave.getStartDate() + " " + leave.getStatus());
-		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour leave application on "+leave.getStartDate().toString()
-				 +" has been " + leave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+		if(leave.getDiscriminatorValue().equals("Compensation Leave")) {
+		CompensationLeave nleave = (CompensationLeave) leave;
+			msg.setText("Dear " + nleave.getStaff().getName()+ ",\n\nYour "+nleave.getDiscriminatorValue()+" application on "+nleave.getStartDate()
+				+" "+ nleave.getClaimQuota()+" has been " + nleave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+		}else{
+		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour "+leave.getDiscriminatorValue()+" application on "+leave.getStartDate()
+				+" has been " + leave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+		}
 		jvm.send(msg);
+	}
+
+	@Override
+	public void notifyManager(Leaves leave) throws MailException{
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(leave.getStaff().getManager().getEmail());
+		msg.setFrom("gdipsa50t8@gmail.com");
+		msg.setSubject("Leave application from " + leave.getStaff().getName());
+
+		if(leave.getDiscriminatorValue().equals("Medical Leave")) {
+			MedicalLeave nleave = (MedicalLeave) leave;
+			msg.setText("Dear " + nleave.getStaff().getManager().getName()+ ",\n\n"+nleave.getStaff().getName()+ " applied medical leave from "+nleave.getStartDate().toString()+" to "+
+					nleave.getEndDate().toString()+".\n\nFrom,\nTeam8LAPS");}
+
+		if(leave.getDiscriminatorValue().equals("Compensation Leave")) {
+			CompensationLeave nleave = (CompensationLeave) leave;
+			msg.setText("Dear " + nleave.getStaff().getManager().getName()+ ",\n\n"+nleave.getStaff().getName()+ " applied compensation leave on "+nleave.getStartDate().toString()+ " "+nleave.getClaimQuota()
+					+".\n\nFrom,\nTeam8LAPS");}
+
+		if(leave.getDiscriminatorValue().equals("Annual Leave")) {
+			AnnualLeave nleave = (AnnualLeave) leave;
+			msg.setText("Dear " + nleave.getStaff().getManager().getName()+ ",\n\n"+nleave.getStaff().getName()+ " applied annual leave from "+nleave.getStartDate().toString()+" to "+
+					nleave.getEndDate().toString()+".\n\nFrom,\nTeam8LAPS");}
+
+		jvm.send(msg);
+
 	}
 }

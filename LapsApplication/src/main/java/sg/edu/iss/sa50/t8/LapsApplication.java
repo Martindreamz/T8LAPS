@@ -64,7 +64,7 @@ public class LapsApplication {
 			Admin adm1 = new Admin("Martin","martin.dreamz@hotmail.com");
 			Admin adm2 = new Admin("Martin2","e0533410@u.nus.edu");
 			Manager man1 = new Manager("Joe","martin.dreamz@hotmail.com",null,16,20);
-			Manager man2 = new Manager("Joe2","martin.dreamz@hotmail.com",man1,16,15);
+			Manager man2 = new Manager("Joe2","e0533363@u.nus.edu",man1,16,15);
 			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
 			Staff s1 = new Staff("Martin1","martin.dreamz@hotmail.com",man2,(long)10,(long)10);
 			s1.setTotalOTHours(8);

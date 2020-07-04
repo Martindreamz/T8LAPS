@@ -27,4 +27,6 @@ public interface EmailService {
 
 	public void notifyStaff(Leaves leave) throws MailException;
 
+	public void notifyManager(Leaves leave) throws MailException;
+
 }

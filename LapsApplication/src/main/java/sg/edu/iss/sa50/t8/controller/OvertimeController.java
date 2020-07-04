@@ -80,6 +80,7 @@ public class OvertimeController {
 		overtime.setStaff((Staff) srepo.findById(emp.getId()).get());
 		overtimeService.saveOvertime(overtime);
 		emailservice.notifyStaffForOT(overtime);
+		emailservice.notifyManagerForOT(overtime);
 		
 		model.addAttribute("overtime", overtimeService.findAllOvertimeByStaffId(emp.getId()));
 		return "overtime-history";
