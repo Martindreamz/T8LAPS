@@ -198,15 +198,21 @@ public class AdminController {
 	}*/
 
 	@RequestMapping("/search-employee")
-	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model) {
+	public String searchEmployee(@RequestParam("searchTerm") String searchTerm, Model model, HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if(emp.getDiscriminatorValue().equals("Staff") || emp == null) {
+			model.addAttribute("errorMsg", "Sorry you should log in as a manager or admin.");
+			return "error";
+			}
 		model.addAttribute("employeeList", ((AdminService) aservice).searchEmployee(searchTerm));
 		return "dashboard";
 	}
 	
 	@RequestMapping("/dashboard")
+	//this page is visible for both manager and admin 
 	public String dashboard(Model model, HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("user");
-		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+		if(emp.getDiscriminatorValue().equals("Staff") || emp == null) {
 			model.addAttribute("errorMsg","Sorry you haven't log in."
 					+ "Pls Log in as an admin.");
 			return "error";
@@ -216,7 +222,11 @@ public class AdminController {
 	}
 
 	@RequestMapping("/save")
-	public String saveAdmin(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
+	public String saveAdmin(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model, HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
+			return "error";}
 		System.out.println("id"+staff.getId());
 		System.out.println("Managerid" + staff.getManId());
 		System.out.println("name"+staff.getName());
@@ -258,7 +268,11 @@ public class AdminController {
 
 
 	@RequestMapping("/save-staff")
-	public String saveStaff(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model) {
+	public String saveStaff(@ModelAttribute("staff") @Valid Staff staff, BindingResult result, Model model, HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
+			return "error";}
 		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
 		if(result.hasFieldErrors()) {
 			model.addAttribute("staff", toSave);
@@ -280,7 +294,11 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute("admin") @Valid Admin admin, BindingResult result, Model model) {
+	public String saveAdmin(@ModelAttribute("admin") @Valid Admin admin, BindingResult result, Model model, HttpSession session) {
+		Employee emp = (Employee) session.getAttribute("user");
+		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
+			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
+			return "error";}
 		if(result.hasFieldErrors()) {
 			model.addAttribute("admin", admin);
 			return "admin-edit";
