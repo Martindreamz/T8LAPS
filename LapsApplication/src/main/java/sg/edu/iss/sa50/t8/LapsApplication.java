@@ -85,25 +85,45 @@ public class LapsApplication {
 			
 			
 			
-			//set max leaves
-			man1.setAnnualLeaveDays(18);
-			man2.setAnnualLeaveDays(18);
-			man3.setAnnualLeaveDays(18);
-			s1.setAnnualLeaveDays(14);
-			s2.setAnnualLeaveDays(14);
-			s3.setAnnualLeaveDays(14);
-			s4.setAnnualLeaveDays(14);
-			s5.setAnnualLeaveDays(14);
-			s6.setAnnualLeaveDays(14);
-			s7.setAnnualLeaveDays(14);
-			s8.setAnnualLeaveDays(14);
-			s9.setAnnualLeaveDays(14);
-			s10.setAnnualLeaveDays(14);
-			s11.setAnnualLeaveDays(14);
-			s12.setAnnualLeaveDays(14);
-			s13.setAnnualLeaveDays(14);
-			s14.setAnnualLeaveDays(14);
-			s15.setAnnualLeaveDays(14);
+			
+			  //set max leaves man1.setAnnualLeaveDays(18); man2.setAnnualLeaveDays(18);
+			/*
+			 * man3.setAnnualLeaveDays(18); s1.setAnnualLeaveDays(14);
+			 * s2.setAnnualLeaveDays(14); s3.setAnnualLeaveDays(14);
+			 * s4.setAnnualLeaveDays(14); s5.setAnnualLeaveDays(14);
+			 * s6.setAnnualLeaveDays(14); s7.setAnnualLeaveDays(14);
+			 * s8.setAnnualLeaveDays(14); s9.setAnnualLeaveDays(14);
+			 * s10.setAnnualLeaveDays(14); s11.setAnnualLeaveDays(14);
+			 * s12.setAnnualLeaveDays(14); s13.setAnnualLeaveDays(14);
+			 * s14.setAnnualLeaveDays(14); s15.setAnnualLeaveDays(14);
+			 */
+			  
+			  man1.setTotalAnnualLeaves(18);
+			  man2.setTotalAnnualLeaves(18);
+			  man3.setTotalAnnualLeaves(18);
+			  
+			  s1.setTotalAnnualLeaves(14);
+			  s2.setTotalAnnualLeaves(14);
+			  s3.setTotalAnnualLeaves(14);
+			  s4.setTotalAnnualLeaves(14);
+			  s5.setTotalAnnualLeaves(14);
+			  s6.setTotalAnnualLeaves(14);
+			  s7.setTotalAnnualLeaves(14);
+			  s8.setTotalAnnualLeaves(14);
+			  s9.setTotalAnnualLeaves(14);
+			  s10.setTotalAnnualLeaves(14);
+			  s11.setTotalAnnualLeaves(14);
+			  s12.setTotalAnnualLeaves(14);
+			  s13.setTotalAnnualLeaves(14);
+			  s14.setTotalAnnualLeaves(14);
+			  s15.setTotalAnnualLeaves(14);
+			  
+			  
+			  
+			 
+			 
+			
+			
 			
 			Date d1 = new SimpleDateFormat("MM/dd/yyyy").parse("08/01/2020");
 			Date d2 = new SimpleDateFormat("MM/dd/yyyy").parse("08/03/2020");
@@ -117,8 +137,8 @@ public class LapsApplication {
 			Date d7 = new SimpleDateFormat("MM/dd/yyyy").parse("08/08/2020");
 			Date d8 = new SimpleDateFormat("MM/dd/yyyy").parse("08/12/2020");
 			
-			Date d9 = new SimpleDateFormat("MM/dd/yyyy").parse("10/07/2020");
-			Date d10 = new SimpleDateFormat("MM/dd/yyyy").parse("15/07/2020");
+			Date d9 = new SimpleDateFormat("MM/dd/yyyy").parse("07/10/2020");
+			Date d10 = new SimpleDateFormat("MM/dd/yyyy").parse("07/15/2020");
 			
 			Date d11 = new SimpleDateFormat("MM/dd/yyyy").parse("08/05/2020");
 			Date d12 = new SimpleDateFormat("MM/dd/yyyy").parse("08/08/2020");
@@ -292,6 +312,45 @@ public class LapsApplication {
 			c4.setStaff(s13);
 			c4.setLeaveReason("Compensation 2.2");
 			c4.setStatus(LeaveStatus.Approved);
+			
+			man1.setCurrentAnnualLeaves(18);
+			man1.setCurrentMedicalLeaves(20);
+			man2.setCurrentAnnualLeaves(16);
+			man2.setCurrentMedicalLeaves(15);
+			man2.setCurrentAnnualLeaves(18);
+			man2.setCurrentMedicalLeaves(15);
+			s1.setCurrentAnnualLeaves(8);
+			s1.setCurrentMedicalLeaves(7);
+			s2.setCurrentAnnualLeaves(14);
+			s2.setCurrentMedicalLeaves(10);
+			s3.setCurrentAnnualLeaves(14);
+			s3.setCurrentMedicalLeaves(10);
+			s4.setCurrentAnnualLeaves(14);
+			s4.setCurrentMedicalLeaves(60);
+			s5.setCurrentAnnualLeaves(9);
+			s5.setCurrentMedicalLeaves(18);
+			s6.setCurrentAnnualLeaves(14);
+			s6.setCurrentMedicalLeaves(60);
+			s7.setCurrentAnnualLeaves(14);
+			s7.setCurrentMedicalLeaves(60);
+			s8.setCurrentAnnualLeaves(14);
+			s8.setCurrentMedicalLeaves(57);
+			s9.setCurrentAnnualLeaves(14);
+			s9.setCurrentMedicalLeaves(60);
+			s10.setCurrentAnnualLeaves(12);
+			s10.setCurrentMedicalLeaves(60);
+			s11.setCurrentAnnualLeaves(14);
+			s11.setCurrentMedicalLeaves(60);
+			s12.setCurrentAnnualLeaves(10);
+			s12.setCurrentMedicalLeaves(50);
+			s13.setCurrentAnnualLeaves(14);
+			s13.setCurrentMedicalLeaves(60);
+			s14.setCurrentAnnualLeaves(11);
+			s14.setCurrentMedicalLeaves(40);
+			s15.setCurrentAnnualLeaves(8);
+			s15.setCurrentMedicalLeaves(16);
+			
+			
 			
 			empRepo.save(adm1);
 			empRepo.save(adm2);
