@@ -581,6 +581,9 @@ public class LeaveController {
 			System.out.println("Date1 is before Date2");
 			status = true;
 		}
+		else if(d1.equals(d2)) {
+			status = true;
+		}
 
 		return status;
 	}
