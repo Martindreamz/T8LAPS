@@ -42,7 +42,11 @@ public class AdminController {
 		this.aservice = aservice;
 	}
 
-
+	//After Login, show this method
+	@RequestMapping("/admin")
+	public String admin() {
+		return "admin";
+	}
 	//Admin create form
 	@RequestMapping("/admin-create")
 
@@ -281,32 +285,26 @@ public class AdminController {
 		if(!emp.getDiscriminatorValue().equals("Admin") || emp == null) {
 			model.addAttribute("errorMsg","Sorry Pls Log in as an admin.");
 			return "error";}
-
-		//		checking input errors
+		
 		Staff toSave = ((AdminService) aservice).findStaffById(staff.getId());
-		if(result.hasErrors()) {
-
-			if(((AdminService) aservice).findById(staff.getId()).getDiscriminatorValue().equals("Staff")){
-				staff.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
-				model.addAttribute("staff", staff);
-				model.addAttribute("manlist",((AdminService) aservice).findAllManager());
-			}else {				
-				staff.setType("Manager");
-				model.addAttribute("staff", staff);
-			}
+		toSave.setName(staff.getName());
+		toSave.setPassword(staff.getPassword());
+		toSave.setEmail(staff.getEmail());
+		toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
+		toSave.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
+		//		checking input errors
+		if(result.hasErrors()) {	
+			model.addAttribute("staff", toSave);
+			model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 			return "staff-edit";
 		}
 		else {
-			toSave.setName(staff.getName());
-			toSave.setPassword(staff.getPassword());
-			toSave.setEmail(staff.getEmail());
-			toSave.setAnnualLeaveDays(staff.getAnnualLeaveDays());
-			toSave.setManager(((AdminService) aservice).findManagerById(staff.getManId()));
 			if(((AdminService) aservice).save(toSave)) {
 				return "forward:/employee/dashboard";
 			}
 			else {
 				model.addAttribute("staff", toSave);
+				model.addAttribute("manlist",((AdminService) aservice).findAllManager());
 				return "staff-edit";
 			}
 		}

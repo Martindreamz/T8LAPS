@@ -1,8 +1,10 @@
 package sg.edu.iss.sa50.t8.model;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 @Entity
 @Inheritance
@@ -17,7 +19,8 @@ public class Employee {
     private String email;
     @NotBlank(message = "Password is mandatory")
 	private String password; 
-	
+	@NotNull
+    @Min(0) 
 	private long CurrentAnnualLeaves;
 	private long CurrentMedicalLeaves; 
 	private int TotalAnnualLeaves;
