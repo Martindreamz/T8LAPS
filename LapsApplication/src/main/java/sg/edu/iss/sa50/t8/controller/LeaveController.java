@@ -141,16 +141,16 @@ public class LeaveController {
 
 		Date d1 = annualLeave.getStartDate();
 		Date d2 = annualLeave.getEndDate();
-		if (!d1.after(new Date())) {
-			model.addAttribute("errorDate", "Start Date must be future date.");
-			model.addAttribute("annualLeave", annualLeave);
-			return "leaves-apply-annual";
-		}
-		if (!d2.after(new Date())) {
-			model.addAttribute("errorEndDate", "End Date must be future date.");
-			model.addAttribute("annualLeave", annualLeave);
-			return "leaves-apply-annual";
-		}
+//		if (!d1.after(new Date())) {
+//			model.addAttribute("errorDate", "Start Date must be future date.");
+//			model.addAttribute("annualLeave", annualLeave);
+//			return "leaves-apply-annual";
+//		}
+//		if (!d2.after(new Date())) {
+//			model.addAttribute("errorEndDate", "End Date must be future date.");
+//			model.addAttribute("annualLeave", annualLeave);
+//			return "leaves-apply-annual";
+//		}
 		long duration = duration(d1, d2);
 		int satsunCount = saturdaysundaycount(d1, d2);
 		long actualleavesdays = ActualLeaveDays(d1, d2);
@@ -227,17 +227,17 @@ public class LeaveController {
 		}
 		Date d1 = medicalLeave.getStartDate();
 		Date d2 = medicalLeave.getEndDate();
-
-		if (!d1.after(new Date())) {
-			model.addAttribute("errorDate", "Start Date must be future date.");
-			model.addAttribute("medicalLeave", medicalLeave);
-			return "leaves-apply-medical";
-		}
-		if (!d2.after(new Date())) {
-			model.addAttribute("errorEndDate", "End Date must be future date.");
-			model.addAttribute("medicalLeave", medicalLeave);
-			return "leaves-apply-medical";
-		}
+//
+//		if (!d1.after(new Date())) {
+//			model.addAttribute("errorDate", "Start Date must be future date.");
+//			model.addAttribute("medicalLeave", medicalLeave);
+//			return "leaves-apply-medical";
+//		}
+//		if (!d2.after(new Date())) {
+//			model.addAttribute("errorEndDate", "End Date must be future date.");
+//			model.addAttribute("medicalLeave", medicalLeave);
+//			return "leaves-apply-medical";
+//		}
 
 		long duration = duration(d1, d2);
 		// long actualleavesdays = ActualLeaveDays(d1, d2);
@@ -454,10 +454,11 @@ public class LeaveController {
 			if (ml.getStatus().equals(LeaveStatus.Approved)) {
 				Date d1 = ml.getStartDate();
 				Date d2 = ml.getEndDate();
-				long actualleavedays = ActualLeaveDays(d1, d2);
-				System.out.println("An Appl:" + actualleavedays);
+				long duration = duration(d1, d2);
+				//long actualleavedays = ActualLeaveDays(d1, d2);
+				System.out.println("An Appl:" + duration);
 				long existingDays = leaveService.findMedAnnLeave(ml.getStaff().getId());
-				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), actualleavedays + existingDays);
+				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), duration + existingDays);
 			}
 		} else {
 			if (l.getStatus().equals(LeaveStatus.Approved)) {
@@ -518,10 +519,11 @@ public class LeaveController {
 			if (ml.getStatus().equals(LeaveStatus.Applied)) {
 				Date d1 = ml.getStartDate();
 				Date d2 = ml.getEndDate();
-				long actualleavedays = ActualLeaveDays(d1, d2);
-				System.out.println("An Appl:" + actualleavedays);
+				//long actualleavedays = ActualLeaveDays(d1, d2);
+				long duration = duration(d1, d2);
+				System.out.println("An Appl:" + duration);
 				long existingDays = leaveService.findMedAnnLeave(ml.getStaff().getId());
-				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), actualleavedays + existingDays);
+				leaveService.updateCurMedLeaveDate(ml.getStaff().getId(), duration + existingDays);
 			}
 		} else {
 			if (l.getStatus().equals(LeaveStatus.Applied)) {
