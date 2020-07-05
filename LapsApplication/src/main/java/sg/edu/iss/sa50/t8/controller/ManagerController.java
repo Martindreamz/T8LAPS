@@ -119,7 +119,7 @@ public class ManagerController {
 				session.setAttribute("leavesId", id);
 				model.addAttribute("leaves", l);
 				model.addAttribute("leaves", l);
-				List<Leaves> matesLeavesList = ((ManagerService) manService).findAllSubLeavesByPeriod(l, man);
+				List<Leaves> matesLeavesList = ((ManagerService) manService).findAllSubLeavesByPeriod2(l, man);
 				model.addAttribute("MatesLeaves", matesLeavesList);
 				return "manager-leaveAppDetails";
 			}

@@ -1,6 +1,7 @@
 package sg.edu.iss.sa50.t8.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,8 +59,8 @@ public class ManagerService implements IEmployeeService {
 	public ArrayList<Staff> findSub(Manager man) {
 		return empRepo.findSubordinates(man);
 	}
-
-	public List<Leaves> findAllSubLeavesByPeriod(Leaves l, Manager man){
+	
+	public List<Leaves> findAllSubLeavesByPeriod2(Leaves l, Manager man){
 		ArrayList<Staff> stfList = empRepo.findSubordinates(man);
 		List<Leaves> leaveslist = new ArrayList<Leaves>();
 		List<Leaves> result = new ArrayList<Leaves>();
@@ -67,48 +68,33 @@ public class ManagerService implements IEmployeeService {
 			leaveslist.addAll(lrepo.findAllLeavesByStaff(stf));
 		}
 		for (Leaves ll : leaveslist) {
-			if (l.getDiscriminatorValue().equals("Annual Leave")) {
-				AnnualLeave lcast  = (AnnualLeave) l;
-				if (ll.getStartDate().compareTo(lcast.getEndDate())<=0) {
-					if (ll.getDiscriminatorValue().equals("Annual Leave")) {
-						AnnualLeave llcast  = (AnnualLeave) ll;
-						if (llcast.getEndDate().compareTo(lcast.getStartDate())>=0) {
-							if(ll.getId()!= l.getId()) {result.add(ll);}
-							continue;
-							}
-						}
-					if (ll.getDiscriminatorValue().equals("Medical Leave")) {
-						MedicalLeave llcast  = (MedicalLeave) ll;
-						if (llcast.getEndDate().compareTo(lcast.getStartDate())>=0) {
-							if(ll.getId()!= l.getId()) {result.add(ll);}
-							continue;
-							}
-						}
-				}
-			}
-			else if (l.getDiscriminatorValue().equals("Medical Leave")) {
+			Date lStart =  l.getStartDate();
+			Date llStart =  ll.getStartDate();
+			Date lEnd =  l.getStartDate();
+			Date llEnd =  ll.getStartDate();
+			if (l.getDiscriminatorValue().equals("Medical Leave")){
 				MedicalLeave lcast  = (MedicalLeave) l;
-				if (ll.getStartDate().compareTo(lcast.getEndDate())<=0) {
-					if (ll.getDiscriminatorValue().equals("Annual Leave")) {
-						AnnualLeave llcast  = (AnnualLeave) ll;
-						if (llcast.getEndDate().compareTo(lcast.getStartDate())>=0) {
-							if(ll.getId()!= l.getId()) {result.add(ll);}
-							continue;
-							}
-						}
-					if (ll.getDiscriminatorValue().equals("Medical Leave")) {
-						MedicalLeave llcast  = (MedicalLeave) ll;
-						if (llcast.getEndDate().compareTo(lcast.getStartDate())>=0) {
-							if(ll.getId()!= l.getId()) {result.add(ll);}
-							continue;
-							}
-						}
-				}
+				lEnd =  lcast.getEndDate();
 			}
+			else if (l.getDiscriminatorValue().equals("AnnualLeave")){
+				MedicalLeave lcast  = (MedicalLeave) l;
+				lEnd =  lcast.getEndDate();
+			}
+			if (ll.getDiscriminatorValue().equals("Medical Leave")){
+				MedicalLeave llcast  = (MedicalLeave) ll;
+				llEnd =  llcast.getEndDate();
+			}
+			else if (ll.getDiscriminatorValue().equals("Annual Leave")){
+				AnnualLeave lcast  = (AnnualLeave) ll;
+				llEnd =  lcast.getEndDate();
+			}
+			if (llStart.compareTo(lEnd)<=0 && llEnd.compareTo(lStart)>=0) {
+				if(ll.getId()!= l.getId()) {result.add(ll);}
+				}
 		}
+		
 		return result;
 	}
-
 	public List<Overtime> findStaffOvertime(Manager man) {
 
 		List<Overtime> overtimelist = new ArrayList<Overtime>();
