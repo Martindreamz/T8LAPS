@@ -50,7 +50,7 @@ public class EmployeeController {
 	@RequestMapping("/movement-register")
 	public String movementregister(@SessionAttribute("user") Employee emp,Model model) {
 		if(!emp.getDiscriminatorValue().equals("Admin")) {
-			if(emp.getDiscriminatorValue().equals("staff")){
+			if(emp.getDiscriminatorValue().equals("Staff")){
 				Staff staff = (Staff) emp;			
 				List<Staff> staffs = ((StaffService) sservice).findAllStaffbyManager(staff.getManager().getId());
 				List<Leaves> leaves = new ArrayList<>();
