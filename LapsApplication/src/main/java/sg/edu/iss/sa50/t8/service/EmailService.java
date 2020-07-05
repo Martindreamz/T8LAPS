@@ -17,10 +17,6 @@ public interface EmailService {
 
 	public void notifyStaff(MedicalLeave leave) throws MailException;
 
-	public void confirmStaffCancellation(AnnualLeave leave) throws MailException;
-
-	public void confirmStaffCancellation(MedicalLeave leave) throws MailException;
-
 	public void notifyManagerForOT(Overtime ot) throws MailException;
 
 	public void notifyStaffForOT(Overtime ot) throws MailException;
@@ -28,5 +24,9 @@ public interface EmailService {
 	public void notifyStaff(Leaves leave) throws MailException;
 
 	public void notifyManager(Leaves leave) throws MailException;
+
+	public void confirmStaffCancellation(Leaves leave) throws MailException;
+
+	public void confirmStaffCancellationToManager(Leaves leave) throws MailException;
 
 }

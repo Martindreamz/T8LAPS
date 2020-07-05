@@ -68,26 +68,43 @@ public class iEmailService implements EmailService{
 	}
 
 	@Override
-	public void confirmStaffCancellation(AnnualLeave leave) throws MailException{
+	public void confirmStaffCancellation(Leaves leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(leave.getStaff().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave cancellation on " + leave.getStartDate());
-		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nThis is to confirm your cancellation of annual leave from "+leave.getStartDate().toString()+" to "+
-				leave.getEndDate().toString()+".\n\nFrom,\nTeam8LAPS");
+
+		if(leave.getDiscriminatorValue().equals("Compensation Leave")) {
+			CompensationLeave nleave = (CompensationLeave) leave;
+			msg.setText("Dear " + nleave.getStaff().getName()+ ",\n\nYour "+nleave.getDiscriminatorValue()+" application on "+nleave.getStartDate()
+			+" "+ nleave.getClaimQuota()+" has been " + nleave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+		}else{
+			msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour "+leave.getDiscriminatorValue()+" application on "+leave.getStartDate()
+			+" has been " + leave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+		}
 		jvm.send(msg);
 	}
 
 	@Override
-	public void confirmStaffCancellation(MedicalLeave leave) throws MailException{
+	public void confirmStaffCancellationToManager(Leaves leave) throws MailException{
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(leave.getStaff().getEmail());
+		msg.setTo(leave.getStaff().getManager().getEmail());
 		msg.setFrom("gdipsa50t8@gmail.com");
-		msg.setSubject("Leave cancellation on " + leave.getStartDate());
-		msg.setText("Dear " + leave.getStaff().getName()+ ",\nThis is to confirm your cancellation of medical leave from "+leave.getStartDate().toString()+" to "+
-				leave.getEndDate().toString()+".\n\nFrom,\nTeam8LAPS");
+		msg.setSubject("Leave cancellation on " + leave.getStartDate()+" from "+ leave.getStaff().getName());
+System.out.println(leave.getDiscriminatorValue());
+		if(leave.getDiscriminatorValue().equals("Compensation Leave")) {
+			CompensationLeave nleave = (CompensationLeave) leave;
+			msg.setText("Dear " + nleave.getStaff().getManager().getName()+ 
+					",\n\nYour staff "+nleave.getStaff().getName()+" "+nleave.getStatus()+
+					" "+ nleave.getDiscriminatorValue()+" application on "+nleave.getStartDate()
+					+" "+ nleave.getClaimQuota()+".\n\nFrom,\nTeam8LAPS");
+		}else{
+			msg.setText("Dear " + leave.getStaff().getManager().getName()+ 
+					",\n\nYour staff "+leave.getStaff().getName()+" "+leave.getStatus()+
+					" "+ leave.getDiscriminatorValue()+" application on "+leave.getStartDate()
+					+".\n\nFrom,\nTeam8LAPS");
+		}
 		jvm.send(msg);
-
 	}
 
 	@Override
@@ -120,12 +137,12 @@ public class iEmailService implements EmailService{
 		msg.setFrom("gdipsa50t8@gmail.com");
 		msg.setSubject("Leave application on " + leave.getStartDate() + " " + leave.getStatus());
 		if(leave.getDiscriminatorValue().equals("Compensation Leave")) {
-		CompensationLeave nleave = (CompensationLeave) leave;
+			CompensationLeave nleave = (CompensationLeave) leave;
 			msg.setText("Dear " + nleave.getStaff().getName()+ ",\n\nYour "+nleave.getDiscriminatorValue()+" application on "+nleave.getStartDate()
-				+" "+ nleave.getClaimQuota()+" has been " + nleave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+			+" "+ nleave.getClaimQuota()+" has been " + nleave.getStatus()+".\n\nFrom,\nTeam8LAPS");
 		}else{
-		msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour "+leave.getDiscriminatorValue()+" application on "+leave.getStartDate()
-				+" has been " + leave.getStatus()+".\n\nFrom,\nTeam8LAPS");
+			msg.setText("Dear " + leave.getStaff().getName()+ ",\n\nYour "+leave.getDiscriminatorValue()+" application on "+leave.getStartDate()
+			+" has been " + leave.getStatus()+".\n\nFrom,\nTeam8LAPS");
 		}
 		jvm.send(msg);
 	}
@@ -145,7 +162,7 @@ public class iEmailService implements EmailService{
 		if(leave.getDiscriminatorValue().equals("Compensation Leave")) {
 			CompensationLeave nleave = (CompensationLeave) leave;
 			msg.setText("Dear " + nleave.getStaff().getManager().getName()+ ",\n\n"+nleave.getStaff().getName()+ " applied compensation leave on "+nleave.getStartDate().toString()+ " "+nleave.getClaimQuota()
-					+".\n\nFrom,\nTeam8LAPS");}
+			+".\n\nFrom,\nTeam8LAPS");}
 
 		if(leave.getDiscriminatorValue().equals("Annual Leave")) {
 			AnnualLeave nleave = (AnnualLeave) leave;
