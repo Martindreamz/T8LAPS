@@ -68,8 +68,8 @@ public class LapsApplication {
 			Manager man3 = new Manager("Joe3","martin.dreamz@hotmail.com",man2,15,15);
 			Staff s1 = new Staff("Martin1","martin.dreamz@hotmail.com",man2,(long)10,(long)10);
 			s1.setTotalOTHours(8);
-			Staff s2 = new Staff("Bianca2","e0533382@u.nus.edu",man1,(long)12,(long)10);
-			Staff s3 = new Staff("Bianca3","e0533383@u.nus.edu",man3,(long)14,(long)10);
+			Staff s2 = new Staff("Bianca2","e0533381@u.nus.edu",man1,(long)12,(long)10);
+			Staff s3 = new Staff("Bianca3","e0533381@u.nus.edu",man3,(long)14,(long)10);
 			Staff s4 = new Staff("Yirui","ye0533384@u.nus.edu",man1,(long)20,(long)60);
 			Staff s5 = new Staff("Yirui2","martin.dreamz@hotmail.com",man2,(long)4,(long)18);
 			Staff s6 = new Staff("Yirui3","e0533363@u.nus.edu",man3,(long)22,(long)60);
