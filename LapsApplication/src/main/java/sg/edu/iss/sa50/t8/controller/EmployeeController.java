@@ -1,6 +1,8 @@
 package sg.edu.iss.sa50.t8.controller;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -62,7 +64,7 @@ public class EmployeeController {
 				for(Leaves l: leaveservice.findAllLeavesByStaff(staff.getManager())) {
 					leaves.add(l);
 				}
-				model.addAttribute("movelist",leaves);
+				model.addAttribute("movelist",leaves.stream().sorted(Comparator.comparing(Leaves:: getStartDate).reversed()).toArray());
 				return "movement-register";
 			}
 			if(emp.getDiscriminatorValue().equals("Manager")){
