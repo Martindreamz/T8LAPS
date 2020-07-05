@@ -178,7 +178,7 @@ public class ManagerController {
 			//if (medical leave) return actualLeaveDays
 			if (leaves.getDiscriminatorValue().equals("Medical Leave")) {
 				MedicalLeave lcast = (MedicalLeave) leaves;
-				long actualdays = duration(lcast.getStartDate(),lcast.getEndDate());
+				long actualdays = ActualLeaveDays(lcast.getStartDate(),lcast.getEndDate());
 				//add actualleavedays back into database this staff currentLeaveDays;
 				System.out.println("rejecting AnnualLeave Application: add balance back" + actualdays);
 				long currBalance = leaveService.findMedAnnLeave(lcast.getStaff().getId());
