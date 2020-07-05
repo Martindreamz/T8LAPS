@@ -5,12 +5,13 @@
 <title th:utext=#{leaves-manage.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{leaves-manage.heading}></h1>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::navigationbar"></div>
 
 	<a href="/employee/leaves">
-		<button> Back</button>
+		<button>Back</button>
 	</a>
-	
+
 
 </body>
 </html>

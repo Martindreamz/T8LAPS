@@ -16,7 +16,8 @@
 </head>
 <body>
 	<header th:insert="fragments/general.html::header"></header>
-	<div th:insert="fragments/general.html::adminbar"></div>
+	<div th:if="${session.user.DiscriminatorValue=='Admin'}" th:insert="fragments/general.html::adminbar"></div>
+	<div th:unless="${session.user.DiscriminatorValue=='Admin'}" th:insert="fragments/general.html::navigationbar"></div>
 	<div class="container">
 		<!-- Search Bar -->
 		<form action="#" th:action="@{/employee/search-employee}"
@@ -26,14 +27,14 @@
 		</form>
 
 		<!-- Generated table -->
-		<table class="table table-bordered">
+		<table  class="table table-bordered">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">Id</th>
 					<th scope="col">Name</th>
 					<th scope="col">Email</th>
 					<th scope="col">Role</th>
-					<th scope="col" colspan="2">Manage</th>
+					<th th:if="${session.user.DiscriminatorValue=='Admin'}" scope="col" colspan="2">Manage</th>
 
 				</tr>
 			</thead>
@@ -44,12 +45,12 @@
 					<td th:text="${employee.email}">Email</td>
 					<td th:text="${employee.DiscriminatorValue}">Role</td>
 
-					<td th:if="${employee.DiscriminatorValue == 'Admin'}"><a class="btn btn-primary"
+					<td th:if="${employee.DiscriminatorValue == 'Admin' and session.user.DiscriminatorValue=='Admin'}"><a class="btn btn-primary"
 						th:href="@{/employee/admin-edit/}+${employee.id}" role="button">Edit</a>
 						<a class="btn btn-primary"
 						th:href="@{/employee/admin-delete/}+${employee.id}" role="button">Delete</a>
 					</td>
-					<td th:if="${employee.DiscriminatorValue != 'Admin'}"><a class="btn btn-primary"
+					<td th:if="${employee.DiscriminatorValue != 'Admin' and session.user.DiscriminatorValue=='Admin'}"><a class="btn btn-primary"
 						th:href="@{/employee/staff-edit/}+${employee.id}" role="button">Edit</a>
 						<a class="btn btn-primary"
 						th:href="@{/employee/admin-delete/}+${employee.id}" role="button">Delete</a>
@@ -59,9 +60,6 @@
 			</tbody>
 		</table>
 
-		<a href="/employee/admin-create">
-			<button>Create Employee</button>
-		</a>
 	</div>
 
 	<!-- Optional JavaScript -->

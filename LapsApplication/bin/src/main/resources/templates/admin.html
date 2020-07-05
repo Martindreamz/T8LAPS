@@ -5,18 +5,13 @@
 <title th:utext=#{admin.title}></title>
 </head>
 <body>
-	<h1 th:utext=#{admin.heading}></h1>
-
-	<a href="/employee/home">
-		<button> Sign out</button>
-	</a>
+	<header th:insert="fragments/general.html::header"></header>
+	<div th:insert="fragments/general.html::adminbar"></div>
 	
-	<a href="/employee/admin-blockleave">
-		<button> Set block leave</button>
-	</a>
-
-<a href="/employee/admin-manage">
-		<button> Manage Employees</button>
-	</a>
+	<h1 th:text="'Welcome, ' + ${session.user.name} + ' (' + ${session.user.getDiscriminatorValue()}+')'"></h1>
+	
+	<div th:insert="fragments/general.html::footer"></div>
+	
+	
 </body>
 </html>
