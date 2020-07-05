@@ -46,7 +46,10 @@ public class StaffService implements IEmployeeService {
 	EmployeeRepository eRepo;
 
 	public void updateTotalOTHoursByEmpId(int empId, int hr) {
-		eRepo.updateTotalOTHoursByEmpId(empId, hr);
+		//eRepo.updateTotalOTHoursByEmpId(empId, hr);
+		Employee e = eRepo.findEmployeeById(empId);
+		e.setTotalOTHours(hr);
+		eRepo.save(e);
 	}
 
 	public int findTotalOTHoursByEmpId(int empId) {
