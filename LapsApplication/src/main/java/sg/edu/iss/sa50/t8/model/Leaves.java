@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Leaves {
 
 	private String managerComment;
 	
-	@ManyToOne @JoinColumn(name="staff_id")
+	@ManyToOne(cascade={CascadeType.MERGE}) @JoinColumn(name="staff_id")
 	private Staff staff;
 
 	public Leaves() {

@@ -2,6 +2,7 @@ package sg.edu.iss.sa50.t8.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,8 @@ public class Overtime {
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private Date overtimeDate; 
 	
-	@ManyToOne @JoinColumn(name="staff_id")
+	@ManyToOne(cascade={CascadeType.REMOVE}) 
+	@JoinColumn(name="staff_id")
 	private Staff staff; 
 	
 	@Min(1)

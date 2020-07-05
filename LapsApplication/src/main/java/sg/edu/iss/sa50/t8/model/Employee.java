@@ -1,10 +1,7 @@
 package sg.edu.iss.sa50.t8.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.*;
 
 @Entity
 @Inheritance
@@ -24,6 +21,7 @@ public class Employee {
 	private long CurrentAnnualLeaves;
 	private long CurrentMedicalLeaves; 
 	private int TotalAnnualLeaves;
+	@Max(60)
 	private int TotalMedicalLeaves;
 	
 

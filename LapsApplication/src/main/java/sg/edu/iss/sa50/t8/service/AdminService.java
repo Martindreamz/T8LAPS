@@ -1,5 +1,6 @@
 package sg.edu.iss.sa50.t8.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -129,10 +130,25 @@ public class AdminService implements IEmployeeService {
 	public void deleteEmpbyID(int id) {
 		eRepo.deleteEmployeeById(id);
 	}
-
+	
+	@Transactional
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
-	eRepo.deleteById(id);	
+		Employee curr = (Employee) eRepo.findEmployeeById(id);
+		if (curr.getDiscriminatorValue().equals("Manager")) {
+			Manager currCast = (Manager) curr;
+			Manager bigBoss = currCast.getManager();
+			bigBoss.getStaffs().remove(currCast);
+			eRepo.save(bigBoss);
+			ArrayList<Staff> subList= eRepo.findSubordinates(currCast);
+			for (Staff stf: subList) {
+				stf.setManager(null);
+				eRepo.save(stf);
+			}	
+			currCast.setStaffs(null);
+			currCast.setManager(null);
+			eRepo.save(currCast);
+		}
+		eRepo.deleteById(id);	
 	}
 
 
