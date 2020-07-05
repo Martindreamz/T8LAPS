@@ -1,9 +1,7 @@
 package sg.edu.iss.sa50.t8;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,7 +25,6 @@ import sg.edu.iss.sa50.t8.repository.EmployeeRepository;
 import sg.edu.iss.sa50.t8.repository.LeaveRepository;
 import sg.edu.iss.sa50.t8.repository.OvertimeRepository;
 import sg.edu.iss.sa50.t8.service.EmailService;
-import sg.edu.iss.sa50.t8.model.Leaves;
 
 @SpringBootApplication
 public class LapsApplication {

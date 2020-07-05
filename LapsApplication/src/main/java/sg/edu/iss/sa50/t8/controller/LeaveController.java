@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.mail.Session;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.sun.el.parser.ParseException;
 
 import sg.edu.iss.sa50.t8.model.AnnualLeave;
-import sg.edu.iss.sa50.t8.model.BlockedLeaves;
 import sg.edu.iss.sa50.t8.model.CompensationLeave;
 import sg.edu.iss.sa50.t8.model.Employee;
 import sg.edu.iss.sa50.t8.model.LeaveStatus;
@@ -33,7 +31,6 @@ import sg.edu.iss.sa50.t8.model.MedicalLeave;
 import sg.edu.iss.sa50.t8.model.Staff;
 import sg.edu.iss.sa50.t8.repository.BlockedLeavesRepository;
 import sg.edu.iss.sa50.t8.repository.StaffRepository;
-import sg.edu.iss.sa50.t8.service.AdminService;
 import sg.edu.iss.sa50.t8.service.EmailService;
 import sg.edu.iss.sa50.t8.service.IEmployeeService;
 import sg.edu.iss.sa50.t8.service.ILeaveService;
