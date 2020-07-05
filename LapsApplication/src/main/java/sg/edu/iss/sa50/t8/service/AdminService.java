@@ -137,8 +137,9 @@ public class AdminService implements IEmployeeService {
 		if (curr.getDiscriminatorValue().equals("Manager")) {
 			Manager currCast = (Manager) curr;
 			Manager bigBoss = currCast.getManager();
-			bigBoss.getStaffs().remove(currCast);
-			eRepo.save(bigBoss);
+			if  (bigBoss != null)
+				{bigBoss.getStaffs().remove(currCast);
+				eRepo.save(bigBoss);}
 			ArrayList<Staff> subList= eRepo.findSubordinates(currCast);
 			for (Staff stf: subList) {
 				stf.setManager(null);
